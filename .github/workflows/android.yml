@@ -1,69 +1,60 @@
 name: Android CI
-
 on:
   pull_request:
     branches: [ develop ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: gradle
-
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-      
-    - name: Build with Gradle
-      run: ./gradlew build
-      
-    - name: Run Unit test
-      run: ./gradlew testdebugUnitTest
-      
-    - name: Print Hello World
-      run: echo "Hello World"
-      
-    # 의존성 라이브러리 다운로드 및 확인
-    # 라이브러리끼리 충돌 되지 않는지 검사
-    - name: 의존성 라이브러리 다운로드 및 확인
-      run: ./gradlew androidDependencies
-      
-    # 프로젝트 빌드
-    # 다른 variant로 처리하고 싶은 경우, assemble 뒤에 다른 variant를 작성
-    - name: 프로젝트 빌드
-      run: ./gradlew assembleDebug
-
-    # 코틀린 코드 스타일 체크
-    # reporter
-    #  - github-pr-review : 댓글로 리뷰 추가
-    #  - github-pr-check  : Annotation으로 추가
-    # android             : Android Kotlin Code Style도 함께 체크할 것인지
-    # fail_on_error       : 오류가 발생되면 실패로 처리할 것인지
-    # level               : Lint 레벨
-    
-  ktlint:
-    name: Check Code Quality
-    runs-on: ubuntu-latest
-      
-    steps:
-      - name: 리포지터리 클론
-        uses: actions/checkout@main
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 1
-          
-      - name: 코틀린 코드 스타일 체크
-        uses: ScaCap/action-ktlint@master
+          fetch-depth: 0
+
+      - name: Setup JDK 11
+        uses: actions/setup-java@v3
         with:
-          github_token: $
-          reporter: github-pr-review 
-          android: true
-          fail_on_error: true
-          level: warning
-    
+          distribution: "zulu"
+          java-version: 11
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', '**/buildSrc/**/*.kt') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Decrypt secrets.tar.gpg
+        run: gpg --quiet --batch --yes --always-trust --decrypt --passphrase="$SECRET_GPG_PASSWORD" --output secrets.tar secrets.tar.gpg
+        env:
+          SECRET_GPG_PASSWORD: ${{ secrets.SECRET_GPG_PASSWORD }}
+
+      - name: Unzip secrets.tar
+        run: tar xvf secrets.tar
+
+      - name: Run ktlint
+        run: ./gradlew ktlintCheck
+
+      - name: Run detekt
+        run: ./gradlew detekt
+
+      - name: Run unit tests
+        run: ./gradlew testDebugUnitTest
+
+      - name: Build assemble release apk
+        run: ./gradlew assembleRelease
+
+      - name: Create android test report
+        uses: asadmansr/android-test-report-action@v1.2.0
+        if: ${{ always() }}
+
+      - name: Build assemble release apk
+        run: ./gradlew assembleRelease
