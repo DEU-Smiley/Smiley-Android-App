@@ -27,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app
-          path: data/debug
+          path: presentation/build/outputs/apk/debug/presentation-release-unsigned.apk
