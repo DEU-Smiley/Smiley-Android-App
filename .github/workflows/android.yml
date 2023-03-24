@@ -42,7 +42,7 @@ jobs:
       
     steps:
       - name: 리포지터리 클론
-        uses: actions/checkout@main
+        uses: actions/checkout@develop
         with:
           fetch-depth: 1
           
