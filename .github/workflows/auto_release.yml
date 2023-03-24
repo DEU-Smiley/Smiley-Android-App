@@ -6,6 +6,7 @@ on:
 jobs:
   # Release APK 생성
   apk:
+    permissions: write-all
     name: Generate APK
     runs-on: ubuntu-latest
     steps:
