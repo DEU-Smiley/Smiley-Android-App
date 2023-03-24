@@ -4,3 +4,6 @@ plugins {
     id 'com.android.library' version '7.3.1' apply false
     id 'org.jetbrains.kotlin.android' version '1.7.20' apply false
 }
+
+// 라이브러리 버젼 관리 gradle
+apply from : 'ext-version.gradle'

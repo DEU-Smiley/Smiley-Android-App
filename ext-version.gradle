@@ -1,0 +1,10 @@
+
+/* 라이브러리들의 버전을 변수로 관리 */
+ext {
+    compileSdk_Version  = 33
+    targetSdk_Version   = 33
+    buildTools_Version  = "30.0.3"
+    minSdk_Version      = 28
+    versionCode         = 1
+    versionName         = "1.0.0"
+}
