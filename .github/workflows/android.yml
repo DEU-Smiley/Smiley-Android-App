@@ -49,5 +49,5 @@ jobs:
       - name: 코틀린 코드 스타일 체크
         uses: ScaCap/action-ktlint@master
         with:
-          github_token: $ {{ secrets.github_token }}
+          github_token: $ {{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
