@@ -7,7 +7,7 @@ jobs:
   # Release APK 생성
   apk:
     name: Generate APK
-        runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
