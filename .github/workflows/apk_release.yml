@@ -1,10 +1,8 @@
 name: Android APK Release
 
 on:
-  push:
-    branches: [ "main", "develop"]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "main" ]
 
 jobs:
   apk:
@@ -23,7 +21,7 @@ jobs:
       - name: Build debug APK
         run: bash ./gradlew assembleDebug --stacktrace
 
-      - name: Upload APK
+      - name: Upload Debug APK
         uses: actions/upload-artifact@v3
         with:
           name: app
