@@ -4,6 +4,7 @@ import android.app.Application
 
 /**
  * @HiltAndroidApp
+ * test
  */
 class App : Application() {
     override fun onCreate() {
