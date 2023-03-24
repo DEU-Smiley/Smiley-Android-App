@@ -17,12 +17,6 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
-    - name: Check Code Style
-      uses: ScaCap/action-ktlint@master
-      with:
-        github_token: ${{ secrets.TOKEN }}
-        reporter: github-pr-review
-
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
@@ -34,7 +28,6 @@ jobs:
       
     - name: 프로젝트 빌드
       run: ./gradlew assembleDebug
-
     # 코틀린 코드 스타일 체크
     # reporter
     #  - github-pr-review : 댓글로 리뷰 추가
@@ -42,3 +35,22 @@ jobs:
     # android             : Android Kotlin Code Style도 함께 체크할 것인지
     # fail_on_error       : 오류가 발생되면 실패로 처리할 것인지
     # level               : Lint 레벨
+    
+  ktlint:
+    name: Check Code Quality
+    runs-on: ubuntu-latest
+      
+    steps:
+      - name: 리포지터리 클론
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 1
+          
+      - name: 코틀린 코드 스타일 체크
+        uses: ScaCap/action-ktlint@master
+        with:
+          github_token: $ {{ secrets.TOKEN }}
+          reporter: github-pr-review 
+          android: true
+          fail_on_error: true
+          level: warning
