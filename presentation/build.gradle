@@ -5,9 +5,22 @@ plugins {
 apply from : '../common.gradle'
 apply from : '../core-dependencies.gradle'
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def KAKAO_SDK_APPKEY = properties.getProperty('kakao.sdk.appkey')
+
+
 android {
     defaultConfig {
         applicationId "com.android.application"
+
+        /* 카카오 Appkey 변수로 등록(local.properties) */
+        buildConfigField "String", "KAKAO_SDK_APPKEY", properties["kakao.sdk.appkey"]
+        /* Manifest에서 변수로 참조할 수 있도록 지정 */
+        manifestPlaceholders = [kakaoSdkAppkey: KAKAO_SDK_APPKEY]
+
+        /* 서버 url 변수로 등록(local.properties) */
+        buildConfigField "String", "BASE_URL", properties["base.url"]
     }
 }
 /* Presentation 모듈에서 사용하는 라이브러리들을 작성 */
@@ -16,5 +29,5 @@ dependencies {
     implementation project(':data')
 
     /* Kakao Login */
-    implementation 'com.kakao.sdk:v2-user:2.10.0'
+    implementation 'com.kakao.sdk:v2-user:2.11.0'
 }
