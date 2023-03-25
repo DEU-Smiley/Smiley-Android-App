@@ -1,3 +1,6 @@
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def KAKAO_SDK_APPKEY = properties.getProperty('KAKAO_SDK_APPKEY')
 def isLibraryPlugin = pluginManager.hasPlugin("com.android.library")
 def isApplicationPlugin = pluginManager.hasPlugin("com.android.application")
 
@@ -7,8 +10,13 @@ if (isLibraryPlugin || isApplicationPlugin) {
         buildToolsVersion buildTools_Version
 
         defaultConfig {
+            /* 카카오 Appkey 변수로 등록(local.properties) */
+            buildConfigField "String", "KAKAO_SDK_APPKEY", properties["KAKAO_SDK_APPKEY"]
+            /* Manifest에서 변수로 참조할 수 있도록 지정 */
+            manifestPlaceholders = [kakaoSdkAppkey: KAKAO_SDK_APPKEY]
+
             if(isApplicationPlugin) {
-                applicationId "com.android.application"
+                applicationId "com.example.smiley"
             }
 
             minSdkVersion minSdk_Version

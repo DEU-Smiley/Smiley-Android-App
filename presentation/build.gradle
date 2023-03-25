@@ -16,5 +16,5 @@ dependencies {
     implementation project(':data')
 
     /* Kakao Login */
-    implementation 'com.kakao.sdk:v2-user:2.10.0'
+    implementation 'com.kakao.sdk:v2-user:2.11.0'
 }
