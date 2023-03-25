@@ -18,9 +18,6 @@ android {
         buildConfigField "String", "KAKAO_SDK_APPKEY", properties["kakao.sdk.appkey"]
         /* Manifest에서 변수로 참조할 수 있도록 지정 */
         manifestPlaceholders = [kakaoSdkAppkey: KAKAO_SDK_APPKEY]
-
-        /* 서버 url 변수로 등록(local.properties) */
-        buildConfigField "String", "BASE_URL", properties["base.url"]
     }
 }
 /* Presentation 모듈에서 사용하는 라이브러리들을 작성 */
