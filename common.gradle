@@ -8,7 +8,7 @@ if (isLibraryPlugin || isApplicationPlugin) {
 
         defaultConfig {
             if(isApplicationPlugin) {
-                applicationId "com.android.application"
+                applicationId "com.example.smiley"
             }
 
             minSdkVersion minSdk_Version
