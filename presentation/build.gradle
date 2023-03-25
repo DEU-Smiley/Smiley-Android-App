@@ -14,4 +14,7 @@ android {
 dependencies {
     implementation project(':domain')
     implementation project(':data')
+
+    /* Kakao Login */
+    implementation 'com.kakao.sdk:v2-user:2.10.0'
 }
