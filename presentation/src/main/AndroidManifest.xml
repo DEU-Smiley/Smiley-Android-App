@@ -18,8 +18,14 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <!--  카카오 로그인 관련 (추후 로그인 액티비티 쪽으로 옮기기) -->
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="oauth"
+                    android:scheme="kakao6398a4d814a7709f5216eb5f5ba5e926"/>
+
             </intent-filter>
 
             <meta-data
