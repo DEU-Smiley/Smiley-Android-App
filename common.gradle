@@ -1,5 +1,10 @@
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 def KAKAO_SDK_APPKEY = properties.getProperty('KAKAO_SDK_APPKEY')
 def isLibraryPlugin = pluginManager.hasPlugin("com.android.library")
 def isApplicationPlugin = pluginManager.hasPlugin("com.android.application")
@@ -29,6 +34,15 @@ if (isLibraryPlugin || isApplicationPlugin) {
 
         }
 
+        signingConfigs {
+            config {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+
         buildTypes {
             debug {
                 if(isApplicationPlugin){
@@ -44,6 +58,7 @@ if (isLibraryPlugin || isApplicationPlugin) {
                 }
                 minifyEnabled true
                 proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.config
             }
         }
 
