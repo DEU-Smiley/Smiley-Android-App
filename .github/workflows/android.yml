@@ -35,6 +35,7 @@ jobs:
         echo keyPassword=${{ secrets.KEY_PASSWORD }} >> ./keystore.properties
         echo keyAlias=${{ secrets.KEY_ALIAS }} >> ./keystore.properties
         echo storeFile=${{ secrets.STORE_FILE }} >> ./keystore.properties
+        echo ./keystore.properties
 
     - name: Access KAKAO_SDK_APPKEY
       env:
