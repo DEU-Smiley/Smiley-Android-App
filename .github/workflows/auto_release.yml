@@ -38,7 +38,7 @@ jobs:
           echo storePassword=$STORE_PASSWORD > ./keystore.properties
           echo keyPassword=$KEY_PASSWORD >> ./keystore.properties
           echo keyAlias=$KEY_ALIAS >> ./keystore.properties
-          echo storeFile=../$STORE_FILE >> ./keystore.properties
+          echo storeFile=$STORE_FILE >> ./keystore.properties
 
       # Kakao App Key
       - name: Access KAKAO_SDK_APPKEY
@@ -90,6 +90,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: presentation/build/outputs/apk/release/presentation-release-unsigned.apk
+          asset_path: presentation/build/outputs/apk/release/presentation-release.apk
           asset_name: app-release.apk
           asset_content_type: application/zip

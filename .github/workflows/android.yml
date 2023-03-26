@@ -40,7 +40,7 @@ jobs:
         echo storePassword=$STORE_PASSWORD > ./keystore.properties
         echo keyPassword=$KEY_PASSWORD >> ./keystore.properties
         echo keyAlias=$KEY_ALIAS >> ./keystore.properties
-        echo storeFile=../$STORE_FILE >> ./keystore.properties
+        echo storeFile=$STORE_FILE >> ./keystore.properties
 
     - name: Access KAKAO_SDK_APPKEY
       env:

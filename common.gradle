@@ -1,7 +1,7 @@
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystorePropertiesFile = project.rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
