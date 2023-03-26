@@ -17,7 +17,23 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           cache: gradle
-      
+
+      # Generate Keystore File
+      - name: Generate Keystore File
+        run : |
+          echo "${{ secrets.APP_KEYSTORE_BASE64}}" > ./keystore.b64
+          base64 -d -i ./keystore.b64 > ./Smiley.jks
+        env:
+          KEYSTORE: ${{ secrets.APP_KEYSTORE_BASE64 }}
+
+      # Generate keystore.properties
+      - name: Generate keystore.properties
+        run: |
+          echo storePassword=${{ secrets.STORE_PASSWORD }} > ./keystore.properties
+          echo keyPassword=${{ secrets.KEY_PASSWORD }} >> ./keystore.properties
+          echo keyAlias=${{ secrets.KEY_ALIAS }} >> ./keystore.properties
+          echo storeFile=${{ secrets.STORE_FILE }} >> ./keystore.properties
+
       # Kakao App Key
       - name: Access KAKAO_SDK_APPKEY
         env:
