@@ -18,6 +18,12 @@ jobs:
           distribution: 'temurin'
           cache: gradle
       
+      # Kakao App Key
+      - name: Access KAKAO_SDK_APPKEY
+        env:
+          APOD_API_KEY: ${{ secrets.KAKAO_SDK_APPKEY }}
+        run: echo KAKAO_SDK_APPKEY=\"$KAKAO_SDK_APPKEY\" > ./local.properties
+
       # Release 빌드
       - name: Build Release APK
         run: bash ./gradlew assembleRelease --stacktrace
@@ -26,7 +32,7 @@ jobs:
       - name: Upload Release APK
         uses: actions/upload-artifact@v3
         with:
-          name: app
+          name: app-release
           path: presentation/build/outputs/apk/release
 
       # merge commit에서 release 버전 정보 추출
@@ -35,20 +41,33 @@ jobs:
         id: extract_version_name
 
       # Release/Tag 생성
-      - name: Release 생성 
+      - name: Release 생성
+        id: create_release
         uses: actions/create-release@v1
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with: 
-          tag_name: ${{ steps.extract_version_name.outputs.version }} 
+          tag_name: ${{ steps.extract_version_name.outputs.version }}
           release_name: ${{ steps.extract_version_name.outputs.version }}
           body: |
             ## ${{ steps.extract_version_name.outputs.version }} 버전이 릴리즈 되었습니다.
             - 새로운 버전의 Apk가 릴리즈 되면, Apk 파일이 해당 게시글에 업로드 됩니다.
             - 만약 해당 게시글에 Apk 파일이 업로드 되어 있지 않다면 아래 절차를 통해 다운로드 받아주세요.
-            - apk 파일은 .zip 파일로 업로드 됩니다. ( Source code (zip), Source code (tar.gz) 파일은 apk 파일이 아닙니다. )
+            - ( Source code (zip), Source code (tar.gz) 파일은 apk 파일이 아닙니다. )
 
             ### Apk 다운로드
-            1. [Apk Downloads](https://github.com/DEU-Smiley/Smiley-Android-App/actions/workflows/auto_release.yml) 로 이동하세요.
-            2. release {버전명}으로 된 목록 중 가장 최근에 완료된 항목(초록색 체크 표시)을 클릭하세요.
+            1. [Apk Downloads](https://github.com/DEU-Smiley/Smiley-Android-App/actions/workflows/auto_release.yml?query=is%3Asuccess+) 로 이동하세요.
+            2. 목록 중 가장 최근에 완료된 항목(초록색 체크 표시)을 클릭하세요.
             3. Artifacts 탭에서 apk 파일을 다운로드 할 수 있습니다.
+ 
+      # Release에 Apk 파일 업로드
+      - name: Upload Apk to Release
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: presentation/build/outputs/apk/release/presentation-release-unsigned.apk
+          asset_name: app-release.apk
+          asset_content_type: application/zip

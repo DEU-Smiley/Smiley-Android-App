@@ -17,7 +17,13 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           cache: gradle
-      
+
+      # Kakao App Key
+      - name: Access KAKAO_SDK_APPKEY
+        env:
+          APOD_API_KEY: ${{ secrets.KAKAO_SDK_APPKEY }}
+        run: echo KAKAO_SDK_APPKEY=\"$KAKAO_SDK_APPKEY\" > ./local.properties
+
       - name: Build debug APK
         run: bash ./gradlew assembleDebug --stacktrace
 
