@@ -48,7 +48,8 @@
         </activity> <!-- kakao 로그인 화면으로 이동하기 위해 kakao.sdk에 존재하는 AuthCodeHandlerActivity 추가 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:exported="true">
+            android:exported="true"
+            android:permission="">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
