@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.smiley.R
 import com.example.smiley.main.MainActivity
+import com.example.smiley.onboarding.OnBoardingActivity
 import kotlinx.coroutines.*
 
 @SuppressLint("CustomSplashScreen")
@@ -20,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun splashLogo(sec:Long){
         Handler().postDelayed(Runnable {
-            val intent = Intent(applicationContext, MainActivity::class.java)
+            val intent = Intent(applicationContext, OnBoardingActivity::class.java)
             startActivity(intent) //intent 에 명시된 액티비티로 이동
             finish() //현재 액티비티 종료
         }, 1000L * sec)
