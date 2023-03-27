@@ -22,7 +22,7 @@ class App : Application() {
      */
     private fun catchAllError(){
         try {
-            Thread.setDefaultUncaughtExceptionHandler { thread, ex -> ex.printStackTrace() }
+            Thread.setDefaultUncaughtExceptionHandler { _, ex -> ex.printStackTrace() }
         } catch (e: SecurityException) {
             e.printStackTrace()
         }

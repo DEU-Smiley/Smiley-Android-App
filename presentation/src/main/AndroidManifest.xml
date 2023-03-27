@@ -18,11 +18,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Smiley"
         tools:targetApi="31">
-
+        <activity
+            android:name=".onboarding.OnBoardingActivity"
+            android:exported="true"
+            android:permission="">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".splash.SplashActivity"
-            android:theme="@style/Theme.Smiley.Splash"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Smiley.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,19 +40,17 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".main.MainActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-
-        <!-- kakao 로그인 화면으로 이동하기 위해 kakao.sdk에 존재하는 AuthCodeHandlerActivity 추가 -->
+        </activity> <!-- kakao 로그인 화면으로 이동하기 위해 kakao.sdk에 존재하는 AuthCodeHandlerActivity 추가 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:exported="true">
+            android:exported="true"
+            android:permission="">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

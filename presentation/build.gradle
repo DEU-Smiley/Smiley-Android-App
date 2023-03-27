@@ -9,11 +9,19 @@ android {
     defaultConfig {
         applicationId "com.android.application"
     }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
 }
 /* Presentation 모듈에서 사용하는 라이브러리들을 작성 */
 dependencies {
     implementation project(':domain')
     implementation project(':data')
+
+    /* Dot Indicator */
+    implementation 'com.tbuonomo:dotsindicator:4.3'
 
     /* Kakao Login */
     implementation 'com.kakao.sdk:v2-user:2.11.0'
