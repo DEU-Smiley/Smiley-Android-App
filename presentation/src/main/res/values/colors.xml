@@ -7,4 +7,27 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- 컬러 셋 -->
+    <color name="black1_20">#202020</color>
+    <color name="primary_normal">#3E9EFF</color>
+    <color name="primary_light">#7CBDFF</color>
+    <color name="primary_dark">#4780EE</color>
+    <color name="light_blue1">#E7F3FF</color>
+    <color name="light_blue2">#F6FBFF</color>
+
+    <color name="gray1_55">#555555</color>
+    <color name="gray2_6E">#6E6E6E</color>
+    <color name="gray3_8E">#8E8E8E</color>
+    <color name="gray4_CB">#CBCBCB</color>
+    <color name="gray5_E6">#E6E6E6</color>
+    <color name="gray6_F2">#F2F2F2</color>
+    <color name="gray7_F7">#F7F7F7</color>
+
+    <color name="background">#F5F7F9</color>
+    <color name="btn_gray">#E6E7EC</color>
+    <color name="detail_point">#26A99B</color>
+    <color name="red">#F0636E</color>
+    <!-- 컬러 셋 -->
+
 </resources>
