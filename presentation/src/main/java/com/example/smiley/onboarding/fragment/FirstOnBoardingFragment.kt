@@ -1,4 +1,4 @@
-package com.example.smiley.onboarding
+package com.example.smiley.onboarding.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
