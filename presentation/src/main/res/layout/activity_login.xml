@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".login.LoginActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/side_margin"
+        android:paddingRight="@dimen/side_margin">
+
+        <!-- Layout 로그인 타이틀 -->
+        <LinearLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/login_logo"
+            android:gravity="center">
+
+            <View
+                android:layout_width="61dp"
+                android:layout_height="20dp"
+                android:background="@drawable/smiley_logo"
+                android:backgroundTint="@color/black1_20"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+                android:text="스마일리와 함께"
+                android:textSize="22sp"
+                android:textColor="@color/black1_20"
+                android:fontFamily="@font/pretendard_semibold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="기록하고 관리해 보세요!"
+                android:textSize="22sp"
+                android:textColor="@color/black1_20"
+                android:fontFamily="@font/pretendard_light"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+
+                android:text="바로 지금, 미소가 필요한 순간"
+                android:textSize="15sp"
+                android:textColor="@color/gray2_6E"
+                android:fontFamily="@font/pretendard_medium"/>
+        </LinearLayout>
+        <!-- Layout End 로그인 타이틀 -->
+
+        <!-- Layout 로그인 로고 -->
+        <ImageView
+            android:id="@+id/login_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:src="@drawable/login_logo"
+            android:adjustViewBounds="true"
+
+            app:layout_constraintTop_toBottomOf="@+id/title_layout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/google_login_btn"
+            />
+        <!-- Layout End 로그인 로고 -->
+
+        <!-- Layout 구글 로그인 버튼 -->
+        <LinearLayout
+            android:id="@+id/google_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginBottom="10dp"
+
+            android:background="@drawable/stroke_layout"
+            android:foreground="?attr/selectableItemBackground"
+
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/kakao_login_btn">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/google"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:text="구글 계정으로 시작"
+                android:textSize="18sp"
+                android:textColor="@color/black1_20"
+                android:fontFamily="@font/pretendard_medium"/>
+        </LinearLayout>
+        <!-- Layout End 구글 로그인 버튼 -->
+
+        <!-- Layout 카카오 로그인 버튼 -->
+        <LinearLayout
+            android:id="@+id/kakao_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginBottom="@dimen/btn_bottom_margin"
+
+            android:background="@drawable/stroke_layout"
+            android:foreground="?attr/selectableItemBackground"
+
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/kakao"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="카카오 계정으로 시작"
+                android:textSize="18sp"
+                android:textColor="@color/black1_20"
+                android:fontFamily="@font/pretendard_medium"/>
+        </LinearLayout>
+        <!-- Layout End 카카오 로그인 버튼 -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
