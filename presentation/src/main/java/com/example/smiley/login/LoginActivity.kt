@@ -9,6 +9,7 @@ import com.example.smiley.common.extension.changeActivity
 import com.example.smiley.common.extension.showGenericAlertDialog
 import com.example.smiley.databinding.ActivityLoginBinding
 import com.example.smiley.main.MainActivity
+import com.example.smiley.permission.PermissionActivity
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
@@ -34,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
             showGenericAlertDialog("로그인에 실패했습니다.")
         } else if (token != null) {
             Log.d(TAG, "카카오 로그인 성공 ${token.accessToken}")
-            changeActivity(MainActivity::class.java)
+            changeActivity(PermissionActivity::class.java)
         }
     }
 
@@ -58,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                         UserApiClient.instance.loginWithKakaoAccount(this, callback = mCallback)
                     } else if (token != null) {
                         Log.d(TAG, "카카오 로그인 성공 ${token.accessToken}")
-                        changeActivity(MainActivity::class.java)
+                        changeActivity(PermissionActivity::class.java)
                     }
                 }
             } else {

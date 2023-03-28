@@ -101,7 +101,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="26dp"
-                android:src="@drawable/google"
+                android:src="@drawable/ic_google"
 
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -150,7 +150,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="26dp"
-                android:src="@drawable/kakao"
+                android:src="@drawable/ic_kakao"
 
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
