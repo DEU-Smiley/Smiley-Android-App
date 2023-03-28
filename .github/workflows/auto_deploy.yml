@@ -29,7 +29,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           id: ${{ github.event.release.id }}
           replacename: true
-          name: Smiley v${{ steps.extract_version_name.outputs.version }} - official
+          name: Smiley v'${{ steps.extract_version_name.outputs.version }}' - official
           replacebody: true
           body: |
             ## Smiley v${{ steps.extract_version_name.outputs.version }} 정식 버전이 릴리즈 되었습니다.
