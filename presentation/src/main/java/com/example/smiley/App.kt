@@ -5,7 +5,6 @@ import com.kakao.sdk.common.KakaoSdk
 
 /**
  * @HiltAndroidApp
- * test v0.0.3
  */
 class App : Application() {
     override fun onCreate() {
