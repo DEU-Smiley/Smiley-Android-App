@@ -1,7 +1,7 @@
-name: Auto Release (Test)
+name: Auto Release (Main)
 on:
   push:
-    branches: [ "release/*" ]
+    branches: [ "main" ]
     
 jobs:
   # Release APK 생성
@@ -72,7 +72,7 @@ jobs:
           tag_name: ${{ steps.extract_version_name.outputs.version }}
           release_name: ${{ steps.extract_version_name.outputs.version }}
           body: |
-            ## v${{ steps.extract_version_name.outputs.version }} 테스트 버전이 릴리즈 되었습니다.
+            ## v${{ steps.extract_version_name.outputs.version }} 정식 버전이 릴리즈 되었습니다.
             - Apk 다운로드 -> [Apk Downloads](https://github.com/DEU-Smiley/Smiley-Android-App/releases/download/0.0.3/app-release.apk) 
             - Apk는 위의 링크 또는 해당 게시글 하단에서 다운로드 받을 수 있습니다.
             - 만약 해당 게시글에 Apk 파일이 업로드 되어 있지 않다면 아래 절차를 통해 다운로드 받아주세요.

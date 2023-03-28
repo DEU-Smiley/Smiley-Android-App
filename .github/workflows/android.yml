@@ -1,14 +1,11 @@
 name: Android CI
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "develop" ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -27,7 +24,7 @@ jobs:
       run : |
         echo $KEY_STORE > ./keystore.b64
         base64 -d -i ./keystore.b64 > ./Smiley.jks
-        
+
 
     # Generate keystore.properties
     - name: Generate keystore.properties
@@ -40,12 +37,15 @@ jobs:
         echo storePassword=$STORE_PASSWORD > ./keystore.properties
         echo keyPassword=$KEY_PASSWORD >> ./keystore.properties
         echo keyAlias=$KEY_ALIAS >> ./keystore.properties
-        echo storeFile=$STORE_FILE >> ./keystore.properties
+        echo storeFile=../$STORE_FILE >> ./keystore.properties
 
+    # Kakao App Key
     - name: Access KAKAO_SDK_APPKEY
       env:
-        APOD_API_KEY: ${{ secrets.KAKAO_SDK_APPKEY }}
-      run: echo KAKAO_SDK_APPKEY=\"$KAKAO_SDK_APPKEY\" > ./local.properties
+        KAKAO_SDK_APPKEY: ${{ secrets.KAKAO_SDK_APPKEY }}
+      run: |
+        echo KAKAO_SDK_APPKEY=\"$KAKAO_SDK_APPKEY\" > ./local.properties
+        cat ./local.properties
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
