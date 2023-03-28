@@ -61,6 +61,9 @@ jobs:
         run: |
           echo ${{ github.head_ref }}
           echo ${{ github.base_ref }}
+          echo ${{ github.ref_name }}
+          echo ${{ GITHUB_REF }}
+          echo ${ GITHUB_REF }
 
       # merge commit에서 release 버전 정보 추출
       - name: 버전 정보 추출
