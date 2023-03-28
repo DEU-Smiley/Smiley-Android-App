@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="side_margin">20dp</dimen>
+
+    <!-- 모든 버튼의 아래 여백 -->
+    <dimen name="btn_bottom_margin">28dp</dimen>
+    <!-- 모든 버튼 사이 간격-->
+    <dimen name="btn_between_margin">14dp</dimen>
+    <!-- 모든 질문간 사이 간격 (세로) -->
+    <dimen name="question_between_margin">32dp</dimen>
+
+</resources>

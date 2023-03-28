@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".onboarding.FirstOnBoardingFragment"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/side_margin"
+    android:paddingRight="@dimen/side_margin">
+
+    <View
+        android:id="@+id/illustration"
+        android:layout_width="258dp"
+        android:layout_height="215dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/first_on_boarding_logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="더욱 정확하게, 더욱 간단하게"
+        android:textColor="@color/black1_20"
+        android:textSize="22sp"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/illustration" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/pretendard_medium"
+        android:gravity="center"
+        android:text="착용 시간 관리부터, 목표 달성까지.\n더욱 똑똑해진 교정기로 차별화된 교정을 경험해 보세요."
+        android:textColor="@color/gray3_8E"
+        android:textSize="15sp"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

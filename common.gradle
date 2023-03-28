@@ -1,0 +1,75 @@
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+def keystorePropertiesFile = project.rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+def KAKAO_SDK_APPKEY = properties.getProperty('KAKAO_SDK_APPKEY')
+def isLibraryPlugin = pluginManager.hasPlugin("com.android.library")
+def isApplicationPlugin = pluginManager.hasPlugin("com.android.application")
+
+if (isLibraryPlugin || isApplicationPlugin) {
+    android {
+        compileSdkVersion compileSdk_Version
+        buildToolsVersion buildTools_Version
+
+        defaultConfig {
+            /* 카카오 Appkey 변수로 등록(local.properties) */
+            buildConfigField "String", "KAKAO_SDK_APPKEY", properties["KAKAO_SDK_APPKEY"]
+            /* Manifest에서 변수로 참조할 수 있도록 지정 */
+            manifestPlaceholders = [kakaoSdkAppkey: KAKAO_SDK_APPKEY]
+
+            if(isApplicationPlugin) {
+                applicationId "com.example.smiley"
+            }
+
+            minSdkVersion minSdk_Version
+            targetSdkVersion targetSdk_Version
+
+            versionCode versionCode
+            versionName versionName
+
+            testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        }
+
+        signingConfigs {
+            config {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+
+        buildTypes {
+            debug {
+                if(isApplicationPlugin){
+                    shrinkResources false
+                }
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            }
+
+            release {
+                if(isApplicationPlugin){
+                    shrinkResources true
+                }
+                debuggable true
+                minifyEnabled true
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.config
+            }
+        }
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
+    }
+}
