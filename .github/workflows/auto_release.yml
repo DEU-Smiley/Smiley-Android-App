@@ -59,7 +59,7 @@ jobs:
 
       # merge commit에서 release 버전 정보 추출
       - name: 버전 정보 추출
-        run: echo "##[set-output name=version;]$(echo '${{ github.event.head_commit.message }}' | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')"
+        run: echo "##[set-output name=version;]$(echo '${{ github.event.head_ref }}' | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')"
         id: extract_version_name
 
       # Release/Tag 생성
