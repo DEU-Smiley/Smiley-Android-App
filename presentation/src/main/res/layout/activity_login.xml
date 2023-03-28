@@ -36,7 +36,7 @@
                 android:layout_marginTop="10dp"
 
                 android:text="스마일리와 함께"
-                android:textSize="22sp"
+                android:textSize="22dp"
                 android:textColor="@color/black1_20"
                 android:fontFamily="@font/pretendard_semibold"
                 />
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
 
                 android:text="기록하고 관리해 보세요!"
-                android:textSize="22sp"
+                android:textSize="22dp"
                 android:textColor="@color/black1_20"
                 android:fontFamily="@font/pretendard_light"/>
 
@@ -56,7 +56,7 @@
                 android:layout_marginTop="4dp"
 
                 android:text="바로 지금, 미소가 필요한 순간"
-                android:textSize="15sp"
+                android:textSize="15dp"
                 android:textColor="@color/gray2_6E"
                 android:fontFamily="@font/pretendard_medium"/>
         </LinearLayout>
@@ -80,20 +80,18 @@
         <!-- Layout End 로그인 로고 -->
 
         <!-- Layout 구글 로그인 버튼 -->
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/google_login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:layout_marginBottom="10dp"
-
             android:background="@drawable/stroke_layout"
             android:foreground="?attr/selectableItemBackground"
 
             android:clickable="true"
             android:orientation="horizontal"
-            android:gravity="center"
 
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -102,21 +100,34 @@
             <ImageView
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:src="@drawable/google"/>
+                android:layout_marginStart="26dp"
+                android:src="@drawable/google"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
+                android:layout_gravity="center"
+
                 android:text="구글 계정으로 시작"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black1_20"
-                android:fontFamily="@font/pretendard_medium"/>
-        </LinearLayout>
+                android:fontFamily="@font/pretendard_medium"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- Layout End 구글 로그인 버튼 -->
 
         <!-- Layout 카카오 로그인 버튼 -->
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/kakao_login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -124,7 +135,7 @@
             android:paddingBottom="15dp"
             android:layout_marginBottom="@dimen/btn_bottom_margin"
 
-            android:background="@drawable/stroke_layout"
+            android:background="@drawable/stroke_layout_yellow"
             android:foreground="?attr/selectableItemBackground"
 
             android:clickable="true"
@@ -138,17 +149,27 @@
             <ImageView
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:src="@drawable/kakao"/>
+                android:layout_marginStart="26dp"
+                android:src="@drawable/kakao"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:text="카카오 계정으로 시작"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black1_20"
-                android:fontFamily="@font/pretendard_medium"/>
-        </LinearLayout>
+                android:fontFamily="@font/pretendard_medium"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- Layout End 카카오 로그인 버튼 -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>

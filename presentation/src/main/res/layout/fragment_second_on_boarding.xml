@@ -44,6 +44,7 @@
         android:text="노력이 배신하지 못하도록 저희가 꽉 잡아둘게요 :)\n착용 시간, 미션, 체크리스트 달성 여부 등 내 모든\n노력을 한 눈에 볼 수 있어요."
         android:textColor="@color/gray3_8E"
         android:textSize="15sp"
+        android:lineSpacingExtra="8sp"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

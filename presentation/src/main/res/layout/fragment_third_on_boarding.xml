@@ -44,6 +44,7 @@
         android:text="전문가와 교정 선배들의 꿀팁,\n똑똑한 챗봇까지 모두 다 준비되어 있어요 !"
         android:textColor="@color/gray3_8E"
         android:textSize="15sp"
+        android:lineSpacingExtra="8sp"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

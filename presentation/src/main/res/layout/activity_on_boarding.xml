@@ -44,25 +44,31 @@
             app:progressMode="false"
             app:selectedDotColor="@color/primary_normal" />
 
-        <!-- 시작 버튼 -->
-        <com.google.android.material.button.MaterialButton
+        <!-- Layout 카카오 로그인 버튼 -->
+        <Button
             android:id="@+id/startBtn"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginBottom="@dimen/btn_bottom_margin"
 
-            app:layout_constraintBottom_toBottomOf="parent"
+            style="?attr/borderlessButtonStyle"
+            android:background="@drawable/btn_radius"
+            android:foreground="?attr/selectableItemBackground"
+
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+
+            android:text="시작하기"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/pretendard_bold"
+
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-
-            android:backgroundTint="@color/primary_normal"
-            app:cornerRadius="5dp"
-
-            android:fontFamily="@font/pretendard_bold"
-            android:text="시작하기"
-            android:textColor="@color/white"
-            android:textSize="18sp"/>
-
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
