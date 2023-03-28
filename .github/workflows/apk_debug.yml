@@ -42,7 +42,7 @@ jobs:
       # Kakao App Key
       - name: Access KAKAO_SDK_APPKEY
         env:
-          KAKAO_API_KEY: ${{ secrets.KAKAO_SDK_APPKEY }}
+          KAKAO_SDK_APPKEY: ${{ secrets.KAKAO_SDK_APPKEY }}
         run: |
           echo KAKAO_SDK_APPKEY=\"$KAKAO_SDK_APPKEY\" > ./local.properties
           cat ./local.properties
