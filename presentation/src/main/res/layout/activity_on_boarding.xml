@@ -54,7 +54,7 @@
             android:layout_marginBottom="@dimen/btn_bottom_margin"
 
             style="?attr/borderlessButtonStyle"
-            android:background="@drawable/btn_radius"
+            android:background="@drawable/selector_btn"
             android:foreground="?attr/selectableItemBackground"
 
             android:clickable="true"

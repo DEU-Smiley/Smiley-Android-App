@@ -11,6 +11,7 @@ import com.example.smiley.common.extension.showGenericAlertDialog
 import com.example.smiley.login.LoginActivity
 import com.example.smiley.main.MainActivity
 import com.example.smiley.onboarding.OnBoardingActivity
+import com.example.smiley.permission.PermissionActivity
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.common.model.KakaoSdkError
 import com.kakao.sdk.user.UserApiClient
@@ -40,7 +41,7 @@ class SplashActivity : AppCompatActivity() {
         if(AuthApiClient.instance.hasToken()) {
             UserApiClient.instance.accessTokenInfo{ _, error ->
                 if(error == null) { // 토큰 유효성 체크 성공 (필요시 토큰 갱신)
-                    changeActivity(MainActivity::class.java)
+                    changeActivity(PermissionActivity::class.java)
                     return@accessTokenInfo
                 } else if (error !is KakaoSdkError || !error.isInvalidTokenError()){
                     this.showGenericAlertDialog("사용자 검증에 실패하였습니다. 로그인 화면으로 이동합니다.")
