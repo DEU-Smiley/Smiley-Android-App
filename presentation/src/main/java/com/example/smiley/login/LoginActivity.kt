@@ -1,6 +1,7 @@
 package com.example.smiley.login
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
@@ -20,10 +21,9 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginActivity @Inject constructor(
-    private val viewModel: LoginViewModel
-) : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     private lateinit var bind:ActivityLoginBinding
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
