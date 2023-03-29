@@ -7,4 +7,6 @@ ext {
     minSdk_Version      = 28
     versionCode         = 1
     versionName         = "1.0.0"
+
+    hiltVersion         = "2.45"
 }

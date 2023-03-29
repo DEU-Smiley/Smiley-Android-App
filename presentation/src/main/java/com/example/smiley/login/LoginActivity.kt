@@ -1,11 +1,9 @@
 package com.example.smiley.login
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,13 +14,11 @@ import com.example.smiley.databinding.ActivityLoginBinding
 import com.example.smiley.login.viewmodel.LoginActivityState
 import com.example.smiley.login.viewmodel.LoginViewModel
 import com.example.smiley.permission.PermissionActivity
-import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.model.ClientError
-import com.kakao.sdk.common.model.ClientErrorCause
-import com.kakao.sdk.user.UserApiClient
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var bind:ActivityLoginBinding
     private lateinit var viewModel: LoginViewModel
