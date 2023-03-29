@@ -17,17 +17,18 @@ import com.example.smiley.permission.PermissionActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity() {
+class LoginActivity @Inject constructor(
+    private val viewModel: LoginViewModel
+) : AppCompatActivity() {
     private lateinit var bind:ActivityLoginBinding
-    private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         bind = DataBindingUtil.setContentView(this, R.layout.activity_login)
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         observeLoginState()
         addLoginBtnClickEvent()
