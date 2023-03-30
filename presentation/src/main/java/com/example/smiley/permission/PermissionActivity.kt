@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.smiley.R
+import com.example.smiley.common.extension.changeActivity
 import com.example.smiley.common.extension.setDisabled
 import com.example.smiley.common.extension.setEnabled
 import com.example.smiley.databinding.ActivityPermissionBinding
+import com.example.smiley.info.InfoActivity
 
 class PermissionActivity : AppCompatActivity() {
 
@@ -17,6 +19,7 @@ class PermissionActivity : AppCompatActivity() {
         bind = DataBindingUtil.setContentView(this, R.layout.activity_permission)
         initAllowBtn()
         addInfoCheckBoxClickEvent()
+        addAllowBtnClickEvent()
     }
 
     private fun initAllowBtn(){
@@ -32,4 +35,9 @@ class PermissionActivity : AppCompatActivity() {
         }
     }
 
+    private fun addAllowBtnClickEvent(){
+        bind.allowBtn.setOnClickListener{
+            changeActivity(InfoActivity::class.java)
+        }
+    }
 }
