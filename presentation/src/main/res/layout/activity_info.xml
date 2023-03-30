@@ -23,11 +23,14 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="left|center_vertical"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:background="@drawable/ic_left_arrow"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                android:src="@drawable/ripple_unbounded"
+                android:clickable="true"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:orientation="horizontal"
             android:background="@drawable/background_indicator">
 
