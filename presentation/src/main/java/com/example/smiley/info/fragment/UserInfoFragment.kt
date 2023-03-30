@@ -1,23 +1,20 @@
-package com.example.smiley.info
+package com.example.smiley.info.fragment
 
-import android.icu.text.IDNA.Info
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.core.view.isEmpty
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.smiley.R
 import com.example.smiley.databinding.FragmentUserInfoBinding
+import com.example.smiley.info.InfoActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
@@ -132,11 +129,10 @@ class UserInfoFragment : Fragment() {
         override fun afterTextChanged(p0: Editable?) {
             val input = "$p0"
 
-            if(!input.matches(Regex("^\\d{8}"))){
-                bind.birthEditText.error = "올바르지 않은 형식입니다."
-            } else {
-                bind.birthEditText.error = null
-            }
+            bind.birthEditText.error =
+                if(!input.matches(Regex("^\\d{8}"))) "올바르지 않은 형식입니다."
+                else null
+
             isAllInputComplete()
         }
     }
@@ -151,12 +147,10 @@ class UserInfoFragment : Fragment() {
         override fun afterTextChanged(p0: Editable?) {
             val pattern = Patterns.EMAIL_ADDRESS
 
-            if(!pattern.matcher("$p0").matches()){
-                bind.emailEditText.error = "올바르지 않은 이메일 형식입니다."
-            }
-            else{
-                bind.emailEditText.error = null
-            }
+            bind.emailEditText.error =
+                if(!pattern.matcher("$p0").matches()) "올바르지 않은 이메일 형식입니다."
+                else null
+
             isAllInputComplete()
         }
     }
@@ -171,15 +165,13 @@ class UserInfoFragment : Fragment() {
         override fun afterTextChanged(p0: Editable?) {
             val input = "$p0"
 
-            if(input.matches(Regex("^\\d{3}-\\d{4}-\\d{4}\$"))){
-                bind.phoneEditText.error = "- 없이 입력해주세요"
-            }
-            else if(!input.matches(Regex("^[0-9]{11}$"))) {
-                bind.phoneEditText.error = "올바르지 않은 형식입니다."
-            }
-            else{
-                bind.phoneEditText.error = null
-            }
+            bind.phoneEditText.error =
+                if(input.matches(Regex("^\\d{3}-\\d{4}-\\d{4}\$"))){
+                    "- 없이 입력해주세요"
+                } else if(!input.matches(Regex("^[0-9]{11}$"))) {
+                    "올바르지 않은 형식입니다."
+                } else null
+
             isAllInputComplete()
         }
     }
