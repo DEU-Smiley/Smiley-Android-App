@@ -1,7 +1,5 @@
 package com.example.smiley.common.extension
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -11,7 +9,6 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.ScrollView
 import androidx.core.view.get
-import com.example.smiley.App
 import com.example.smiley.R
 
 fun View.gone(){ visibility = View.GONE }
@@ -34,16 +31,21 @@ fun Button.setEnabled(){
 /**
  * 선택된 라디오 버튼에 따라 다음 뷰를 표시하는 메소드
  * 버튼 2개인 경우만 해당
- * @param visibleView:View
- * @param goneView:View?
+ * @param subView:View
+ * @param nextView:View?
+ * @param hideView:List<View>?
+ * @param inputChecker: (()->Unit)?
  */
-fun RadioGroup.showViewThenCheckedChanged(visibleView:View, goneView:View?) {
+fun RadioGroup.showViewThenCheckedChanged(subView:View, nextView:View?, hideView:List<View>? = null, inputChecker: (() -> Unit)? = null) {
     this.setOnCheckedChangeListener { _, checkedId ->
-        if(checkedId == this[0].id || goneView == null) visibleView.visible()
+        if(checkedId == this[0].id || nextView == null) subView.visible()
         else {
-            visibleView.gone()
-            goneView.visible()
+            subView.gone()
+            nextView.visible()
+            hideView?.map { it.gone() }
         }
+
+        if(inputChecker != null) inputChecker()
     }
 }
 
@@ -61,8 +63,9 @@ fun ScrollView.scrollDown(){
  * EditText에서 엔터 누르면 다음 뷰를 표시하는 메소드
  * @param nextView:View
  * @param scrollView:ScrollView?
+ * @param inputChecker: (()->Unit)?
  */
-fun EditText.showViewThenEnterPressed(nextView: View, scrollView: ScrollView?) {
+fun EditText.showViewThenEnterPressed(nextView: View, scrollView: ScrollView?, inputChecker: (() -> Unit)? = null) {
     setOnKeyListener { view, keyCode, _ ->
         if (keyCode == KeyEvent.KEYCODE_ENTER) {
             val input = (view as EditText).text
@@ -71,6 +74,7 @@ fun EditText.showViewThenEnterPressed(nextView: View, scrollView: ScrollView?) {
                 scrollView?.scrollDown()
             }
         }
+        if(inputChecker != null) inputChecker()
         false
     }
 }

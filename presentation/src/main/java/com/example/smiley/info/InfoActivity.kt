@@ -1,8 +1,8 @@
 package com.example.smiley.info
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
@@ -21,14 +21,12 @@ class InfoActivity : AppCompatActivity() {
 
         bind = DataBindingUtil.setContentView(this, R.layout.activity_info)
         initViewPager()
-        setBackBtnVisibility()
+        setBackBtnStatus()
         addNextBtnClickEvent()
         addBackBtnClickEvent()
     }
 
-    private fun setBackBtnVisibility(){
-        bind.backBtn.isVisible = currentPage != 0
-    }
+
 
     private fun initViewPager(){
         bind.viewpager.apply {
@@ -46,10 +44,8 @@ class InfoActivity : AppCompatActivity() {
     private fun addNextBtnClickEvent(){
         bind.nextBtn.setOnClickListener {
             currentPage = (if(currentPage + 1 >= PAGE_COUNT) PAGE_COUNT-1 else currentPage + 1) % PAGE_COUNT
-            setBackBtnVisibility()
-
-            bind.viewpager.setCurrentItem(currentPage, true)
-            (bind.viewpager.adapter as InfoAdapter).setIndicatorPosit(currentPage)
+            setBackBtnStatus()
+            setViewPagerStatus(currentPage)
         }
     }
 
@@ -59,18 +55,38 @@ class InfoActivity : AppCompatActivity() {
     private fun addBackBtnClickEvent(){
         bind.backBtn.setOnClickListener {
             currentPage = (if(currentPage - 1 < 0) 0 else currentPage - 1) % PAGE_COUNT
-            setBackBtnVisibility()
-
-            bind.viewpager.setCurrentItem(currentPage, true)
-            (bind.viewpager.adapter as InfoAdapter).setIndicatorPosit(currentPage)
+            setBackBtnStatus()
+            setViewPagerStatus(currentPage)
         }
     }
 
-    fun getNextButton(): Button{
+    /**
+     * 뷰페이저 상태를 결정하는 메소드
+     */
+    private fun setViewPagerStatus(currentPage:Int){
+        bind.viewpager.apply {
+            setCurrentItem(currentPage, true)
+            (adapter as InfoAdapter).apply {
+                setIndicatorPosit(currentPage)
+                (getFragmentAt(currentPage) as ButtonClickable).setButtonStatus()
+            }
+        }
+    }
+    /**
+     * 상단 뒤로가기 버튼의 상태를 지정하는 ㅔㅁ소드
+     */
+    private fun setBackBtnStatus(){
+        bind.backBtn.isVisible = currentPage != 0
+    }
+
+    /**
+     * 부모의 다음 버튼을 가져오는 메소드
+     */
+    fun getNextButton(): Button {
         return bind.nextBtn
     }
 
     companion object {
-        const val PAGE_COUNT:Int = 2
+        const val PAGE_COUNT:Int = 3
     }
 }
