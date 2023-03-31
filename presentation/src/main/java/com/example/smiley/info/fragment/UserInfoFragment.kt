@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
 import com.example.smiley.databinding.FragmentUserInfoBinding
+import com.example.smiley.info.ButtonClickable
 import com.example.smiley.info.InfoActivity
 
 private const val ARG_PARAM1 = "param1"
@@ -23,13 +24,13 @@ private const val ARG_PARAM2 = "param2"
  * Use the [UserInfoFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class UserInfoFragment : Fragment() {
+class UserInfoFragment : Fragment(), ButtonClickable {
     private var param1: String? = null
     private var param2: String? = null
 
     private lateinit var bind:FragmentUserInfoBinding
     private lateinit var nextBtn: Button
-    private val editTextList = arrayListOf<EditText>()
+    private var editTextList: ArrayList<EditText> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,34 +65,18 @@ class UserInfoFragment : Fragment() {
 
     private fun addRadioGroupClickEvent(){
         bind.genderRadio.setOnCheckedChangeListener { _, _ ->
-            isAllInputComplete()
+            setButtonStatus()
         }
-    }
-
-    private fun initNextBtn(){
-        nextBtn = (activity as InfoActivity).getNextButton()
-        nextBtn.isEnabled = false
     }
 
     /**
-     * 모든 EditText에 형식에 맞는 입력이 들어왔는지 확인
+     * 다음 버튼 초기화
      */
-    private fun isAllInputComplete() : Boolean {
-        if(!bind.maleRadioBtn.isChecked && !bind.femaleRadioBtn.isChecked) {
-            nextBtn.isEnabled = false
-            return false
-        }
-
-        editTextList.forEach{
-            if(it.error != null || it.text.isEmpty()) {
-                nextBtn.isEnabled = false
-                return false
-            }
-        }
-
-        nextBtn.isEnabled = true
-        return true
+    private fun initNextBtn(){
+        nextBtn = (activity as InfoActivity).getNextButton()
+        setButtonStatus()
     }
+
 
     /**
      * EditText에 TextWatcher 등록
@@ -114,7 +99,7 @@ class UserInfoFragment : Fragment() {
 
         override fun afterTextChanged(p0: Editable?) {
             // 모든 edittext가 정상적으로 입력 되었는지 확인
-            isAllInputComplete()
+            setButtonStatus()
         }
     }
 
@@ -133,7 +118,7 @@ class UserInfoFragment : Fragment() {
                 if(!input.matches(Regex("^\\d{8}"))) "올바르지 않은 형식입니다."
                 else null
 
-            isAllInputComplete()
+            setButtonStatus()
         }
     }
 
@@ -151,7 +136,7 @@ class UserInfoFragment : Fragment() {
                 if(!pattern.matcher("$p0").matches()) "올바르지 않은 이메일 형식입니다."
                 else null
 
-            isAllInputComplete()
+            setButtonStatus()
         }
     }
 
@@ -161,10 +146,8 @@ class UserInfoFragment : Fragment() {
     private val phoneNumberTextWatcher = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
         override fun afterTextChanged(p0: Editable?) {
             val input = "$p0"
-
             bind.phoneEditText.error =
                 if(input.matches(Regex("^\\d{3}-\\d{4}-\\d{4}\$"))){
                     "- 없이 입력해주세요"
@@ -172,8 +155,22 @@ class UserInfoFragment : Fragment() {
                     "올바르지 않은 형식입니다."
                 } else null
 
-            isAllInputComplete()
+            setButtonStatus()
         }
+    }
+
+    override fun setButtonStatus(){
+        if(::nextBtn.isInitialized) nextBtn.isEnabled = isAllInputCompleted()
+    }
+
+    private fun isAllInputCompleted(): Boolean {
+        if(!bind.maleRadioBtn.isChecked && !bind.femaleRadioBtn.isChecked) return false
+
+        editTextList.forEach{
+            if(it.error != null || it.text.isEmpty()) return false
+        }
+
+        return true
     }
 
     companion object {
