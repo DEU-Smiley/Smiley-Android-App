@@ -1,5 +1,6 @@
 package com.example.smiley.info.fragment
 
+
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,7 @@ import com.example.smiley.info.ButtonClickable
 import com.example.smiley.info.InfoActivity
 import java.time.LocalDate
 
+
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
@@ -39,6 +41,7 @@ class MedicalInfoFragment : Fragment(), ButtonClickable {
     private lateinit var radioBtnList:ArrayList<RadioGroup>
     private lateinit var editTextList:ArrayList<EditText>
     private lateinit var nextBtn:Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,13 +116,11 @@ class MedicalInfoFragment : Fragment(), ButtonClickable {
     private fun isAllInputCompleted(): Boolean {
         if(!::radioBtnList.isInitialized || !::editTextList.isInitialized) return false
         
-        Log.d("실행 됨", "췍")
         radioBtnList.forEach {
             if (it.checkedRadioButtonId < 0) return false
         }
 
         editTextList.forEach {
-            Log.d("보이나", "${it.isShown}")
             if (it.isShown && (it.error != null || it.text.isEmpty())) return false
         }
         return true

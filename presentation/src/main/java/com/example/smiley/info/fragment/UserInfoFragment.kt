@@ -148,6 +148,7 @@ class UserInfoFragment : Fragment(), ButtonClickable {
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         override fun afterTextChanged(p0: Editable?) {
             val input = "$p0"
+
             bind.phoneEditText.error =
                 if(input.matches(Regex("^\\d{3}-\\d{4}-\\d{4}\$"))){
                     "- 없이 입력해주세요"
