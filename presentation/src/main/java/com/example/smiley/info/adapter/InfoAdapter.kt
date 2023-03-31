@@ -1,6 +1,7 @@
 package com.example.smiley.info.adapter
 
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -9,14 +10,16 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.example.smiley.R
 import com.example.smiley.common.extension.invisible
 import com.example.smiley.common.extension.visible
+import com.example.smiley.info.fragment.CalibrationInfoFragment
 import com.example.smiley.info.fragment.MedicalInfoFragment
 import com.example.smiley.info.fragment.UserInfoFragment
 
+
 class InfoAdapter(activity: FragmentActivity, indicatorId: Int, private val count: Int): FragmentStateAdapter(activity) {
+    private val fragmentMap = hashMapOf<Int, Fragment>()
     private val activity = activity
     private val pointer:List<View>
     private val text:List<TextView>
@@ -32,12 +35,22 @@ class InfoAdapter(activity: FragmentActivity, indicatorId: Int, private val coun
     }
 
     override fun createFragment(position: Int): Fragment {
-        return when(position){
-            0 -> UserInfoFragment()
-            1 -> MedicalInfoFragment()
-            else -> UserInfoFragment()
-        }
+        return fragmentFactory(position)
     }
+
+    private fun fragmentFactory(position:Int): Fragment {
+        if (fragmentMap[position] == null)
+            fragmentMap[position] = when (position) {
+                0 -> UserInfoFragment()
+                1 -> MedicalInfoFragment()
+                2 -> CalibrationInfoFragment()
+                else -> UserInfoFragment()
+            }
+
+        return fragmentMap[position]!!
+    }
+
+    fun getFragmentAt(position:Int) = fragmentFactory(position)
 
     fun setIndicatorPosit(posit:Int){
         repeat(count){
