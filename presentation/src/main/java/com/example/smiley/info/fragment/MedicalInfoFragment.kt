@@ -9,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.RadioGroup
 import androidx.annotation.RequiresApi
+import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -39,7 +41,7 @@ class MedicalInfoFragment : Fragment(), ButtonClickable {
 
     private lateinit var bind: FragmentMedicalInfoBinding
     private lateinit var radioBtnList:ArrayList<RadioGroup>
-    private lateinit var editTextList:ArrayList<EditText>
+    private lateinit var subQuestionLayout:ArrayList<LinearLayout>
     private lateinit var nextBtn:Button
 
 
@@ -57,6 +59,16 @@ class MedicalInfoFragment : Fragment(), ButtonClickable {
     ): View? {
         // Inflate the layout for this fragment
         bind = DataBindingUtil.inflate(inflater, R.layout.fragment_medical_info, container, false)
+
+        initLayoutList()
+        initNextBtn()
+        addAnswerClickEvent()
+        addKeyPressEventToEditText()
+
+        return bind.root
+    }
+
+    private fun initLayoutList(){
         bind.apply {
             radioBtnList = arrayListOf(
                 answer1Radio,
@@ -65,17 +77,11 @@ class MedicalInfoFragment : Fragment(), ButtonClickable {
                 answer4Radio,
             )
 
-            editTextList = arrayListOf(
-                answer2SubEditText,
-                answer3SubEditText,
+            subQuestionLayout = arrayListOf(
+                answer2SubQuestion,
+                answer3SubQuestion
             )
         }
-
-        initNextBtn()
-        addAnswerClickEvent()
-        addKeyPressEventToEditText()
-
-        return bind.root
     }
 
     /**
@@ -114,15 +120,23 @@ class MedicalInfoFragment : Fragment(), ButtonClickable {
     }
 
     private fun isAllInputCompleted(): Boolean {
-        if(!::radioBtnList.isInitialized || !::editTextList.isInitialized) return false
-        
         radioBtnList.forEach {
             if (it.checkedRadioButtonId < 0) return false
         }
 
-        editTextList.forEach {
-            if (it.isShown && (it.error != null || it.text.isEmpty())) return false
+        subQuestionLayout.forEach { layout ->
+            val editText = layout.children
+                .filter { it is EditText }
+                .map { it as EditText }
+                .toList()
+
+            if(layout.isVisible){
+                editText.forEach {
+                    if(it.error != null || it.text.isEmpty() || it.text.isBlank()) return false
+                }
+            }
         }
+
         return true
     }
 
