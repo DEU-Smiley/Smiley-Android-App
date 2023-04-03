@@ -8,8 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:paddingLeft="@dimen/side_margin"
-        android:paddingRight="@dimen/side_margin"
         android:orientation="vertical">
 
         <androidx.viewpager2.widget.ViewPager2
@@ -49,6 +47,8 @@
             android:id="@+id/startBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginEnd="@dimen/side_margin"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:layout_marginBottom="@dimen/btn_bottom_margin"

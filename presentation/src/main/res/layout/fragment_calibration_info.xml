@@ -24,7 +24,9 @@
                 android:fontFamily="@font/pretendard_semibold"
                 android:text="교정 정보를 입력해주세요."
                 android:textColor="@color/black1_20"
-                android:textSize="22sp" />
+                android:textSize="@dimen/H2_SB600_22_h30"
+                android:lineSpacingExtra="6sp"
+                android:includeFontPadding="false"/>
 
             <!-- Layout 질문1 입력 레이아웃-->
             <LinearLayout
@@ -40,9 +42,11 @@
                     android:layout_marginTop="34dp"
                     android:layout_marginBottom="20dp"
                     android:fontFamily="@font/pretendard_medium"
-                    android:text="1. 현재 교정 중이신가요?"
+                    android:text="@string/calibration_question_1"
                     android:textColor="@color/black1_20"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/M500_16_h22"
+                    android:lineSpacingExtra="6sp"
+                    android:includeFontPadding="false"/>
 
                 <RadioGroup
                     android:id="@+id/answer1_radio"
@@ -61,7 +65,7 @@
                         android:button="@null"
                         android:gravity="center"
 
-                        android:text="네"
+                        android:text="@string/answer_yes"
                         android:textColor="@drawable/selector_answer_text" />
 
                     <RadioButton
@@ -75,7 +79,7 @@
                         android:button="@null"
                         android:gravity="center"
 
-                        android:text="아니오"
+                        android:text="@string/answer_no"
                         android:textColor="@drawable/selector_answer_text" />
                 </RadioGroup>
             </LinearLayout>
@@ -95,9 +99,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:fontFamily="@font/pretendard_medium"
-                    android:text="2. 어느 병원에서 교정을 받고 있나요?"
+                    android:text="@string/calibration_question_2"
                     android:textColor="@color/black1_20"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/M500_16_h22"
+                    android:lineSpacingExtra="6sp"
+                    android:includeFontPadding="false"/>
 
                 <LinearLayout
                     android:id="@+id/answer2_sub_question"
@@ -110,10 +116,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
-                        android:fontFamily="@font/pretendard_medium"
-                        android:text="*병원명을 입력해주세요"
+
+                        android:text="@string/calibration_sub_question_2"
+                        android:textSize="@dimen/M500_14_h20"
                         android:textColor="@color/gray3_8E"
-                        android:textSize="14sp" />
+                        android:fontFamily="@font/pretendard_medium"
+                        android:lineSpacingExtra="6sp"
+                        android:includeFontPadding="false"/>
 
                     <EditText
                         android:id="@+id/answer2_sub_edit_text"
@@ -121,16 +130,17 @@
                         android:layout_height="45dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/selector_primary_edittext"
-                        android:fontFamily="@font/pretendard_medium"
+
 
                         android:inputType="text"
                         android:maxLines="1"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:textColor="@color/gray3_8E"
 
+                        android:textSize="14sp"
+                        android:textColor="@color/gray3_8E"
                         android:textColorHint="@color/gray4_CB"
-                        android:textSize="14sp" />
+                        android:fontFamily="@font/pretendard_medium"/>
                 </LinearLayout>
             </LinearLayout>
             <!-- Layout End 질문2 입력 레이아웃-->
@@ -149,9 +159,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:fontFamily="@font/pretendard_medium"
-                    android:text="3. 교정 시작일은 언제인가요?"
+                    android:text="@string/calibration_question_3"
+                    android:textSize="@dimen/M500_16_h22"
                     android:textColor="@color/black1_20"
-                    android:textSize="16sp" />
+                    android:lineSpacingExtra="6sp"
+                    android:includeFontPadding="false"/>
 
                 <LinearLayout
                     android:id="@+id/answer3_sub_question"
@@ -172,67 +184,10 @@
                         android:paddingEnd="15dp"
                         android:textColor="@color/gray3_8E"
                         android:textSize="14sp" />
-
                 </LinearLayout>
 
             </LinearLayout>
-            <!-- Layout End 전화번호 입력 레이아웃-->
-
-            <!-- Layout 전화번호 입력 레이아웃-->
-            <LinearLayout
-                android:id="@+id/question4_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/question4_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="4. 치과 치료 중 마취나 지혈이 잘 안되어 고생한 경험이 있나요?"
-                    android:textColor="@color/black1_20"
-                    android:textSize="16sp" />
-
-                <RadioGroup
-                    android:id="@+id/answer4_radio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/answer4_yes_radio_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="38dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_answer_radio"
-
-                        android:button="@null"
-                        android:gravity="center"
-
-                        android:text="네"
-                        android:textColor="@drawable/selector_answer_text" />
-
-                    <RadioButton
-                        android:id="@+id/answer4_no_radio_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="38dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_answer_radio"
-
-                        android:button="@null"
-                        android:gravity="center"
-
-                        android:text="아니오"
-                        android:textColor="@drawable/selector_answer_text" />
-                </RadioGroup>
-            </LinearLayout>
-            <!-- Layout End 전화번호 입력 레이아웃-->
+            <!-- Layout End 질문3 입력 레이아웃-->
         </LinearLayout>
     </ScrollView>
 

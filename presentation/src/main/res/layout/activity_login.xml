@@ -36,19 +36,25 @@
                 android:layout_marginTop="10dp"
 
                 android:text="스마일리와 함께"
-                android:textSize="22dp"
+                android:textSize="@dimen/SB600_24_auto"
                 android:textColor="@color/black1_20"
                 android:fontFamily="@font/pretendard_semibold"
+                android:lineSpacingExtra="6sp"
+                android:includeFontPadding="false"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
 
                 android:text="기록하고 관리해 보세요!"
-                android:textSize="22dp"
+                android:textSize="@dimen/SB600_24_auto"
                 android:textColor="@color/black1_20"
-                android:fontFamily="@font/pretendard_light"/>
+                android:fontFamily="@font/pretendard_light"
+                android:lineSpacingExtra="6sp"
+                android:includeFontPadding="false"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,9 +62,11 @@
                 android:layout_marginTop="4dp"
 
                 android:text="바로 지금, 미소가 필요한 순간"
-                android:textSize="15dp"
+                android:textSize="@dimen/M500_16_h22"
                 android:textColor="@color/gray2_6E"
-                android:fontFamily="@font/pretendard_medium"/>
+                android:fontFamily="@font/pretendard_medium"
+                android:lineSpacingExtra="6sp"
+                android:includeFontPadding="false"/>
         </LinearLayout>
         <!-- Layout End 로그인 타이틀 -->
 
@@ -113,10 +121,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
 
-                android:text="구글 계정으로 시작"
-                android:textSize="16sp"
+                android:text="@string/google_login_text"
+                android:textSize="@dimen/H6_SB600_16_h22"
                 android:textColor="@color/black1_20"
                 android:fontFamily="@font/pretendard_medium"
+                android:lineSpacingExtra="6sp"
+                android:includeFontPadding="false"
 
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -160,10 +170,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="카카오 계정으로 시작"
-                android:textSize="16sp"
+                android:text="@string/kakao_login_text"
+                android:textSize="@dimen/H6_SB600_16_h22"
                 android:textColor="@color/black1_20"
                 android:fontFamily="@font/pretendard_medium"
+                android:lineSpacingExtra="6sp"
+                android:includeFontPadding="false"
 
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
