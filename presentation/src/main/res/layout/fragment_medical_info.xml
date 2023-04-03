@@ -22,11 +22,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="의료 정보를 입력해주세요."
-                android:textSize="22sp"
+                android:textSize="@dimen/H2_SB600_22_h30"
                 android:textColor="@color/black1_20"
-                android:fontFamily="@font/pretendard_semibold"/>
+                android:fontFamily="@font/pretendard_semibold"
+                android:lineSpacingExtra="6sp"
+                android:includeFontPadding="false"/>
 
-            <!-- Layout 이름 입력 레이아웃-->
+            <!-- Layout 질문1 입력 레이아웃-->
             <LinearLayout
                 android:id="@+id/question1_layout"
                 android:layout_width="match_parent"
@@ -39,10 +41,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="34dp"
                     android:layout_marginBottom="20dp"
-                    android:text="1. 치과진료 외에 수술이나 입원 경력이 있나요?"
-                    android:textSize="16sp"
+                    android:text="@string/medical_question_1"
+                    android:textSize="@dimen/M500_16_h22"
                     android:textColor="@color/black1_20"
-                    android:fontFamily="@font/pretendard_medium"/>
+                    android:fontFamily="@font/pretendard_medium"
+                    android:lineSpacingExtra="6sp"
+                    android:includeFontPadding="false"/>
 
                 <RadioGroup
                     android:id="@+id/answer1_radio"
@@ -60,7 +64,7 @@
                         android:button="@null"
                         android:background="@drawable/selector_answer_radio"
 
-                        android:text="네"
+                        android:text="@string/answer_yes"
                         android:textColor="@drawable/selector_answer_text"
                         />
 
@@ -75,12 +79,12 @@
                         android:button="@null"
                         android:background="@drawable/selector_answer_radio"
 
-                        android:text="아니오"
+                        android:text="@string/answer_no"
                         android:textColor="@drawable/selector_answer_text"
                         />
                 </RadioGroup>
             </LinearLayout>
-            <!-- Layout End 이름 입력 레이아웃-->
+            <!-- Layout End 질문1 입력 레이아웃-->
 
             <!-- Layout 질문2 입력 레이아웃-->
             <LinearLayout
@@ -88,8 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone"
-                >
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/question2_text_view"
@@ -97,10 +100,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="20dp"
-                    android:text="2. 알러지나 부작용을 유발하는 의약품이 있나요?"
-                    android:textSize="16sp"
+                    android:text="@string/medical_question_2"
+                    android:textSize="@dimen/M500_16_h22"
                     android:textColor="@color/black1_20"
-                    android:fontFamily="@font/pretendard_medium"/>
+                    android:fontFamily="@font/pretendard_medium"
+                    android:lineSpacingExtra="6sp"
+                    android:includeFontPadding="false"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -123,7 +128,7 @@
                             android:button="@null"
                             android:background="@drawable/selector_answer_radio"
 
-                            android:text="네"
+                            android:text="@string/answer_yes"
                             android:textColor="@drawable/selector_answer_text"
                             />
 
@@ -138,7 +143,7 @@
                             android:button="@null"
                             android:background="@drawable/selector_answer_radio"
 
-                            android:text="아니오"
+                            android:text="@string/answer_no"
                             android:textColor="@drawable/selector_answer_text"
                             />
                     </RadioGroup>
@@ -156,10 +161,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
-                        android:text="*의약품명을 입력해주세요"
-                        android:textSize="14sp"
+                        android:text="@string/medical_sub_question_2"
+                        android:textSize="@dimen/M500_14_h20"
                         android:textColor="@color/gray3_8E"
-                        android:fontFamily="@font/pretendard_medium"/>
+                        android:fontFamily="@font/pretendard_medium"
+                        android:lineSpacingExtra="6sp"
+                        android:includeFontPadding="false"/>
 
                     <EditText
                         android:id="@+id/answer2_sub_edit_text"
@@ -179,16 +186,15 @@
                         android:inputType="text"/>
                 </LinearLayout>
             </LinearLayout>
-            <!-- Layout End 이름 입력 레이아웃-->
+            <!-- Layout End 질문2 입력 레이아웃-->
 
-            <!-- Layout 이메일 입력 레이아웃-->
+            <!-- Layout 질문 3입력 레이아웃-->
             <LinearLayout
                 android:id="@+id/question3_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone"
-                >
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/question3_text_view"
@@ -196,10 +202,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="20dp"
-                    android:text="3. 만성(또는 전신) 질환이 있나요?"
-                    android:textSize="16sp"
+                    android:text="@string/medical_question_3"
+                    android:textSize="@dimen/M500_16_h22"
                     android:textColor="@color/black1_20"
-                    android:fontFamily="@font/pretendard_medium"/>
+                    android:fontFamily="@font/pretendard_medium"
+                    android:lineSpacingExtra="6sp"
+                    android:includeFontPadding="false"/>
 
                 <RadioGroup
                     android:id="@+id/answer3_radio"
@@ -217,7 +225,7 @@
                         android:button="@null"
                         android:background="@drawable/selector_answer_radio"
 
-                        android:text="네"
+                        android:text="@string/answer_yes"
                         android:textColor="@drawable/selector_answer_text"
                         />
 
@@ -232,9 +240,8 @@
                         android:button="@null"
                         android:background="@drawable/selector_answer_radio"
 
-                        android:text="아니오"
-                        android:textColor="@drawable/selector_answer_text"
-                        />
+                        android:text="@string/answer_no"
+                        android:textColor="@drawable/selector_answer_text"/>
                 </RadioGroup>
 
                 <LinearLayout
@@ -248,10 +255,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="*질환명을 입력해주세요"
-                        android:textSize="14sp"
+
+                        android:text="@string/medical_sub_question_3"
+                        android:textSize="@dimen/M500_16_h22"
                         android:textColor="@color/gray3_8E"
-                        android:fontFamily="@font/pretendard_medium"/>
+                        android:fontFamily="@font/pretendard_medium"
+                        android:lineSpacingExtra="6sp"
+                        android:includeFontPadding="false"/>
 
                     <EditText
                         android:id="@+id/answer3_sub_edit_text"
@@ -271,16 +281,15 @@
                 </LinearLayout>
 
             </LinearLayout>
-            <!-- Layout End 전화번호 입력 레이아웃-->
+            <!-- Layout End 질문3 입력 레이아웃-->
 
-            <!-- Layout 전화번호 입력 레이아웃-->
+            <!-- Layout 질문4 입력 레이아웃-->
             <LinearLayout
                 android:id="@+id/question4_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone"
-                >
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/question4_text_view"
@@ -288,10 +297,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="20dp"
-                    android:text="4. 치과 치료 중 마취나 지혈이 잘 안되어 고생한 경험이 있나요?"
-                    android:textSize="16sp"
+
+                    android:text="@string/medical_question_4"
+                    android:textSize="@dimen/M500_16_h22"
                     android:textColor="@color/black1_20"
-                    android:fontFamily="@font/pretendard_medium"/>
+                    android:fontFamily="@font/pretendard_medium"
+                    android:lineSpacingExtra="6sp"
+                    android:includeFontPadding="false"/>
 
                 <RadioGroup
                     android:id="@+id/answer4_radio"
@@ -309,7 +321,7 @@
                         android:button="@null"
                         android:background="@drawable/selector_answer_radio"
 
-                        android:text="네"
+                        android:text="@string/answer_yes"
                         android:textColor="@drawable/selector_answer_text"
                         />
 
@@ -324,9 +336,8 @@
                         android:button="@null"
                         android:background="@drawable/selector_answer_radio"
 
-                        android:text="아니오"
-                        android:textColor="@drawable/selector_answer_text"
-                        />
+                        android:text="@string/answer_no"
+                        android:textColor="@drawable/selector_answer_text"/>
                 </RadioGroup>
             </LinearLayout>
             <!-- Layout End 전화번호 입력 레이아웃-->
