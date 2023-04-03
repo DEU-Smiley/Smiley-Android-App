@@ -26,7 +26,7 @@ dependencies {
     implementation 'com.tbuonomo:dotsindicator:4.3'
 
     /* Kakao Login */
-    implementation 'com.kakao.sdk:v2-user:2.11.0'
+    implementation 'com.kakao.sdk:v2-user:2.13.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
