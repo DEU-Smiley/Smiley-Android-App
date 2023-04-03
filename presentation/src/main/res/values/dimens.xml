@@ -9,4 +9,28 @@
     <!-- 모든 질문간 사이 간격 (세로) -->
     <dimen name="question_between_margin">32dp</dimen>
 
+    <!-- 폰트 크기 -->
+    <dimen name="H1_R400_28_h28">28sp</dimen>
+    <dimen name="H1_B700_28_h28">28sp</dimen>
+    <dimen name="H1_M500_24_h32">24sp</dimen>
+    <dimen name="H2_L300_22_h30">22sp</dimen>
+    <dimen name="H2_SB600_22_h30">22sp</dimen>
+    <dimen name="H3_B700_20_h30">20sp</dimen>
+    <dimen name="H4_R400_15_h22">15sp</dimen>
+    <dimen name="H4_M500_18_auto">18sp</dimen>
+    <dimen name="H4_SB600_14_h18">14sp</dimen>
+    <dimen name="H5_B700_18_h22">18sp</dimen>
+    <dimen name="H6_SB600_16_h22">16sp</dimen>
+    <dimen name="B3_M500_15_h22">15sp</dimen>
+    <dimen name="B4_M500_13_h18">13sp</dimen>
+    <dimen name="B5_M500_12_auto">12sp</dimen>
+    <dimen name="B6_M500_11_auto">11sp</dimen>
+    <dimen name="B7_R400_12_h18">12sp</dimen>
+    <dimen name="B8_B700_12_auto">12sp</dimen>
+    <dimen name="Detail1_M500_10_h14">10sp</dimen>
+    <dimen name="M500_14_h20">14sp</dimen>
+    <dimen name="M500_16_h22">16sp</dimen>
+    <dimen name="SB600_24_auto">24sp</dimen>
+    <dimen name="B700_11_auto">11sp</dimen>
+    <dimen name="B700_15_auto">15sp</dimen>
 </resources>
