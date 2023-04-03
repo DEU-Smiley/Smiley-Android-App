@@ -9,14 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.children
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
 import com.example.smiley.common.extension.showViewThenCheckedChanged
 import com.example.smiley.common.extension.showViewThenEnterPressed
 import com.example.smiley.common.extension.toDate
-import com.example.smiley.common.extension.toDateString
 import com.example.smiley.databinding.FragmentCalibrationInfoBinding
 import com.example.smiley.info.ButtonClickable
 import com.example.smiley.info.InfoActivity
@@ -38,7 +41,7 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable {
 
     private lateinit var bind:FragmentCalibrationInfoBinding
     private lateinit var nextBtn:Button
-    private lateinit var textViewList: ArrayList<TextView>
+    private lateinit var questionLayout: ArrayList<LinearLayout>
 
     private var param1: String? = null
     private var param2: String? = null
@@ -59,9 +62,9 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable {
         bind = DataBindingUtil.inflate(inflater, R.layout.fragment_calibration_info, container, false)
 
         bind.apply {
-            textViewList = arrayListOf(
-                answer2SubEditText,
-                answer3SubTextView
+            questionLayout = arrayListOf(
+                question2Layout,
+                question3Layout
             )
         }
 
@@ -156,22 +159,43 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable {
      * 모든 EditText에 형식에 맞는 입력이 들어왔는지 확인
      */
     override fun setButtonStatus(){
-        if(::nextBtn.isInitialized) nextBtn.isEnabled = isAllInputCompleted()
+        if(::nextBtn.isInitialized) {
+            val result = isAllInputCompleted()
+            Log.d("결과", "$result")
+            nextBtn.isEnabled = result
+        }
     }
 
     private fun isAllInputCompleted() : Boolean {
         bind.apply {
             if (answer1NoRadioBtn.isChecked) return true
 
-            textViewList.forEach {
-                if(it.text.equals("yyyy-mm-dd") || it.error != null || it.text.isEmpty() || it.text.isBlank()){
-                    return false
+            // 질문 레이아웃의 자식들 중 LinearLayout을 가져옴
+            questionLayout.forEach { layout ->
+                if(!layout.isVisible) return false
+                val subLinearLayout = layout.children.
+                    filter { it is LinearLayout }
+                    .map { it as LinearLayout }
+                    .toList()
+
+
+                // TextView와 EditText를 가져옴
+                // 입력 필드가 EditText와 TextView 모두 존재하기 때문에 TextView로 캐스팅
+                // (EditText는 TextView의 자식이므로 TextView로 캐스팅 가능)
+                subLinearLayout.forEach { subLayout ->
+                    subLayout.children
+                        .filter { it is TextView || it is EditText }
+                        .map { it as TextView }
+                        .forEach {
+                            if(it.text.equals("yyyy-mm-dd") || it.error != null || it.text.isBlank()) return false
+                        }
                 }
             }
         }
 
         return true
     }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
