@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".info.InfoActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/white">
 
         <!-- Layout 상단바 레이아웃 -->
@@ -16,7 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:orientation="horizontal"
-            android:background="@color/white">
+            android:background="@color/white"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/back_btn"
@@ -57,7 +60,11 @@
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:orientation="horizontal"
-            android:background="@drawable/background_indicator">
+            android:background="@drawable/background_indicator"
+
+            app:layout_constraintTop_toBottomOf="@id/title_bar_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/viewpager">
 
             <View
                 android:layout_width="83dp"
@@ -143,7 +150,10 @@
             android:layout_marginTop="14dp"
             android:paddingBottom="40dp"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"/>
+            android:paddingRight="20dp"
+
+            app:layout_constraintTop_toBottomOf="@id/indicator_layout"
+            app:layout_constraintBottom_toTopOf="@+id/next_btn"/>
 
         <!-- Layout 다음 단계 버튼 -->
         <Button
@@ -156,6 +166,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="@dimen/btn_bottom_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
 
             style="?attr/borderlessButtonStyle"
             android:background="@drawable/selector_btn"
@@ -170,5 +181,5 @@
             android:textColor="@color/white"
             android:fontFamily="@font/pretendard_bold"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
