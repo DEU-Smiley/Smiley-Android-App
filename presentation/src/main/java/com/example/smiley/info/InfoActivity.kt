@@ -9,7 +9,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.smiley.R
 import com.example.smiley.databinding.ActivityInfoBinding
 import com.example.smiley.info.adapter.InfoAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InfoActivity : AppCompatActivity() {
 
     private lateinit var bind:ActivityInfoBinding
@@ -25,8 +27,6 @@ class InfoActivity : AppCompatActivity() {
         addNextBtnClickEvent()
         addBackBtnClickEvent()
     }
-
-
 
     private fun initViewPager(){
         bind.viewpager.apply {

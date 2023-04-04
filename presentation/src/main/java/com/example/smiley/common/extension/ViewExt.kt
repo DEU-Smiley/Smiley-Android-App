@@ -1,13 +1,15 @@
 package com.example.smiley.common.extension
 
+import android.graphics.Typeface
+import android.text.Spannable
+import android.text.Spanned
+import android.text.style.BackgroundColorSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
+import android.text.style.UnderlineSpan
 import android.view.KeyEvent
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioGroup
-import android.widget.ScrollView
+import android.widget.*
 import androidx.core.view.get
 import com.example.smiley.R
 
@@ -77,4 +79,46 @@ fun EditText.showViewThenEnterPressed(nextView: View, scrollView: ScrollView?, i
         if(inputChecker != null) inputChecker()
         false
     }
+}
+
+/**
+ * start~end까지의 텍스트의 전경색 변경
+ * @param color :Int
+ * @param start :Int
+ * @param end   :Int
+ */
+fun TextView.setForegroundColor(color:Int, start:Int, end:Int){
+    val span:Spannable = this.text as Spannable
+    span.setSpan(ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+}
+
+/**
+ * start~end까지의 텍스트의 배경색 변경
+ * @param color :Int
+ * @param start :Int
+ * @param end   :Int
+ */
+fun TextView.setBackGroundColor(color:Int, start:Int, end:Int){
+    val span:Spannable = this.text as Spannable
+    span.setSpan(BackgroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+}
+
+/**
+ * start~end까지의 텍스트에 밑줄 표시
+ * @param start :Int
+ * @param end   :Int
+ */
+fun TextView.setUnderLine(start:Int, end:Int){
+    val span:Spannable = this.text as Spannable
+    span.setSpan(UnderlineSpan(), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+}
+
+/**
+ * start~end까지의 텍스트를 Bold로 변환
+ * @param start :Int
+ * @param end   :Int
+ */
+fun TextView.setBold(start:Int, end:Int){
+    val span:Spannable = this.text as Spannable
+    span.setSpan(StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 }

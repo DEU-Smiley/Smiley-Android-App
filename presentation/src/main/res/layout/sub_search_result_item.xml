@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/search_medicine_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/search_result_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/pretendard_semibold"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="6sp"
+
+            android:textColor="@color/gray4_CB"
+            android:textSize="@dimen/H6_SB600_16_h22" />
+    </LinearLayout>
+</layout>

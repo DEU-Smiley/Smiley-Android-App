@@ -1,9 +1,7 @@
 package com.example.smiley.info.fragment
 
 
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +9,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioGroup
-import androidx.annotation.RequiresApi
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -19,11 +16,10 @@ import androidx.fragment.app.Fragment
 import com.example.smiley.R
 import com.example.smiley.common.extension.showViewThenCheckedChanged
 import com.example.smiley.common.extension.showViewThenEnterPressed
-import com.example.smiley.common.extension.visible
 import com.example.smiley.databinding.FragmentMedicalInfoBinding
 import com.example.smiley.info.ButtonClickable
 import com.example.smiley.info.InfoActivity
-import java.time.LocalDate
+import com.example.smiley.medicine.MedicineSearchFragment
 
 
 private const val ARG_PARAM1 = "param1"
@@ -35,7 +31,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class MedicalInfoFragment : Fragment(), ButtonClickable {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -60,12 +55,23 @@ class MedicalInfoFragment : Fragment(), ButtonClickable {
         // Inflate the layout for this fragment
         bind = DataBindingUtil.inflate(inflater, R.layout.fragment_medical_info, container, false)
 
+        initEditText()
         initLayoutList()
         initNextBtn()
         addAnswerClickEvent()
         addKeyPressEventToEditText()
 
         return bind.root
+    }
+
+    private fun initEditText(){
+        bind.answer2SubEditText.setOnClickListener {
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .add(R.id.parent_layout, MedicineSearchFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     private fun initLayoutList(){
