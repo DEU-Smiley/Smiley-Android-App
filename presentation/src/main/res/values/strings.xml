@@ -26,6 +26,7 @@
     <string name="calibration_question_3">3. 교정 시작일은 언제인가요?</string>
     <string name="hint_email">예시) 000000@naver.com</string>
     <string name="hint_phone_number">01012345678</string>
+    <string name="meidcine_search_hint">의약품 명을 입력해주세요 ex) 타이레놀</string>
 
 
 </resources>
