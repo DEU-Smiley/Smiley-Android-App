@@ -8,8 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smiley.R
-import com.example.smiley.common.observer.Observer
-import com.example.smiley.common.observer.Subject
 
 /**
  * 선택한 약품에 대한 어댑터 (해시태그 형태)
