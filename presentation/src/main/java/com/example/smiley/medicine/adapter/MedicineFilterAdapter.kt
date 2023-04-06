@@ -1,6 +1,8 @@
 package com.example.smiley.medicine.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +11,14 @@ import android.widget.Filterable
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.medicine.model.Medicine
+import com.example.domain.medicine.model.MedicineList
 import com.example.smiley.R
+import com.example.smiley.common.extension.setForegroundColor
 
 class MedicineFilterAdapter(
-    medicineList: ArrayList<String>
+    context:Context,
+    medicineList: MedicineList
 ) : RecyclerView.Adapter<MedicineFilterAdapter.ViewHolder>(), Filterable {
     interface OnItemClickListener {
         fun onItemClicked(position: Int, data:String)
@@ -23,14 +29,10 @@ class MedicineFilterAdapter(
     }
 
     private lateinit var itemClickListener: OnItemClickListener
-
-    private var filteredList: ArrayList<String> = medicineList
-    private val unFilteredList: ArrayList<String> = medicineList
-    private var userInput:String
-        get() = userInput
-        set(value) {
-            userInput = value
-        }
+    private val context = context
+    private var filteredList    : List<Medicine> = emptyList()
+    private val unFilteredList  : List<Medicine> = medicineList.medicines
+    private var userInput:String = ""
 
     /**
      * ViewHolder를 생성하는 메소드
@@ -46,7 +48,14 @@ class MedicineFilterAdapter(
      * 생성자에서 전달 받은 medicineList의 데이터를 Position에 맞게 ViewHolder에 할당
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.medicineTitle.text = filteredList[position]
+        holder.medicineTitle.apply {
+            text = filteredList[position].itemName
+            val matchedIdx = text.indexOf(userInput, 0, true)
+            if(matchedIdx >= 0){
+                setForegroundColor(context.resources.getColor(R.color.primary_normal), matchedIdx, matchedIdx + userInput.length)
+            }
+        }
+
         holder.layout.setOnClickListener {
             if(!::itemClickListener.isInitialized) return@setOnClickListener
 
@@ -59,14 +68,14 @@ class MedicineFilterAdapter(
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(p0: CharSequence?): FilterResults {
-                val input = "$p0"
+                userInput = "$p0"
 
                 filteredList =
-                    if (input.isEmpty()) arrayListOf()
+                    if (userInput.isEmpty()) arrayListOf()
                     else {
-                        val filteringList = ArrayList<String>()
+                        val filteringList = ArrayList<Medicine>()
                         for (item in unFilteredList) {
-                            if (item.contains(input)) filteringList.add(item)
+                            if (item.itemName.contains(userInput)) filteringList.add(item)
                         }
                         filteringList
                     }
@@ -79,7 +88,7 @@ class MedicineFilterAdapter(
 
             @SuppressLint("NotifyDataSetChanged")
             override fun publishResults(p0: CharSequence?, results: FilterResults?) {
-                filteredList = results?.values as ArrayList<String>
+                filteredList = results?.values as List<Medicine>
                 notifyDataSetChanged()
             }
         }
