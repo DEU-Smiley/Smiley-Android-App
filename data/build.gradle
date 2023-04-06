@@ -30,4 +30,5 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     // To use Kotlin annotation processing tool (kapt)
     kapt "androidx.room:room-compiler:$room_version"
+    kapt "org.xerial:sqlite-jdbc:3.36.0"
 }
