@@ -2,6 +2,7 @@ package com.example.smiley.common.extension
 
 import android.graphics.Typeface
 import android.text.Spannable
+import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
@@ -88,8 +89,9 @@ fun EditText.showViewThenEnterPressed(nextView: View, scrollView: ScrollView?, i
  * @param end   :Int
  */
 fun TextView.setForegroundColor(color:Int, start:Int, end:Int){
-    val span:Spannable = this.text as Spannable
+    val span = SpannableStringBuilder(this.text)
     span.setSpan(ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+    this.text = span
 }
 
 /**
@@ -99,8 +101,9 @@ fun TextView.setForegroundColor(color:Int, start:Int, end:Int){
  * @param end   :Int
  */
 fun TextView.setBackGroundColor(color:Int, start:Int, end:Int){
-    val span:Spannable = this.text as Spannable
+    val span = SpannableStringBuilder(this.text)
     span.setSpan(BackgroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+    this.text = span
 }
 
 /**
@@ -109,8 +112,9 @@ fun TextView.setBackGroundColor(color:Int, start:Int, end:Int){
  * @param end   :Int
  */
 fun TextView.setUnderLine(start:Int, end:Int){
-    val span:Spannable = this.text as Spannable
+    val span = SpannableStringBuilder(this.text)
     span.setSpan(UnderlineSpan(), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+    this.text = span
 }
 
 /**
@@ -119,6 +123,7 @@ fun TextView.setUnderLine(start:Int, end:Int){
  * @param end   :Int
  */
 fun TextView.setBold(start:Int, end:Int){
-    val span:Spannable = this.text as Spannable
-    span.setSpan(StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+    val span = SpannableStringBuilder(this.text)
+    span.setSpan(StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+    this.text = span
 }
