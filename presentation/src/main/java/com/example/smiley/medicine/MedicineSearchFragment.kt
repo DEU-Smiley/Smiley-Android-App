@@ -20,6 +20,7 @@ import com.example.smiley.databinding.FragmentMedicineSearchBinding
 import com.example.smiley.medicine.adapter.MedicineFilterAdapter
 import com.example.smiley.medicine.adapter.MedicineSelectAdapter
 import com.example.smiley.medicine.viewmodel.MedicineViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -30,6 +31,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [MedicineSearchFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class MedicineSearchFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
@@ -57,6 +59,7 @@ class MedicineSearchFragment : Fragment() {
         initRecyclerView()
         initSearchEditText()
 
+        medicineVm.getAllMedicines()
         return bind.root
     }
 

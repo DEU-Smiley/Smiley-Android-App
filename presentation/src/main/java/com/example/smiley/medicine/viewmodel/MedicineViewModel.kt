@@ -1,11 +1,46 @@
 package com.example.smiley.medicine.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.domain.common.base.ResponseState
+import com.example.domain.medicine.model.MedicineList
+import com.example.domain.medicine.usecase.GetAllMedicinesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class MedicineViewModel @Inject constructor(): ViewModel() {
+class MedicineViewModel @Inject constructor(
+    private val getAllMedicinesUseCase: GetAllMedicinesUseCase
+): ViewModel() {
+
+    private val medicineList = MutableStateFlow<MedicineList>(MedicineList(emptyList()))
+
+    fun getAllMedicines(){
+        viewModelScope.launch {
+            getAllMedicinesUseCase()
+                .onStart {  }
+                .catch { exception ->
+                    Log.d("의약품 조회 에러", exception.stackTraceToString())
+                }
+                .collect{ state ->
+                    when(state) {
+                        is ResponseState.Success -> {
+                            medicineList.value = state.data
+                        }
+                        is ResponseState.Error -> {
+                            Log.e("의약품 조회 에러", state.error.toString())
+                        }
+                    }
+                }
+        }
+    }
 
     fun getMedicineList(): ArrayList<String> {
         return arrayListOf(
