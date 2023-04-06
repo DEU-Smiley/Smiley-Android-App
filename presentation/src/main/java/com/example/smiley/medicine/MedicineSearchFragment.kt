@@ -11,8 +11,12 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
+import com.example.domain.medicine.model.MedicineList
 import com.example.smiley.R
 import com.example.smiley.common.extension.gone
 import com.example.smiley.common.extension.visible
@@ -21,6 +25,8 @@ import com.example.smiley.medicine.adapter.MedicineFilterAdapter
 import com.example.smiley.medicine.adapter.MedicineSelectAdapter
 import com.example.smiley.medicine.viewmodel.MedicineViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -56,18 +62,29 @@ class MedicineSearchFragment : Fragment() {
         // Inflate the layout for this fragment
         bind = DataBindingUtil.inflate(inflater, R.layout.fragment_medicine_search, container, false)
 
-        initRecyclerView()
+        observe()
         initSearchEditText()
+        fetchMedicineList()
 
-        medicineVm.getAllMedicines()
         return bind.root
+    }
+
+    private fun observe(){
+        observeMedicineList()
+    }
+
+    /**
+     * 의약품 리스트 조회 요청
+     */
+    private fun fetchMedicineList(){
+        medicineVm.getMedicineList()
     }
 
     /**
      * 리사이클러뷰 초기화
      */
-    private fun initRecyclerView(){
-        medicineFilterAdapter = MedicineFilterAdapter(medicineVm.getMedicineList()).apply {
+    private fun initRecyclerView(medicineList:MedicineList){
+        medicineFilterAdapter = MedicineFilterAdapter(requireContext(), medicineList).apply {
             setOnItemClickListener(medicineItemClickListener)
         }
 
@@ -96,6 +113,17 @@ class MedicineSearchFragment : Fragment() {
         }
     }
 
+    /**
+     * 약품 리스트 옵저버
+     */
+    private fun observeMedicineList(){
+        medicineVm.medicineList.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+            .onEach { medicines ->
+                initRecyclerView(medicines)
+            }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
 
     /**
      * 의약품 검색 EditText 초기화
@@ -112,6 +140,7 @@ class MedicineSearchFragment : Fragment() {
         override fun afterTextChanged(p0: Editable?) {}
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            if(!::medicineFilterAdapter.isInitialized) return
             medicineFilterAdapter.filter.filter(p0)
         }
     }
@@ -121,6 +150,7 @@ class MedicineSearchFragment : Fragment() {
      */
     private val medicineItemClickListener = object : MedicineFilterAdapter.OnItemClickListener {
         override fun onItemClicked(position: Int, data: String) {
+            if(!::medicineSelectAdapter.isInitialized) return
             medicineSelectAdapter.apply {
                 addMedicine(data)
             }
