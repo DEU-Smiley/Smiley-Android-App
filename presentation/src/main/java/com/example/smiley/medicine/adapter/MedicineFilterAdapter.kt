@@ -29,7 +29,6 @@ class MedicineFilterAdapter(
     }
 
     private lateinit var itemClickListener: OnItemClickListener
-    private val context = context
     private var filteredList    : List<Medicine> = emptyList()
     private val unFilteredList  : List<Medicine> = medicineList.medicines
     private var userInput:String = ""
@@ -47,12 +46,30 @@ class MedicineFilterAdapter(
      * ViewHolder에 데이터를 바인딩해주는 메소드
      * 생성자에서 전달 받은 medicineList의 데이터를 Position에 맞게 ViewHolder에 할당
      */
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.medicineTitle.apply {
-            text = filteredList[position].itemName
+            // 약품 이름 앞에 전문/일반 약품 표시
+            val medicine = filteredList[position]
+            when (medicine.type) {
+                "전문의약품" -> {
+                    text = "[전문] " + medicine.itemName
+                    setForegroundColor(resources.getColor(R.color.detail_point), 0, 4)
+                }
+                "일반의약품" -> {
+                    text = "[일반] " + medicine.itemName
+                    setForegroundColor(resources.getColor(R.color.primary_normal), 0, 4)
+                }
+                else -> {
+                    text = "[기타] " + medicine.itemName
+                    setForegroundColor(resources.getColor(R.color.gray4_CB), 0, 4)
+                }
+            }
+
+            // 검색어와 일치하는 단어 하이라이팅
             val matchedIdx = text.indexOf(userInput, 0, true)
             if(matchedIdx >= 0){
-                setForegroundColor(context.resources.getColor(R.color.primary_normal), matchedIdx, matchedIdx + userInput.length)
+                setForegroundColor(resources.getColor(R.color.primary_normal), matchedIdx, matchedIdx + userInput.length)
             }
         }
 

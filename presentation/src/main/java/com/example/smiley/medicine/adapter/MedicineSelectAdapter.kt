@@ -39,9 +39,11 @@ class MedicineSelectAdapter(
      */
     @SuppressLint("NotifyDataSetChanged")
     fun addMedicine(medicine:String){
-        if(selectList.contains(medicine)) return
+        // 약품 이름 앞에 [타입] 부분은 제외하고 추가
+        val realItemName = medicine.split(" ")[1]
+        if(selectList.contains(realItemName)) return
 
-        selectList.add(medicine)
+        selectList.add(realItemName)
         notifyDataSetChanged()
     }
 
