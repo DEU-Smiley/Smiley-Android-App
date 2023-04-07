@@ -32,6 +32,7 @@ class MedicineSelectAdapter(
     }
 
     override fun getItemCount() = selectList.size
+    fun getSelectedList() = selectList
 
     /**
      * 약품 선택시 리스트에 추가하는 메소드
