@@ -3,11 +3,9 @@ package com.example.smiley.medicine
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,9 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.example.domain.medicine.model.MedicineList
 import com.example.smiley.R
+import com.example.smiley.common.utils.DataSendable
+import com.example.smiley.common.extension.dismiss
 import com.example.smiley.common.extension.gone
 import com.example.smiley.common.extension.visible
 import com.example.smiley.databinding.FragmentMedicineSearchBinding
+import com.example.smiley.info.fragment.MedicalInfoFragment
 import com.example.smiley.medicine.adapter.MedicineFilterAdapter
 import com.example.smiley.medicine.adapter.MedicineSelectAdapter
 import com.example.smiley.medicine.viewmodel.MedicineViewModel
@@ -45,7 +46,10 @@ class MedicineSearchFragment : Fragment() {
     private lateinit var bind: FragmentMedicineSearchBinding
     private lateinit var medicineFilterAdapter: MedicineFilterAdapter
     private lateinit var medicineSelectAdapter: MedicineSelectAdapter
-    private val medicineVm:MedicineViewModel by viewModels()
+    lateinit var dataSendable: DataSendable  /* 부모 프래그먼트로 선택 약품 리스트를 전달하기 위한 인터페이스 */
+
+    private val medicineVm: MedicineViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,31 +64,48 @@ class MedicineSearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        bind = DataBindingUtil.inflate(inflater, R.layout.fragment_medicine_search, container, false)
+        bind =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_medicine_search, container, false)
 
         observe()
-        initSearchEditText()
         fetchMedicineList()
+        initSearchEditText()
+        addSelectBtnClickEvent()
+        addBackBtnClickEvent()
 
         return bind.root
     }
 
-    private fun observe(){
+    private fun observe() {
         observeMedicineList()
+    }
+
+    /**
+     * 약품 리스트 옵저버
+     */
+    private fun observeMedicineList() {
+        medicineVm.medicineList.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        )
+            .onEach { medicines ->
+                initRecyclerView(medicines)
+            }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     /**
      * 의약품 리스트 조회 요청
      */
-    private fun fetchMedicineList(){
+    private fun fetchMedicineList() {
         medicineVm.getMedicineList()
     }
 
     /**
      * 리사이클러뷰 초기화
      */
-    private fun initRecyclerView(medicineList:MedicineList){
-        medicineFilterAdapter = MedicineFilterAdapter(requireContext(), medicineList).apply {
+    private fun initRecyclerView(medicineList: MedicineList) {
+        medicineFilterAdapter = MedicineFilterAdapter(medicineList).apply {
             setOnItemClickListener(medicineItemClickListener)
         }
 
@@ -93,7 +114,7 @@ class MedicineSearchFragment : Fragment() {
                 override fun onChanged() {
                     super.onChanged()
 
-                    if(itemCount == 0) bind.selectBtn.gone()
+                    if (itemCount == 0) bind.selectBtn.gone()
                     else bind.selectBtn.visible()
                 }
             })
@@ -109,38 +130,48 @@ class MedicineSearchFragment : Fragment() {
         bind.selectedView.apply {
             adapter = medicineSelectAdapter
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
-    }
-
-    /**
-     * 약품 리스트 옵저버
-     */
-    private fun observeMedicineList(){
-        medicineVm.medicineList.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
-            .onEach { medicines ->
-                initRecyclerView(medicines)
-            }
-            .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
 
     /**
      * 의약품 검색 EditText 초기화
      */
-    private fun initSearchEditText(){
+    private fun initSearchEditText() {
         bind.searchEditText.addTextChangedListener(filterTextWatcher)
     }
 
     /**
+     * 선택완료 버튼 이벤트 등록 메소드
+     */
+    private fun addSelectBtnClickEvent() {
+        bind.selectBtn.setOnClickListener {
+            if(::dataSendable.isInitialized){
+                dataSendable.sendData(medicineSelectAdapter.getSelectedList())
+                this@MedicineSearchFragment.dismiss()
+            }
+        }
+    }
+
+    /**
+     * 뒤로가기 버튼 이벤트
+     */
+    private fun addBackBtnClickEvent(){
+        bind.backBtn.setOnClickListener {
+            this@MedicineSearchFragment.dismiss()
+        }
+    }
+    /**
      * 검색어 입력 체크 TextWatcher
      */
-    private val filterTextWatcher = object : TextWatcher{
+    private val filterTextWatcher = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         override fun afterTextChanged(p0: Editable?) {}
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            if(!::medicineFilterAdapter.isInitialized) return
+            if (!::medicineFilterAdapter.isInitialized) return
             medicineFilterAdapter.filter.filter(p0)
         }
     }
@@ -150,7 +181,7 @@ class MedicineSearchFragment : Fragment() {
      */
     private val medicineItemClickListener = object : MedicineFilterAdapter.OnItemClickListener {
         override fun onItemClicked(position: Int, data: String) {
-            if(!::medicineSelectAdapter.isInitialized) return
+            if (!::medicineSelectAdapter.isInitialized) return
             medicineSelectAdapter.apply {
                 addMedicine(data)
             }

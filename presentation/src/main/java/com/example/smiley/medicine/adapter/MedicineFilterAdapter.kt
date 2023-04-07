@@ -17,7 +17,6 @@ import com.example.smiley.R
 import com.example.smiley.common.extension.setForegroundColor
 
 class MedicineFilterAdapter(
-    context:Context,
     medicineList: MedicineList
 ) : RecyclerView.Adapter<MedicineFilterAdapter.ViewHolder>(), Filterable {
     interface OnItemClickListener {
