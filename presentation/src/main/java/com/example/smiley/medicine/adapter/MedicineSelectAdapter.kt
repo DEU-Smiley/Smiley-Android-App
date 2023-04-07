@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.medicine.model.Medicine
 import com.example.smiley.R
 
 /**
@@ -31,6 +32,7 @@ class MedicineSelectAdapter(
     }
 
     override fun getItemCount() = selectList.size
+    fun getSelectedList() = selectList
 
     /**
      * 약품 선택시 리스트에 추가하는 메소드
@@ -38,9 +40,11 @@ class MedicineSelectAdapter(
      */
     @SuppressLint("NotifyDataSetChanged")
     fun addMedicine(medicine:String){
-        if(selectList.contains(medicine)) return
+        // 약품 이름 앞에 [타입] 부분은 제외하고 추가
+        val realItemName = medicine.split(" ")[1]
+        if(selectList.contains(realItemName)) return
 
-        selectList.add(medicine)
+        selectList.add(realItemName)
         notifyDataSetChanged()
     }
 

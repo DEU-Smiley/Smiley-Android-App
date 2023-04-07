@@ -9,17 +9,21 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioGroup
+import android.widget.TextView
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
+import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.common.extension.showViewThenCheckedChanged
 import com.example.smiley.common.extension.showViewThenEnterPressed
+import com.example.smiley.common.extension.showViewThenTextChanged
 import com.example.smiley.databinding.FragmentMedicalInfoBinding
 import com.example.smiley.info.ButtonClickable
 import com.example.smiley.info.InfoActivity
 import com.example.smiley.medicine.MedicineSearchFragment
+import java.util.StringJoiner
 
 
 private const val ARG_PARAM1 = "param1"
@@ -30,7 +34,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [MedicalInfoFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MedicalInfoFragment : Fragment(), ButtonClickable {
+class MedicalInfoFragment : Fragment(), ButtonClickable, DataSendable {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -55,20 +59,33 @@ class MedicalInfoFragment : Fragment(), ButtonClickable {
         // Inflate the layout for this fragment
         bind = DataBindingUtil.inflate(inflater, R.layout.fragment_medical_info, container, false)
 
-        initEditText()
-        initLayoutList()
-        initNextBtn()
-        addAnswerClickEvent()
-        addKeyPressEventToEditText()
+        init()
+        addEvent()
 
         return bind.root
     }
+    
+    private fun init(){
+        initLayoutList()
+        initNextBtn()
+    }
 
-    private fun initEditText(){
-        bind.answer2SubEditText.setOnClickListener {
+    private fun addEvent(){
+        addAnswerClickEvent()
+        addKeyPressEventToEditText()
+        addMedicineEditTextClickEvent()
+    }
+
+    /**
+     * 약품 입력 EditText 클릭 이벤트
+     */
+    private fun addMedicineEditTextClickEvent(){
+        bind.answer2SubTextView.setOnClickListener {
+            val medicineSearchFragment = MedicineSearchFragment()
+            medicineSearchFragment.dataSendable = this
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .add(R.id.parent_layout, MedicineSearchFragment())
+                .add(R.id.parent_layout, medicineSearchFragment)
                 .addToBackStack(null)
                 .commit()
         }
@@ -115,7 +132,7 @@ class MedicalInfoFragment : Fragment(), ButtonClickable {
      */
     private fun addKeyPressEventToEditText() {
         bind.apply {
-            answer2SubEditText.showViewThenEnterPressed(question3Layout, scrollView) { setButtonStatus() }
+            answer2SubTextView.showViewThenTextChanged(question3Layout, scrollView) { setButtonStatus() }
             answer3SubEditText.showViewThenEnterPressed(question4Layout, scrollView) { setButtonStatus() }
         }
     }
@@ -132,8 +149,8 @@ class MedicalInfoFragment : Fragment(), ButtonClickable {
 
         subQuestionLayout.forEach { layout ->
             val editText = layout.children
-                .filter { it is EditText }
-                .map { it as EditText }
+                .filter { it is TextView || it is EditText }
+                .map { it as TextView }
                 .toList()
 
             if(layout.isVisible){
@@ -144,6 +161,15 @@ class MedicalInfoFragment : Fragment(), ButtonClickable {
         }
 
         return true
+    }
+
+    override fun <T> sendData(data: T) {
+        val sj = StringJoiner(", ")
+        (data as ArrayList<String>).forEach {
+            sj.add(it)
+        }
+
+        bind.answer2SubTextView.text = sj.toString()
     }
 
     companion object {
