@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:animateLayoutChanges="true">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -92,7 +93,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:animateLayoutChanges="true">
 
                 <TextView
                     android:id="@+id/question2_text_view"
@@ -168,22 +170,20 @@
                         android:lineSpacingExtra="6sp"
                         android:includeFontPadding="false"/>
 
-                    <EditText
-                        android:id="@+id/answer2_sub_edit_text"
+                    <TextView
+                        android:id="@+id/answer2_sub_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginTop="10dp"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
+                        android:gravity="center_vertical"
 
                         android:background="@drawable/selector_primary_edittext"
                         android:textColorHint="@color/gray4_CB"
                         android:textSize="14sp"
                         android:textColor="@color/gray3_8E"
-                        android:fontFamily="@font/pretendard_medium"
-
-                        android:maxLines="1"
-                        android:inputType="text"/>
+                        android:fontFamily="@font/pretendard_medium"/>
                 </LinearLayout>
             </LinearLayout>
             <!-- Layout End 질문2 입력 레이아웃-->
@@ -194,7 +194,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:animateLayoutChanges="true">
 
                 <TextView
                     android:id="@+id/question3_text_view"
@@ -257,7 +258,7 @@
                         android:layout_height="wrap_content"
 
                         android:text="@string/medical_sub_question_3"
-                        android:textSize="@dimen/M500_16_h22"
+                        android:textSize="@dimen/M500_14_h20"
                         android:textColor="@color/gray3_8E"
                         android:fontFamily="@font/pretendard_medium"
                         android:lineSpacingExtra="6sp"
@@ -289,7 +290,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:animateLayoutChanges="true">
 
                 <TextView
                     android:id="@+id/question4_text_view"
