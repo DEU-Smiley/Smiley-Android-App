@@ -2,7 +2,6 @@ package com.example.data.medicine.local.dao
 
 import androidx.room.*
 import com.example.data.medicine.local.entity.MedicineEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MedicineDao {
@@ -18,12 +17,9 @@ interface MedicineDao {
     @Delete
     suspend fun delete(medicine: MedicineEntity)
 
-    @Query("DELETE FROM medicine WHERE id = :id")
-    suspend fun deleteById(id: Int)
-
     @Query("DELETE FROM medicine WHERE item_code = :itemCode")
     suspend fun deleteByItemCode(itemCode: String)
 
     @Query("SELECT * FROM medicine")
-    fun findAll(): List<MedicineEntity>
+    suspend fun findAll(): List<MedicineEntity>
 }
