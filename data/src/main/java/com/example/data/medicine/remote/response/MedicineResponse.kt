@@ -1,4 +1,4 @@
-package com.example.data.medicine.model.response
+package com.example.data.medicine.remote.response
 
 import com.example.data.common.mapper.DataMapper
 import com.example.data.common.network.BaseResponse
@@ -15,7 +15,7 @@ class MedicineResponse (
     @SerializedName("professionalism")  var type        : String,
 ): BaseResponse {
     companion object: DataMapper<MedicineResponse, Medicine> {
-        override fun MedicineResponse.toDataModel(): Medicine {
+        override fun MedicineResponse.toDomainModel(): Medicine {
             return Medicine(
                 id          = id,
                 itemCode    = itemCode,

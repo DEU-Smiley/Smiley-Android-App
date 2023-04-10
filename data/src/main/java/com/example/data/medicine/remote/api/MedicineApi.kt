@@ -1,6 +1,6 @@
 package com.example.data.medicine.remote.api
 
-import com.example.data.medicine.model.response.MedicineListResponse
+import com.example.data.medicine.remote.response.MedicineListResponse
 import retrofit2.Response
 import retrofit2.http.GET
 
