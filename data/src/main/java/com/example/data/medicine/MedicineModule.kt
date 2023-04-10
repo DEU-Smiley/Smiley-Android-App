@@ -1,6 +1,9 @@
 package com.example.data.medicine
 
+import com.example.data.AppDatabase
 import com.example.data.common.module.NetworkModule
+import com.example.data.common.module.RoomModule
+import com.example.data.medicine.local.dao.MedicineDao
 import com.example.data.medicine.remote.api.MedicineApi
 import com.example.data.medicine.repository.MedicineRepositoryImpl
 import com.example.domain.medicine.MedicineRepository
@@ -12,7 +15,7 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 
 
-@Module(includes = [NetworkModule::class])
+@Module(includes = [NetworkModule::class, RoomModule::class])
 @InstallIn(SingletonComponent::class)
 internal class MedicineModule {
 
@@ -24,7 +27,16 @@ internal class MedicineModule {
 
     @Singleton
     @Provides
-    fun provideMedicineRepository(medicineApi: MedicineApi): MedicineRepository {
-        return MedicineRepositoryImpl(medicineApi)
+    fun provideMedicineRepository(
+        medicineApi: MedicineApi,
+        medicineDao: MedicineDao
+    ): MedicineRepository {
+        return MedicineRepositoryImpl(medicineApi, medicineDao)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMedicineDao(appDatabase: AppDatabase): MedicineDao {
+        return appDatabase.medicineDao()
     }
 }
