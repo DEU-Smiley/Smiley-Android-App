@@ -28,8 +28,10 @@ class MedicineFilterAdapter(
     }
 
     private lateinit var itemClickListener: OnItemClickListener
-    private var filteredList    : List<Medicine> = emptyList()
-    private val unFilteredList  : List<Medicine> = medicineList.medicines
+    private var filteredList    : ArrayList<Medicine> = arrayListOf()
+    private val unFilteredList  : ArrayList<Medicine> = arrayListOf<Medicine>().apply {
+        addAll(medicineList.medicines)
+    }
     private var userInput:String = ""
 
     /**
@@ -85,8 +87,7 @@ class MedicineFilterAdapter(
         return object : Filter() {
             override fun performFiltering(p0: CharSequence?): FilterResults {
                 userInput = "$p0"
-
-                filteredList =
+                val newFilteredList =
                     if (userInput.isEmpty()) arrayListOf()
                     else {
                         val filteringList = ArrayList<Medicine>()
@@ -96,6 +97,9 @@ class MedicineFilterAdapter(
                         filteringList
                     }
 
+                filteredList.clear()
+                filteredList.addAll(newFilteredList)
+
                 val filterResults = FilterResults()
                 filterResults.values = filteredList
 
@@ -104,7 +108,6 @@ class MedicineFilterAdapter(
 
             @SuppressLint("NotifyDataSetChanged")
             override fun publishResults(p0: CharSequence?, results: FilterResults?) {
-                filteredList = results?.values as List<Medicine>
                 notifyDataSetChanged()
             }
         }
