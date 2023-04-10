@@ -13,7 +13,7 @@ class ErrorResponse(
     val message     : String? = null,
 ) : BaseResponse {
     companion object: DataMapper<ErrorResponse, NetworkError> {
-        override fun ErrorResponse.toDataModel(): NetworkError {
+        override fun ErrorResponse.toDomainModel(): NetworkError {
             return NetworkError(
                 error = error ?: "null",
                 code = code ?: "null",
