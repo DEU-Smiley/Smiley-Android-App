@@ -1,8 +1,10 @@
 package com.example.smiley.medicine
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,20 +16,21 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
+import com.example.domain.common.base.NetworkError
 import com.example.domain.medicine.model.MedicineList
 import com.example.smiley.R
+import com.example.smiley.common.dialog.LoadingDialog
+import com.example.smiley.common.extension.*
 import com.example.smiley.common.utils.DataSendable
-import com.example.smiley.common.extension.dismiss
-import com.example.smiley.common.extension.gone
-import com.example.smiley.common.extension.visible
 import com.example.smiley.databinding.FragmentMedicineSearchBinding
-import com.example.smiley.info.fragment.MedicalInfoFragment
 import com.example.smiley.medicine.adapter.MedicineFilterAdapter
 import com.example.smiley.medicine.adapter.MedicineSelectAdapter
+import com.example.smiley.medicine.viewmodel.MedicineFragmentState
 import com.example.smiley.medicine.viewmodel.MedicineViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import java.util.*
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -43,7 +46,8 @@ class MedicineSearchFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var bind: FragmentMedicineSearchBinding
+    private var _bind: FragmentMedicineSearchBinding? = null
+    private val bind get() = _bind!!
     private val medicineVm: MedicineViewModel by viewModels()
 
     /* 부모 프래그먼트로 선택 약품 리스트를 전달하기 위한 인터페이스 */
@@ -77,8 +81,7 @@ class MedicineSearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        bind =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_medicine_search, container, false)
+        _bind = DataBindingUtil.inflate(inflater, R.layout.fragment_medicine_search, container, false)
 
         observe()
         fetchMedicineList()
@@ -90,18 +93,11 @@ class MedicineSearchFragment : Fragment() {
     }
 
     private fun observe() {
-        observeMedicineList()
-    }
-
-    /**
-     * 약품 리스트 옵저버
-     */
-    private fun observeMedicineList() {
-        medicineVm.medicineList.flowWithLifecycle(
+        medicineVm.state.flowWithLifecycle(
             viewLifecycleOwner.lifecycle,
             Lifecycle.State.STARTED
-        ).onEach { medicines ->
-            initRecyclerView(medicines)
+        ).onEach { state ->
+            handleStateChange(state)
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
@@ -187,6 +183,64 @@ class MedicineSearchFragment : Fragment() {
                 addMedicine(data)
             }
         }
+    }
+
+    /**
+     * ViewModel 상태 핸들러
+     */
+    private fun handleStateChange(state: MedicineFragmentState){
+        when(state){
+            is MedicineFragmentState.Init -> Unit
+            is MedicineFragmentState.IsLoading -> handleLoading(state.isLoading)
+            is MedicineFragmentState.SuccessMedicine ->{
+                handleSuccessMedicine(state.medicineList)
+                handleLoading(false)
+            }
+            is MedicineFragmentState.ErrorMedicine -> handleErrorMedicine(state.error)
+            is MedicineFragmentState.ShowToast -> handleShowToast(state.message)
+        }
+    }
+
+    /**
+     * MedicineList 조회에 성공한 경우의 핸들러
+     */
+    private fun handleSuccessMedicine(medicineList: MedicineList){
+        initRecyclerView(medicineList)
+    }
+
+    /**
+     * MedicineList 조회에 실패한 경우의 핸들러
+     */
+    private fun handleErrorMedicine(error:String){
+        requireActivity().showGenericAlertDialog(error)
+    }
+
+    /**
+     * 로딩 다이얼로그 핸들러
+     */
+    private lateinit var loadingDialog:LoadingDialog
+    private fun handleLoading(isLoding: Boolean){
+        if(!::loadingDialog.isInitialized) return
+
+        if(isLoding) loadingDialog.show()
+        else loadingDialog.dismiss()
+    }
+
+    /**
+     * ToastMessage 핸들러
+     */
+    private fun handleShowToast(message: String){
+        requireActivity().showToast(message)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        loadingDialog = LoadingDialog(context)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _bind = null
     }
 
     companion object {

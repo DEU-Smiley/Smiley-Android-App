@@ -3,6 +3,7 @@ package com.example.smiley.medicine.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.common.base.NetworkError
 import com.example.domain.common.base.ResponseState
 import com.example.domain.medicine.model.MedicineList
 import com.example.domain.medicine.usecase.GetAllMedicinesUseCase
@@ -54,25 +55,29 @@ class MedicineViewModel @Inject constructor(
                 .onStart { setLoading() }
                 .catch { exception ->
                     hideLoading()
+                    showToast(exception.message.toString())
                     Log.d("의약품 조회 에러", exception.stackTraceToString())
                 }
                 .collect{ state ->
                     hideLoading()
                     when(state) {
-                        is ResponseState.Success -> _medicineList.value = state.data
+                        is ResponseState.Success -> {
+                            _state.value = MedicineFragmentState.SuccessMedicine(state.data)
+                        }
                         is ResponseState.Error -> {
+                            _state.value = MedicineFragmentState.ErrorMedicine(state.error.message)
                             Log.e("의약품 조회 에러", state.error.toString())
-                            showToast(state.error.message)
                         }
                     }
                 }
         }
     }
+}
 
-    sealed class MedicineFragmentState {
-        object Init                                     : MedicineFragmentState()
-        object SuccessLoad                              : MedicineFragmentState()
-        data class IsLoading(val isLoading: Boolean)    : MedicineFragmentState()
-        data class ShowToast(val message: String)       : MedicineFragmentState()
-    }
+sealed class MedicineFragmentState {
+    object Init                                                 : MedicineFragmentState()
+    data class SuccessMedicine(val medicineList: MedicineList)  : MedicineFragmentState()
+    data class ErrorMedicine(val error:String)                  : MedicineFragmentState()
+    data class IsLoading(val isLoading: Boolean)                : MedicineFragmentState()
+    data class ShowToast(val message: String)                   : MedicineFragmentState()
 }
