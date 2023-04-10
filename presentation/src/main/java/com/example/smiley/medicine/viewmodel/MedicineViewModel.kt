@@ -7,6 +7,7 @@ import com.example.domain.common.base.ResponseState
 import com.example.domain.medicine.model.MedicineList
 import com.example.domain.medicine.usecase.GetAllMedicinesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import okhttp3.internal.notify
@@ -48,7 +49,7 @@ class MedicineViewModel @Inject constructor(
     }
 
     private fun requestAllMedigines(){
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             getAllMedicinesUseCase()
                 .onStart { setLoading() }
                 .catch { exception ->

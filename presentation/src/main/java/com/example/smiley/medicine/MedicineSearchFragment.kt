@@ -44,12 +44,25 @@ class MedicineSearchFragment : Fragment() {
     private var param2: String? = null
 
     private lateinit var bind: FragmentMedicineSearchBinding
-    private lateinit var medicineFilterAdapter: MedicineFilterAdapter
-    private lateinit var medicineSelectAdapter: MedicineSelectAdapter
-    lateinit var dataSendable: DataSendable  /* 부모 프래그먼트로 선택 약품 리스트를 전달하기 위한 인터페이스 */
-
     private val medicineVm: MedicineViewModel by viewModels()
 
+    /* 부모 프래그먼트로 선택 약품 리스트를 전달하기 위한 인터페이스 */
+    lateinit var dataSendable: DataSendable
+
+    /* 약품 검색시 사용될 Adapter */
+    private lateinit var medicineFilterAdapter: MedicineFilterAdapter
+    private val medicineSelectAdapter by lazy {
+        MedicineSelectAdapter(arrayListOf()).apply {
+            registerAdapterDataObserver(object : AdapterDataObserver() {
+                override fun onChanged() {
+                    super.onChanged()
+
+                    if (itemCount == 0) bind.selectBtn.gone()
+                    else bind.selectBtn.visible()
+                }
+            })
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,11 +100,9 @@ class MedicineSearchFragment : Fragment() {
         medicineVm.medicineList.flowWithLifecycle(
             viewLifecycleOwner.lifecycle,
             Lifecycle.State.STARTED
-        )
-            .onEach { medicines ->
-                initRecyclerView(medicines)
-            }
-            .launchIn(viewLifecycleOwner.lifecycleScope)
+        ).onEach { medicines ->
+            initRecyclerView(medicines)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     /**
@@ -109,16 +120,7 @@ class MedicineSearchFragment : Fragment() {
             setOnItemClickListener(medicineItemClickListener)
         }
 
-        medicineSelectAdapter = MedicineSelectAdapter(arrayListOf()).apply {
-            registerAdapterDataObserver(object : AdapterDataObserver() {
-                override fun onChanged() {
-                    super.onChanged()
-
-                    if (itemCount == 0) bind.selectBtn.gone()
-                    else bind.selectBtn.visible()
-                }
-            })
-        }
+        /** MedicineSelectAdapter는 by lazy로 초기화 */
 
         bind.searchResultView.apply {
             adapter = medicineFilterAdapter
@@ -171,7 +173,7 @@ class MedicineSearchFragment : Fragment() {
         override fun afterTextChanged(p0: Editable?) {}
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            if (!::medicineFilterAdapter.isInitialized) return
+            if(!::medicineFilterAdapter.isInitialized) return
             medicineFilterAdapter.filter.filter(p0)
         }
     }
@@ -181,7 +183,6 @@ class MedicineSearchFragment : Fragment() {
      */
     private val medicineItemClickListener = object : MedicineFilterAdapter.OnItemClickListener {
         override fun onItemClicked(position: Int, data: String) {
-            if (!::medicineSelectAdapter.isInitialized) return
             medicineSelectAdapter.apply {
                 addMedicine(data)
             }
