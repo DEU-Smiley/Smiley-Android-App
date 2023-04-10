@@ -8,19 +8,17 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class MedicineResponse (
-    @SerializedName("id")               var id          : Int,
-    @SerializedName("itemCode")         var itemCode    : String,
-    @SerializedName("itemName")         var itemName    : String,
-    @SerializedName("mainIngredient")   var ingredient  : String,
-    @SerializedName("professionalism")  var type        : String,
+    @SerializedName("itemCode")             var itemCode    : String,
+    @SerializedName("itemNameKor")          var itemName    : String,
+    @SerializedName("itemNameEng")          var itemNameEng  : String,
+    @SerializedName("professionalism")      var type        : String,
 ): BaseResponse {
     companion object: DataMapper<MedicineResponse, Medicine> {
         override fun MedicineResponse.toDomainModel(): Medicine {
             return Medicine(
-                id          = id,
                 itemCode    = itemCode,
                 itemName    = itemName,
-                ingredient  = ingredient,
+                itemNameEng = itemNameEng,
                 type        = type
             )
         }

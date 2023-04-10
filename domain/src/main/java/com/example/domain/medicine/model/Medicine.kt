@@ -5,9 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class Medicine (
-    var id          : Int,
     var itemCode    : String,
     var itemName    : String,
-    var ingredient  : String,
+    var itemNameEng : String,
     var type        : String,
 ) : BaseModel

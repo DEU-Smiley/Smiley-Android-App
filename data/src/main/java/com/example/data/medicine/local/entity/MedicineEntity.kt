@@ -8,29 +8,27 @@ import com.example.domain.medicine.model.Medicine
 
 @Entity(tableName = "medicine")
 class MedicineEntity(
-    @PrimaryKey                         val id         : Int,
-    @ColumnInfo(name = "item_code")     val itemCode   : String,
-    @ColumnInfo(name = "item_name")     val itemName   : String,
-    @ColumnInfo(name = "ingredient")    val ingredient : String,
-    @ColumnInfo(name = "type")          val type       : String
+    @PrimaryKey
+    @ColumnInfo(name = "item_code")     val itemCode    : String,
+    @ColumnInfo(name = "item_name")     val itemName    : String,
+    @ColumnInfo(name = "item_name_eng") val itemNameEng : String,
+    @ColumnInfo(name = "type")          val type        : String
 ) {
     companion object : EntityMapper<MedicineEntity, Medicine> {
         override fun MedicineEntity.mapToDomainModel(): Medicine {
             return Medicine(
-                id = this.id,
                 itemCode = this.itemCode,
                 itemName = this.itemName,
-                ingredient = this.ingredient,
+                itemNameEng = this.itemNameEng,
                 type = this.type
             )
         }
 
         override fun Medicine.mapFromDomainModel(): MedicineEntity {
             return MedicineEntity(
-                id = this.id,
                 itemCode = this.itemCode,
                 itemName = this.itemName,
-                ingredient = this.ingredient,
+                itemNameEng = this.itemNameEng,
                 type = this.type
             )
         }
