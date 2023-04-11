@@ -97,23 +97,16 @@ class MedicineFilterAdapter(
                         filteringList
                     }
 
-                filteredList.clear()
-                filteredList.addAll(newFilteredList)
-
-                val filterResults = FilterResults()
-                filterResults.values = filteredList
-
-                return filterResults
+                return FilterResults().apply { values = newFilteredList }
             }
 
             @SuppressLint("NotifyDataSetChanged")
             override fun publishResults(p0: CharSequence?, results: FilterResults?) {
+                filteredList = results?.values as ArrayList<Medicine>
                 notifyDataSetChanged()
             }
         }
     }
-
-
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val layout:LinearLayout = itemView.findViewById(R.id.search_medicine_layout)

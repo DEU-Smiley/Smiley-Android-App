@@ -4,9 +4,8 @@ import com.example.data.common.network.ApiResponse
 import com.example.data.common.network.ApiResponseHandler
 import com.example.data.common.network.ErrorResponse.Companion.toDomainModel
 import com.example.data.medicine.local.dao.MedicineDao
-import com.example.data.medicine.local.entity.MedicineEntity
-import com.example.data.medicine.local.entity.MedicineEntity.Companion.mapFromDomainModel
-import com.example.data.medicine.local.entity.MedicineEntity.Companion.mapToDomainModel
+import com.example.data.medicine.local.entity.MedicineEntity.Companion.domainModelToEntity
+import com.example.data.medicine.local.entity.MedicineEntity.Companion.entityToDomainModel
 import com.example.data.medicine.remote.response.MedicineListResponse.Companion.toDomainModel
 import com.example.data.medicine.remote.api.MedicineApi
 import com.example.domain.common.base.ResponseState
@@ -26,7 +25,7 @@ internal class MedicineRepositoryImpl @Inject constructor(
      */
     override suspend fun getAllMedicines(): Flow<ResponseState<MedicineList>> {
         return flow {
-            val list = medicineDao.findAll().map { it.mapToDomainModel() }
+            val list = medicineDao.findAll().map { it.entityToDomainModel() }
             if(list.isNotEmpty()){ // 내부 DB에 존재하면 내부 DB의 데이터를 사용
                 emit(ResponseState.Success(MedicineList(list)))
             } else { // 내부 DB에 없는 경우에만 서버로 요청
@@ -37,7 +36,7 @@ internal class MedicineRepositoryImpl @Inject constructor(
                         is ApiResponse.Success -> {
                             val data = result.data.toDomainModel()
                             // DB에 저장
-                            medicineDao.insertAll(data.medicines.map { it.mapFromDomainModel() })
+                            medicineDao.insertAll(data.medicines.map { it.domainModelToEntity() })
                             emit(ResponseState.Success(data))
                         }
                         is ApiResponse.Error -> emit(ResponseState.Error(result.error.toDomainModel()))

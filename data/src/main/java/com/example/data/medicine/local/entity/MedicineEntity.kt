@@ -15,7 +15,7 @@ class MedicineEntity(
     @ColumnInfo(name = "type")          val type        : String
 ) {
     companion object : EntityMapper<MedicineEntity, Medicine> {
-        override fun MedicineEntity.mapToDomainModel(): Medicine {
+        override fun MedicineEntity.entityToDomainModel(): Medicine {
             return Medicine(
                 itemCode = this.itemCode,
                 itemName = this.itemName,
@@ -24,7 +24,7 @@ class MedicineEntity(
             )
         }
 
-        override fun Medicine.mapFromDomainModel(): MedicineEntity {
+        override fun Medicine.domainModelToEntity(): MedicineEntity {
             return MedicineEntity(
                 itemCode = this.itemCode,
                 itemName = this.itemName,

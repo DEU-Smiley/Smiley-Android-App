@@ -8,6 +8,6 @@ package com.example.data.common.mapper
  * @return BaseModel
  */
 interface EntityMapper<From, To> {
-    fun From.mapToDomainModel(): To
-    fun To.mapFromDomainModel(): From
+    fun From.entityToDomainModel(): To
+    fun To.domainModelToEntity(): From
 }

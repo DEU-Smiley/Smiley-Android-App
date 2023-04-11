@@ -5,25 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
-import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.common.extension.showViewThenCheckedChanged
 import com.example.smiley.common.extension.showViewThenEnterPressed
 import com.example.smiley.common.extension.showViewThenTextChanged
+import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.databinding.FragmentMedicalInfoBinding
 import com.example.smiley.info.ButtonClickable
 import com.example.smiley.info.InfoActivity
 import com.example.smiley.medicine.MedicineSearchFragment
-import java.util.StringJoiner
+import java.util.*
 
 
 private const val ARG_PARAM1 = "param1"
