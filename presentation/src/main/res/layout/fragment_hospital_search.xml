@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".medicine.MedicineSearchFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical">
+
+        <!-- Layout 상단바 레이아웃 -->
+        <RelativeLayout
+            android:id="@+id/title_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/ic_left_arrow"
+
+                android:layout_centerVertical="true"
+
+                android:src="@drawable/ripple_unbounded"
+                android:clickable="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:fontFamily="@font/pretendard_medium"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="3sp"
+                android:text="병원 검색"
+                android:textColor="@color/black1_20"
+                android:textSize="@dimen/H4_M500_18_auto" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingTop="10dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/search_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="14dp"
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+
+                android:background="@drawable/selector_primary_edittext"
+                android:drawableEnd="@drawable/ic_search"
+                android:drawableTint="@color/gray1_55"
+
+                android:hint="@string/hospital_search_hint"
+                android:textColorHint="@color/gray4_CB"
+                android:textSize="14sp"
+                android:textColor="@color/black1_20"
+                android:fontFamily="@font/pretendard_medium"
+                android:maxLines="1"
+                android:inputType="text"/>
+        </LinearLayout>
+        <!-- Layout End 상단바 레이아웃 -->
+
+        <LinearLayout
+            android:id="@+id/search_result_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            android:paddingStart="@dimen/side_margin"
+            android:paddingEnd="@dimen/side_margin"
+            android:clipToPadding="false"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_result_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <!-- Layout 다음 단계 버튼 -->
+            <Button
+                android:id="@+id/select_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="16dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:layout_marginBottom="@dimen/btn_bottom_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"
+                style="?attr/borderlessButtonStyle"
+                android:background="@drawable/selector_btn"
+                android:foreground="?attr/selectableItemBackground"
+
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:gravity="center"
+
+                android:text="선택 완료"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/pretendard_bold"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>
