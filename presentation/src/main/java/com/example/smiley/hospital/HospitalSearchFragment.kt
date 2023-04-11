@@ -15,7 +15,6 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.hospital.model.HospitalList
-import com.example.domain.medicine.model.MedicineList
 import com.example.smiley.R
 import com.example.smiley.common.dialog.LoadingDialog
 import com.example.smiley.common.extension.dismiss
@@ -26,12 +25,10 @@ import com.example.smiley.databinding.FragmentHospitalSearchBinding
 import com.example.smiley.hospital.adapter.HospitalFilterAdapter
 import com.example.smiley.hospital.viewmodel.HospitalSearchFragmentState
 import com.example.smiley.hospital.viewmodel.HospitalViewModel
-import com.example.smiley.medicine.adapter.MedicineFilterAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -43,7 +40,6 @@ private const val ARG_PARAM2 = "param2"
  */
 @AndroidEntryPoint
 class HospitalSearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -205,7 +201,6 @@ class HospitalSearchFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment HospitalSearchFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             HospitalSearchFragment().apply {
