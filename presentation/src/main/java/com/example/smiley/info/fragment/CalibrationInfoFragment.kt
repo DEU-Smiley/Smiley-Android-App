@@ -19,8 +19,11 @@ import androidx.fragment.app.Fragment
 import com.example.smiley.R
 import com.example.smiley.common.extension.showViewThenCheckedChanged
 import com.example.smiley.common.extension.showViewThenEnterPressed
+import com.example.smiley.common.extension.showViewThenTextChanged
 import com.example.smiley.common.extension.toDate
+import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.databinding.FragmentCalibrationInfoBinding
+import com.example.smiley.hospital.HospitalSearchFragment
 import com.example.smiley.info.ButtonClickable
 import com.example.smiley.info.InfoActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -37,7 +40,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [CalibrationInfoFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CalibrationInfoFragment : Fragment(), ButtonClickable {
+class CalibrationInfoFragment : Fragment(), ButtonClickable, DataSendable {
 
     private lateinit var bind:FragmentCalibrationInfoBinding
     private lateinit var nextBtn:Button
@@ -73,6 +76,7 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable {
         validSelectedDate()
         addAnswerClickEvent()
         addKeyPressEventToEditText()
+        addHospitalEditTextClickEvent()
 
         return bind.root
     }
@@ -124,11 +128,27 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable {
     }
 
     /**
+     * 약품 입력 EditText 클릭 이벤트
+     */
+    private fun addHospitalEditTextClickEvent(){
+        bind.answer2SubTextView.setOnClickListener {
+            val hospitalSearchFragment = HospitalSearchFragment()
+            hospitalSearchFragment.dataSendable = this
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .add(R.id.parent_layout, hospitalSearchFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+    }
+
+
+    /**
      * EditText 엔터 이벤트 (입력 종료 캐치 )
      */
     private fun addKeyPressEventToEditText() {
         bind.apply {
-            answer2SubEditText.showViewThenEnterPressed(question3Layout, scrollView) { setButtonStatus() }
+            answer2SubTextView.showViewThenTextChanged(question3Layout, scrollView) { setButtonStatus() }
         }
     }
 
@@ -194,6 +214,15 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable {
         }
 
         return true
+    }
+
+    override fun <T> sendData(data: T) {
+        val sj = StringJoiner(", ")
+        (data as ArrayList<String>).forEach {
+            sj.add(it)
+        }
+
+        bind.answer2SubTextView.text = sj.toString()
     }
 
     companion object {

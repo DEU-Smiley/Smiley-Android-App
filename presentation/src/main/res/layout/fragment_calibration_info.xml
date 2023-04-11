@@ -126,8 +126,8 @@
                         android:lineSpacingExtra="6sp"
                         android:includeFontPadding="false"/>
 
-                    <EditText
-                        android:id="@+id/answer2_sub_edit_text"
+                    <TextView
+                        android:id="@+id/answer2_sub_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginTop="10dp"

@@ -20,6 +20,7 @@ import com.example.smiley.common.extension.showViewThenCheckedChanged
 import com.example.smiley.common.extension.showViewThenEnterPressed
 import com.example.smiley.common.extension.showViewThenTextChanged
 import com.example.smiley.databinding.FragmentMedicalInfoBinding
+import com.example.smiley.hospital.HospitalSearchFragment
 import com.example.smiley.info.ButtonClickable
 import com.example.smiley.info.InfoActivity
 import com.example.smiley.medicine.MedicineSearchFragment
