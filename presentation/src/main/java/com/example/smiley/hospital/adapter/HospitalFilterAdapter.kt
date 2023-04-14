@@ -56,6 +56,11 @@ class HospitalFilterAdapter(
         }
 
         holder.address.text = "[${hospital.dutyAddress}] "
+        holder.layout.setOnClickListener {
+            if(!::itemClickListener.isInitialized) return@setOnClickListener
+
+            itemClickListener.onItemClicked(position, hospital.hpid)
+        }
     }
 
     override fun getItemCount(): Int = filteredList.size
