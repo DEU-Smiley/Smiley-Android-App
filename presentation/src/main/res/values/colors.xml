@@ -28,6 +28,7 @@
     <color name="btn_gray">#E6E7EC</color>
     <color name="detail_point">#26A99B</color>
     <color name="red">#F0636E</color>
+    <color name="trasparent">#00FFFFFF</color>
     <!-- 컬러 셋 -->
 
 </resources>
