@@ -1,5 +1,7 @@
 package com.example.smiley.common.extension
 
+import android.animation.ObjectAnimator
+import android.graphics.Rect
 import android.graphics.Typeface
 import android.text.Editable
 import android.text.SpannableStringBuilder
@@ -13,8 +15,10 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.*
 import androidx.core.view.get
+import androidx.core.widget.NestedScrollView
 import androidx.core.widget.addTextChangedListener
 import com.example.smiley.R
+import java.lang.Math.abs
 
 fun View.gone(){ visibility = View.GONE }
 
@@ -63,6 +67,53 @@ fun ScrollView.scrollDown(){
     }
 }
 
+/**
+ * 특정 View로 Scroll하는 메소드
+ * @param view: View
+ */
+fun NestedScrollView.scrollToView(view:View){
+    this.scrollTo(0, computeDistanceToView(view))
+}
+
+/**
+ * 특정 View까지의 거리를 측정하는 메소드
+ */
+fun NestedScrollView.computeDistanceToView(view: View): Int{
+    /**
+     * 특정 View의 화면 크기를 측정하는 메소드
+     */
+    fun calculateRectOnScreen(view: View): Rect {
+        val location = IntArray(2)
+        view.getLocationOnScreen(location)
+        return Rect(
+            location[0],
+            location[1],
+            location[0] + view.measuredWidth,
+            location[1] + view.measuredHeight
+        )
+    }
+
+    return kotlin.math.abs(
+        calculateRectOnScreen(this).top - (this.scrollY + calculateRectOnScreen(view).top)
+    )
+}
+
+fun NestedScrollView.smoothScrollToView(
+    view: View,
+    maxDuration: Long = 1
+) {
+    // 스크롤 할 필요가 없는 경우
+    if (this.getChildAt(0).height <= this.height) return
+
+    val y = computeDistanceToView(view)
+
+    // (스크롤 해야하는 거리 - 현재 스크롤 된 거리) / (스크롤 몸체의 높이 - 스크롤 뷰의 높이)
+    val ratio = kotlin.math.abs(y - this.scrollY) / (this.getChildAt(0).height - this.height).toFloat()
+
+    ObjectAnimator.ofInt(this, "scrollY", y).apply {
+        duration = (maxDuration * ratio).toLong()
+    }.start()
+}
 
 /**
  * EditText에서 엔터 누르면 다음 뷰를 표시하는 메소드
