@@ -1,5 +1,6 @@
 package com.example.smiley.hospital
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -125,7 +126,9 @@ class HospitalSearchFragment : Fragment() {
      * 리사이클러뷰 초기화
      */
     private fun initRecyclerView(hospitalList: HospitalList) {
-        hospitalFilterAdapter = HospitalFilterAdapter(hospitalList)
+        hospitalFilterAdapter = HospitalFilterAdapter(hospitalList).apply {
+            setOnItemClickListener(hospitalItemClickListener)
+        }
 
         bind.searchResultView.apply {
             adapter = hospitalFilterAdapter
@@ -190,6 +193,18 @@ class HospitalSearchFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _bind = null
+    }
+
+    /**
+     * 검색 결과 병원 클릭 이벤트 리스너
+     */
+    private val hospitalItemClickListener = object : HospitalFilterAdapter.OnItemClickListener {
+        @SuppressLint("InflateParams")
+        override fun onItemClicked(position: Int, data: String) {
+            HospitalInfoBottomSheetFragment().show(
+                parentFragmentManager, "bottomsheet"
+            )
+        }
     }
 
     companion object {

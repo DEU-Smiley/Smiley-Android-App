@@ -28,5 +28,7 @@
     <string name="hint_phone_number">01012345678</string>
     <string name="meidcine_search_hint">의약품 명을 입력해주세요 ex) 타이레놀</string>
     <string name="hospital_search_hint">병원 명을 입력해주세요</string>
+    <string name="hospital_info_provide_notice">스마일리에서 제공하는 병원 정보는 건강보험심사평가원의 의료 빅데이터를 기반으로 제공됩니다.</string>
+    <string name="hospital_data_edit_request_message">잘못된 정보가 있다면\nSMILEY 팀에게 알려주세요.</string>
 
 </resources>
