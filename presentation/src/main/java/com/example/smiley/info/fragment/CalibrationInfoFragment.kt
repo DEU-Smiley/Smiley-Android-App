@@ -26,11 +26,11 @@ import com.example.smiley.databinding.FragmentCalibrationInfoBinding
 import com.example.smiley.hospital.HospitalSearchFragment
 import com.example.smiley.info.ButtonClickable
 import com.example.smiley.info.InfoActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.time.LocalDate
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -96,6 +96,22 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable, DataSendable {
         val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet_date_spinner, null)
         val bottomSheetDialog = BottomSheetDialog(requireActivity()).apply {
             setContentView(bottomSheetView)
+            behavior.apply {
+                state = BottomSheetBehavior.STATE_EXPANDED
+                isHideable = true
+                skipCollapsed = true
+                saveFlags = BottomSheetBehavior.SAVE_ALL
+                addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback(){
+                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+                        if(newState != BottomSheetBehavior.STATE_EXPANDED){
+                            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                        }
+                    }
+
+                    override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
+                })
+            }
+
             /** DateSpinner 날짜 선택 이벤트 */
             val dateSpinner = bottomSheetView.findViewById<DatePicker>(R.id.date_spinner)
             dateSpinner.setOnDateChangedListener { _, year, month, day ->

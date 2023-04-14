@@ -37,5 +37,13 @@
     <style name="AppModalStyle"
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/background_bottom_sheet</item>
+        <item name="behavior_peekHeight">250dp</item>
+    </style>
+
+    <style name="tab_item_text"
+        parent="Widget.Design.TabLayout">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@drawable/selector_tab_layout_item_text</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
     </style>
 </resources>
