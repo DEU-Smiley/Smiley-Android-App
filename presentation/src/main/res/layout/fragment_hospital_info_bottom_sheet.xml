@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinator_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:behavior_draggable="true"
+            app:behavior_peekHeight="170dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+            <!-- AppBarLayout -->
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                app:elevation="0dp">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                    <!-- Layout 접혔을 때 사라질 레이아웃 -->
+                    <!-- 병원 기본 정보 레이아웃 (parallax: 스크롤 시 접힘) -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/hospital_info_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:background="@color/white"
+                        android:paddingStart="@dimen/side_margin"
+                        android:paddingEnd="@dimen/side_margin"
+                        android:paddingBottom="20dp">
+
+                        <View
+                            android:id="@+id/handle_bar"
+                            android:layout_width="60dp"
+                            android:layout_height="5dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_round_rectangle_15dp"
+                            android:backgroundTint="@color/gray5_E6"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/partner_tag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/background_round_rectangle_15dp"
+                            android:fontFamily="@font/pretendard_medium"
+                            android:paddingLeft="11dp"
+                            android:paddingTop="5dp"
+                            android:paddingRight="11dp"
+
+                            android:paddingBottom="5dp"
+                            android:text="제휴"
+                            android:textColor="@color/primary_normal"
+                            android:textSize="@dimen/B5_M500_12_auto"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/handle_bar" />
+
+                        <TextView
+                            android:id="@+id/hospital_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+
+                            android:fontFamily="@font/pretendard_bold"
+                            android:includeFontPadding="true"
+                            android:lineSpacingExtra="10sp"
+                            android:text="가야프라임치과의원"
+                            android:textColor="#202020"
+                            android:textSize="@dimen/H5_B700_18_h22"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/partner_tag" />
+
+                        <TextView
+                            android:id="@+id/running_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+
+                            android:fontFamily="@font/pretendard_semibold"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="4sp"
+                            android:text="진료종료"
+
+                            android:textColor="@color/gray3_8E"
+                            android:textSize="@dimen/H4_SB600_14_h18"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/hospital_title" />
+
+                        <TextView
+                            android:id="@+id/running_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginTop="6dp"
+
+                            android:fontFamily="@font/pretendard_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="4sp"
+                            android:text="오늘 09:00 ~ 17:00"
+
+                            android:textColor="@color/gray3_8E"
+                            android:textSize="@dimen/M500_14_h20"
+
+                            app:layout_constraintLeft_toRightOf="@+id/running_info"
+                            app:layout_constraintTop_toBottomOf="@+id/hospital_title" />
+
+                        <TextView
+                            android:id="@+id/hospital_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="947m 부산시 부산진구 대학로 | 치과"
+
+                            android:textColor="@color/gray3_8E"
+                            android:textSize="@dimen/M500_14_h20"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/running_info" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/hospital_image_card_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp"
+
+                            app:layout_constraintRight_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/hospital_address">
+
+                            <ImageView
+                                android:id="@+id/hospital_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/base_image_hospital" />
+                        </androidx.cardview.widget.CardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!-- 병원 기본 정보 레이아웃 (parallax: 스크롤 시 접힘) -->
+                    <!-- Layout End 접혔을 때 사라질 레이아웃 -->
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                <!-- Layout 탭 레이아웃 -->
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+
+                    android:paddingTop="5dp"
+                    android:scrollIndicators="bottom"
+                    app:tabIndicatorFullWidth="true"
+                    app:tabIndicatorColor="@color/black1_20"
+
+                    app:tabMode="fixed"
+                    app:tabGravity="fill"
+                    app:tabMaxWidth="0dp"
+                    app:tabRippleColor="@color/trasparent"
+                    app:tabSelectedTextColor="@color/black1_20"
+                    app:tabPaddingStart="10dp"
+                    app:tabPaddingEnd="10dp"
+                    android:clipToPadding="false">
+
+<!--                    app:tabTextColor="@color/black1_20"-->
+<!--                    app:tabIndicatorColor="@color/black1_20"-->
+
+<!--                    <com.google.android.material.tabs.TabItem-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="병원정보"/>-->
+
+<!--                    <com.google.android.material.tabs.TabItem-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="진료정보"/>-->
+
+<!--                    <com.google.android.material.tabs.TabItem-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="리뷰"/>-->
+                </com.google.android.material.tabs.TabLayout>
+                <!-- Layout End 탭 레이아웃 -->
+            </com.google.android.material.appbar.AppBarLayout>
+            <!-- AppBarLayout End -->
+
+            <!-- Layout 병원 정보 스크롤 뷰 -->
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nested_scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:fillViewport="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintTop_toBottomOf="@+id/tab_layout">
+
+                <!-- Layout 스크롤뷰 베이스 리니어 레이아웃 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <!-- Layout 병원 시간 정보 리니어 레이아웃 -->
+                    <LinearLayout
+                        android:id="@+id/hospital_time_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/side_margin"
+                        android:paddingTop="20dp"
+                        android:paddingRight="@dimen/side_margin"
+                        android:paddingBottom="60dp">
+
+                        <!-- Layout 병원 시간(오늘) 정보 레이아웃 -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_round_rectangle_10dp"
+
+                            android:paddingLeft="26dp"
+                            android:paddingTop="11dp"
+                            android:paddingRight="26dp"
+                            android:paddingBottom="11dp">
+
+                            <TextView
+                                android:id="@+id/today_info"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+
+                                android:fontFamily="@font/pretendard_bold"
+                                android:text="오늘"
+                                android:textColor="@color/black1_20"
+                                android:textSize="@dimen/H5_B700_18_h22"
+
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toLeftOf="@id/lunch_info"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/lunch_info"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="40dp"
+                                android:fontFamily="@font/pretendard_regular"
+                                android:text="점심시간"
+                                android:textColor="@color/gray1_55"
+                                android:textSize="@dimen/H4_R400_15_h22"
+
+                                app:layout_constraintBottom_toBottomOf="@id/today_info"
+                                app:layout_constraintLeft_toRightOf="@id/today_info"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/today_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/pretendard_regular"
+                                android:text="휴진"
+                                android:textColor="@color/gray1_55"
+                                android:textSize="@dimen/H4_R400_15_h22"
+
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/today_info" />
+
+                            <TextView
+                                android:id="@+id/lunch_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/pretendard_regular"
+                                android:text="13:30 ~ 14:30"
+                                android:textColor="@color/gray1_55"
+                                android:textSize="@dimen/H4_R400_15_h22"
+
+                                app:layout_constraintBottom_toBottomOf="@id/today_time"
+                                app:layout_constraintLeft_toLeftOf="@+id/lunch_info"
+                                app:layout_constraintTop_toBottomOf="@+id/lunch_info" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <!-- Layout End 병원 시간(오늘) 정보 레이아웃 -->
+
+                        <!-- Layout 병원 시간(월, 화) 정보 레이아웃 -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+
+                            android:paddingLeft="26dp"
+                            android:paddingTop="11dp"
+                            android:paddingRight="26dp"
+                            android:paddingBottom="11dp">
+
+                            <TextView
+                                android:id="@+id/monday_info"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+
+                                android:fontFamily="@font/pretendard_bold"
+                                android:text="월요일"
+                                android:textColor="@color/black1_20"
+                                android:textSize="@dimen/H5_B700_18_h22"
+
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toLeftOf="@id/tuesday_info"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tuesday_info"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="40dp"
+
+                                android:fontFamily="@font/pretendard_bold"
+                                android:text="화요일"
+                                android:textColor="@color/gray1_55"
+                                android:textSize="@dimen/H5_B700_18_h22"
+
+                                app:layout_constraintBottom_toBottomOf="@id/monday_info"
+                                app:layout_constraintLeft_toRightOf="@id/monday_info"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/monday_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/pretendard_regular"
+                                android:text="08:30 ~ 19:30"
+                                android:textColor="@color/gray1_55"
+                                android:textSize="@dimen/H4_R400_15_h22"
+
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/monday_info" />
+
+                            <TextView
+                                android:id="@+id/tuesday_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/pretendard_regular"
+                                android:text="08:30 ~ 19:30"
+                                android:textColor="@color/gray1_55"
+                                android:textSize="@dimen/H4_R400_15_h22"
+
+                                app:layout_constraintBottom_toBottomOf="@id/monday_time"
+                                app:layout_constraintLeft_toLeftOf="@+id/tuesday_info"
+                                app:layout_constraintTop_toBottomOf="@+id/tuesday_info" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <!-- Layout End 병원 시간(월, 화) 정보 레이아웃 -->
+
+                        <!-- Layout 병원 시간(수, 목) 정보 레이아웃 -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+
+                            android:paddingLeft="26dp"
+                            android:paddingTop="11dp"
+                            android:paddingRight="26dp"
+                            android:paddingBottom="11dp">
+
+                            <TextView
+                                android:id="@+id/wednesday_info"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+
+                                android:fontFamily="@font/pretendard_bold"
+                                android:text="수요일"
+                                android:textColor="@color/black1_20"
+                                android:textSize="@dimen/H5_B700_18_h22"
+
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toLeftOf="@id/thursday_info"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/thursday_info"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="40dp"
+
+                                android:fontFamily="@font/pretendard_bold"
+                                android:text="목요일"
+                                android:textColor="@color/gray1_55"
+                                android:textSize="@dimen/H5_B700_18_h22"
+
+                                app:layout_constraintBottom_toBottomOf="@id/wednesday_info"
+                                app:layout_constraintLeft_toRightOf="@id/wednesday_info"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/wednesday_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/pretendard_regular"
+                                android:text="08:30 ~ 19:30"
+                                android:textColor="@color/gray1_55"
+                                android:textSize="@dimen/H4_R400_15_h22"
+
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/wednesday_info" />
+
+                            <TextView
+                                android:id="@+id/thursday_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/pretendard_regular"
+                                android:text="08:30 ~ 19:30"
+                                android:textColor="@color/gray1_55"
+                                android:textSize="@dimen/H4_R400_15_h22"
+
+                                app:layout_constraintBottom_toBottomOf="@id/wednesday_time"
+                                app:layout_constraintLeft_toLeftOf="@+id/thursday_info"
+                                app:layout_constraintTop_toBottomOf="@+id/thursday_info" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <!-- Layout End 병원 시간(수, 목) 정보 레이아웃 -->
+
+                        <!-- Layout 병원 시간(금, 토) 정보 레이아웃 -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+
+                            android:paddingLeft="26dp"
+                            android:paddingTop="11dp"
+                            android:paddingRight="26dp"
+                            android:paddingBottom="11dp">
+
+                            <TextView
+                                android:id="@+id/friday_info"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+
+                                android:fontFamily="@font/pretendard_bold"
+                                android:text="금요일"
+                                android:textColor="@color/black1_20"
+                                android:textSize="@dimen/H5_B700_18_h22"
+
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toLeftOf="@id/saturday_info"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/saturday_info"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="40dp"
+                                android:fontFamily="@font/pretendard_bold"
+                                android:text="토요일"
+                                android:textColor="@color/primary_normal"
+                                android:textSize="@dimen/H5_B700_18_h22"
+
+                                app:layout_constraintBottom_toBottomOf="@id/friday_info"
+                                app:layout_constraintLeft_toRightOf="@id/friday_info"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/friday_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+
+                                android:fontFamily="@font/pretendard_regular"
+                                android:text="08:30 ~ 19:30"
+                                android:textColor="@color/gray1_55"
+                                android:textSize="@dimen/H4_R400_15_h22"
+
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/friday_info" />
+
+                            <TextView
+                                android:id="@+id/saturday_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+
+                                android:fontFamily="@font/pretendard_regular"
+                                android:text="08:30 ~ 19:30"
+                                android:textColor="@color/primary_normal"
+                                android:textSize="@dimen/H4_R400_15_h22"
+
+                                app:layout_constraintBottom_toBottomOf="@id/friday_time"
+                                app:layout_constraintLeft_toLeftOf="@+id/saturday_info"
+                                app:layout_constraintTop_toBottomOf="@+id/saturday_info" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <!-- Layout End 병원 시간(금, 토) 정보 레이아웃 -->
+
+
+                        <!-- Layout 병원 시간(금, 토) 정보 레이아웃 -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+
+                            android:paddingLeft="26dp"
+                            android:paddingTop="11dp"
+                            android:paddingRight="26dp"
+                            android:paddingBottom="11dp">
+
+                            <TextView
+                                android:id="@+id/sunday_info"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+
+                                android:fontFamily="@font/pretendard_bold"
+                                android:text="일요일"
+                                android:textColor="@color/red"
+                                android:textSize="@dimen/H5_B700_18_h22"
+
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toLeftOf="@id/holiday_info"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/holiday_info"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="40dp"
+
+                                android:fontFamily="@font/pretendard_bold"
+                                android:text="공휴일"
+                                android:textColor="@color/red"
+                                android:textSize="@dimen/H5_B700_18_h22"
+
+                                app:layout_constraintBottom_toBottomOf="@id/sunday_info"
+                                app:layout_constraintLeft_toRightOf="@id/sunday_info"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/sunday_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+
+                                android:fontFamily="@font/pretendard_regular"
+                                android:text="휴진"
+                                android:textColor="@color/red"
+                                android:textSize="@dimen/H4_R400_15_h22"
+
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/sunday_info" />
+
+                            <TextView
+                                android:id="@+id/holiday_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+
+                                android:fontFamily="@font/pretendard_regular"
+                                android:text="휴진"
+                                android:textColor="@color/red"
+                                android:textSize="@dimen/H4_R400_15_h22"
+
+                                app:layout_constraintBottom_toBottomOf="@id/sunday_time"
+                                app:layout_constraintLeft_toLeftOf="@+id/holiday_info"
+                                app:layout_constraintTop_toBottomOf="@+id/holiday_info" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <!-- Layout End 병원 시간(금, 토) 정보 레이아웃 -->
+                    </LinearLayout>
+                    <!-- Layout End 병원 시간 정보 리니어 레이아웃 -->
+
+                    <!-- Layout 병원 위치 정보 레이아웃 -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/hospital_posit_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/white"
+                        android:paddingLeft="@dimen/side_margin"
+                        android:paddingRight="@dimen/side_margin"
+                        android:paddingBottom="20dp">
+
+                        <TextView
+                            android:id="@+id/posit_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/pretendard_bold"
+                            android:text="위치"
+                            android:textColor="@color/black1_20"
+                            android:textSize="@dimen/H5_B700_18_h22"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/posit_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:text="서울특별시 은평구 신사동 12"
+                            android:textColor="@color/gray1_55"
+                            android:textSize="@dimen/H4_R400_15_h22"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/posit_text_view" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+
+                            android:elevation="0dp"
+                            app:cardCornerRadius="10dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/posit_address">
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/base_map" />
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!-- Layout End 병원 위치 정보 레이아웃 -->
+
+                    <!-- Layout 병원 전화번호 레이아웃 -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/white"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp">
+
+                        <TextView
+                            android:id="@+id/hospital_phone_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/side_margin"
+
+                            android:fontFamily="@font/pretendard_bold"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="4sp"
+                            android:text="전화번호"
+                            android:textColor="@color/black1_20"
+                            android:textSize="@dimen/H5_B700_18_h22"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/hospital_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/side_margin"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="7sp"
+                            android:text="02-123-4567"
+                            android:textColor="@color/gray1_55"
+                            android:textSize="@dimen/H4_R400_15_h22"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/hospital_phone_title" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!-- Layout End 병원 전화번호 레이아웃 -->
+
+                    <!-- Layout 병원 리뷰 레이아웃 -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/hospital_review_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/white"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="60dp">
+
+                        <TextView
+                            android:id="@+id/hospital_review_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/side_margin"
+
+                            android:fontFamily="@font/pretendard_bold"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="4sp"
+                            android:text="리뷰"
+                            android:textColor="@color/black1_20"
+                            android:textSize="@dimen/H5_B700_18_h22"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/hospital_review"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/side_margin"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="7sp"
+                            android:text="리뷰 0개"
+                            android:textColor="@color/gray1_55"
+                            android:textSize="@dimen/H4_R400_15_h22"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/hospital_review_title" />
+
+                        <ImageView
+                            android:id="@+id/ic_review"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ic_none_data"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/hospital_review" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:text="리뷰 내역이 없어요"
+                            android:textColor="@color/gray1_55"
+                            android:textSize="@dimen/H4_R400_15_h22"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ic_review" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!-- Layout End 병원 리뷰 레이아웃 -->
+
+                    <!-- Layout 병원 정보 제공 레이아웃 -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/hospital_provide_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="100dp"
+                        android:background="@color/white"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp">
+
+                        <TextView
+                            android:id="@+id/hospital_provide_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/side_margin"
+
+                            android:fontFamily="@font/pretendard_medium"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="4sp"
+                            android:text="병원 정보제공"
+                            android:textColor="@color/black1_20"
+                            android:textSize="@dimen/M500_16_h22"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/hospital_provide_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/side_margin"
+                            android:layout_marginEnd="@dimen/side_margin"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="7sp"
+                            android:text="@string/hospital_info_provide_notice"
+                            android:textColor="@color/gray1_55"
+                            android:textSize="@dimen/H4_R400_15_h22"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/hospital_provide_title" />
+
+                        <View
+                            android:id="@+id/hospital_provide_line"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="@dimen/side_margin"
+                            android:layout_marginRight="@dimen/side_margin"
+                            android:background="@color/gray5_E6"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/hospital_provide_content"/>
+
+                        <TextView
+                            android:id="@+id/hospital_provide_wrong_data"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/side_margin"
+                            android:layout_marginEnd="@dimen/side_margin"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="7sp"
+                            android:text="@string/hospital_data_edit_request_message"
+                            android:textColor="@color/gray1_55"
+                            android:textSize="@dimen/H4_R400_15_h22"
+
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/hospital_provide_line" />
+
+                        <TextView
+                            android:id="@+id/hospital_provide_edit_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/side_margin"
+                            android:layout_marginEnd="@dimen/side_margin"
+                            android:layout_marginTop="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:paddingLeft="15dp"
+                            android:paddingRight="15dp"
+                            android:background="@drawable/background_gray_round_button"
+
+                            android:text="정보 수정요청"
+                            android:textColor="@color/black1_20"
+                            android:textSize="@dimen/B7_R400_12_h18"
+                            android:fontFamily="@font/pretendard_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/hospital_provide_line"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!-- Layout End 병원 정보 제공 레이아웃 -->
+                </LinearLayout>
+                <!-- Layout End 스크롤뷰 베이스 리니어 레이아웃 -->
+            </androidx.core.widget.NestedScrollView>
+            <!-- Layout End 병원 정보 스크롤 뷰 -->
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
