@@ -149,8 +149,8 @@
             android:layout_weight="1"
             android:layout_marginTop="14dp"
             android:paddingBottom="40dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
 
             app:layout_constraintTop_toBottomOf="@id/indicator_layout"
             app:layout_constraintBottom_toTopOf="@+id/next_btn"/>
