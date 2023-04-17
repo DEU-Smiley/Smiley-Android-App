@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.smiley.R
+import kotlin.math.roundToInt
 
 fun Context.showToast(message: String){
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
@@ -16,4 +17,9 @@ fun Context.showGenericAlertDialog(message: String){
             dialog.dismiss()
         }
     }.show()
+}
+
+fun Context.convertDpToPx(dp:Int): Int {
+    val density = resources.displayMetrics.density
+    return (dp * density).roundToInt()
 }
