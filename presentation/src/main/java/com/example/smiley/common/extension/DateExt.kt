@@ -25,3 +25,7 @@ fun String.toDateString(): String {
 fun String.toDate(): LocalDate {
     return LocalDate.parse(this, DateTimeFormatter.ISO_DATE)
 }
+
+fun Calendar.getTodayOfWeek(): Int {
+    return this.get(Calendar.DAY_OF_WEEK)
+}

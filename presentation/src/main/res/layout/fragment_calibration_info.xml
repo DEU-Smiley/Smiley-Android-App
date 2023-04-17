@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+        android:paddingStart="@dimen/side_margin"
+        android:paddingEnd="@dimen/side_margin"
         android:scrollbars="none">
 
         <LinearLayout
@@ -131,10 +133,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
                         android:background="@drawable/selector_primary_edittext"
 
-
-                        android:inputType="text"
                         android:maxLines="1"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"

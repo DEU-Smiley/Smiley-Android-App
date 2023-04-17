@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.common.base.ResponseState
-import com.example.domain.hospital.model.HospitalList
+import com.example.domain.hospital.model.SimpleHospitalList
 import com.example.domain.hospital.usecase.GetAllHospitalUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -57,7 +57,7 @@ class HospitalViewModel @Inject constructor(
 
 sealed class HospitalSearchFragmentState {
     object Init                                                     : HospitalSearchFragmentState()
-    data class SuccessLoadHospital(val hospitalList: HospitalList)  : HospitalSearchFragmentState()
+    data class SuccessLoadHospital(val simpleHospitalList: SimpleHospitalList)  : HospitalSearchFragmentState()
     data class ErrorLoadHospital(val error: String)                 : HospitalSearchFragmentState()
     data class IsLoading(val isLoading: Boolean)                    : HospitalSearchFragmentState()
     data class ShowToast(val message: String)                       : HospitalSearchFragmentState()
