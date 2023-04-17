@@ -1,7 +1,8 @@
 package com.example.data.hospital
 
-import com.example.data.common.module.NetworkModule
-import com.example.data.common.module.RoomModule
+import com.example.data.hilt.module.NetworkModule
+import com.example.data.hilt.module.RoomModule
+import com.example.data.hilt.qualifier.BaseRetrofit
 import com.example.data.hospital.remote.api.HospitalApi
 import com.example.data.hospital.repository.HospitalRepositoryImpl
 import com.example.domain.hospital.HospitalRepository
@@ -18,7 +19,9 @@ internal class HospitalModule {
 
     @Singleton
     @Provides
-    fun provideHospitalApi(retrofit: Retrofit): HospitalApi {
+    fun provideHospitalApi(
+        @BaseRetrofit retrofit: Retrofit
+    ): HospitalApi {
         return retrofit.create(HospitalApi::class.java)
     }
 
