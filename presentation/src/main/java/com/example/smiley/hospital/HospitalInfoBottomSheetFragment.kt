@@ -1,27 +1,39 @@
 package com.example.smiley.hospital
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Dialog
 import android.content.DialogInterface
+import android.graphics.Outline
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.ViewGroup.MarginLayoutParams
+import android.widget.Button
 import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import com.example.domain.hospital.model.Hospital
 import com.example.smiley.R
-import com.example.smiley.common.extension.computeDistanceToView
-import com.example.smiley.common.extension.smoothScrollToView
+import com.example.smiley.common.extension.*
+import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.databinding.FragmentHospitalInfoBottomSheetBinding
+import com.example.smiley.hospital.viewmodel.HospitalDialogState
+import com.example.smiley.hospital.viewmodel.HospitalDialogViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import java.util.*
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,18 +45,32 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HospitalInfoBottomSheetFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
-    private var param1: String? = null
-    private var param2: String? = null
+    private var hpid: String? = null
 
-    private lateinit var _bind: FragmentHospitalInfoBottomSheetBinding
+    private var _bind: FragmentHospitalInfoBottomSheetBinding?=null
+    private val bind get() = _bind!!
+    private val hospitalVm: HospitalDialogViewModel by viewModels()
+    lateinit var dataSendable: DataSendable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+             hpid = it.getString("hpid")
         }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog: BottomSheetDialog =
+            super.onCreateDialog(savedInstanceState) as BottomSheetDialog
+
+        dialog.setOnShowListener {
+            setUpFullHeight(it as BottomSheetDialog) // 바텀 시트 높이 화면 전체로 설정
+            addBtnToBottom(dialog, it)               // 바텀 시트 하단에 고정 버튼 추가
+        }
+
+        return dialog
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -60,25 +86,81 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
             false
         )
 
+        observe()
+        initCoordinatorLayout()
         initTabLayout()
         initNestedScrollView()
-
-        return _bind.root
+        requestHospital()
+        
+        return bind.root
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog: BottomSheetDialog =
-            super.onCreateDialog(savedInstanceState) as BottomSheetDialog
+    private fun observe(){
+        hospitalVm.state.flowWithLifecycle(
+            viewLifecycleOwner.lifecycle,
+            Lifecycle.State.STARTED
+        ).onEach { state ->
+            handleStateChange(state)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
 
-        dialog.setOnShowListener {
-            setUpFullHeight(it as BottomSheetDialog)
-            addBtnToBottom(dialog, it)
+    /**
+     * 바텀시트 코너 Radius 지정
+     */
+    private fun initCoordinatorLayout(){
+        bind.coordinatorLayout.outlineProvider = object : ViewOutlineProvider() {
+            override fun getOutline(view: View, outline: Outline) {
+                outline.setRoundRect(
+                    0,
+                    0,
+                    view.width,
+                    view.height,
+                    requireActivity().convertDpToPx(30).toFloat()
+                )
+            }
+        }
+        bind.coordinatorLayout.clipToOutline = true
+    }
+
+    /**
+     * TabLayout 초기화 메소드
+     */
+    private fun initTabLayout() {
+
+        bind.tabLayout.apply {
+            addTab(newTab().setText("병원정보"))
+            addTab(newTab().setText("위치정보"))
+            addTab(newTab().setText("리뷰"))
+
+            addOnTabSelectedListener(tabSelectedListener)
         }
 
-        return dialog
+        repeat(bind.tabLayout.tabCount){
+            val tab = (bind.tabLayout.getChildAt(0) as ViewGroup).getChildAt(it)
+            val params = tab.layoutParams as MarginLayoutParams
+
+            if(it == bind.tabLayout.tabCount-1) params.setMargins(0, 0, 0, 0)
+            else params.setMargins(0, 0, 50, 0)
+            tab.requestLayout()
+        }
     }
 
+    /**
+     * NestedScrollView 초기화 메소드
+     */
+    private fun initNestedScrollView(){
+        bind.nestedScrollView.setOnScrollChangeListener(scrollChangedListener)
+    }
 
+    private fun requestHospital(){
+        hpid?.let {
+            hospitalVm.requestHospital(it)
+        }
+    }
+
+    private fun addSelectBtnClickEvent(){
+
+    }
     /**
      * 바텀 시트가 펼쳐졌을 때, Height를 화면 전체로 지정하는 메소드
      */
@@ -107,46 +189,111 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
     private fun addBtnToBottom(dialog: BottomSheetDialog, dialogInterface: DialogInterface) {
         val containerLayout =
             (dialogInterface as BottomSheetDialog).findViewById<FrameLayout>(com.google.android.material.R.id.container)
-        val button = dialog.layoutInflater.inflate(R.layout.sub_bottom_sheet_button, null)
+        val btnLayout = dialog.layoutInflater.inflate(R.layout.sub_bottom_sheet_button, null)
 
-        button.layoutParams = FrameLayout.LayoutParams(
+        btnLayout.layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
         ).apply {
             gravity = Gravity.BOTTOM
         }
-        containerLayout!!.addView(button)
+
+        val button = btnLayout.findViewById<Button>(R.id.next_btn)
+        button.setOnClickListener {
+            if(!::dataSendable.isInitialized) return@setOnClickListener
+            Log.d("바텀시트", "버튼 클릭")
+            dataSendable.sendData(bind.hospitalTitle.text)
+            this@HospitalInfoBottomSheetFragment.dismiss()
+        }
+
+        containerLayout!!.addView(btnLayout)
     }
 
     private fun getWindowHeight(): Int {
-        return (context as Activity).findViewById<View>(Window.ID_ANDROID_CONTENT).height
+        return requireActivity().findViewById<View>(Window.ID_ANDROID_CONTENT).height
     }
 
     /**
-     * TabLayout 초기화 메소드
+     * ViewModel 상태 핸들러
      */
-    private fun initTabLayout() {
-
-        _bind.tabLayout.apply {
-            addTab(newTab().setText("병원정보"))
-            addTab(newTab().setText("위치정보"))
-            addTab(newTab().setText("리뷰"))
-
-            addOnTabSelectedListener(tabSelectedListener)
-        }
-
-        repeat(_bind.tabLayout.tabCount){
-            val tab = (_bind.tabLayout.getChildAt(0) as ViewGroup).getChildAt(it)
-            val params = tab.layoutParams as MarginLayoutParams
-
-            if(it == _bind.tabLayout.tabCount-1) params.setMargins(0, 0, 0, 0)
-            else params.setMargins(0, 0, 50, 0)
-            tab.requestLayout()
+    private fun handleStateChange(state: HospitalDialogState){
+        when(state){
+            is HospitalDialogState.Init -> Unit
+            is HospitalDialogState.IsLoading -> handleLoading(state.isLoading)
+            is HospitalDialogState.SuccessLoadHospital ->{
+                handleSucccessHospital(state.hospital)
+                handleLoading(false)
+            }
+            is HospitalDialogState.ErrorLoadHospital -> handleErrorHospital(state.error)
+            is HospitalDialogState.ShowToast -> handleShowToast(state.message)
         }
     }
 
-    private fun initNestedScrollView(){
-        _bind.nestedScrollView.setOnScrollChangeListener(scrollChangedListener)
+    /**
+     * HospitalList 조회에 성공한 경우의 핸들러
+     */
+    @SuppressLint("SetTextI18n")
+    private fun handleSucccessHospital(hospital: Hospital){
+        bind.apply {
+            partnerTag.text     = if (hospital.isPartner) "제휴" else "일반"
+            hospitalTitle.text  = hospital.name
+            hospitalAddress.text = hospital.address
+            runningInfo.text    = if(hospital.isRunningNow()) "운영중" else "진료 종료"
+            runningTime.text    = "오늘 ${hospital.parseRunningTimeAt(Calendar.getInstance().getTodayOfWeek())}"
+
+
+            mondayTime.text     = hospital.parseRunningTimeAt(Calendar.MONDAY)
+            tuesdayTime.text    = hospital.parseRunningTimeAt(Calendar.TUESDAY)
+            wednesdayTime.text  = hospital.parseRunningTimeAt(Calendar.WEDNESDAY)
+            thursdayTime.text   = hospital.parseRunningTimeAt(Calendar.THURSDAY)
+            fridayTime.text     = hospital.parseRunningTimeAt(Calendar.FRIDAY)
+            saturdayTime.text   = hospital.parseRunningTimeAt(Calendar.SATURDAY)
+            sundayTime.text     = hospital.parseRunningTimeAt(Calendar.SUNDAY)
+            holidayTime.text    = hospital.parseRunningTimeAt(-1)
+
+            positAddress.text   = hospital.detailAddress.ifEmpty { hospital.address }
+            hospitalPhone.text  = hospital.tel
+        }
+    }
+
+    /**
+     * 요일별 진료 시간을 반환하는 메소드
+     */
+    private fun Hospital.parseRunningTimeAt(dayOfWeek: Int): String {
+        val time = this.getRunnginTimeAt(dayOfWeek)
+        if(time.first.isEmpty() || time.second.isEmpty()) return "휴진"
+
+        val startTime = "${time.first.substring(0..1)}:${time.first.substring(2..3)}"
+        val endTime = "${time.second.substring(0..1)}:${time.second.substring(2..3)}"
+
+        return "$startTime ~ $endTime"
+    }
+
+    /**
+     * HospitalList 조회에 실패한 경우의 핸들러
+     */
+    private fun handleErrorHospital(error:String){
+        requireActivity().showGenericAlertDialog(error)
+    }
+
+    /**
+     * 로딩 다이얼로그 핸들러
+     */
+    private fun handleLoading(isLoding: Boolean){
+        if(isLoding) {
+            bind.lodingLayout.visible()
+            bind.coordinatorLayout.gone()
+        } else {
+            bind.lodingLayout.gone()
+            bind.coordinatorLayout.visible()
+        }
+    }
+
+    /**
+     * ToastMessage 핸들러
+     */
+    private fun handleShowToast(message: String){
+        requireActivity().showToast(message)
     }
 
     /**
@@ -156,11 +303,11 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
         override fun onTabUnselected(tab: Tab?) = Unit
         override fun onTabReselected(tab: Tab?) = Unit
         override fun onTabSelected(tab: Tab?) {
-            _bind.appBarLayout.setExpanded(false, true)
+            bind.appBarLayout.setExpanded(false, true)
             when (tab?.position) {
-                0 -> _bind.nestedScrollView.smoothScrollToView(_bind.hospitalTimeInfo)
-                1 -> _bind.nestedScrollView.smoothScrollToView(_bind.hospitalPositInfo)
-                2 -> _bind.nestedScrollView.smoothScrollToView(_bind.hospitalReviewInfo)
+                0 -> bind.nestedScrollView.smoothScrollToView(bind.hospitalTimeInfo)
+                1 -> bind.nestedScrollView.smoothScrollToView(bind.hospitalPositInfo)
+                2 -> bind.nestedScrollView.smoothScrollToView(bind.hospitalReviewInfo)
             }
         }
     }
@@ -169,18 +316,22 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
      * NestedScrollView 스크롤 리스너
      */
     private val scrollChangedListener = View.OnScrollChangeListener { _, _, scrollY, _, _ ->
-        _bind.nestedScrollView.apply {
+        bind.nestedScrollView.apply {
             when {
-                scrollY < (computeDistanceToView(_bind.hospitalPositInfo) / 2)-> {
-                    _bind.tabLayout.setScrollPosition(0, 0f, true)
+                scrollY < (computeDistanceToView(bind.hospitalPositInfo) / 2)-> {
+                    bind.tabLayout.setScrollPosition(0, 0f, true)
                 }
-                scrollY < (computeDistanceToView(_bind.hospitalReviewInfo) / 2) -> {
-                    _bind.tabLayout.setScrollPosition(1, 0f, true)
+                scrollY < (computeDistanceToView(bind.hospitalReviewInfo) / 2) -> {
+                    bind.tabLayout.setScrollPosition(1, 0f, true)
                 }
                 else ->{
-                    _bind.tabLayout.setScrollPosition(2, 0f, true)
+                    bind.tabLayout.setScrollPosition(2, 0f, true)
                 }
             }
         }
+    }
+
+    companion object {
+        const val TAG = "HospitalInfoBottomSheetFragment"
     }
 }

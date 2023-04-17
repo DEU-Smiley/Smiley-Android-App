@@ -233,12 +233,8 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable, DataSendable {
     }
 
     override fun <T> sendData(data: T) {
-        val sj = StringJoiner(", ")
-        (data as ArrayList<String>).forEach {
-            sj.add(it)
-        }
-
-        bind.answer2SubTextView.text = sj.toString()
+        Log.d("교정정보", "DataSendable : $data")
+        bind.answer2SubTextView.text = data.toString()
     }
 
     companion object {
