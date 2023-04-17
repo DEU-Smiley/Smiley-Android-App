@@ -8,6 +8,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/loding_layout"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:gravity="center_horizontal"
+            android:clickable="false"
+            android:focusable="false"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="50dp"
+                app:lottie_rawRes="@raw/loading"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                android:background="#00000000"/>
+        </LinearLayout>
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinator_layout"
             android:layout_width="match_parent"
@@ -91,7 +112,7 @@
                             android:id="@+id/running_info"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
+                            android:layout_marginTop="20dp"
 
                             android:fontFamily="@font/pretendard_semibold"
                             android:includeFontPadding="false"
@@ -109,7 +130,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="6dp"
-                            android:layout_marginTop="6dp"
+                            android:layout_marginTop="20dp"
 
                             android:fontFamily="@font/pretendard_regular"
                             android:includeFontPadding="false"
@@ -182,24 +203,6 @@
                     app:tabPaddingStart="10dp"
                     app:tabPaddingEnd="10dp"
                     android:clipToPadding="false">
-
-<!--                    app:tabTextColor="@color/black1_20"-->
-<!--                    app:tabIndicatorColor="@color/black1_20"-->
-
-<!--                    <com.google.android.material.tabs.TabItem-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="병원정보"/>-->
-
-<!--                    <com.google.android.material.tabs.TabItem-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="진료정보"/>-->
-
-<!--                    <com.google.android.material.tabs.TabItem-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="리뷰"/>-->
                 </com.google.android.material.tabs.TabLayout>
                 <!-- Layout End 탭 레이아웃 -->
             </com.google.android.material.appbar.AppBarLayout>
@@ -695,7 +698,7 @@
                         android:layout_marginTop="12dp"
                         android:background="@color/white"
                         android:paddingTop="20dp"
-                        android:paddingBottom="60dp">
+                        android:paddingBottom="100dp">
 
                         <TextView
                             android:id="@+id/hospital_review_title"
@@ -795,7 +798,7 @@
                             android:lineSpacingExtra="7sp"
                             android:text="@string/hospital_info_provide_notice"
                             android:textColor="@color/gray1_55"
-                            android:textSize="@dimen/H4_R400_15_h22"
+                            android:textSize="@dimen/M500_14_h20"
 
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
@@ -825,7 +828,7 @@
                             android:lineSpacingExtra="7sp"
                             android:text="@string/hospital_data_edit_request_message"
                             android:textColor="@color/gray1_55"
-                            android:textSize="@dimen/H4_R400_15_h22"
+                            android:textSize="@dimen/M500_14_h20"
 
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/hospital_provide_line" />

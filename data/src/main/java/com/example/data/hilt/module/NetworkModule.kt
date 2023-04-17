@@ -1,8 +1,9 @@
-package com.example.data.common.module
+package com.example.data.hilt.module
 
 import com.example.data.common.utils.ApiLogger
 import com.example.data.common.utils.RequestInterceptor
 import com.example.data.common.utils.SharedPrefs
+import com.example.data.hilt.qualifier.BaseRetrofit
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -13,17 +14,17 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.annotation.Signed
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val BASE_URL = "http://113.198.236.100:8080" // 추후 Build.Config로 이동
+    private const val BASE_URL = "http://113.198.236.100:8080"
 
     @Singleton
     @Provides
-    fun proviceRetrofit(okHttp: OkHttpClient): Retrofit {
+    @BaseRetrofit
+    fun provideRetrofit(okHttp: OkHttpClient): Retrofit {
         return Retrofit.Builder().apply {
             addConverterFactory(
                 GsonConverterFactory.create(

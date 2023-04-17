@@ -4,6 +4,6 @@ import com.example.domain.common.base.BaseModel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class HospitalList(
-    var hospitals: List<Hospital>
+class SimpleHospitalList(
+    var simpleHospitals: List<SimpleHospital>
 ) : BaseModel

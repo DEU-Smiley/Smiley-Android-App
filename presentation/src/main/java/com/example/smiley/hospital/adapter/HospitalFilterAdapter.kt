@@ -1,8 +1,6 @@
 package com.example.smiley.hospital.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +9,13 @@ import android.widget.Filterable
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.domain.hospital.model.Hospital
-import com.example.domain.hospital.model.HospitalList
+import com.example.domain.hospital.model.SimpleHospital
+import com.example.domain.hospital.model.SimpleHospitalList
 import com.example.smiley.R
 import com.example.smiley.common.extension.setForegroundColor
 
 class HospitalFilterAdapter(
-    hospitalList: HospitalList
+    simpleHospitalList: SimpleHospitalList
 ) : RecyclerView.Adapter<HospitalFilterAdapter.ViewHolder>(), Filterable {
 
     interface OnItemClickListener {
@@ -29,9 +27,9 @@ class HospitalFilterAdapter(
     }
 
     private lateinit var itemClickListener: OnItemClickListener
-    private var filteredList : ArrayList<Hospital> = arrayListOf()
-    private val unFilteredList : ArrayList<Hospital> = arrayListOf<Hospital>().apply {
-        addAll(hospitalList.hospitals)
+    private var filteredList : ArrayList<SimpleHospital> = arrayListOf()
+    private val unFilteredList : ArrayList<SimpleHospital> = arrayListOf<SimpleHospital>().apply {
+        addAll(simpleHospitalList.simpleHospitals)
     }
     private var userInput:String = ""
 
@@ -72,7 +70,7 @@ class HospitalFilterAdapter(
                 val newFilteredList =
                     if (userInput.isEmpty()) arrayListOf()
                     else {
-                        val filteringList = arrayListOf<Hospital>()
+                        val filteringList = arrayListOf<SimpleHospital>()
                         for (item in unFilteredList) {
                             if (item.dutyName.contains(userInput)) filteringList.add(item)
                         }
@@ -84,7 +82,7 @@ class HospitalFilterAdapter(
 
             @SuppressLint("NotifyDataSetChanged")
             override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-                filteredList = p1?.values as ArrayList<Hospital>
+                filteredList = p1?.values as ArrayList<SimpleHospital>
                 notifyDataSetChanged()
             }
         }

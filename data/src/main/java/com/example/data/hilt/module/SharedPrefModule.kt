@@ -1,4 +1,4 @@
-package com.example.data.common.module
+package com.example.data.hilt.module
 
 import android.content.Context
 import com.example.data.common.utils.SharedPrefs
