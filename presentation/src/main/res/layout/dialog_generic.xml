@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:minWidth="288dp"
+        android:minHeight="155dp"
+        android:background="@drawable/background_round_rectangle_15dp"
+        android:backgroundTint="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="시스템 알림"
+            android:textColor="@color/black1_20"
+            android:textSize="@dimen/H6_SB600_16_h22" />
+
+        <TextView
+            android:id="@+id/dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:layout_marginBottom="30dp"
+
+            android:fontFamily="@font/pretendard_regular"
+            android:text="시스템 알림"
+            android:textColor="@color/gray1_55"
+            android:textSize="@dimen/M500_14_h20" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="@color/gray5_E6" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dialog_cancle_btn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:background="?attr/selectableItemBackground"
+
+                android:text="취소"
+                android:textColor="@color/gray1_55"
+                android:textSize="@dimen/M500_14_h20"
+                android:fontFamily="@font/pretendard_regular"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/btn_line"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="s" />
+
+            <View
+                android:id="@+id/btn_line"
+                android:layout_width="1.5dp"
+                android:layout_height="50dp"
+                android:background="@color/gray5_E6"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toRightOf="@id/dialog_cancle_btn"
+                app:layout_constraintRight_toLeftOf="@id/dialog_confirm_btn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dialog_confirm_btn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:background="?attr/selectableItemBackground"
+
+                android:text="확인"
+                android:textColor="@color/primary_normal"
+                android:textSize="@dimen/M500_14_h20"
+                android:fontFamily="@font/pretendard_regular"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/btn_line"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="s" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</layout>
