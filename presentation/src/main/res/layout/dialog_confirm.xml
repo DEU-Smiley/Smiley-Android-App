@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_round_rectangle_15dp"
+        android:backgroundTint="@color/white"
+        android:minWidth="300dp"
+        android:minHeight="155dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="시스템 알림"
+            android:textColor="@color/black1_20"
+            android:textSize="@dimen/H6_SB600_16_h22" />
+
+        <TextView
+            android:id="@+id/dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:layout_marginBottom="30dp"
+
+            android:fontFamily="@font/pretendard_regular"
+            android:text="시스템 알림"
+            android:textColor="@color/gray1_55"
+            android:textSize="@dimen/M500_14_h20" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="@color/gray5_E6" />
+
+        <TextView
+            android:id="@+id/dialog_confirm_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="?attr/selectableItemBackground"
+
+            android:gravity="center"
+            android:text="확인"
+            android:textColor="@color/primary_normal"
+            android:textSize="@dimen/M500_14_h20"
+            android:fontFamily="@font/pretendard_regular"
+            tools:targetApi="s" />
+    </LinearLayout>
+</layout>
