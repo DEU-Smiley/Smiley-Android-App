@@ -273,7 +273,10 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
      * HospitalList 조회에 실패한 경우의 핸들러
      */
     private fun handleErrorHospital(error:String){
-        requireActivity().showGenericAlertDialog(error)
+        requireActivity().showConfirmDialog(
+            "병원 조회 에러",
+            error
+        )
     }
 
     /**

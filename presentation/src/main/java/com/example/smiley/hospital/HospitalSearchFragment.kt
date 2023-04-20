@@ -2,7 +2,6 @@ package com.example.smiley.hospital
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.nfc.Tag
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,9 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.hospital.model.SimpleHospitalList
 import com.example.smiley.R
 import com.example.smiley.common.dialog.LoadingDialog
-import com.example.smiley.common.extension.dismiss
-import com.example.smiley.common.extension.showGenericAlertDialog
-import com.example.smiley.common.extension.showToast
+import com.example.smiley.common.extension.*
 import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.databinding.FragmentHospitalSearchBinding
 import com.example.smiley.hospital.adapter.HospitalFilterAdapter
@@ -166,7 +163,10 @@ class HospitalSearchFragment : Fragment(), DataSendable{
      * HospitalList 조회에 실패한 경우의 핸들러
      */
     private fun handleErrorHospital(error:String){
-        requireActivity().showGenericAlertDialog(error)
+        requireActivity().showConfirmDialog(
+            "병원 조회 에러",
+            error
+        )
     }
 
     /**
