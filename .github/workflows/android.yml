@@ -41,7 +41,7 @@ jobs:
     - name: Access KAKAO_SDK_APPKEY
       env:
         APOD_API_KEY: ${{ secrets.KAKAO_SDK_APPKEY }}
-      run: echo KAKAO_SDK_APPKEY=\"$KAKAO_SDK_APPKEY\" > ./local.properties
+      run: echo KAKAO_SDK_APPKEY=$KAKAO_SDK_APPKEY > ./local.properties
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
