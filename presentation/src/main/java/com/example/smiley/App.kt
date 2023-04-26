@@ -1,6 +1,9 @@
 package com.example.smiley
 
 import android.app.Application
+import android.util.Log
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
 
@@ -11,8 +14,13 @@ class App : Application() {
 
         catchAllError()
 
-        //Kakao Sdk 초기화
+
+        // Kakao Sdk 초기화
         KakaoSdk.init(this, BuildConfig.KAKAO_SDK_APPKEY)
+
+        // Firebase 인스턴스 초기화
+        FirebaseApp.initializeApp(this.applicationContext)
+        getDeviceToken()
     }
 
     /**
@@ -24,5 +32,18 @@ class App : Application() {
         } catch (e: SecurityException) {
             e.printStackTrace()
         }
+    }
+
+    private fun getDeviceToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                deviceToken = task.result
+                Log.d("디바이스 토큰", deviceToken.toString())
+            }
+        }
+    }
+
+    companion object{
+        private var deviceToken: String? = null
     }
 }
