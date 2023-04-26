@@ -3,13 +3,15 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'com.google.gms.google-services'
 }
+
 apply from : '../common.gradle'
 apply from : '../core-dependencies.gradle'
 
 android {
     defaultConfig {
-        applicationId "com.android.application"
+        applicationId "com.example.smiley"
     }
 
     buildFeatures {
@@ -38,4 +40,9 @@ dependencies {
     implementation "androidx.activity:activity-ktx:1.7.1"
     implementation "androidx.fragment:fragment-ktx:1.5.7"
     implementation 'com.google.android.material:material:1.8.0'
+
+    /* Firebase */
+    implementation platform('com.google.firebase:firebase-bom:31.5.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging:23.1.2'
 }
