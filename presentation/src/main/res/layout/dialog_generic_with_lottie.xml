@@ -6,10 +6,10 @@
     <LinearLayout
         android:layout_width="288dp"
         android:layout_height="wrap_content"
-        android:minWidth="288dp"
-        android:minHeight="155dp"
         android:background="@drawable/background_round_rectangle_15dp"
         android:backgroundTint="@color/white"
+        android:minWidth="300dp"
+        android:minHeight="155dp"
         android:orientation="vertical">
 
         <TextView
@@ -19,23 +19,41 @@
             android:layout_marginStart="@dimen/side_margin"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="@dimen/side_margin"
-            android:fontFamily="@font/pretendard_semibold"
+            android:layout_gravity="center"
+            android:fontFamily="@font/pretendard_medium"
             android:text="시스템 알림"
             android:textColor="@color/black1_20"
-            android:textSize="18sp" />
+            android:textSize="@dimen/M500_16_h22" />
 
         <TextView
             android:id="@+id/dialog_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/side_margin"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="@dimen/side_margin"
+            android:layout_gravity="center"
+            android:textAlignment="center"
             android:lineSpacingExtra="6sp"
             android:fontFamily="@font/pretendard_regular"
             android:text="다이얼로그 내용"
-            android:textColor="@color/black1_20"
+            android:textColor="@color/gray1_55"
             android:textSize="@dimen/M500_14_h20" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:adjustViewBounds="true"
+            android:background="#00000000"
+            app:lottie_rawRes="@raw/complete"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            />
 
         <TextView
             android:id="@+id/dialog_sub_content"
@@ -43,7 +61,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/side_margin"
             android:layout_marginEnd="@dimen/side_margin"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
             android:lineSpacingExtra="6sp"
             android:fontFamily="@font/pretendard_regular"
             android:text="(부가 정보)"
