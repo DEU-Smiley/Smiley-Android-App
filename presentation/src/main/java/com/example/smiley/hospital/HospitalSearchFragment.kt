@@ -165,7 +165,7 @@ class HospitalSearchFragment : Fragment(), DataSendable{
     private fun handleErrorHospital(error:String){
         requireActivity().showConfirmDialog(
             "병원 조회 에러",
-            error
+            content = error
         )
     }
 

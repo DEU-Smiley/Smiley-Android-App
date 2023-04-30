@@ -1,24 +1,24 @@
 package com.example.smiley.login
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.smiley.R
 import com.example.smiley.common.extension.changeActivity
-import com.example.smiley.common.extension.showGenericAlertDialog
+import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.databinding.ActivityLoginBinding
 import com.example.smiley.login.viewmodel.LoginActivityState
 import com.example.smiley.login.viewmodel.LoginViewModel
 import com.example.smiley.permission.PermissionActivity
+import com.kakao.sdk.user.model.User
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observeLoginState(){
-        viewModel.mState
+        viewModel.state
             .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
             .onEach { state -> handleLoginStateChange(state) }
             .launchIn(lifecycleScope)
@@ -53,17 +53,17 @@ class LoginActivity : AppCompatActivity() {
     private fun handleLoginStateChange(state: LoginActivityState){
         when(state){
             is LoginActivityState.Init -> Unit
-            is LoginActivityState.SuccessLogin -> handleSuccessLogin()
+            is LoginActivityState.SuccessLogin -> handleSuccessLogin(state.user)
             is LoginActivityState.ErrorLogin -> handleErrorLogin(state.message)
         }
     }
 
-    private fun handleSuccessLogin(){
+    private fun handleSuccessLogin(user:User){
         changeActivity(PermissionActivity::class.java)
     }
 
     private fun handleErrorLogin(message:String){
-        showGenericAlertDialog(message)
+        showConfirmDialog("로그인 에러", content = message)
     }
 
     companion object{
