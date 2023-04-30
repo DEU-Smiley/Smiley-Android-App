@@ -5,9 +5,9 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import com.example.smiley.R
+import com.example.smiley.common.extension.gone
 
 class ConfirmDialog constructor(context: Context): Dialog(context) {
     private var confirmBtn : TextView
@@ -20,14 +20,21 @@ class ConfirmDialog constructor(context: Context): Dialog(context) {
         confirmBtn  = findViewById(R.id.dialog_confirm_btn)
     }
 
-    fun setDialogTitle(title:String){
+    fun setTitle(title:String){
         val titleView = findViewById<TextView>(R.id.dialog_title)
         titleView.text = title
     }
 
-    fun setDialogContent(content:String){
+    fun setContent(content:String){
         val contentView = findViewById<TextView>(R.id.dialog_content)
         contentView.text = content
+    }
+
+    fun setSubContent(subContent: String){
+        val subContentView = findViewById<TextView>(R.id.dialog_sub_content)
+        if(subContent == "") subContentView.gone()
+
+        subContentView.text = subContent
     }
 
     fun setConfirmBtnClickListener(listner: View.OnClickListener) {
