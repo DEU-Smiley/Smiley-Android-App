@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +15,11 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
-import com.example.domain.common.base.NetworkError
 import com.example.domain.medicine.model.MedicineList
 import com.example.smiley.R
 import com.example.smiley.common.dialog.LoadingDialog
 import com.example.smiley.common.extension.*
+import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.databinding.FragmentMedicineSearchBinding
 import com.example.smiley.medicine.adapter.MedicineFilterAdapter
@@ -30,7 +29,6 @@ import com.example.smiley.medicine.viewmodel.MedicineViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import java.util.*
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -177,7 +175,7 @@ class MedicineSearchFragment : Fragment() {
     /**
      * 검색 결과 약품 클릭 이벤트 리스너
      */
-    private val medicineItemClickListener = object : MedicineFilterAdapter.OnItemClickListener {
+    private val medicineItemClickListener = object : OnItemClickListener<String> {
         override fun onItemClicked(position: Int, data: String) {
             medicineSelectAdapter.apply {
                 addMedicine(data)
@@ -197,7 +195,7 @@ class MedicineSearchFragment : Fragment() {
                 handleLoading(false)
             }
             is MedicineFragmentState.ErrorMedicine -> handleErrorMedicine(state.error)
-            is MedicineFragmentState.ShowToast -> handleShowToast(state.message)
+            is MedicineFragmentState.ShowDialog -> handleShowDialog(state.message)
         }
     }
 
@@ -212,7 +210,24 @@ class MedicineSearchFragment : Fragment() {
      * MedicineList 조회에 실패한 경우의 핸들러
      */
     private fun handleErrorMedicine(error:String){
-        requireActivity().showGenericAlertDialog(error)
+        loadingDialog.dismiss()
+        requireActivity().showConfirmDialog(
+            "의약품 조회 오류",
+            "의약품 조회 중 오류가 발생했습니다.",
+            "(에러 코드: $error)"
+        )
+    }
+
+    /**
+     * ToastMessage 핸들러
+     */
+    private fun handleShowDialog(message: String){
+        loadingDialog.dismiss()
+        requireActivity().showConfirmDialog(
+            "의약품 조회 오류",
+            "의약품 조회 중 오류가 발생했습니다.",
+            message
+        )
     }
 
     /**
@@ -224,13 +239,6 @@ class MedicineSearchFragment : Fragment() {
 
         if(isLoding) loadingDialog.show()
         else loadingDialog.dismiss()
-    }
-
-    /**
-     * ToastMessage 핸들러
-     */
-    private fun handleShowToast(message: String){
-        requireActivity().showToast(message)
     }
 
     override fun onAttach(context: Context) {

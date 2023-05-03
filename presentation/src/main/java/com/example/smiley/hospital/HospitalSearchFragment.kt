@@ -20,6 +20,7 @@ import com.example.domain.hospital.model.SimpleHospitalList
 import com.example.smiley.R
 import com.example.smiley.common.dialog.LoadingDialog
 import com.example.smiley.common.extension.*
+import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.databinding.FragmentHospitalSearchBinding
 import com.example.smiley.hospital.adapter.HospitalFilterAdapter
@@ -211,7 +212,7 @@ class HospitalSearchFragment : Fragment(), DataSendable{
     /**
      * 검색 결과 병원 클릭 이벤트 리스너
      */
-    private val hospitalItemClickListener = object : HospitalFilterAdapter.OnItemClickListener {
+    private val hospitalItemClickListener = object : OnItemClickListener<String> {
         @SuppressLint("InflateParams")
         override fun onItemClicked(position: Int, data: String) {
             val bundle = Bundle()
