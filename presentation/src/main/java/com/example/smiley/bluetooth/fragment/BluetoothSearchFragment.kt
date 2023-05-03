@@ -1,5 +1,6 @@
 package com.example.smiley.bluetooth.fragment
 
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
 import android.nfc.Tag
 import android.os.Bundle
@@ -21,6 +22,7 @@ import com.example.smiley.bluetooth.viewmodel.BluetoothViewModel
 import com.example.smiley.common.extension.gone
 import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.common.extension.visible
+import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.databinding.FragmentBluetoothSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -79,12 +81,15 @@ class BluetoothSearchFragment : Fragment() {
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
+
     /**
      * 뷰 초기화 메소드
      */
     private fun init(){
         bind.searchResultView.apply {
-            adapter = bluetoothSearchAdapter
+            adapter = bluetoothSearchAdapter.apply {
+                setOnItemClickListener(btItemClickListener)
+            }
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
         }
@@ -140,7 +145,7 @@ class BluetoothSearchFragment : Fragment() {
                 notFoundView.gone()
                 searchResultView.visible()
             }
-            connectLoadingView.gone()
+            searchLoadingView.gone()
         }
 
         // 버튼을 다시 찾기 모드로 변경
@@ -156,13 +161,22 @@ class BluetoothSearchFragment : Fragment() {
         with(bind) {
             titleTextView.text = "장치를 찾는 중입니다..."
             subTextView.text = "블루투스와 위치 기능이 켜져 있는지 확인해주세요."
-            connectLoadingView.visible()
+            searchLoadingView.visible()
             searchResultView.visible()
             notFoundView.gone()
         }
 
         // 버튼을 취소 가능한 상태로 변경
         setBtnToCancleState()
+    }
+
+    /**
+     * 장치에 연결 중일 떄의 핸들러
+     */
+    private fun handleIsConnecting(){
+        with(bind){
+
+        }
     }
 
     /**
@@ -174,6 +188,7 @@ class BluetoothSearchFragment : Fragment() {
             content = message,
         )
     }
+
 
     /**
      * 버튼을 취소 가능 버튼으로 변경
@@ -201,6 +216,15 @@ class BluetoothSearchFragment : Fragment() {
             setOnClickListener {
                 bluetoothVm.startScan()
             }
+        }
+    }
+
+    private val btItemClickListener = object : OnItemClickListener<BluetoothDevice>{
+        @SuppressLint("MissingPermission")
+        override fun onItemClicked(position: Int, data: BluetoothDevice) {
+            // 연결 메소드
+            bluetoothVm.connectToDevice(data.address)
+
         }
     }
 
