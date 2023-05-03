@@ -7,6 +7,9 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.example.smiley.R
+import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
+import com.example.smiley.common.extension.addFragment
+import com.example.smiley.common.extension.showLottieGenericDialog
 import com.example.smiley.databinding.ActivityInfoBinding
 import com.example.smiley.info.adapter.InfoAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +46,20 @@ class InfoActivity : AppCompatActivity() {
      */
     private fun addNextBtnClickEvent(){
         bind.nextBtn.setOnClickListener {
+            if(currentPage+1 >= PAGE_COUNT){
+                showLottieGenericDialog(
+                    "정보 입력 완료",
+                    content = """모든 정보 입력이 완료 되었습니다 !
+                    |지금 바로 교정 장치를 등록해보세요 !
+                    """.trimMargin(),
+                    subContent = "(교정 장치 등록은 추후 앱 설정에서도 가능합니다.)",
+                    lottieView = R.raw.complete,
+                    confirmText = "등록하기",
+                    cancleText = "나중에 하기",
+                    confirmListener = {this.addFragment(BluetoothSearchFragment())}
+                )
+            }
+
             currentPage = (if(currentPage + 1 >= PAGE_COUNT) PAGE_COUNT-1 else currentPage + 1) % PAGE_COUNT
             setBackBtnStatus()
             setViewPagerStatus(currentPage)

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/ic_circle"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="@dimen/side_margin_2x"
+        android:background="@drawable/shape_oval"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <View
+        android:id="@+id/top_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/side_margin_2x"
+        android:background="@color/gray6_F2"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/device_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin"
+        android:text="Device Name"
+        android:textSize="@dimen/M500_16_h22"
+        android:textColor="@color/black1_20"
+        android:fontFamily="@font/pretendard_medium"
+
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+
+        app:layout_constraintLeft_toRightOf="@+id/ic_circle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/device_address"
+        />
+
+    <TextView
+        android:id="@+id/device_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin"
+        android:text="42:CB:6F:92:0E:F3"
+        android:textSize="@dimen/B5_M500_12_auto"
+        android:textColor="@color/gray3_8E"
+        android:fontFamily="@font/pretendard_light"
+
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+
+        app:layout_constraintLeft_toRightOf="@+id/ic_circle"
+        app:layout_constraintTop_toBottomOf="@+id/device_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

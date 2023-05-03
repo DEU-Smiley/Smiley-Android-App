@@ -65,7 +65,7 @@
                         android:gravity="center"
 
                         android:button="@null"
-                        android:background="@drawable/selector_answer_radio"
+                        android:background="@drawable/selector_answer_radio_radius_50"
 
                         android:text="@string/answer_yes"
                         android:textColor="@drawable/selector_answer_text"
@@ -80,7 +80,7 @@
                         android:gravity="center"
 
                         android:button="@null"
-                        android:background="@drawable/selector_answer_radio"
+                        android:background="@drawable/selector_answer_radio_radius_50"
 
                         android:text="@string/answer_no"
                         android:textColor="@drawable/selector_answer_text"
@@ -130,7 +130,7 @@
                             android:gravity="center"
 
                             android:button="@null"
-                            android:background="@drawable/selector_answer_radio"
+                            android:background="@drawable/selector_answer_radio_radius_50"
 
                             android:text="@string/answer_yes"
                             android:textColor="@drawable/selector_answer_text"
@@ -145,7 +145,7 @@
                             android:gravity="center"
 
                             android:button="@null"
-                            android:background="@drawable/selector_answer_radio"
+                            android:background="@drawable/selector_answer_radio_radius_50"
 
                             android:text="@string/answer_no"
                             android:textColor="@drawable/selector_answer_text"
@@ -226,7 +226,7 @@
                         android:gravity="center"
 
                         android:button="@null"
-                        android:background="@drawable/selector_answer_radio"
+                        android:background="@drawable/selector_answer_radio_radius_50"
 
                         android:text="@string/answer_yes"
                         android:textColor="@drawable/selector_answer_text"
@@ -241,7 +241,7 @@
                         android:gravity="center"
 
                         android:button="@null"
-                        android:background="@drawable/selector_answer_radio"
+                        android:background="@drawable/selector_answer_radio_radius_50"
 
                         android:text="@string/answer_no"
                         android:textColor="@drawable/selector_answer_text"/>
@@ -323,7 +323,7 @@
                         android:gravity="center"
 
                         android:button="@null"
-                        android:background="@drawable/selector_answer_radio"
+                        android:background="@drawable/selector_answer_radio_radius_50"
 
                         android:text="@string/answer_yes"
                         android:textColor="@drawable/selector_answer_text"
@@ -338,7 +338,7 @@
                         android:gravity="center"
 
                         android:button="@null"
-                        android:background="@drawable/selector_answer_radio"
+                        android:background="@drawable/selector_answer_radio_radius_50"
 
                         android:text="@string/answer_no"
                         android:textColor="@drawable/selector_answer_text"/>
