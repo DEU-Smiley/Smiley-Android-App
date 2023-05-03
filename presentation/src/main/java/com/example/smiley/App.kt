@@ -1,6 +1,8 @@
 package com.example.smiley
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
@@ -11,7 +13,7 @@ import dagger.hilt.android.HiltAndroidApp
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-
+        _context = applicationContext
         catchAllError()
 
 
@@ -44,6 +46,13 @@ class App : Application() {
     }
 
     companion object{
+        @SuppressLint("StaticFieldLeak")
+        private var _context: Context? = null
         private var deviceToken: String? = null
+
+        @JvmStatic
+        fun ApplicationContext(): Context {
+            return _context!!
+        }
     }
 }
