@@ -8,9 +8,12 @@ import com.example.domain.medicine.model.MedicineList
 import com.example.domain.medicine.usecase.GetAllMedicinesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import okhttp3.internal.notify
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,16 +26,24 @@ class MedicineViewModel @Inject constructor(
 
     var medicineList: MedicineList? = null
 
-    private fun setLoading(){
-        _state.value = MedicineFragmentState.IsLoading(true)
+    private suspend fun setLoading(){
+        _state.emit(MedicineFragmentState.IsLoading(true))
     }
 
-    private fun hideLoading(){
-        _state.value = MedicineFragmentState.IsLoading(false)
+    private suspend fun hideLoading(){
+        _state.emit(MedicineFragmentState.IsLoading(false))
     }
 
-    private fun showDialog(message: String){
-        _state.value = MedicineFragmentState.ShowDialog(message)
+    private suspend fun showDialog(message: String){
+        _state.emit(MedicineFragmentState.ShowDialog(message))
+    }
+
+    private suspend fun setStateToSuccess(medicineList: MedicineList){
+        _state.emit(MedicineFragmentState.SuccessMedicine(UUID.randomUUID(), medicineList))
+    }
+
+    private suspend fun setStateToError(error:String){
+        _state.emit(MedicineFragmentState.ErrorMedicine(error))
     }
 
     fun getMedicineList() {
@@ -43,7 +54,9 @@ class MedicineViewModel @Inject constructor(
         }
 
         medicineList?.let {
-            _state.value = MedicineFragmentState.SuccessMedicine(it)
+            viewModelScope.launch(Dispatchers.IO) {
+                setStateToSuccess(it)
+            }
         }
     }
 
@@ -57,14 +70,13 @@ class MedicineViewModel @Inject constructor(
                     Log.d("의약품 조회 에러", exception.stackTraceToString())
                 }
                 .collect{ state ->
-                    hideLoading()
                     when(state) {
                         is ResponseState.Success -> {
                             medicineList = state.data
-                            _state.value = MedicineFragmentState.SuccessMedicine(state.data)
+                            setStateToSuccess(state.data)
                         }
                         is ResponseState.Error -> {
-                            _state.value = MedicineFragmentState.ErrorMedicine(state.error.code)
+                            setStateToError(state.error.code)
                             Log.e("의약품 조회 에러", state.error.toString())
                         }
                     }
@@ -75,7 +87,9 @@ class MedicineViewModel @Inject constructor(
 
 sealed class MedicineFragmentState {
     object Init                                                 : MedicineFragmentState()
-    data class SuccessMedicine(val medicineList: MedicineList)  : MedicineFragmentState()
+    data class SuccessMedicine(
+        val id: UUID,
+        val medicineList: MedicineList)  : MedicineFragmentState()
     data class ErrorMedicine(val error:String)                  : MedicineFragmentState()
     data class IsLoading(val isLoading: Boolean)                : MedicineFragmentState()
     data class ShowDialog(val message: String)                  : MedicineFragmentState()

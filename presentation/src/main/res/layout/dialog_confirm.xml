@@ -44,7 +44,7 @@
             android:layout_marginStart="@dimen/side_margin"
             android:layout_marginEnd="@dimen/side_margin"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="30dp"
+
             android:lineSpacingExtra="6sp"
             android:fontFamily="@font/pretendard_regular"
             android:text="(부가 정보)"
@@ -55,6 +55,8 @@
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1.5dp"
+
+            android:layout_marginTop="30dp"
             android:background="@color/gray5_E6" />
 
         <TextView
@@ -64,6 +66,7 @@
             android:background="?attr/selectableItemBackground"
 
             android:gravity="center"
+            android:layout_gravity="bottom"
             android:text="확인"
             android:textColor="@color/primary_normal"
             android:textSize="@dimen/M500_14_h20"

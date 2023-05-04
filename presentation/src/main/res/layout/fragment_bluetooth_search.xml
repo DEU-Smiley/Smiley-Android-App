@@ -7,6 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
         android:background="@color/white">
 
         <!-- Layout 상단바 레이아웃 -->
@@ -51,7 +52,7 @@
         <!-- Layout End 상단바 레이아웃 -->
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/connect_loading_view"
+            android:id="@+id/search_loading_view"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="@dimen/side_margin"
@@ -103,7 +104,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sub_text_view"
-            app:layout_constraintBottom_toTopOf="@id/bluetooth_btn">
+            app:layout_constraintBottom_toTopOf="@id/btn_layout">
 
             <ImageView
                 android:layout_width="100dp"
@@ -133,34 +134,100 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sub_text_view"
-            app:layout_constraintBottom_toTopOf="@id/bluetooth_btn"/>
+            app:layout_constraintBottom_toTopOf="@id/btn_layout"/>
 
-        <!-- Layout 다음 단계 버튼 -->
-        <Button
-            android:id="@+id/bluetooth_btn"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:layout_marginBottom="@dimen/btn_bottom_margin"
-            android:layout_marginStart="@dimen/side_margin"
-            android:layout_marginEnd="@dimen/side_margin"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <Button
+                android:id="@+id/find_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/btn_bottom_margin"
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:clickable="true"
+                android:visibility="invisible"
 
-            style="?attr/borderlessButtonStyle"
-            android:background="@drawable/selector_btn"
-            android:foreground="?attr/selectableItemBackground"
+                style="?attr/borderlessButtonStyle"
+                android:background="@drawable/selector_btn"
+                android:foreground="?attr/selectableItemBackground"
 
-            android:clickable="true"
-            android:orientation="horizontal"
-            android:gravity="center"
+                android:text="다시 찾기"
+                android:textSize="@dimen/M500_16_h22"
+                android:textColor="@color/white"
+                android:fontFamily="@font/pretendard_medium"
 
-            android:text="취소하기"
-            android:textSize="@dimen/M500_16_h22"
-            android:textColor="@color/white"
-            android:fontFamily="@font/pretendard_medium"/>
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <Button
+                android:id="@+id/cancle_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/btn_bottom_margin"
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:clickable="true"
+                android:visibility="visible"
+
+                style="?attr/borderlessButtonStyle"
+                android:background="@drawable/selector_white_btn"
+                android:foreground="?attr/selectableItemBackground"
+
+                android:text="취소하기"
+                android:textSize="@dimen/M500_16_h22"
+                android:textColor="@color/black1_20"
+                android:fontFamily="@font/pretendard_medium"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <Button
+                android:id="@+id/connecting_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/btn_bottom_margin"
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:enabled="false"
+                android:clickable="false"
+                android:visibility="invisible"
+
+                style="?attr/borderlessButtonStyle"
+                android:background="@drawable/selector_white_btn"
+                android:foreground="?attr/selectableItemBackground"
+
+                android:text="연결 중..."
+                android:textSize="@dimen/M500_16_h22"
+                android:textColor="@color/gray3_8E"
+                android:fontFamily="@font/pretendard_medium"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
