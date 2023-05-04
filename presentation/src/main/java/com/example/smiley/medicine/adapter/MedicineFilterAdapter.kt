@@ -15,19 +15,17 @@ import com.example.domain.medicine.model.Medicine
 import com.example.domain.medicine.model.MedicineList
 import com.example.smiley.R
 import com.example.smiley.common.extension.setForegroundColor
+import com.example.smiley.common.listener.OnItemClickListener
 
 class MedicineFilterAdapter(
     medicineList: MedicineList
 ) : RecyclerView.Adapter<MedicineFilterAdapter.ViewHolder>(), Filterable {
-    interface OnItemClickListener {
-        fun onItemClicked(position: Int, data:String)
-    }
 
-    fun setOnItemClickListener(listner:OnItemClickListener){
+    fun setOnItemClickListener(listner: OnItemClickListener<String>){
         this.itemClickListener = listner
     }
 
-    private lateinit var itemClickListener: OnItemClickListener
+    private lateinit var itemClickListener: OnItemClickListener<String>
     private var filteredList    : ArrayList<Medicine> = arrayListOf()
     private val unFilteredList  : ArrayList<Medicine> = arrayListOf<Medicine>().apply {
         addAll(medicineList.medicines)

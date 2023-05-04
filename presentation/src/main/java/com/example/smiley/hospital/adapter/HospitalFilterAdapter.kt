@@ -13,22 +13,20 @@ import com.example.domain.hospital.model.SimpleHospital
 import com.example.domain.hospital.model.SimpleHospitalList
 import com.example.smiley.R
 import com.example.smiley.common.extension.setForegroundColor
+import com.example.smiley.common.listener.OnItemClickListener
 
 class HospitalFilterAdapter(
     simpleHospitalList: SimpleHospitalList
 ) : RecyclerView.Adapter<HospitalFilterAdapter.ViewHolder>(), Filterable {
 
-    interface OnItemClickListener {
-        fun onItemClicked(position: Int, data:String)
-    }
 
-    fun setOnItemClickListener(listener: OnItemClickListener){
+    fun setOnItemClickListener(listener: OnItemClickListener<String>){
         this.itemClickListener = listener
     }
 
-    private lateinit var itemClickListener: OnItemClickListener
-    private var filteredList : ArrayList<SimpleHospital> = arrayListOf()
-    private val unFilteredList : ArrayList<SimpleHospital> = arrayListOf<SimpleHospital>().apply {
+    private lateinit var itemClickListener: OnItemClickListener<String>
+    private var filteredList    = arrayListOf<SimpleHospital>()
+    private val unFilteredList  = arrayListOf<SimpleHospital>().apply {
         addAll(simpleHospitalList.simpleHospitals)
     }
     private var userInput:String = ""
