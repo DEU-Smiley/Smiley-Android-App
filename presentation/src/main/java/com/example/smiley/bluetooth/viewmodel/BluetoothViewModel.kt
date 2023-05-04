@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.AndroidViewModel
 import com.example.smiley.bluetooth.util.BluetoothUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.util.*
@@ -121,6 +122,7 @@ class BluetoothViewModel @Inject constructor(
         
         // SDK 버전에 따라 처리해줘야할 수도 있음
         // Ref : https://doqtqu.tistory.com/174
+        setStateToIsConnecting(true)
         btGatt = device.connectGatt(
             context,
             false,
@@ -134,6 +136,7 @@ class BluetoothViewModel @Inject constructor(
      */
     @SuppressLint("MissingPermission")
     fun disConnectToDevice(){
+        setStateToError("장치 연결에 실패했습니다.")
         btGatt?.let {
             it.disconnect()
             it.close()
@@ -218,14 +221,12 @@ class BluetoothViewModel @Inject constructor(
         @SuppressLint("MissingPermission")
         override fun onServicesDiscovered(gatt: BluetoothGatt?, status: Int) {
             super.onServicesDiscovered(gatt, status)
+            setStateToIsConnecting(false)
             when(status){
                 BluetoothGatt.GATT_SUCCESS -> {
                     Log.i(TAG, "연결에 성공했습니다.")
-                    // 연결 성공 State
                     gatt?.let {
                         btGatt = it
-                        setStateToSuccessConnect(it.device)
-
                         // 값을 읽기 위해서 ResponseCharacteristic 받아오기
                         val respCharacteristic = BluetoothUtil.findResponseCharacteristic(it)
                         if(respCharacteristic == null){
@@ -240,10 +241,11 @@ class BluetoothViewModel @Inject constructor(
                         )
                         descriptor.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
                         gatt.writeDescriptor(descriptor)
+                        // 연결 성공 State로 변경
+                        setStateToSuccessConnect(it.device)
                     }
                 }
                 else -> {
-                    Log.w(TAG, "연결에 실패했습니다. status : $status")
                     // 연결 실패 state
                     setStateToError("장치 연결에 실패했습니다. (status: $status)")
                 }

@@ -2,7 +2,6 @@ package com.example.smiley.bluetooth.fragment
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
-import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,13 +14,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieAnimationView
 import com.example.smiley.R
 import com.example.smiley.bluetooth.adapter.BluetoothSearchAdapter
 import com.example.smiley.bluetooth.viewmodel.BluetoothSearchFragmentState
 import com.example.smiley.bluetooth.viewmodel.BluetoothViewModel
-import com.example.smiley.common.extension.gone
-import com.example.smiley.common.extension.showConfirmDialog
-import com.example.smiley.common.extension.visible
+import com.example.smiley.common.extension.*
 import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.databinding.FragmentBluetoothSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,7 +84,15 @@ class BluetoothSearchFragment : Fragment() {
      * 뷰 초기화 메소드
      */
     private fun init(){
-        bind.searchResultView.apply {
+        with(bind){
+            findBtn.setOnClickListener {
+                bluetoothVm.startScan()
+            }
+            cancleBtn.setOnClickListener {
+                bluetoothVm.stopScan()
+            }
+        }
+        with(bind.searchResultView){
             adapter = bluetoothSearchAdapter.apply {
                 setOnItemClickListener(btItemClickListener)
             }
@@ -111,9 +117,11 @@ class BluetoothSearchFragment : Fragment() {
             }
             is BluetoothSearchFragmentState.SuccessConnect -> {
                 // 장치 연결이 완료된 경우
+                handleSuccessConnect()
             }
             is BluetoothSearchFragmentState.IsConnecting -> {
                 // 장치 연결 중인 경우
+                handleIsConnecting(state.status)
             }
             is BluetoothSearchFragmentState.IsScanning -> {
                 handleScanning(state.scanResults)
@@ -173,58 +181,83 @@ class BluetoothSearchFragment : Fragment() {
     /**
      * 장치에 연결 중일 떄의 핸들러
      */
-    private fun handleIsConnecting(){
-        with(bind){
-
+    private fun handleIsConnecting(status:Boolean){
+        if(status){
+            Log.d("연결 시작", "연결 시작")
+            connectLoadingView?.visible()
+            bluetoothSearchAdapter.setOnItemClickListener(null)
+            setBtnToConnecting()
+        } else {
+            Log.d("연결 끝", "연결 끝")
+            connectLoadingView?.invisible()
+            connectLoadingView = null
+            bluetoothSearchAdapter.setOnItemClickListener(btItemClickListener)
+            setBtnToRefindState()
         }
+    }
+
+    /**
+     * 장치에 연결 성공했을 때의 핸들러
+     */
+    private fun handleSuccessConnect(){
+        requireActivity().showConfirmDialog(
+            "장치 연결 성공",
+            "장치 연결이 완료 되었습니다.",
+            "(설정>장치 관리에서 장치를 연결/해제 가능합니다.)"
+        )
     }
 
     /**
      * 에러 발생 핸들러
      */
     private fun handleError(message:String){
+        handleIsConnecting(false)
         requireActivity().showConfirmDialog(
             title = "블루투스 오류",
             content = message,
         )
     }
 
-
     /**
      * 버튼을 취소 가능 버튼으로 변경
      */
     private fun setBtnToCancleState(){
-        bind.bluetoothBtn.apply {
-            background = resources.getDrawable(R.drawable.selector_white_btn)
-            setTextColor(resources.getColor(R.color.black1_20))
-            text = "취소하기"
-
-            setOnClickListener {
-                bluetoothVm.stopScan()
-            }
+        with(bind){
+            cancleBtn.visible()
+            findBtn.invisible()
+            connectingBtn.invisible()
         }
     }
+
     /**
      * 버튼을 다시 찾기 모드로 변경
      */
     private fun setBtnToRefindState(){
-        bind.bluetoothBtn.apply {
-            background = resources.getDrawable(R.drawable.selector_btn)
-            setTextColor(resources.getColor(R.color.white))
-            text = "다시 찾기"
-
-            setOnClickListener {
-                bluetoothVm.startScan()
-            }
+        with(bind){
+            findBtn.visible()
+            cancleBtn.invisible()
+            connectingBtn.invisible()
         }
     }
 
+    /**
+     * 버튼을 연결 중 상태로 변경
+     */
+    private fun setBtnToConnecting(){
+        with(bind){
+            connectingBtn.visible()
+            findBtn.invisible()
+            cancleBtn.invisible()
+        }
+    }
+    
+    private var connectLoadingView: View? = null
     private val btItemClickListener = object : OnItemClickListener<BluetoothDevice>{
         @SuppressLint("MissingPermission")
-        override fun onItemClicked(position: Int, data: BluetoothDevice) {
+        override fun onItemClicked(view:View, position: Int, data: BluetoothDevice) {
             // 연결 메소드
+            connectLoadingView = view.findViewById<LottieAnimationView>(R.id.connect_loading_view)
             bluetoothVm.connectToDevice(data.address)
-
         }
     }
 
