@@ -17,8 +17,8 @@ class BluetoothSearchAdapter(
     var scanResults: List<BluetoothDevice>
 ) : RecyclerView.Adapter<BluetoothSearchAdapter.ViewHolder>() {
 
-    private lateinit var itemClickListener: OnItemClickListener<BluetoothDevice>
-    fun setOnItemClickListener(listener: OnItemClickListener<BluetoothDevice>){
+    private var itemClickListener: OnItemClickListener<BluetoothDevice>? = null
+    fun setOnItemClickListener(listener: OnItemClickListener<BluetoothDevice>?){
         this.itemClickListener = listener
     }
 
@@ -36,9 +36,7 @@ class BluetoothSearchAdapter(
             deviceAddress.text = scanResults[position].address
 
             layout.setOnClickListener {
-                if(::itemClickListener.isInitialized){
-                    itemClickListener.onItemClicked(position, scanResults[position])
-                }
+                itemClickListener?.onItemClicked(holder.layout, position, scanResults[position])
             }
         }
     }
