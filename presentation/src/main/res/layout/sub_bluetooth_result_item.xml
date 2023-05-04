@@ -69,11 +69,11 @@
         />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/search_loading_view"
+        android:id="@+id/connect_loading_view"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="@dimen/side_margin"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:lottie_rawRes="@raw/loading"
         app:lottie_loop="true"
         app:lottie_autoPlay="true"
