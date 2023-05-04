@@ -13,6 +13,7 @@ import com.example.smiley.R
 import com.example.smiley.common.extension.gone
 import com.example.smiley.common.listener.OnItemClickListener
 
+
 class BluetoothSearchAdapter(
     var scanResults: List<BluetoothDevice>
 ) : RecyclerView.Adapter<BluetoothSearchAdapter.ViewHolder>() {

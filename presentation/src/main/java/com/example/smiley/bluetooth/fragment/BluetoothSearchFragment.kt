@@ -1,5 +1,6 @@
 package com.example.smiley.bluetooth.fragment
 
+
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
 import android.os.Bundle
@@ -79,7 +80,6 @@ class BluetoothSearchFragment : Fragment() {
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-
     /**
      * 뷰 초기화 메소드
      */
@@ -96,6 +96,7 @@ class BluetoothSearchFragment : Fragment() {
             adapter = bluetoothSearchAdapter.apply {
                 setOnItemClickListener(btItemClickListener)
             }
+            
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
         }

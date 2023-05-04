@@ -42,6 +42,7 @@ class BluetoothViewModel @Inject constructor(
     val state: StateFlow<BluetoothSearchFragmentState>
         get() = _state
 
+
     private fun setStateToInit(){
         _state.value = BluetoothSearchFragmentState.Init
     }
@@ -69,6 +70,7 @@ class BluetoothViewModel @Inject constructor(
         _state.value = BluetoothSearchFragmentState.IsScanning(id, scanResults)
     }
 
+
     /**
      * BLE 스캔 시작 메소드
      */
@@ -78,6 +80,7 @@ class BluetoothViewModel @Inject constructor(
             // 블루투스가 꺼져있는 경우
             // 블루투스 활성화 요청 코드 or State 체인지
         }
+
 
         if (context.checkSelfPermission(ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             // 위치 권한 요청 필요 (View에서 해야함)
@@ -114,6 +117,7 @@ class BluetoothViewModel @Inject constructor(
         val device = btAdapter.getRemoteDevice(address)
         if (ActivityCompat.checkSelfPermission(context,BLUETOOTH_CONNECT)
             != PackageManager.PERMISSION_GRANTED) {
+
             /**
              * 블루투스 연결 권한 요청 코드 작성
              */
@@ -137,6 +141,7 @@ class BluetoothViewModel @Inject constructor(
     @SuppressLint("MissingPermission")
     fun disConnectToDevice(){
         setStateToError("장치 연결에 실패했습니다.")
+
         btGatt?.let {
             it.disconnect()
             it.close()
