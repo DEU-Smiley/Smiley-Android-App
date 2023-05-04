@@ -3,6 +3,9 @@ package com.example.smiley.common.extension
 import android.app.Activity
 import android.content.Intent
 import androidx.annotation.RawRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.smiley.R
 import com.example.smiley.common.dialog.ConfirmDialog
 import com.example.smiley.common.dialog.GenericDialog
 import com.example.smiley.common.dialog.LottieConfirmDialog
@@ -13,6 +16,18 @@ fun<T> Activity.changeActivity(activity:Class<T>) {
     val intent = Intent(this, activity)
     startActivity(intent) //intent 에 명시된 액티비티로 이동
     finish() //현재 액티비티 종료
+}
+
+/**
+ * Activity에 Fragment를 추가하는 메소드
+ * @param fragment: Fragment
+ */
+fun AppCompatActivity.addFragment(fragment: Fragment){
+    supportFragmentManager
+        .beginTransaction()
+        .add(R.id.parent_layout, fragment)
+        .addToBackStack(null)
+        .commit()
 }
 
 /**
