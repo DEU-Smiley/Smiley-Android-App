@@ -159,7 +159,7 @@
                 android:visibility="invisible"
 
                 style="?attr/borderlessButtonStyle"
-                android:background="@drawable/selector_btn"
+                android:background="@drawable/selector_btn_radius_5dp"
                 android:foreground="?attr/selectableItemBackground"
 
                 android:text="다시 찾기"
