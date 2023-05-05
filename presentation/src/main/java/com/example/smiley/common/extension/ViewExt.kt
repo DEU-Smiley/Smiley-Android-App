@@ -13,18 +13,40 @@ import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
 import android.view.KeyEvent
 import android.view.View
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import android.widget.*
 import androidx.core.view.get
 import androidx.core.widget.NestedScrollView
-import androidx.core.widget.addTextChangedListener
 import com.example.smiley.R
-import java.lang.Math.abs
+
 
 fun View.gone(){ visibility = View.GONE }
 
 fun View.visible(){ visibility = View.VISIBLE }
 
 fun View.invisible(){ visibility = View.INVISIBLE }
+
+fun View.visibleWithAnimation(){
+    val animation: Animation = AlphaAnimation(0f, 1f)
+    animation.duration = 250
+    this.visibility = View.VISIBLE
+    this.animation = animation
+}
+
+fun View.invisibleWithAnimation(){
+    val animation: Animation = AlphaAnimation(0f, 1f)
+    animation.duration = 250
+    this.visibility = View.INVISIBLE
+    this.animation = animation
+}
+
+fun View.goneWithAnimation(){
+    val animation: Animation = AlphaAnimation(0f, 1f)
+    animation.duration = 250
+    this.visibility = View.GONE
+    this.animation = animation
+}
 
 fun Button.setDisabled(){
     this.setTextColor(resources.getColor(R.color.gray3_8E))

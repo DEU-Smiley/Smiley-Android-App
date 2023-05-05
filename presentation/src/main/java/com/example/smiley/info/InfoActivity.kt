@@ -9,9 +9,11 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.smiley.R
 import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
 import com.example.smiley.common.extension.addFragment
+import com.example.smiley.common.extension.gone
 import com.example.smiley.common.extension.showLottieGenericDialog
 import com.example.smiley.databinding.ActivityInfoBinding
 import com.example.smiley.info.adapter.InfoAdapter
+import com.example.smiley.info.fragment.SignUpFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,6 +34,8 @@ class InfoActivity : AppCompatActivity() {
     }
 
     private fun initViewPager(){
+        this.addFragment(SignUpFragment())
+
         bind.viewpager.apply {
             adapter = InfoAdapter(this@InfoActivity, R.id.indicator_layout, PAGE_COUNT)
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -39,6 +43,11 @@ class InfoActivity : AppCompatActivity() {
             offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
             isUserInputEnabled = false
         }
+
+        bind.viewpager.gone()
+        bind.titleBarLayout.gone()
+        bind.nextBtn.gone()
+        bind.indicatorLayout.gone()
     }
 
     /**
