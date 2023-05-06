@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.view.WindowManager.LayoutParams
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.smiley.R
 import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
@@ -123,12 +125,13 @@ class SignUpFragment : Fragment() {
     private fun setConfirmBtnClickEvent(){
         bind.confirmBtn.setOnClickListener {
             if(isAllInputCompleted()){
-                requireActivity().showGenericDialog(
-                    "회원가입 완료 !",
-                    "교정 치료를 받고 계신가요 ?",
-                    "병원을 등록하면 앱에서 예약할 수 있어요 !",
+                requireActivity().showLottieGenericDialog(
+                    "회원가입 완료!",
+                    "스마일리에 오신 것을 환영합니다!",
+                    "교정 치료를 받고 계신가요?\n병원을 등록하면 앱에서 예약할 수 있어요 !",
                     confirmText = "등록하러 가기",
-                    cancleText = "나중에 하기"
+                    cancleText = "나중에 하기",
+                    lottieView = R.raw.hospital
                 )
             }
         }
@@ -140,10 +143,14 @@ class SignUpFragment : Fragment() {
         override fun afterTextChanged(p0: Editable?) {
             val input = "$p0"
 
-            if(input.isNotBlank()){
-                bind.nameBtn.visibleWithAnimation()
-            } else {
-                bind.nameBtn.gone()
+            with(bind){
+                if(input.isBlank()){
+                    // 빈 칸이면 버튼 숨김
+                    nameBtn.gone()
+                } else if(nameBtn.isGone && confirmBtn.isGone){
+                    // 빈 칸이 아니고 버튼이 둘 다 안보이는 상태에만 표시
+                    nameBtn.visibleWithAnimation()
+                }
             }
         }
     }

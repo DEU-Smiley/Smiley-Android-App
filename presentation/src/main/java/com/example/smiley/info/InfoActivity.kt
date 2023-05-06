@@ -34,8 +34,6 @@ class InfoActivity : AppCompatActivity() {
     }
 
     private fun initViewPager(){
-        this.addFragment(SignUpFragment())
-
         bind.viewpager.apply {
             adapter = InfoAdapter(this@InfoActivity, R.id.indicator_layout, PAGE_COUNT)
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -44,6 +42,7 @@ class InfoActivity : AppCompatActivity() {
             isUserInputEnabled = false
         }
 
+        this.addFragment(SignUpFragment())
         bind.viewpager.gone()
         bind.titleBarLayout.gone()
         bind.nextBtn.gone()
