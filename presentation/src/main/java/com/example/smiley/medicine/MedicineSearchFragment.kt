@@ -11,8 +11,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.example.domain.medicine.model.MedicineList
@@ -27,11 +27,7 @@ import com.example.smiley.medicine.adapter.MedicineSelectAdapter
 import com.example.smiley.medicine.viewmodel.MedicineFragmentState
 import com.example.smiley.medicine.viewmodel.MedicineViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -94,12 +90,13 @@ class MedicineSearchFragment : Fragment() {
     }
 
     private fun observe() {
-        medicineVm.state.flowWithLifecycle(
-            viewLifecycleOwner.lifecycle,
-            Lifecycle.State.STARTED
-        ).onEach { state ->
-            handleStateChange(state)
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                medicineVm.state.collect{ state ->
+                    handleStateChange(state)
+                }
+            }
+        }
     }
 
     /**
@@ -195,7 +192,7 @@ class MedicineSearchFragment : Fragment() {
             is MedicineFragmentState.IsLoading -> handleLoading(state.isLoading)
             is MedicineFragmentState.SuccessMedicine ->{
                 handleSuccessMedicine(state.medicineList)
-                handleLoading(false)
+//                handleLoading(false)
             }
             is MedicineFragmentState.ErrorMedicine -> handleErrorMedicine(state.error)
             is MedicineFragmentState.ShowDialog -> handleShowDialog(state.message)
@@ -237,10 +234,10 @@ class MedicineSearchFragment : Fragment() {
      * 로딩 다이얼로그 핸들러
      */
     private lateinit var loadingDialog:LoadingDialog
-    private fun handleLoading(isLoding: Boolean){
+    private fun handleLoading(isLoading: Boolean){
         if(!::loadingDialog.isInitialized) return
 
-        if(isLoding) loadingDialog.show()
+        if(isLoading) loadingDialog.show()
         else loadingDialog.dismiss()
     }
 

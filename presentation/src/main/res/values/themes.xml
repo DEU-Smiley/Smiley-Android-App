@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/primary_normal</item>
         <item name="colorPrimaryVariant">@color/primary_normal</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorAccent">@color/black1_20</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -19,6 +20,11 @@
         <item name="windowNoTitle">true</item>
 
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
+        <item name="colorControlActivated">@color/primary_normal</item>
+        <item name="colorControlNormal">@color/gray3_8E</item>
+        <item name="android:textCursorDrawable">@color/black1_20</item>
+        <item name="android:textColorHighlight">@color/light_blue1</item>
     </style>
 
     <!-- Splash 화면 테마 -->

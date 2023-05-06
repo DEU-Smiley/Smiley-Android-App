@@ -44,7 +44,7 @@
         android:lineSpacingExtra="6sp"
 
         app:layout_constraintLeft_toRightOf="@+id/ic_circle"
-        app:layout_constraintRight_toLeftOf="@id/search_loading_view"
+        app:layout_constraintRight_toLeftOf="@id/connect_loading_view"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/device_address"
         />
