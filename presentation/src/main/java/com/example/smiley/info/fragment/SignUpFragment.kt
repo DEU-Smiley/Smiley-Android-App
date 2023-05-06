@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +11,12 @@ import android.view.WindowManager.LayoutParams
 import android.widget.EditText
 import android.widget.TextView
 import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.smiley.R
-import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
 import com.example.smiley.common.extension.*
 import com.example.smiley.databinding.FragmentSignUpBinding
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -94,7 +91,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun setFocusChangeListener(editText: EditText, textView:TextView){
-        editText.setOnFocusChangeListener { view, hasFocus ->
+        editText.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) { // 포커스 얻었을 때
                 textView.setTextColor(resources.getColor(R.color.primary_normal))
             } else { // 포커스 잃었을 때
