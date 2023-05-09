@@ -2,198 +2,178 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".info.UserInfoFragment">
+    tools:context=".info.fragment.SignUpFragment">
 
-    <ScrollView
-        android:id="@+id/scroll_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:paddingStart="@dimen/side_margin"
-        android:paddingEnd="@dimen/side_margin"
-        android:scrollbars="none">
+        android:clickable="true"
+        android:background="@color/white">
 
-        <LinearLayout
-            android:id="@+id/parent_layout"
+        <TextView
+            android:id="@+id/title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginTop="80dp"
+
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="8sp"
+
+            android:text="병원 명을\n입력해 주세요."
+            android:textColor="@color/black1_20"
+            android:textSize="@dimen/H2_SB600_22_h30"
+            android:fontFamily="@font/pretendard_semibold"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!-- Layout 교정 시작일 입력 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/date_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical">
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/title_text_view">
 
             <TextView
+                android:id="@+id/date_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendard_semibold"
-                android:text="교정 정보를 입력해주세요."
+                android:layout_marginTop="30dp"
+
+                android:text="교정 시작일"
+                android:textColor="@color/gray2_6E"
+                android:textSize="@dimen/M500_16_h22"
+                android:fontFamily="@font/pretendard_medium"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <EditText
+                android:id="@+id/date_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+
+                android:maxLines="1"
+                android:inputType="date"
+
+                android:textSize="@dimen/H3_B700_20_h30"
                 android:textColor="@color/black1_20"
-                android:textSize="@dimen/H2_SB600_22_h30"
-                android:lineSpacingExtra="6sp"
-                android:includeFontPadding="false"/>
+                android:fontFamily="@font/pretendard_medium"
+                app:layout_constraintTop_toBottomOf="@id/date_text_view" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 교정 시작일 입력 레이아웃 -->
 
-            <!-- Layout 질문1 입력 레이아웃-->
+        <!-- Layout 병원명 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/hospital_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="@dimen/side_margin"
+            app:layout_constraintTop_toBottomOf="@+id/date_layout">
+
+            <TextView
+                android:id="@+id/hospital_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="병원명"
+                android:textColor="@color/gray2_6E"
+                android:textSize="@dimen/M500_16_h22"
+                android:fontFamily="@font/pretendard_medium"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
             <LinearLayout
-                android:id="@+id/question1_layout"
+                android:id="@+id/hospital_edit_text_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:animateLayoutChanges="true">
+                android:clickable="true"
+                app:layout_constraintTop_toBottomOf="@id/hospital_text_view">
 
-                <TextView
-                    android:id="@+id/question1_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="34dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/calibration_question_1"
-                    android:textColor="@color/black1_20"
-                    android:textSize="@dimen/M500_16_h22"
-                    android:lineSpacingExtra="6sp"
-                    android:includeFontPadding="false"/>
-
-                <RadioGroup
-                    android:id="@+id/answer1_radio"
+                <EditText
+                    android:id="@+id/hospital_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:clickable="false"
+                    android:focusable="false"
 
-                    <RadioButton
-                        android:id="@+id/answer1_yes_radio_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="38dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_answer_radio_radius_50"
+                    android:maxLines="1"
+                    android:inputType="text"
 
-                        android:button="@null"
-                        android:gravity="center"
-
-                        android:text="@string/answer_yes"
-                        android:textColor="@drawable/selector_answer_text" />
-
-                    <RadioButton
-                        android:id="@+id/answer1_no_radio_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="38dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_answer_radio_radius_50"
-
-                        android:button="@null"
-                        android:gravity="center"
-
-                        android:text="@string/answer_no"
-                        android:textColor="@drawable/selector_answer_text" />
-                </RadioGroup>
-            </LinearLayout>
-            <!-- Layout End 질문1 입력 레이아웃-->
-
-            <!-- Layout 질문2 입력 레이아웃-->
-            <LinearLayout
-                android:id="@+id/question2_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                android:animateLayoutChanges="true">
-
-                <TextView
-                    android:id="@+id/question2_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/calibration_question_2"
+                    android:textSize="@dimen/H3_B700_20_h30"
                     android:textColor="@color/black1_20"
-                    android:textSize="@dimen/M500_16_h22"
-                    android:lineSpacingExtra="6sp"
-                    android:includeFontPadding="false"/>
-
-                <LinearLayout
-                    android:id="@+id/answer2_sub_question"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-
-                        android:text="@string/calibration_sub_question_2"
-                        android:textSize="@dimen/M500_14_h20"
-                        android:textColor="@color/gray3_8E"
-                        android:fontFamily="@font/pretendard_medium"
-                        android:lineSpacingExtra="6sp"
-                        android:includeFontPadding="false"/>
-
-                    <TextView
-                        android:id="@+id/answer2_sub_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_vertical"
-                        android:background="@drawable/selector_primary_edittext"
-
-                        android:maxLines="1"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-
-                        android:textSize="14sp"
-                        android:textColor="@color/gray3_8E"
-                        android:textColorHint="@color/gray4_CB"
-                        android:fontFamily="@font/pretendard_medium"/>
-                </LinearLayout>
+                    android:textCursorDrawable="@null"
+                    android:fontFamily="@font/pretendard_semibold"/>
             </LinearLayout>
-            <!-- Layout End 질문2 입력 레이아웃-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 병원명 레이아웃 -->
 
-            <!-- Layout 질문3 입력 레이아웃-->
-            <LinearLayout
-                android:id="@+id/question3_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                android:animateLayoutChanges="true">
+        <Button
+            android:id="@+id/confirm_btn"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="@dimen/side_margin"
+            android:layout_marginRight="@dimen/side_margin"
+            android:layout_marginBottom="@dimen/btn_bottom_margin"
+            android:background="@drawable/selector_btn_radius_5dp"
+            android:clickable="true"
+            android:fontFamily="@font/pretendard_medium"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
 
-                <TextView
-                    android:id="@+id/question3_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:text="@string/calibration_question_3"
-                    android:textSize="@dimen/M500_16_h22"
-                    android:textColor="@color/black1_20"
-                    android:lineSpacingExtra="6sp"
-                    android:includeFontPadding="false"/>
+            android:orientation="horizontal"
+            android:paddingTop="17dp"
+            android:paddingBottom="17dp"
 
-                <LinearLayout
-                    android:id="@+id/answer3_sub_question"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+            android:text="확인"
+            android:textColor="@color/white"
+            android:textSize="@dimen/M500_16_h22"
+            android:visibility="gone"
 
-                    <TextView
-                        android:id="@+id/answer3_sub_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/selector_primary_edittext"
-                        android:fontFamily="@font/pretendard_medium"
-                        android:gravity="center_vertical"
-                        android:hint="yyyy-mm-dd"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:textColor="@color/gray3_8E"
-                        android:textSize="14sp" />
-                </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
-            </LinearLayout>
-            <!-- Layout End 질문3 입력 레이아웃-->
-        </LinearLayout>
-    </ScrollView>
+        <Button
+            android:id="@+id/name_btn"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/selector_btn"
+            android:clickable="true"
+            android:fontFamily="@font/pretendard_medium"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
 
+            android:orientation="horizontal"
+            android:paddingTop="17dp"
+            android:paddingBottom="17dp"
+
+            android:text="다음"
+            android:textColor="@color/white"
+            android:textSize="@dimen/H4_M500_18_auto"
+            android:visibility="gone"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
-

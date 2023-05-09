@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".info.UserInfoFragment">
+    tools:context=".info.MedicalInfoBackUpFragment">
 
     <ScrollView
         android:id="@+id/scroll_view"

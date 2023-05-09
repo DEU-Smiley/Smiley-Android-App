@@ -1,7 +1,6 @@
 package com.example.smiley.info.adapter
 
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -13,9 +12,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.smiley.R
 import com.example.smiley.common.extension.invisible
 import com.example.smiley.common.extension.visible
-import com.example.smiley.info.fragment.CalibrationInfoFragment
-import com.example.smiley.info.fragment.MedicalInfoFragment
-import com.example.smiley.info.fragment.UserInfoFragment
+import com.example.smiley.info.fragment.CalibrationInfoBackUpFragment
+import com.example.smiley.info.fragment.MedicalInfoBackUpFragment
+import com.example.smiley.info.fragment.UserInfoBackUpFragment
 
 
 class InfoAdapter(activity: FragmentActivity, indicatorId: Int, private val count: Int): FragmentStateAdapter(activity) {
@@ -41,10 +40,10 @@ class InfoAdapter(activity: FragmentActivity, indicatorId: Int, private val coun
     private fun fragmentFactory(position:Int): Fragment {
         if (fragmentMap[position] == null)
             fragmentMap[position] = when (position) {
-                0 -> UserInfoFragment()
-                1 -> MedicalInfoFragment()
-                2 -> CalibrationInfoFragment()
-                else -> UserInfoFragment()
+                0 -> UserInfoBackUpFragment()
+                1 -> MedicalInfoBackUpFragment()
+                2 -> CalibrationInfoBackUpFragment()
+                else -> UserInfoBackUpFragment()
             }
 
         return fragmentMap[position]!!

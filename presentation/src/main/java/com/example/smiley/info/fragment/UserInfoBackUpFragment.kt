@@ -12,7 +12,7 @@ import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
-import com.example.smiley.databinding.FragmentUserInfoBinding
+import com.example.smiley.databinding.FragmentUserInfoBackUpBinding
 import com.example.smiley.info.ButtonClickable
 import com.example.smiley.info.InfoActivity
 
@@ -21,14 +21,14 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [UserInfoFragment.newInstance] factory method to
+ * Use the [UserInfoBackUpFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class UserInfoFragment : Fragment(), ButtonClickable {
+class UserInfoBackUpFragment : Fragment(), ButtonClickable {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var bind:FragmentUserInfoBinding
+    private lateinit var bind:FragmentUserInfoBackUpBinding
     private lateinit var nextBtn: Button
     private var editTextList: ArrayList<EditText> = arrayListOf()
 
@@ -45,7 +45,7 @@ class UserInfoFragment : Fragment(), ButtonClickable {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        bind = DataBindingUtil.inflate(inflater, R.layout.fragment_user_info, container, false)
+        bind = DataBindingUtil.inflate(inflater, R.layout.fragment_user_info_back_up, container, false)
         bind.apply {
             lifecycleOwner = requireActivity()
             editTextList.apply {
@@ -94,8 +94,8 @@ class UserInfoFragment : Fragment(), ButtonClickable {
      * 기본 TextWatcher (타입 체크가 필요 없는 EditText에 적용)
      */
     private val baseTextWatcher = object : TextWatcher{
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
 
         override fun afterTextChanged(p0: Editable?) {
             // 모든 edittext가 정상적으로 입력 되었는지 확인
@@ -108,8 +108,8 @@ class UserInfoFragment : Fragment(), ButtonClickable {
      * 생년월일 형식 체크 TextWatcher
      */
     private val birthDayTextWatcher = object : TextWatcher{
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
 
         override fun afterTextChanged(p0: Editable?) {
             val input = "$p0"
@@ -126,8 +126,8 @@ class UserInfoFragment : Fragment(), ButtonClickable {
      * 이메일 형식 체크 TextWatcher
      */
     private val emailTextWatcher = object : TextWatcher{
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
 
         override fun afterTextChanged(p0: Editable?) {
             val pattern = Patterns.EMAIL_ADDRESS
@@ -144,8 +144,8 @@ class UserInfoFragment : Fragment(), ButtonClickable {
      * 전화번호 형식 체크 TextWatcher
      */
     private val phoneNumberTextWatcher = object : TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
         override fun afterTextChanged(p0: Editable?) {
             val input = "$p0"
 
@@ -183,10 +183,9 @@ class UserInfoFragment : Fragment(), ButtonClickable {
          * @param param2 Parameter 2.
          * @return A new instance of fragment UserInfoFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            UserInfoFragment().apply {
+            UserInfoBackUpFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

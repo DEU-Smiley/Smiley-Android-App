@@ -15,7 +15,7 @@ import com.example.smiley.common.extension.showViewThenCheckedChanged
 import com.example.smiley.common.extension.showViewThenEnterPressed
 import com.example.smiley.common.extension.showViewThenTextChanged
 import com.example.smiley.common.utils.DataSendable
-import com.example.smiley.databinding.FragmentMedicalInfoBinding
+import com.example.smiley.databinding.FragmentMedicalInfoBackUpBinding
 import com.example.smiley.info.ButtonClickable
 import com.example.smiley.info.InfoActivity
 import com.example.smiley.medicine.MedicineSearchFragment
@@ -27,14 +27,14 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [MedicalInfoFragment.newInstance] factory method to
+ * Use the [MedicalInfoBackUpFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MedicalInfoFragment : Fragment(), ButtonClickable, DataSendable {
+class MedicalInfoBackUpFragment : Fragment(), ButtonClickable, DataSendable {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var bind: FragmentMedicalInfoBinding
+    private lateinit var bind: FragmentMedicalInfoBackUpBinding
     private lateinit var radioBtnList:ArrayList<RadioGroup>
     private lateinit var subQuestionLayout:ArrayList<LinearLayout>
     private lateinit var nextBtn:Button
@@ -53,7 +53,7 @@ class MedicalInfoFragment : Fragment(), ButtonClickable, DataSendable {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        bind = DataBindingUtil.inflate(inflater, R.layout.fragment_medical_info, container, false)
+        bind = DataBindingUtil.inflate(inflater, R.layout.fragment_medical_info_back_up, container, false)
 
         init()
         addEvent()
@@ -177,10 +177,9 @@ class MedicalInfoFragment : Fragment(), ButtonClickable, DataSendable {
          * @param param2 Parameter 2.
          * @return A new instance of fragment MedicalInfoFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            MedicalInfoFragment().apply {
+            MedicalInfoBackUpFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

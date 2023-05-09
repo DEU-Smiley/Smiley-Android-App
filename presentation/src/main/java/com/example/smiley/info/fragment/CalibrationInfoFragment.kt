@@ -4,32 +4,22 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.view.children
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import com.example.smiley.R
-import com.example.smiley.common.extension.showViewThenCheckedChanged
-import com.example.smiley.common.extension.showViewThenEnterPressed
-import com.example.smiley.common.extension.showViewThenTextChanged
-import com.example.smiley.common.extension.toDate
+import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
+import com.example.smiley.common.extension.*
 import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.databinding.FragmentCalibrationInfoBinding
 import com.example.smiley.hospital.HospitalSearchFragment
-import com.example.smiley.info.ButtonClickable
-import com.example.smiley.info.InfoActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.time.LocalDate
-import java.util.*
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -40,11 +30,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [CalibrationInfoFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CalibrationInfoFragment : Fragment(), ButtonClickable, DataSendable {
+class CalibrationInfoFragment : Fragment(), DataSendable {
+    private var _bind:FragmentCalibrationInfoBinding? = null
+    private val bind get() = _bind!!
 
-    private lateinit var bind:FragmentCalibrationInfoBinding
-    private lateinit var nextBtn:Button
-    private lateinit var questionLayout: ArrayList<LinearLayout>
+    private var dateSpinnerDialog: BottomSheetDialog? = null
 
     private var param1: String? = null
     private var param2: String? = null
@@ -62,31 +52,82 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable, DataSendable {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        bind = DataBindingUtil.inflate(inflater, R.layout.fragment_calibration_info, container, false)
+        _bind = DataBindingUtil.inflate(inflater, R.layout.fragment_calibration_info, container, false)
 
-        bind.apply {
-            questionLayout = arrayListOf(
-                question2Layout,
-                question3Layout
-            )
-        }
-
-        initNextBtn()
         initSpinner()
-        validSelectedDate()
-        addAnswerClickEvent()
-        addKeyPressEventToEditText()
-        addHospitalEditTextClickEvent()
+        initDateEditText()
+        initHospitalEditText()
+        initConfirmBtn()
 
         return bind.root
     }
 
     /**
-     * 다음 버튼 초기화
+     * 병원명 입력 EditText 초기화
      */
-    private fun initNextBtn(){
-        nextBtn = (activity as InfoActivity).getNextButton()
-        setButtonStatus()
+    private fun initHospitalEditText(){
+        with(bind){
+            hospitalEditText.setOnClickListener {
+                val hospitalSearchFragment = HospitalSearchFragment()
+                hospitalSearchFragment.dataSendable = this@CalibrationInfoFragment
+                this@CalibrationInfoFragment.addFragment(hospitalSearchFragment)
+            }
+            hospitalEditText.addTextChangedListener(hospitalTextWatcher)
+        }
+    }
+
+    /**
+     * 교정 시작일 입력 EditText 초기화
+     */
+    private fun initDateEditText(){
+        with(bind){
+            dateEditText.setOnClickListener{
+                dateSpinnerDialog?.show()
+            }
+            dateEditText.addTextChangedListener(dateTextWatcher)
+        }
+    }
+
+    /**
+     * 확인 버튼 초기화 메소드
+     */
+    private fun initConfirmBtn() {
+        bind.confirmBtn.setOnClickListener {
+            if (isAllInputCompleted()) {
+                requireActivity().showLottieGenericDialog(
+                    "정보 입력 완료",
+                    content = """모든 정보 입력이 완료 되었습니다 !
+                    |지금 바로 교정 장치를 등록해보세요 !
+                    """.trimMargin(),
+                    subContent = "(교정 장치 등록은 추후 앱 설정에서도 가능합니다.)",
+                    lottieView = R.raw.complete,
+                    confirmText = "등록하기",
+                    cancleText = "나중에 하기",
+                    confirmListener = { this.addFragment(BluetoothSearchFragment()) }
+                )
+            }
+        }
+    }
+    
+    /**
+     * 확인 버튼 초기화 메소드
+     */
+    private fun isAllInputCompleted(): Boolean {
+        val selectDate = bind.dateEditText.text.toString().toDate()
+        val today = LocalDate.now()
+
+        if (bind.hospitalEditText.text.isBlank()
+            || bind.dateEditText.text.isBlank()) {
+            requireActivity().showConfirmDialog("입력 확인", "빈 칸 없이 입력해주세요.")
+            return false
+        }
+
+        if (today < selectDate) {
+            requireActivity().showConfirmDialog("입력 확인", "교정 시작일을 확인해주세요.")
+            return false
+        }
+
+        return true
     }
 
     /**
@@ -94,8 +135,9 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable, DataSendable {
      */
     private fun initSpinner() {
         val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet_date_spinner, null)
-        val bottomSheetDialog = BottomSheetDialog(requireActivity()).apply {
+        dateSpinnerDialog = BottomSheetDialog(requireActivity()).apply {
             setContentView(bottomSheetView)
+
             behavior.apply {
                 state = BottomSheetBehavior.STATE_EXPANDED
                 isHideable = true
@@ -115,7 +157,7 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable, DataSendable {
             /** DateSpinner 날짜 선택 이벤트 */
             val dateSpinner = bottomSheetView.findViewById<DatePicker>(R.id.date_spinner)
             dateSpinner.setOnDateChangedListener { _, year, month, day ->
-                bind.answer3SubTextView.text = String.format("%d-%02d-%02d", year, month+1, day)
+                bind.dateEditText.setText(String.format("%d-%02d-%02d", year, month+1, day))
             }
 
             /** DateSpinner 선택 완료 버튼 이벤트 */
@@ -125,116 +167,44 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable, DataSendable {
             }
         }
 
-        bind.answer3SubTextView.setOnClickListener {
-            bottomSheetDialog.show()
+        bind.dateEditText.setOnClickListener {
+            dateSpinnerDialog?.show()
         }
-    }
-
-    /**
-     * 질문 응답 클릭 이벤트 (라디오 버튼 )
-     */
-    private fun addAnswerClickEvent(){
-        bind.apply {
-            answer1Radio.showViewThenCheckedChanged(
-                question2Layout,
-                question2TextView,
-                listOf(question2Layout, question3Layout)
-            ) { setButtonStatus() }
-        }
-    }
-
-    /**
-     * 약품 입력 EditText 클릭 이벤트
-     */
-    private fun addHospitalEditTextClickEvent(){
-        bind.answer2SubTextView.setOnClickListener {
-            val hospitalSearchFragment = HospitalSearchFragment()
-            hospitalSearchFragment.dataSendable = this
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .add(R.id.parent_layout, hospitalSearchFragment)
-                .addToBackStack(null)
-                .commit()
-        }
-    }
-
-
-    /**
-     * EditText 엔터 이벤트 (입력 종료 캐치 )
-     */
-    private fun addKeyPressEventToEditText() {
-        bind.apply {
-            answer2SubTextView.showViewThenTextChanged(question3Layout, scrollView) { setButtonStatus() }
-        }
-    }
-
-    /**
-     * 교정 시작 날짜 선택 검증
-     */
-    private fun validSelectedDate(){
-        bind.answer3SubTextView.apply {
-            addTextChangedListener(object:TextWatcher{
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { /* No Implements required */ }
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { /* No Implements required */ }
-
-                override fun afterTextChanged(p0: Editable?) {
-                    val selectDate = "$p0".toDate()
-                    val today = LocalDate.now()
-
-                    error =
-                        if(today < selectDate) "현재보다 이후의 날짜는 선택할 수 없습니다."
-                        else null
-
-                    setButtonStatus()
-                }
-            })
-        }
-    }
-
-    /**
-     * 모든 EditText에 형식에 맞는 입력이 들어왔는지 확인
-     */
-    override fun setButtonStatus(){
-        if(::nextBtn.isInitialized) {
-            val result = isAllInputCompleted()
-            Log.d("결과", "$result")
-            nextBtn.isEnabled = result
-        }
-    }
-
-    private fun isAllInputCompleted() : Boolean {
-        bind.apply {
-            if (answer1NoRadioBtn.isChecked) return true
-
-            // 질문 레이아웃의 자식들 중 LinearLayout을 가져옴
-            questionLayout.forEach { layout ->
-                if(!layout.isVisible) return false
-                val subLinearLayout = layout.children.
-                    filter { it is LinearLayout }
-                    .map { it as LinearLayout }
-                    .toList()
-
-
-                // TextView와 EditText를 가져옴
-                // 입력 필드가 EditText와 TextView 모두 존재하기 때문에 TextView로 캐스팅
-                // (EditText는 TextView의 자식이므로 TextView로 캐스팅 가능)
-                subLinearLayout.forEach { subLayout ->
-                    subLayout.children
-                        .filter { it is TextView || it is EditText }
-                        .map { it as TextView }
-                        .forEach {
-                            if(it.text.equals("yyyy-mm-dd") || it.error != null || it.text.isBlank()) return false
-                        }
-                }
-            }
-        }
-
-        return true
     }
 
     override fun <T> sendData(data: T) {
         Log.d("교정정보", "DataSendable : $data")
-        bind.answer2SubTextView.text = data.toString()
+        bind.hospitalEditText.setText(data.toString())
+    }
+
+    private val dateTextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun afterTextChanged(p0: Editable?) {
+            val input = "$p0"
+
+            if(input.isNotEmpty()){
+                with(bind){
+                    confirmBtn.visibleWithAnimation()
+                }
+            }
+        }
+    }
+
+    private val hospitalTextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun afterTextChanged(p0: Editable?) {
+            val input = "$p0"
+
+            if(input.isNotEmpty()){
+                with(bind){
+                    dateLayout.visibleWithAnimation()
+                    dateSpinnerDialog?.show()
+                    titleTextView.text = "교정 시작 일을\n입력해 주세요."
+                }
+            }
+        }
     }
 
     companion object {
