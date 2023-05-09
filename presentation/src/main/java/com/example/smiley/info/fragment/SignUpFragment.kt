@@ -128,7 +128,8 @@ class SignUpFragment : Fragment() {
                     "교정 치료를 받고 계신가요?\n병원을 등록하면 앱에서 예약할 수 있어요 !",
                     confirmText = "등록하러 가기",
                     cancleText = "나중에 하기",
-                    lottieView = R.raw.hospital
+                    lottieView = R.raw.hospital,
+                    confirmListener = { this.addFragment(CalibrationInfoFragment()) }
                 )
             }
         }
