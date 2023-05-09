@@ -8,4 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface HospitalRepository {
     suspend fun getAllHospitals(): Flow<ResponseState<SimpleHospitalList>>
     suspend fun getHospitalByHpid(hpid: String): Flow<ResponseState<Hospital>>
+    suspend fun getNearByHospital(lat:Double, lng:Double, dis:Double): Flow<ResponseState<SimpleHospitalList>>
 }

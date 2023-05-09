@@ -1,10 +1,10 @@
 package com.example.data.hospital.repository
 
-import android.util.Log
 import com.example.data.common.network.ApiResponse
 import com.example.data.common.network.ApiResponseHandler
 import com.example.data.common.network.ErrorResponse.Companion.toDomainModel
 import com.example.data.hospital.remote.api.HospitalApi
+import com.example.data.hospital.remote.request.NearbyHospitalRequest
 import com.example.data.hospital.remote.response.HospitalResponse.Companion.toDomainModel
 import com.example.data.hospital.remote.response.SimpleHospitalListResponse.Companion.toDomainModel
 import com.example.domain.common.base.ResponseState
@@ -61,6 +61,33 @@ internal class HospitalRepositoryImpl @Inject constructor(
                     }
                 }
             }.collect()
+        }
+    }
+
+    override suspend fun getNearByHospital(
+        lat: Double,
+        lng: Double,
+        dis: Double
+    ): Flow<ResponseState<SimpleHospitalList>> {
+        return flow {
+            ApiResponseHandler().handle {
+                hospitalApi.getNearbyHospital(
+                    NearbyHospitalRequest(
+                        lat = lat,
+                        lng = lng,
+                        dis = dis
+                    )
+                )
+            }.onEach { result ->
+                when(result) {
+                    is ApiResponse.Success -> {
+                        emit(ResponseState.Success(result.data.toDomainModel()))
+                    }
+                    is ApiResponse.Error -> {
+                        emit(ResponseState.Error(result.error.toDomainModel()))
+                    }
+                }
+            }
         }
     }
 }
