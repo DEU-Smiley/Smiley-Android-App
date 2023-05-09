@@ -168,8 +168,8 @@ class CalibrationInfoBackUpFragment : Fragment(), ButtonClickable, DataSendable 
     private fun validSelectedDate(){
         bind.answer3SubTextView.apply {
             addTextChangedListener(object:TextWatcher{
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { /* No Implements required */ }
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { /* No Implements required */ }
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
 
                 override fun afterTextChanged(p0: Editable?) {
                     val selectDate = "$p0".toDate()

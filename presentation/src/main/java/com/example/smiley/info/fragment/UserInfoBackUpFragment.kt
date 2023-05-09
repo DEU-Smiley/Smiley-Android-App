@@ -94,8 +94,8 @@ class UserInfoBackUpFragment : Fragment(), ButtonClickable {
      * 기본 TextWatcher (타입 체크가 필요 없는 EditText에 적용)
      */
     private val baseTextWatcher = object : TextWatcher{
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
 
         override fun afterTextChanged(p0: Editable?) {
             // 모든 edittext가 정상적으로 입력 되었는지 확인
@@ -108,8 +108,8 @@ class UserInfoBackUpFragment : Fragment(), ButtonClickable {
      * 생년월일 형식 체크 TextWatcher
      */
     private val birthDayTextWatcher = object : TextWatcher{
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
 
         override fun afterTextChanged(p0: Editable?) {
             val input = "$p0"
@@ -126,8 +126,8 @@ class UserInfoBackUpFragment : Fragment(), ButtonClickable {
      * 이메일 형식 체크 TextWatcher
      */
     private val emailTextWatcher = object : TextWatcher{
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
 
         override fun afterTextChanged(p0: Editable?) {
             val pattern = Patterns.EMAIL_ADDRESS
@@ -144,8 +144,8 @@ class UserInfoBackUpFragment : Fragment(), ButtonClickable {
      * 전화번호 형식 체크 TextWatcher
      */
     private val phoneNumberTextWatcher = object : TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
         override fun afterTextChanged(p0: Editable?) {
             val input = "$p0"
 
@@ -183,7 +183,6 @@ class UserInfoBackUpFragment : Fragment(), ButtonClickable {
          * @param param2 Parameter 2.
          * @return A new instance of fragment UserInfoFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             UserInfoBackUpFragment().apply {
