@@ -7,29 +7,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
 import com.example.smiley.common.extension.showViewThenCheckedChanged
-import com.example.smiley.common.extension.showViewThenEnterPressed
 import com.example.smiley.common.extension.showViewThenTextChanged
 import com.example.smiley.common.extension.toDate
 import com.example.smiley.common.utils.DataSendable
-import com.example.smiley.databinding.FragmentCalibrationInfoBinding
+import com.example.smiley.databinding.FragmentCalibrationInfoBackUpBinding
 import com.example.smiley.hospital.HospitalSearchFragment
 import com.example.smiley.info.ButtonClickable
 import com.example.smiley.info.InfoActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.time.LocalDate
-import java.util.*
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -37,12 +31,12 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CalibrationInfoFragment.newInstance] factory method to
+ * Use the [CalibrationInfoBackUpFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CalibrationInfoFragment : Fragment(), ButtonClickable, DataSendable {
+class CalibrationInfoBackUpFragment : Fragment(), ButtonClickable, DataSendable {
 
-    private lateinit var bind:FragmentCalibrationInfoBinding
+    private lateinit var bind:FragmentCalibrationInfoBackUpBinding
     private lateinit var nextBtn:Button
     private lateinit var questionLayout: ArrayList<LinearLayout>
 
@@ -62,7 +56,7 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable, DataSendable {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        bind = DataBindingUtil.inflate(inflater, R.layout.fragment_calibration_info, container, false)
+        bind = DataBindingUtil.inflate(inflater, R.layout.fragment_calibration_info_back_up, container, false)
 
         bind.apply {
             questionLayout = arrayListOf(
@@ -248,7 +242,7 @@ class CalibrationInfoFragment : Fragment(), ButtonClickable, DataSendable {
          */
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            CalibrationInfoFragment().apply {
+            CalibrationInfoBackUpFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
