@@ -43,6 +43,11 @@
             android:value="false" />
         <!-- [END fcm_disable_auto_init] -->
 
+        <!-- Naver Map Sdk -->
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="${naverMapClientId}" />
+
         <activity
             android:name=".info.InfoActivity"
             android:exported="false"

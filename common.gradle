@@ -5,8 +5,9 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-def kakaoSdkAppKey = properties.getProperty('KAKAO_SDK_APPKEY')
-def isLibraryPlugin = pluginManager.hasPlugin("com.android.library")
+def kakaoSdkAppKey      = properties.getProperty('KAKAO_SDK_APPKEY')
+def naverMapClientId    = properties.getProperty('NAVER_MAP_CLIENT_ID')
+def isLibraryPlugin     = pluginManager.hasPlugin("com.android.library")
 def isApplicationPlugin = pluginManager.hasPlugin("com.android.application")
 
 if (isLibraryPlugin || isApplicationPlugin) {
@@ -17,8 +18,13 @@ if (isLibraryPlugin || isApplicationPlugin) {
         defaultConfig {
             /* 카카오 Appkey 변수로 등록(local.properties) */
             buildConfigField "String", "KAKAO_SDK_APPKEY", "\"" + properties["KAKAO_SDK_APPKEY"] + "\""
+            buildConfigField "String", "NAVER_MAP_CLIENT_ID", "\"" + properties["NAVER_MAP_CLIENT_ID"] + "\""
+
             /* Manifest에서 변수로 참조할 수 있도록 지정 */
-            manifestPlaceholders = [kakaoSdkAppkey: kakaoSdkAppKey]
+            manifestPlaceholders = [
+                    kakaoSdkAppkey: kakaoSdkAppKey,
+                    naverMapClientId: naverMapClientId
+            ]
 
             if(isApplicationPlugin) {
                 applicationId "com.example.smiley"

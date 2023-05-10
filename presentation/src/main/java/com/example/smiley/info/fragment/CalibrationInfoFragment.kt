@@ -16,6 +16,7 @@ import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
 import com.example.smiley.common.extension.*
 import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.databinding.FragmentCalibrationInfoBinding
+import com.example.smiley.hospital.HospitalMapFragment
 import com.example.smiley.hospital.HospitalSearchFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -103,7 +104,8 @@ class CalibrationInfoFragment : Fragment(), DataSendable {
                     lottieView = R.raw.complete,
                     confirmText = "등록하기",
                     cancleText = "나중에 하기",
-                    confirmListener = { this.addFragment(BluetoothSearchFragment()) }
+                    confirmListener = { this.addFragment(BluetoothSearchFragment()) },
+                    cancleListner = { this.addFragment(HospitalMapFragment()) }
                 )
             }
         }

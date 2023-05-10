@@ -39,10 +39,16 @@ dependencies {
     /* Ktx */
     implementation "androidx.activity:activity-ktx:1.7.1"
     implementation "androidx.fragment:fragment-ktx:1.5.7"
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
 
     /* Firebase */
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-messaging:23.1.2'
+
+    /* Naver Map Sdk */
+    implementation 'com.naver.maps:map-sdk:3.16.0'
+
+    /* Gms Location */
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
 }
