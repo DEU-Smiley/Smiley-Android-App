@@ -1,9 +1,9 @@
 package com.example.data.hospital.remote.api
 
 import com.example.data.hospital.remote.request.NearbyHospitalRequest
+import com.example.data.hospital.remote.response.HospitalPositListResponse
 import com.example.data.hospital.remote.response.HospitalResponse
 import com.example.data.hospital.remote.response.SimpleHospitalListResponse
-import com.example.domain.hospital.model.SimpleHospitalList
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -19,5 +19,5 @@ internal interface HospitalApi {
     suspend fun getHospitalByHpid(@Path("hpid") hpid:String): Response<HospitalResponse>
 
     @POST("hospitals/nearhospitalinfos")
-    suspend fun getNearbyHospital(@Body nearbyHospitalRequest: NearbyHospitalRequest): Response<SimpleHospitalListResponse>
+    suspend fun getNearbyHospital(@Body nearbyHospitalRequest: NearbyHospitalRequest): Response<HospitalPositListResponse>
 }

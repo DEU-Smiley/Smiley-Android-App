@@ -2,9 +2,7 @@ package com.example.domain.hospital.usecase
 
 import com.example.domain.common.base.ResponseState
 import com.example.domain.hospital.HospitalRepository
-import com.example.domain.hospital.model.Hospital
-import com.example.domain.hospital.model.SimpleHospital
-import com.example.domain.hospital.model.SimpleHospitalList
+import com.example.domain.hospital.model.HospitalPositList
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -17,7 +15,7 @@ class GetNearByHospitalUseCase @Inject constructor(
         lat: Double,
         lng:Double,
         dis:Double
-    ): Flow<ResponseState<SimpleHospitalList>> {
+    ): Flow<ResponseState<HospitalPositList>> {
         return hospitalRepository.getNearByHospital(lat, lng, dis)
     }
 }

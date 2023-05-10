@@ -4,8 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.common.base.ResponseState
-import com.example.domain.hospital.model.SimpleHospitalList
+import com.example.domain.hospital.model.HospitalPositList
 import com.example.domain.hospital.usecase.GetNearByHospitalUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class HospitalMapViewModel  @Inject constructor(
     private val getNearByHospitalUseCase: GetNearByHospitalUseCase
 ) : ViewModel() {
@@ -74,9 +76,8 @@ class HospitalMapViewModel  @Inject constructor(
 sealed class HospitalMapFragmentState {
     object Init : HospitalMapFragmentState()
     data class SuccessLoadHospital(
-        val simpleHospitalList: SimpleHospitalList
+        val hospitalPositList: HospitalPositList
     ) : HospitalMapFragmentState()
-
     data class Error(val error: String) : HospitalMapFragmentState()
     data class IsLoading(val isLoading: Boolean) : HospitalMapFragmentState()
     data class ShowToast(val message: String) : HospitalMapFragmentState()

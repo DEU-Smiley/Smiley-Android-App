@@ -1,10 +1,7 @@
 package com.example.smiley.hospital
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.location.Criteria
 import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,14 +13,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.domain.hospital.model.SimpleHospitalList
+import com.example.domain.hospital.model.HospitalPositList
 import com.example.smiley.R
 import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.common.extension.showToast
 import com.example.smiley.databinding.FragmentHospitalMapBinding
 import com.example.smiley.hospital.viewmodel.HospitalMapFragmentState
 import com.example.smiley.hospital.viewmodel.HospitalMapViewModel
-import com.example.smiley.hospital.viewmodel.HospitalSearchFragmentState
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
@@ -32,6 +28,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
@@ -45,6 +42,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HospitalMapFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class HospitalMapFragment : Fragment(), OnMapReadyCallback {
 
     private var _bind:FragmentHospitalMapBinding? = null
@@ -120,7 +118,7 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
         when(state){
             is HospitalMapFragmentState.Init -> Unit
             is HospitalMapFragmentState.SuccessLoadHospital -> {
-                handleSuccess(state.simpleHospitalList)
+                handleSuccess(state.hospitalPositList)
             }
             is HospitalMapFragmentState.Error -> {
                 handleError(state.error)
@@ -131,9 +129,14 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
-
-    private fun handleSuccess(result:SimpleHospitalList){
-
+    private fun handleSuccess(result:HospitalPositList){
+        result.hospitalPosits.forEach {
+            addMarker(
+                it.lat,
+                it.lng,
+                it.hpid
+            )
+        }
     }
 
     private fun handleError(message: String){
@@ -227,7 +230,7 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
                 hospitalVm.getNearByHospitals(
                     lat = latitude,
                     lng = longitude,
-                    dis = 1000.0
+                    dis = 1.5
                 )
                 Log.i("NaverMap", "카메라 움직임 종료 중심 좌표(${latitude}, $longitude)")
             }

@@ -5,11 +5,13 @@ import com.example.data.common.network.ApiResponseHandler
 import com.example.data.common.network.ErrorResponse.Companion.toDomainModel
 import com.example.data.hospital.remote.api.HospitalApi
 import com.example.data.hospital.remote.request.NearbyHospitalRequest
+import com.example.data.hospital.remote.response.HospitalPositListResponse.Companion.toDomainModel
 import com.example.data.hospital.remote.response.HospitalResponse.Companion.toDomainModel
 import com.example.data.hospital.remote.response.SimpleHospitalListResponse.Companion.toDomainModel
 import com.example.domain.common.base.ResponseState
 import com.example.domain.hospital.HospitalRepository
 import com.example.domain.hospital.model.Hospital
+import com.example.domain.hospital.model.HospitalPositList
 import com.example.domain.hospital.model.SimpleHospitalList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -64,11 +66,18 @@ internal class HospitalRepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * 주변 반경 n미터 이내의 병원들을 가져오는 메소드
+     * @param lat: Double
+     * @param lng: Double
+     * @param dis: Double
+     * @return Flow<ResponseStaet<HospitalPositList>
+     */
     override suspend fun getNearByHospital(
         lat: Double,
         lng: Double,
         dis: Double
-    ): Flow<ResponseState<SimpleHospitalList>> {
+    ): Flow<ResponseState<HospitalPositList>> {
         return flow {
             ApiResponseHandler().handle {
                 hospitalApi.getNearbyHospital(
@@ -87,7 +96,7 @@ internal class HospitalRepositoryImpl @Inject constructor(
                         emit(ResponseState.Error(result.error.toDomainModel()))
                     }
                 }
-            }
+            }.collect()
         }
     }
 }
