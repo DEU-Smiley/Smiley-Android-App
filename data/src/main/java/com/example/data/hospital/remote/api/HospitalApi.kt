@@ -12,12 +12,12 @@ import retrofit2.http.Path
 
 internal interface HospitalApi {
 
-    @GET("hospitals/simpleinfo")
+    @GET("hospitals/simpleInfos")
     suspend fun getAllHospitals(): Response<SimpleHospitalListResponse>
 
     @GET("hospitals/{hpid}")
     suspend fun getHospitalByHpid(@Path("hpid") hpid:String): Response<HospitalResponse>
 
-    @POST("hospitals/nearhospitalinfos")
+    @POST("hospitals/nearBy")
     suspend fun getNearbyHospital(@Body nearbyHospitalRequest: NearbyHospitalRequest): Response<HospitalPositListResponse>
 }
