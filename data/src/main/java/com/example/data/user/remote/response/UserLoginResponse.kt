@@ -13,7 +13,7 @@ class UserLoginResponse(
     @SerializedName("id")           val id          : String,
     @SerializedName("email")        val email       : String,
     @SerializedName("name")         val name        : String,
-    @SerializedName("bitrhDate")    val birthDate   : String,
+    @SerializedName("birthDate")    val birthDate   : String,
     @SerializedName("phoneToken")   val deviceToken : String
 ): BaseResponse {
     companion object: DataMapper<UserLoginResponse, User> {
