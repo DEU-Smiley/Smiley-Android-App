@@ -1,5 +1,6 @@
 package com.example.smiley.info.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,9 +14,19 @@ import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.example.domain.user.model.User
 import com.example.smiley.R
+import com.example.smiley.common.dialog.LoadingDialog
 import com.example.smiley.common.extension.*
 import com.example.smiley.databinding.FragmentSignUpBinding
+import com.example.smiley.info.viewmodel.InfoViewModel
+import com.example.smiley.info.viewmodel.SignUpFragmentState
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -26,10 +37,12 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SignUpFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
     private var _bind:FragmentSignUpBinding?=null
     private val bind get() = _bind!!
 
+    private val infoVm: InfoViewModel by viewModels()
     private val editTextList: ArrayList<EditText> = arrayListOf()
 
     private var param1: String? = null
@@ -50,12 +63,64 @@ class SignUpFragment : Fragment() {
         // Inflate the layout for this fragment
         _bind = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
 
+        observe()
         init()
         setNameBtnClickEvent()
         setConfirmBtnClickEvent()
         setTextWatcher()
 
         return bind.root
+    }
+
+    private fun observe(){
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                infoVm.state.collect { state ->
+                    when(state){
+                        is SignUpFragmentState.Init -> Unit
+                        is SignUpFragmentState.IsLoading -> handleLoading(state.isLoading)
+                        is SignUpFragmentState.ShowToast -> handleShowToast(state.message)
+                        is SignUpFragmentState.Error -> handleError(state.message)
+                        is SignUpFragmentState.SuccessSendInfo -> handleSuccess(state.user)
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 로딩 다이얼로그 핸들러
+     */
+    private lateinit var loadingDialog: LoadingDialog
+    private fun handleLoading(isLoading: Boolean){
+        if(!::loadingDialog.isInitialized) return
+
+        if(isLoading) loadingDialog.show()
+        else loadingDialog.dismiss()
+    }
+
+    private fun handleShowToast(message:String){
+        requireActivity().showToast(message)
+    }
+
+    private fun handleError(message:String){
+        requireActivity().showConfirmDialog(
+            "회원가입 오류",
+            message,
+            "(계속해서 오류가 발생하는 경우 SMILEY 팀으로 문의 부탁드립니다.)",
+        )
+    }
+
+    private fun handleSuccess(user:User){
+        requireActivity().showLottieGenericDialog(
+            "회원가입 완료!",
+            "${user.name}님 환영합니다!",
+            "교정 치료를 받고 계신가요?\n병원을 등록하면 앱에서 예약할 수 있어요 !",
+            confirmText = "등록하러 가기",
+            cancleText = "나중에 하기",
+            lottieView = R.raw.hospital,
+            confirmListener = { this@SignUpFragment.addFragment(CalibrationInfoFragment()) }
+        )
     }
 
     private fun init(){
@@ -122,14 +187,10 @@ class SignUpFragment : Fragment() {
     private fun setConfirmBtnClickEvent(){
         bind.confirmBtn.setOnClickListener {
             if(isAllInputCompleted()){
-                requireActivity().showLottieGenericDialog(
-                    "회원가입 완료!",
-                    "스마일리에 오신 것을 환영합니다!",
-                    "교정 치료를 받고 계신가요?\n병원을 등록하면 앱에서 예약할 수 있어요 !",
-                    confirmText = "등록하러 가기",
-                    cancleText = "나중에 하기",
-                    lottieView = R.raw.hospital,
-                    confirmListener = { this.addFragment(CalibrationInfoFragment()) }
+                infoVm.sendUserInfoToServer(
+                    name = "${bind.nameEditText.text}",
+                    email = "${bind.emailEditText.text}",
+                    birth = "${bind.birthEditText.text}".toDateOfyyMMdd()
                 )
             }
         }
@@ -239,7 +300,24 @@ class SignUpFragment : Fragment() {
             return false
         }
 
+        try {
+            "${bind.birthEditText.text}".toDateOfyyMMdd()
+        } catch (e: java.lang.Exception){
+            requireActivity().showConfirmDialog("입력 확인","생년월일을 확인해 주세요.")
+            return false
+        }
+
         return true
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        loadingDialog = LoadingDialog(context)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _bind = null
     }
 
     companion object {
