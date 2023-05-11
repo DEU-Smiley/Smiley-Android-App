@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import com.example.domain.user.model.User
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.common.KakaoSdk
@@ -13,7 +14,7 @@ import dagger.hilt.android.HiltAndroidApp
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        _context = applicationContext
+        context = applicationContext
         catchAllError()
 
 
@@ -40,19 +41,21 @@ class App : Application() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if(task.isSuccessful){
                 deviceToken = task.result
-                Log.d("디바이스 토큰", deviceToken.toString())
+                Log.d("디바이스 토큰", deviceToken)
             }
         }
     }
 
     companion object{
         @SuppressLint("StaticFieldLeak")
-        private var _context: Context? = null
-        private var deviceToken: String? = null
+        private var context: Context? = null
+        private var deviceToken: String=""
+        var user: User?=null
 
+        fun getDeviceToken() = deviceToken
         @JvmStatic
         fun ApplicationContext(): Context {
-            return _context!!
+            return context!!
         }
     }
 }
