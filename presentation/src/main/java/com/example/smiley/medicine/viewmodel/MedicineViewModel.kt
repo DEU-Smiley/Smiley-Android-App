@@ -25,11 +25,7 @@ class MedicineViewModel @Inject constructor(
     var medicineList: MedicineList? = null
 
     private fun setLoading(){
-        _state.value = MedicineFragmentState.IsLoading(true)
-    }
-
-    private fun hideLoading(){
-        _state.value = MedicineFragmentState.IsLoading(false)
+        _state.value = MedicineFragmentState.IsLoading
     }
 
     private fun showDialog(message: String){
@@ -63,12 +59,10 @@ class MedicineViewModel @Inject constructor(
             getAllMedicinesUseCase()
                 .onStart { setLoading() }
                 .catch { exception ->
-                    hideLoading()
                     showDialog(exception.message.toString())
                     Log.d("의약품 조회 에러", exception.stackTraceToString())
                 }
                 .collect{ state ->
-                    hideLoading()
                     when(state) {
                         is ResponseState.Success -> {
                             medicineList = state.data
@@ -86,10 +80,10 @@ class MedicineViewModel @Inject constructor(
 
 sealed class MedicineFragmentState {
     object Init                                                 : MedicineFragmentState()
+    object IsLoading                                            : MedicineFragmentState()
     data class SuccessMedicine(
         val id: UUID,
-        val medicineList: MedicineList)  : MedicineFragmentState()
+        val medicineList: MedicineList)                         : MedicineFragmentState()
     data class ErrorMedicine(val error:String)                  : MedicineFragmentState()
-    data class IsLoading(val isLoading: Boolean)                : MedicineFragmentState()
     data class ShowDialog(val message: String)                  : MedicineFragmentState()
 }
