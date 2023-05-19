@@ -23,28 +23,19 @@ class InfoViewModel @Inject constructor(
     val state:StateFlow<SignUpFragmentState> get() = _state
 
     private suspend fun setLoading() {
-        _state.emit(SignUpFragmentState.IsLoading(true))
-        Log.d("스테이트", "${_state.value}")
-    }
-
-    private suspend fun hideLoading() {
-        _state.emit(SignUpFragmentState.IsLoading(false))
-        Log.d("스테이트", "${_state.value}")
+        _state.emit(SignUpFragmentState.IsLoading)
     }
 
     private suspend fun showToast(message: String){
         _state.emit(SignUpFragmentState.ShowToast(message))
-        Log.d("스테이트", "${_state.value}")
     }
 
     private suspend fun setSuccess(user: User){
         _state.emit(SignUpFragmentState.SuccessSendInfo(user))
-        Log.d("스테이트", "${_state.value}")
     }
 
     private suspend fun setError(message: String){
         _state.emit(SignUpFragmentState.Error(message))
-        Log.d("스테이트", "${_state.value}")
     }
 
 
@@ -61,12 +52,10 @@ class InfoViewModel @Inject constructor(
             )
                 .onStart { setLoading() }
                 .catch { exception ->
-                    hideLoading()
                     showToast(message = exception.message.toString())
                     Log.e("InfoViewModel", exception.message.toString())
                 }
                 .onEach { state ->
-                    hideLoading()
                     when (state) {
                         is ResponseState.Success -> {
                             App.user = state.data
@@ -84,8 +73,8 @@ class InfoViewModel @Inject constructor(
 
 sealed class SignUpFragmentState {
     object Init : SignUpFragmentState()
+    object IsLoading  : SignUpFragmentState()
     data class SuccessSendInfo(val user: User)      : SignUpFragmentState()
     data class Error(val message: String)           : SignUpFragmentState()
-    data class IsLoading(val isLoading: Boolean)    : SignUpFragmentState()
     data class ShowToast(val message: String)       : SignUpFragmentState()
 }
