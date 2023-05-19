@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="6dp"/>
+            <solid android:color="@color/gray6_F2"/>
+        </shape>
+    </item>
+
+    <item android:id="@android:id/progress">
+        <scale android:scaleWidth="100%">
+            <shape android:shape="rectangle">
+                <corners android:radius="6dp"/>
+                <gradient
+                    android:angle="45"
+                    android:type="linear"
+                    android:startColor="@color/primary_normal"
+                    android:centerColor="@color/primary_normal"
+                    android:endColor="@color/primary_normal"
+                    />
+                <!--                <solid android:color="#287CF6"/>-->
+            </shape>
+        </scale>
+    </item>
+
+    <!--    그라데이션 색상 코드 -->
+    <!--    android:startColor="@color/colorAccent"-->
+    <!--    android:centerColor="#9CBBFF"-->
+    <!--    android:endColor="#83E2FF"-->
+</layer-list>

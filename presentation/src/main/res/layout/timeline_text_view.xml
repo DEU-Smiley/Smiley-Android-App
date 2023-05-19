@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_layout">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:background="@color/gray5_E6"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/indicator" />
+
+        <View
+            android:id="@+id/indicator"
+            android:layout_width="15sp"
+            android:layout_height="15sp"
+            android:background="@drawable/shape_oval_stroke_2dp"
+
+            app:layout_constraintBottom_toBottomOf="@id/title"
+            app:layout_constraintLeft_toLeftOf="@id/line"
+            app:layout_constraintRight_toRightOf="@id/line"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="40dp"
+            android:text="스마일리 매거진이 드리는 교정 정보입니다. "
+            android:textColor="@color/gray1_55"
+            android:textSize="@dimen/H4_R400_15_h22"
+
+            app:layout_constraintLeft_toRightOf="@id/indicator"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Layout 타임라인 콘텐트 사이 레이아웃 -->
+        <View
+            android:id="@+id/margin_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="40dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/line"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+        <!-- Layout End 타임라인 콘텐트 사이 레이아웃 -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,58 @@
+package com.example.smiley.main.adapter
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
+import com.example.smiley.R
+
+class TimeLineAdapter(
+    private val items: ArrayList<TimeLineItem>
+): RecyclerView.Adapter<TimeLineViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeLineViewHolder {
+        return when(viewType){
+            ViewType.TEXT_OBJECT.ordinal -> {
+                TimeLineViewHolder.TextObjectViewHolder(
+                    getViewDataBinding(parent, R.layout.timeline_text_view)
+                )
+            }
+            else -> {
+                TimeLineViewHolder.MagazineObjectViewHolder(
+                    getViewDataBinding(parent, R.layout.timeline_magazine_view)
+                )
+            }
+        }
+    }
+
+    /**
+     * 바인딩 작업은 각 ViewHolder에서 처리
+     * 특정 position의 아이템만 넘겨줌
+     */
+    override fun onBindViewHolder(holder: TimeLineViewHolder, position: Int) {
+        val isLastView = position == items.size-1
+        holder.bind(items[position], isLastView)
+    }
+
+    /**
+    * ViewType에서 해당 position의 데이터의 ordinal(인덱스)를 반환
+    */
+    override fun getItemViewType(position: Int): Int {
+        return ViewType.valueOf(items[position].viewType).ordinal
+    }
+
+    override fun getItemCount() = items.size
+
+    /**
+     * ViewHolder 별로 Binding을 생성하는 메소드
+     */
+    private fun <T: ViewDataBinding> getViewDataBinding(parent: ViewGroup, layoutRes: Int): T {
+        return DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            layoutRes,
+            parent,
+            false
+        )
+    }
+
+}
