@@ -93,7 +93,15 @@ class MedicineSearchFragment : Fragment() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 medicineVm.state.collect{ state ->
-                    handleStateChange(state)
+                    when(state){
+                        is MedicineFragmentState.Init -> Unit
+                        is MedicineFragmentState.IsLoading -> handleLoading(true)
+                        is MedicineFragmentState.SuccessMedicine ->{
+                            handleSuccessMedicine(state.medicineList)
+                        }
+                        is MedicineFragmentState.ErrorMedicine -> handleErrorMedicine(state.error)
+                        is MedicineFragmentState.ShowDialog -> handleShowDialog(state.message)
+                    }
                 }
             }
         }
@@ -189,10 +197,9 @@ class MedicineSearchFragment : Fragment() {
     private fun handleStateChange(state: MedicineFragmentState){
         when(state){
             is MedicineFragmentState.Init -> Unit
-            is MedicineFragmentState.IsLoading -> handleLoading(state.isLoading)
+            is MedicineFragmentState.IsLoading -> handleLoading(true)
             is MedicineFragmentState.SuccessMedicine ->{
                 handleSuccessMedicine(state.medicineList)
-//                handleLoading(false)
             }
             is MedicineFragmentState.ErrorMedicine -> handleErrorMedicine(state.error)
             is MedicineFragmentState.ShowDialog -> handleShowDialog(state.message)
@@ -203,6 +210,7 @@ class MedicineSearchFragment : Fragment() {
      * MedicineList 조회에 성공한 경우의 핸들러
      */
     private fun handleSuccessMedicine(medicineList: MedicineList){
+        handleLoading(false)
         initRecyclerView(medicineList)
     }
 
@@ -210,6 +218,7 @@ class MedicineSearchFragment : Fragment() {
      * MedicineList 조회에 실패한 경우의 핸들러
      */
     private fun handleErrorMedicine(error:String){
+        handleLoading(false)
         loadingDialog.dismiss()
         requireActivity().showConfirmDialog(
             "의약품 조회 오류",
@@ -222,6 +231,7 @@ class MedicineSearchFragment : Fragment() {
      * ToastMessage 핸들러
      */
     private fun handleShowDialog(message: String){
+        handleLoading(false)
         loadingDialog.dismiss()
         requireActivity().showConfirmDialog(
             "의약품 조회 오류",

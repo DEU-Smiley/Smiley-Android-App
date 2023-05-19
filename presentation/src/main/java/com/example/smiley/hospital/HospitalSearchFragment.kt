@@ -82,7 +82,15 @@ class HospitalSearchFragment : Fragment(), DataSendable{
             viewLifecycleOwner.lifecycle,
             Lifecycle.State.STARTED
         ).onEach { state ->
-            handleStateChange(state)
+            when(state){
+                is HospitalSearchFragmentState.Init -> Unit
+                is HospitalSearchFragmentState.IsLoading -> handleLoading(true)
+                is HospitalSearchFragmentState.SuccessLoadHospital ->{
+                    handleSucccessHospital(state.simpleHospitalList)
+                }
+                is HospitalSearchFragmentState.ErrorLoadHospital -> handleErrorHospital(state.error)
+                is HospitalSearchFragmentState.ShowToast -> handleShowToast(state.message)
+            }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
@@ -138,25 +146,10 @@ class HospitalSearchFragment : Fragment(), DataSendable{
     }
 
     /**
-     * ViewModel 상태 핸들러
-     */
-    private fun handleStateChange(state: HospitalSearchFragmentState){
-        when(state){
-            is HospitalSearchFragmentState.Init -> Unit
-            is HospitalSearchFragmentState.IsLoading -> handleLoading(state.isLoading)
-            is HospitalSearchFragmentState.SuccessLoadHospital ->{
-                handleSucccessHospital(state.simpleHospitalList)
-                handleLoading(false)
-            }
-            is HospitalSearchFragmentState.ErrorLoadHospital -> handleErrorHospital(state.error)
-            is HospitalSearchFragmentState.ShowToast -> handleShowToast(state.message)
-        }
-    }
-
-    /**
      * HospitalList 조회에 성공한 경우의 핸들러
      */
     private fun handleSucccessHospital(simpleHospitalList: SimpleHospitalList){
+        handleLoading(false)
         initRecyclerView(simpleHospitalList)
     }
 
@@ -164,6 +157,7 @@ class HospitalSearchFragment : Fragment(), DataSendable{
      * HospitalList 조회에 실패한 경우의 핸들러
      */
     private fun handleErrorHospital(error:String){
+        handleLoading(false)
         requireActivity().showConfirmDialog(
             "병원 조회 에러",
             content = error
@@ -174,10 +168,10 @@ class HospitalSearchFragment : Fragment(), DataSendable{
      * 로딩 다이얼로그 핸들러
      */
     private lateinit var loadingDialog: LoadingDialog
-    private fun handleLoading(isLoding: Boolean){
+    private fun handleLoading(isLoading: Boolean){
         if(!::loadingDialog.isInitialized) return
 
-        if(isLoding) loadingDialog.show()
+        if(isLoading) loadingDialog.show()
         else loadingDialog.dismiss()
     }
 
@@ -185,6 +179,7 @@ class HospitalSearchFragment : Fragment(), DataSendable{
      * ToastMessage 핸들러
      */
     private fun handleShowToast(message: String){
+        handleLoading(false)
         requireActivity().showToast(message)
     }
 

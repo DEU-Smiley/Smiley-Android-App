@@ -100,7 +100,15 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
             viewLifecycleOwner.lifecycle,
             Lifecycle.State.STARTED
         ).onEach { state ->
-            handleStateChange(state)
+            when(state){
+                is HospitalDialogState.Init -> Unit
+                is HospitalDialogState.IsLoading -> handleLoading(true)
+                is HospitalDialogState.SuccessLoadHospital ->{
+                    handleSucccessHospital(state.hospital)
+                }
+                is HospitalDialogState.ErrorLoadHospital -> handleErrorHospital(state.error)
+                is HospitalDialogState.ShowToast -> handleShowToast(state.message)
+            }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
@@ -213,27 +221,13 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
         return requireActivity().findViewById<View>(Window.ID_ANDROID_CONTENT).height
     }
 
-    /**
-     * ViewModel 상태 핸들러
-     */
-    private fun handleStateChange(state: HospitalDialogState){
-        when(state){
-            is HospitalDialogState.Init -> Unit
-            is HospitalDialogState.IsLoading -> handleLoading(state.isLoading)
-            is HospitalDialogState.SuccessLoadHospital ->{
-                handleSucccessHospital(state.hospital)
-                handleLoading(false)
-            }
-            is HospitalDialogState.ErrorLoadHospital -> handleErrorHospital(state.error)
-            is HospitalDialogState.ShowToast -> handleShowToast(state.message)
-        }
-    }
 
     /**
      * HospitalList 조회에 성공한 경우의 핸들러
      */
     @SuppressLint("SetTextI18n")
     private fun handleSucccessHospital(hospital: Hospital){
+        handleLoading(false)
         bind.apply {
             partnerTag.text     = if (hospital.isPartner) "제휴" else "일반"
             hospitalTitle.text  = hospital.name
@@ -256,23 +250,13 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
         }
     }
 
-    /**
-     * 요일별 진료 시간을 반환하는 메소드
-     */
-    private fun Hospital.parseRunningTimeAt(dayOfWeek: Int): String {
-        val time = this.getRunnginTimeAt(dayOfWeek)
-        if(time.first.isEmpty() || time.second.isEmpty()) return "휴진"
 
-        val startTime = "${time.first.substring(0..1)}:${time.first.substring(2..3)}"
-        val endTime = "${time.second.substring(0..1)}:${time.second.substring(2..3)}"
-
-        return "$startTime ~ $endTime"
-    }
 
     /**
      * HospitalList 조회에 실패한 경우의 핸들러
      */
     private fun handleErrorHospital(error:String){
+        handleLoading(false)
         requireActivity().showConfirmDialog(
             "병원 조회 에러",
             content = error
@@ -296,7 +280,21 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
      * ToastMessage 핸들러
      */
     private fun handleShowToast(message: String){
+        handleLoading(false)
         requireActivity().showToast(message)
+    }
+
+    /**
+     * 요일별 진료 시간을 반환하는 메소드
+     */
+    private fun Hospital.parseRunningTimeAt(dayOfWeek: Int): String {
+        val time = this.getRunnginTimeAt(dayOfWeek)
+        if(time.first.isEmpty() || time.second.isEmpty()) return "휴진"
+
+        val startTime = "${time.first.substring(0..1)}:${time.first.substring(2..3)}"
+        val endTime = "${time.second.substring(0..1)}:${time.second.substring(2..3)}"
+
+        return "$startTime ~ $endTime"
     }
 
     /**

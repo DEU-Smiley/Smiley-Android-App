@@ -1,7 +1,6 @@
 package com.example.smiley.info.fragment
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -27,7 +26,6 @@ import com.example.smiley.databinding.FragmentSignUpBinding
 import com.example.smiley.info.viewmodel.InfoViewModel
 import com.example.smiley.info.viewmodel.SignUpFragmentState
 import com.example.smiley.main.MainActivity
-import com.example.smiley.permission.PermissionActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -81,7 +79,7 @@ class SignUpFragment : Fragment() {
                 infoVm.state.collect { state ->
                     when(state){
                         is SignUpFragmentState.Init -> Unit
-                        is SignUpFragmentState.IsLoading -> handleLoading(state.isLoading)
+                        is SignUpFragmentState.IsLoading -> handleLoading(true)
                         is SignUpFragmentState.ShowToast -> handleShowToast(state.message)
                         is SignUpFragmentState.Error -> handleError(state.message)
                         is SignUpFragmentState.SuccessSendInfo -> handleSuccess(state.user)
@@ -103,10 +101,12 @@ class SignUpFragment : Fragment() {
     }
 
     private fun handleShowToast(message:String){
+        handleLoading(false)
         requireActivity().showToast(message)
     }
 
     private fun handleError(message:String){
+        handleLoading(false)
         requireActivity().showConfirmDialog(
             "회원가입 오류",
             message,
@@ -115,6 +115,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun handleSuccess(user:User){
+        handleLoading(false)
         requireActivity().showLottieGenericDialog(
             "회원가입 완료!",
             "${user.name}님 환영합니다!",
