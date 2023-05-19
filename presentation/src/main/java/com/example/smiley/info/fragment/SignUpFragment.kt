@@ -1,6 +1,7 @@
 package com.example.smiley.info.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -25,6 +26,8 @@ import com.example.smiley.common.extension.*
 import com.example.smiley.databinding.FragmentSignUpBinding
 import com.example.smiley.info.viewmodel.InfoViewModel
 import com.example.smiley.info.viewmodel.SignUpFragmentState
+import com.example.smiley.main.MainActivity
+import com.example.smiley.permission.PermissionActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -119,7 +122,8 @@ class SignUpFragment : Fragment() {
             confirmText = "등록하러 가기",
             cancleText = "나중에 하기",
             lottieView = R.raw.hospital,
-            confirmListener = { this@SignUpFragment.addFragment(CalibrationInfoFragment()) }
+            confirmListener = { this@SignUpFragment.addFragment(CalibrationInfoFragment()) },
+            cancleListner = { requireActivity().changeActivity(MainActivity::class.java) }
         )
     }
 

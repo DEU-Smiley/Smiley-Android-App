@@ -15,6 +15,7 @@
             android:layout_height="56dp"
             android:paddingLeft="@dimen/side_margin"
             android:paddingRight="@dimen/side_margin"
+            android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView

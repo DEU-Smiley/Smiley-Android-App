@@ -121,12 +121,13 @@
                 <View
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="@drawable/ic_arrow_right"
+                    android:background="@drawable/ic_right_arrow"
                     android:backgroundTint="@color/gray3_8E"/>
             </LinearLayout>
 
             <!-- Layout 일일 미션 스크롤뷰 -->
             <HorizontalScrollView
+                android:id="@+id/mission_scroll_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="20dp"
@@ -243,6 +244,7 @@
                         android:id="@+id/magazine_mission_card"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="40dp"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="2dp"
                         app:cardUseCompatPadding="true"
@@ -289,6 +291,122 @@
                 </LinearLayout>
             </HorizontalScrollView>
             <!-- Layout End 일일 미션 스크롤뷰 -->
+
+            <!-- Layout 챗봇 상담 배너 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chat_bot_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:layout_marginTop="36dp"
+                android:paddingLeft="@dimen/side_margin"
+                android:background="@drawable/background_card_white_radius_10"
+                app:layout_constraintTop_toBottomOf="@+id/mission_scroll_view">
+
+                <TextView
+                    android:id="@+id/chat_bot_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="챗봇 상담 OPEN!"
+                    android:textSize="@dimen/H6_SB600_16_h22"
+                    android:textColor="@color/black1_20"
+                    android:fontFamily="@font/pretendard_semibold"
+
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/chat_bot_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/chat_bot_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+
+                    android:text="궁금한 건 바로 질문하세요 !"
+                    android:textSize="@dimen/B5_M500_12_auto"
+                    android:textColor="@color/gray3_8E"
+                    android:fontFamily="@font/pretendard_medium"
+
+                    app:layout_constraintTop_toBottomOf="@id/chat_bot_title"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginEnd="24dp"
+                    android:src="@drawable/ic_chat_bot"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Layout End 챗봇 상담 배너 -->
+
+            <!-- Layout 타임 라인 레이아웃 -->
+            <TextView
+                android:id="@+id/magazine_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_marginStart="@dimen/side_margin"
+
+                android:text="오늘의 매거진"
+                android:textSize="@dimen/H3_B700_20_h30"
+                android:textColor="@color/black1_20"
+                android:fontFamily="@font/pretendard_bold"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chat_bot_banner"
+                />
+
+            <LinearLayout
+                android:id="@+id/magzine_detail_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:orientation="horizontal"
+
+                app:layout_constraintTop_toTopOf="@id/magazine_title"
+                app:layout_constraintBottom_toBottomOf="@id/magazine_title"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="전체보기"
+                    android:textSize="@dimen/H4_SB600_14_h18"
+                    android:textColor="@color/gray3_8E"
+                    android:fontFamily="@font/pretendard_semibold"/>
+
+                <View
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_right_arrow"
+                    android:backgroundTint="@color/gray3_8E"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/timeline_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:paddingStart="@dimen/side_margin"
+                android:paddingEnd="@dimen/side_margin"
+
+                app:layout_constraintTop_toBottomOf="@id/magazine_title"
+                />
+
+            <!-- Layout End 타임 라인 레이아웃 -->
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- Layout End 콘텐츠 레이아웃 -->
 
