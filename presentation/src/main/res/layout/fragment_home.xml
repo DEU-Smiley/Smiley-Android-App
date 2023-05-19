@@ -4,411 +4,413 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".main.home.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray6_F2">
+        android:fillViewport="true"
+        android:scrollbars="none">
 
-        <!-- Layout 프로필 레이아웃 -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/profile_layout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="36dp"
-            android:paddingBottom="36dp"
-            android:background="@color/white"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical"
+            android:background="@color/gray6_F2">
 
-            <ImageView
-                android:id="@+id/profile_picture"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="@dimen/side_margin"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/ic_profile_img"
-
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-
-                android:text="김동동님"
-                android:textColor="@color/black1_20"
-                android:textSize="@dimen/H2_SB600_22_h30"
-                android:includeFontPadding="false"
-                android:lineSpacingExtra="8sp"
-                android:fontFamily="@font/pretendard_semibold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/profile_picture"
-                app:layout_constraintRight_toLeftOf="@id/profile_guide_line"/>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/profile_guide_line"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
-
-            <ProgressBar
-                android:id="@+id/wear_progress_bar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
-                android:layout_height="6dp"
-                android:layout_marginEnd="@dimen/side_margin"
-                android:progress="30"
-                android:progressDrawable="@drawable/background_progress_bar"
-
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/profile_guide_line"
-                app:layout_constraintRight_toRightOf="parent"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <!-- Layout End 프로필 레이아웃 -->
-
-        <!-- Layout 콘텐츠 레이아웃 -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/white"
-            android:layout_marginTop="8dp"
-
-            app:layout_constraintTop_toBottomOf="@id/profile_layout"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <TextView
-                android:id="@+id/today_mission_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="@dimen/side_margin"
-
-                android:text="일일 미션"
-                android:textSize="@dimen/H6_SB600_16_h22"
-                android:textColor="@color/gray1_55"
-                android:fontFamily="@font/pretendard_semibold"
-
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
-
-            <LinearLayout
-                android:id="@+id/mission_detail_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/side_margin"
-                android:orientation="horizontal"
-
-                app:layout_constraintTop_toTopOf="@id/today_mission_title"
-                app:layout_constraintBottom_toBottomOf="@id/today_mission_title"
-                app:layout_constraintRight_toRightOf="parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="전체보기"
-                    android:textSize="@dimen/H4_SB600_14_h18"
-                    android:textColor="@color/gray3_8E"
-                    android:fontFamily="@font/pretendard_semibold"/>
-
-                <View
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/ic_right_arrow"
-                    android:backgroundTint="@color/gray3_8E"/>
-            </LinearLayout>
-
-            <!-- Layout 일일 미션 스크롤뷰 -->
-            <HorizontalScrollView
-                android:id="@+id/mission_scroll_view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="20dp"
-                android:paddingStart="@dimen/side_margin"
-                android:clipToPadding="false"
-                android:scrollbars="none"
-                app:layout_constraintTop_toBottomOf="@id/today_mission_title">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <!-- Layout 일일 착용 시간 카드 레이아웃 -->
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/daily_wear_mission_card"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="2dp"
-                        app:cardUseCompatPadding="true"
-                        android:backgroundTint="@color/primary_normal">
-
-                        <LinearLayout
-                            android:layout_width="122dp"
-                            android:layout_height="match_parent"
-                            android:paddingTop="12dp"
-                            android:paddingLeft="14dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="일일 착용 시간"
-                                android:textSize="@dimen/B4_M500_13_h18"
-                                android:textColor="@color/white"
-                                android:fontFamily="@font/pretendard_medium"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-
-                                android:text="2h 30m"
-                                android:textSize="@dimen/H6_SB600_16_h22"
-                                android:textColor="@color/white"
-                                android:fontFamily="@font/pretendard_medium"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8sp"
-                                android:text="권장 16h 30m"
-                                android:textSize="@dimen/B7_R400_12_h18"
-                                android:textColor="@color/white"
-                                android:fontFamily="@font/pretendard_regular"
-                                android:lineSpacingExtra="6sp"/>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                    <!-- Layout End 일일 착용 시간 카드 레이아웃 -->
-
-                    <!-- Layout 목표 착용 시간 카드 레이아웃 -->
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/target_time_mission_card"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="2dp"
-                        app:cardUseCompatPadding="true"
-                        android:backgroundTint="@color/primary_dark">
-
-                        <LinearLayout
-                            android:layout_width="122dp"
-                            android:layout_height="match_parent"
-                            android:paddingTop="12dp"
-                            android:paddingLeft="14dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="목표 시간 달성"
-                                android:textSize="@dimen/B4_M500_13_h18"
-                                android:textColor="@color/white"
-                                android:fontFamily="@font/pretendard_medium"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-
-                                android:text="2h 30m"
-                                android:textSize="@dimen/H6_SB600_16_h22"
-                                android:textColor="@color/white"
-                                android:fontFamily="@font/pretendard_medium"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8sp"
-                                android:text="남은 시간 16h 30m"
-                                android:textSize="@dimen/B7_R400_12_h18"
-                                android:textColor="@color/white"
-                                android:fontFamily="@font/pretendard_regular"
-                                android:lineSpacingExtra="6sp"/>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                    <!-- Layout End 목표 착용 시간 카드 레이아웃 -->
-
-                    <!-- Layout 매거진 미션 카드 레이아웃 -->
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/magazine_mission_card"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="40dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="2dp"
-                        app:cardUseCompatPadding="true"
-                        android:backgroundTint="#5C60F5">
-
-                        <LinearLayout
-                            android:layout_width="122dp"
-                            android:layout_height="match_parent"
-                            android:paddingTop="12dp"
-                            android:paddingLeft="14dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="매거진 읽기"
-                                android:textSize="@dimen/B4_M500_13_h18"
-                                android:textColor="@color/white"
-                                android:fontFamily="@font/pretendard_medium"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-
-                                android:text="1개"
-                                android:textSize="@dimen/H6_SB600_16_h22"
-                                android:textColor="@color/white"
-                                android:fontFamily="@font/pretendard_medium"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8sp"
-                                android:text="3개 읽기"
-                                android:textSize="@dimen/B7_R400_12_h18"
-                                android:textColor="@color/white"
-                                android:fontFamily="@font/pretendard_regular"
-                                android:lineSpacingExtra="6sp"/>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                    <!-- Layout End 매거진 미션 시간 카드 레이아웃 -->
-                </LinearLayout>
-            </HorizontalScrollView>
-            <!-- Layout End 일일 미션 스크롤뷰 -->
-
-            <!-- Layout 챗봇 상담 배너 -->
+            <!-- Layout 프로필 레이아웃 -->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chat_bot_banner"
+                android:id="@+id/profile_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/side_margin"
-                android:layout_marginEnd="@dimen/side_margin"
-                android:layout_marginTop="36dp"
-                android:paddingLeft="@dimen/side_margin"
-                android:background="@drawable/background_card_white_radius_10"
-                app:layout_constraintTop_toBottomOf="@+id/mission_scroll_view">
-
-                <TextView
-                    android:id="@+id/chat_bot_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="챗봇 상담 OPEN!"
-                    android:textSize="@dimen/H6_SB600_16_h22"
-                    android:textColor="@color/black1_20"
-                    android:fontFamily="@font/pretendard_semibold"
-
-                    app:layout_constraintVertical_chainStyle="packed"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/chat_bot_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    />
-
-                <TextView
-                    android:id="@+id/chat_bot_content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-
-                    android:text="궁금한 건 바로 질문하세요 !"
-                    android:textSize="@dimen/B5_M500_12_auto"
-                    android:textColor="@color/gray3_8E"
-                    android:fontFamily="@font/pretendard_medium"
-
-                    app:layout_constraintTop_toBottomOf="@id/chat_bot_title"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    />
+                android:background="@color/white"
+                android:paddingTop="36dp"
+                android:paddingBottom="36dp"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginEnd="24dp"
-                    android:src="@drawable/ic_chat_bot"
+                    android:id="@+id/profile_picture"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="@dimen/side_margin"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/ic_profile_img"
 
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <!-- Layout End 챗봇 상담 배너 -->
-
-            <!-- Layout 타임 라인 레이아웃 -->
-            <TextView
-                android:id="@+id/magazine_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:layout_marginStart="@dimen/side_margin"
-
-                android:text="오늘의 매거진"
-                android:textSize="@dimen/H3_B700_20_h30"
-                android:textColor="@color/black1_20"
-                android:fontFamily="@font/pretendard_bold"
-
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chat_bot_banner"
-                />
-
-            <LinearLayout
-                android:id="@+id/magzine_detail_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/side_margin"
-                android:orientation="horizontal"
-
-                app:layout_constraintTop_toTopOf="@id/magazine_title"
-                app:layout_constraintBottom_toBottomOf="@id/magazine_title"
-                app:layout_constraintRight_toRightOf="parent">
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="8sp"
+                    android:text="김동동님"
+                    android:textColor="@color/black1_20"
+                    android:textSize="@dimen/H2_SB600_22_h30"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/profile_picture"
+                    app:layout_constraintRight_toLeftOf="@id/profile_guide_line"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/profile_guide_line"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="전체보기"
-                    android:textSize="@dimen/H4_SB600_14_h18"
-                    android:textColor="@color/gray3_8E"
-                    android:fontFamily="@font/pretendard_semibold"/>
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
 
-                <View
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/ic_right_arrow"
-                    android:backgroundTint="@color/gray3_8E"/>
-            </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/wear_progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="6dp"
+                    android:layout_marginEnd="@dimen/side_margin"
+                    android:progress="30"
+                    android:progressDrawable="@drawable/background_progress_bar"
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/timeline_view"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/profile_guide_line"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Layout End 프로필 레이아웃 -->
+
+            <!-- Layout 콘텐츠 레이아웃 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:paddingStart="@dimen/side_margin"
-                android:paddingEnd="@dimen/side_margin"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="50dp"
+                android:background="@color/white"
 
-                app:layout_constraintTop_toBottomOf="@id/magazine_title"
-                />
+                app:layout_constraintTop_toBottomOf="@id/profile_layout"
+                app:layout_constraintBottom_toBottomOf="parent">
 
-            <!-- Layout End 타임 라인 레이아웃 -->
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <!-- Layout End 콘텐츠 레이아웃 -->
+                <TextView
+                    android:id="@+id/today_mission_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_marginStart="@dimen/side_margin"
+                    android:layout_marginTop="20dp"
+
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="일일 미션"
+                    android:textColor="@color/gray1_55"
+                    android:textSize="@dimen/H6_SB600_16_h22"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/mission_detail_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/side_margin"
+                    android:orientation="horizontal"
+
+                    app:layout_constraintBottom_toBottomOf="@id/today_mission_title"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/today_mission_title">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="전체보기"
+                        android:textColor="@color/gray3_8E"
+                        android:textSize="@dimen/H4_SB600_14_h18" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/ic_right_arrow"
+                        android:backgroundTint="@color/gray3_8E" />
+                </LinearLayout>
+
+                <!-- Layout 일일 미션 스크롤뷰 -->
+                <HorizontalScrollView
+                    android:id="@+id/mission_scroll_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:clipToPadding="false"
+                    android:paddingStart="@dimen/side_margin"
+                    android:scrollbars="none"
+                    app:layout_constraintTop_toBottomOf="@id/today_mission_title">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- Layout 일일 착용 시간 카드 레이아웃 -->
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/daily_wear_mission_card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/primary_normal"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="2dp"
+                            app:cardUseCompatPadding="true">
+
+                            <LinearLayout
+                                android:layout_width="122dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:paddingLeft="14dp"
+                                android:paddingTop="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="일일 착용 시간"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/B4_M500_13_h18" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="2h 30m"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/H6_SB600_16_h22" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8sp"
+                                    android:fontFamily="@font/pretendard_regular"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="권장 16h 30m"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/B7_R400_12_h18" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                        <!-- Layout End 일일 착용 시간 카드 레이아웃 -->
+
+                        <!-- Layout 목표 착용 시간 카드 레이아웃 -->
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/target_time_mission_card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/primary_dark"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="2dp"
+                            app:cardUseCompatPadding="true">
+
+                            <LinearLayout
+                                android:layout_width="122dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:paddingLeft="14dp"
+                                android:paddingTop="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="목표 시간 달성"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/B4_M500_13_h18" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="2h 30m"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/H6_SB600_16_h22" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8sp"
+                                    android:fontFamily="@font/pretendard_regular"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="남은 시간 16h 30m"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/B7_R400_12_h18" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                        <!-- Layout End 목표 착용 시간 카드 레이아웃 -->
+
+                        <!-- Layout 매거진 미션 카드 레이아웃 -->
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/magazine_mission_card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="40dp"
+                            android:backgroundTint="#5C60F5"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="2dp"
+                            app:cardUseCompatPadding="true">
+
+                            <LinearLayout
+                                android:layout_width="122dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:paddingLeft="14dp"
+                                android:paddingTop="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="매거진 읽기"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/B4_M500_13_h18" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+
+                                    android:fontFamily="@font/pretendard_medium"
+                                    android:text="1개"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/H6_SB600_16_h22" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8sp"
+                                    android:fontFamily="@font/pretendard_regular"
+                                    android:lineSpacingExtra="6sp"
+                                    android:text="3개 읽기"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/B7_R400_12_h18" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                        <!-- Layout End 매거진 미션 시간 카드 레이아웃 -->
+                    </LinearLayout>
+                </HorizontalScrollView>
+                <!-- Layout End 일일 미션 스크롤뷰 -->
+
+                <!-- Layout 챗봇 상담 배너 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/chat_bot_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/side_margin"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginEnd="@dimen/side_margin"
+                    android:background="@drawable/background_card_white_radius_10"
+                    android:paddingStart="@dimen/side_margin"
+                    app:layout_constraintTop_toBottomOf="@+id/mission_scroll_view">
+
+                    <TextView
+                        android:id="@+id/chat_bot_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="챗봇 상담 OPEN!"
+                        android:textColor="@color/black1_20"
+                        android:textSize="@dimen/H6_SB600_16_h22"
+
+                        app:layout_constraintBottom_toTopOf="@id/chat_bot_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/chat_bot_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="궁금한 건 바로 질문하세요 !"
+                        android:textColor="@color/gray3_8E"
+                        android:textSize="@dimen/B5_M500_12_auto"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/chat_bot_title" />
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="15dp"
+                        android:src="@drawable/ic_chat_bot"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 챗봇 상담 배너 -->
+
+                <!-- Layout 타임 라인 레이아웃 -->
+                <TextView
+                    android:id="@+id/magazine_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/side_margin"
+                    android:layout_marginTop="36dp"
+
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="오늘의 매거진"
+                    android:textColor="@color/black1_20"
+                    android:textSize="@dimen/H3_B700_20_h30"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chat_bot_banner"/>
+
+                <LinearLayout
+                    android:id="@+id/magzine_detail_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/side_margin"
+                    android:orientation="horizontal"
+
+                    app:layout_constraintBottom_toBottomOf="@id/magazine_title"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/magazine_title">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="전체보기"
+                        android:textColor="@color/gray3_8E"
+                        android:textSize="@dimen/H4_SB600_14_h18" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/ic_right_arrow"
+                        android:backgroundTint="@color/gray3_8E" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/timeline_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="40dp"
+                    android:paddingStart="@dimen/side_margin"
+                    android:paddingEnd="@dimen/side_margin"
+                    android:overScrollMode="never"
+
+                    app:layout_constraintTop_toBottomOf="@id/magazine_title"/>
+
+                <!-- Layout End 타임 라인 레이아웃 -->
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Layout End 콘텐츠 레이아웃 -->
+        </LinearLayout>
+    </ScrollView>
 </layout>

@@ -30,7 +30,8 @@ class TimeLineAdapter(
      * 특정 position의 아이템만 넘겨줌
      */
     override fun onBindViewHolder(holder: TimeLineViewHolder, position: Int) {
-        holder.bind(items[position])
+        val isLastView = position == items.size-1
+        holder.bind(items[position], isLastView)
     }
 
     /**
