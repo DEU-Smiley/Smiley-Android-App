@@ -23,11 +23,7 @@ class HospitalMapViewModel  @Inject constructor(
     val state : StateFlow<HospitalMapFragmentState> get() = _state
 
     private fun setLoading(){
-        _state.value = HospitalMapFragmentState.IsLoading(true)
-    }
-
-    private fun hideLoading(){
-        _state.value = HospitalMapFragmentState.IsLoading(false)
+        _state.value = HospitalMapFragmentState.IsLoading
     }
 
     private fun showError(message: String){
@@ -53,12 +49,10 @@ class HospitalMapViewModel  @Inject constructor(
             getNearByHospitalUseCase(lat, lng, dis)
                 .onStart { setLoading() }
                 .catch { exception ->
-                    hideLoading()
                     showToast(exception.message.toString())
                     Log.d("병원 조회 에러", exception.stackTraceToString())
                 }
                 .collect { state ->
-                    hideLoading()
                     when (state) {
                         is ResponseState.Success -> {
                             _state.value = HospitalMapFragmentState.SuccessLoadHospital(state.data)
@@ -75,10 +69,10 @@ class HospitalMapViewModel  @Inject constructor(
 
 sealed class HospitalMapFragmentState {
     object Init : HospitalMapFragmentState()
+    object IsLoading : HospitalMapFragmentState()
     data class SuccessLoadHospital(
         val hospitalPositList: HospitalPositList
     ) : HospitalMapFragmentState()
     data class Error(val error: String) : HospitalMapFragmentState()
-    data class IsLoading(val isLoading: Boolean) : HospitalMapFragmentState()
     data class ShowToast(val message: String) : HospitalMapFragmentState()
 }

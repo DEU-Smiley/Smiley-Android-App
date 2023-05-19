@@ -108,28 +108,31 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 hospitalVm.state.collect{ state ->
-                    handleStateChange(state)
+                    when(state){
+                        is HospitalMapFragmentState.Init -> Unit
+                        is HospitalMapFragmentState.IsLoading -> handleLoading(true)
+                        is HospitalMapFragmentState.SuccessLoadHospital -> {
+                            handleSuccess(state.hospitalPositList)
+                        }
+                        is HospitalMapFragmentState.Error -> {
+                            handleError(state.error)
+                        }
+                        is HospitalMapFragmentState.ShowToast -> {
+                            handleShowToast(state.message)
+                        }
+                    }
                 }
             }
         }
     }
 
-    private fun handleStateChange(state: HospitalMapFragmentState){
-        when(state){
-            is HospitalMapFragmentState.Init -> Unit
-            is HospitalMapFragmentState.SuccessLoadHospital -> {
-                handleSuccess(state.hospitalPositList)
-            }
-            is HospitalMapFragmentState.Error -> {
-                handleError(state.error)
-            }
-            is HospitalMapFragmentState.IsLoading -> Unit
-            is HospitalMapFragmentState.ShowToast -> {
-                handleShowToast(state.message)
-            }
-        }
+    private fun handleLoading(isLoading:Boolean){
+
     }
+
+
     private fun handleSuccess(result:HospitalPositList){
+        handleLoading(false)
         result.hospitalPosits.forEach {
             addMarker(
                 it.lat,
@@ -140,17 +143,15 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun handleError(message: String){
+        handleLoading(false)
         requireActivity().showConfirmDialog(
             "병원 조회 오류",
             message
         )
     }
 
-    private fun handleLoading(isLoading:Boolean){
-
-    }
-
     private fun handleShowToast(message:String){
+        handleLoading(false)
         requireActivity().showToast(message)
     }
 

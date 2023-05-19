@@ -22,11 +22,7 @@ class HospitalDialogViewModel @Inject constructor(
     val state : StateFlow<HospitalDialogState> get() = _state
 
     private fun setLoading(){
-        _state.value = HospitalDialogState.IsLoading(true)
-    }
-
-    private fun hideLoading(){
-        _state.value = HospitalDialogState.IsLoading(false)
+        _state.value = HospitalDialogState.IsLoading
     }
 
     private fun showToast(message: String){
@@ -38,12 +34,10 @@ class HospitalDialogViewModel @Inject constructor(
             getHospitalByHpidUseCase(hpid)
                 .onStart { setLoading() }
                 .catch { exception ->
-                    hideLoading()
                     showToast(exception.message.toString())
                     Log.d("병원 조회 에러", exception.stackTraceToString())
                 }
                 .collect{ state ->
-                    hideLoading()
                     when(state){
                         is ResponseState.Success -> {
                             _state.value = HospitalDialogState.SuccessLoadHospital(state.data)
@@ -59,8 +53,8 @@ class HospitalDialogViewModel @Inject constructor(
 
 sealed class HospitalDialogState {
     object Init                                            : HospitalDialogState()
+    object IsLoading                                       : HospitalDialogState()
     data class SuccessLoadHospital(val hospital: Hospital) : HospitalDialogState()
     data class ErrorLoadHospital(val error: String)        : HospitalDialogState()
-    data class IsLoading(val isLoading: Boolean)           : HospitalDialogState()
     data class ShowToast(val message: String)              : HospitalDialogState()
 }

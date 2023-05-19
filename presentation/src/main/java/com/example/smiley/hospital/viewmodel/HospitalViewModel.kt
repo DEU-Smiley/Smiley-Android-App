@@ -20,11 +20,7 @@ class HospitalViewModel @Inject constructor(
     val state : StateFlow<HospitalSearchFragmentState> get() = _state
 
     private fun setLoading(){
-        _state.value = HospitalSearchFragmentState.IsLoading(true)
-    }
-
-    private fun hideLoading(){
-        _state.value = HospitalSearchFragmentState.IsLoading(false)
+        _state.value = HospitalSearchFragmentState.IsLoading
     }
 
     private fun showToast(message: String){
@@ -36,12 +32,10 @@ class HospitalViewModel @Inject constructor(
             getAllHospitalUseCase()
                 .onStart { setLoading() }
                 .catch { exception ->
-                    hideLoading()
                     showToast(exception.message.toString())
                     Log.d("병원 조회 에러", exception.stackTraceToString())
                 }
                 .collect{ state ->
-                    hideLoading()
                     when(state) {
                         is ResponseState.Success -> {
                             _state.value = HospitalSearchFragmentState.SuccessLoadHospital(state.data)
@@ -56,9 +50,9 @@ class HospitalViewModel @Inject constructor(
 }
 
 sealed class HospitalSearchFragmentState {
-    object Init                                                     : HospitalSearchFragmentState()
-    data class SuccessLoadHospital(val simpleHospitalList: SimpleHospitalList)  : HospitalSearchFragmentState()
-    data class ErrorLoadHospital(val error: String)                 : HospitalSearchFragmentState()
-    data class IsLoading(val isLoading: Boolean)                    : HospitalSearchFragmentState()
-    data class ShowToast(val message: String)                       : HospitalSearchFragmentState()
+    object Init : HospitalSearchFragmentState()
+    object IsLoading : HospitalSearchFragmentState()
+    data class SuccessLoadHospital(val simpleHospitalList: SimpleHospitalList) : HospitalSearchFragmentState()
+    data class ErrorLoadHospital(val error: String) : HospitalSearchFragmentState()
+    data class ShowToast(val message: String) : HospitalSearchFragmentState()
 }
