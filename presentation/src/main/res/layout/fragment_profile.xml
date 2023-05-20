@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".main.profile.ProfileFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <!-- Layout 전체 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parent_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background">
+
+            <!-- Layout 프로필 레이아웃 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profile_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+
+                android:paddingLeft="@dimen/side_margin"
+                android:paddingTop="28dp"
+                android:paddingRight="@dimen/side_margin"
+                android:paddingBottom="20dp"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/user_nickname_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="동현"
+                    android:textColor="@color/black1_20"
+                    android:textSize="@dimen/H2_SB600_22_h30"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/user_birth_day_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+
+                    android:fontFamily="@font/pretendard_medium"
+                    android:text="1999년 09월 15일"
+                    android:textColor="@color/gray3_8E"
+                    android:textSize="@dimen/M500_14_h20"
+
+                    app:layout_constraintLeft_toLeftOf="@id/user_nickname_view"
+                    app:layout_constraintTop_toBottomOf="@id/user_nickname_view" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/reserv_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+
+                    android:background="@drawable/bg_rounded_corner_radius_10"
+                    android:backgroundTint="@color/light_blue1"
+                    android:paddingLeft="@dimen/side_margin"
+                    android:paddingTop="16dp"
+
+                    android:paddingRight="@dimen/side_margin"
+                    android:paddingBottom="16dp"
+
+                    app:layout_constraintTop_toBottomOf="@+id/user_birth_day_view">
+
+                    <TextView
+                        android:id="@+id/reserv_banner_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:text="병원 예약 관리 서비스 OPEN!"
+                        android:textColor="@color/black1_20"
+                        android:textSize="@dimen/H6_SB600_16_h22"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="예약 등록하러 가기"
+                        android:textColor="@color/gray3_8E"
+                        android:textSize="@dimen/M500_14_h20"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="@id/reserv_banner_title"
+                        app:layout_constraintTop_toBottomOf="@id/reserv_banner_title" />
+
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+
+                        android:background="@drawable/ic_location_img"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <!-- Layout 일일 미션 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mission_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginTop="34dp"
+
+                    android:orientation="vertical"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+
+                    app:layout_constraintLeft_toLeftOf="@id/reserv_banner"
+                    app:layout_constraintRight_toLeftOf="@id/store_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/reserv_banner">
+
+                    <View
+                        android:id="@+id/ic_document"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="@drawable/ic_document"
+                        android:backgroundTint="@color/gray1_55"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="일일 미션"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/M500_14_h20"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ic_document" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 일일 미션 레이아웃 -->
+
+                <!-- Layout 스토어 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/store_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginEnd="45dp"
+                    android:orientation="vertical"
+
+                    app:layout_constraintLeft_toRightOf="@+id/mission_btn"
+                    app:layout_constraintRight_toLeftOf="@id/chat_bot_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/reserv_banner">
+
+                    <View
+                        android:id="@+id/ic_coins"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="@drawable/ic_coins"
+                        android:backgroundTint="@color/gray1_55"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="스토어"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/M500_14_h20"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ic_coins" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 스토어 레이아웃 -->
+
+                <!-- Layout 챗봇 상담 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/chat_bot_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginEnd="45dp"
+                    android:orientation="vertical"
+
+                    app:layout_constraintLeft_toRightOf="@+id/store_btn"
+                    app:layout_constraintRight_toLeftOf="@id/faq_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/reserv_banner">
+
+                    <View
+                        android:id="@+id/ic_headphone"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="@drawable/ic_headphone"
+                        android:backgroundTint="@color/gray1_55"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="챗봇 상담"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/M500_14_h20"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ic_headphone" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 챗봇 상담 레이아웃 -->
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/faq_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginEnd="9dp"
+                    android:orientation="vertical"
+
+                    app:layout_constraintLeft_toRightOf="@+id/chat_bot_btn"
+                    app:layout_constraintRight_toRightOf="@id/reserv_banner"
+                    app:layout_constraintTop_toBottomOf="@+id/reserv_banner">
+
+                    <View
+                        android:id="@+id/ic_message"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="@drawable/ic_message"
+                        android:backgroundTint="@color/gray1_55"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="질문 답변"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/M500_14_h20"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ic_message" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Layout End 프로필 레이아웃 -->
+
+            <!-- Layout 설정 메뉴 레이아웃 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/menu_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/profile_layout">
+
+                <!-- Layout 첫 번째 설정 레이아웃 -->
+                <!-- Layout 장치 상세정보 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/menu_device_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+
+                    android:paddingStart="24dp"
+                    android:paddingTop="18dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="18dp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="장치 상세정보"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/B3_M500_15_h22"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+
+                        android:background="@drawable/ic_right_arrow"
+                        android:backgroundTint="@color/gray4_CB"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 장치 상세정보 레이아웃 -->
+
+                <!-- Layout 약품 성분 검사 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/menu_medicine_examine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+
+                    android:paddingStart="24dp"
+                    android:paddingTop="18dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="18dp"
+                    app:layout_constraintTop_toBottomOf="@id/menu_device_setting">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="약품 성분 검사"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/B3_M500_15_h22"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+
+                        android:background="@drawable/ic_right_arrow"
+                        android:backgroundTint="@color/gray4_CB"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 약품 성분 검사 레이아웃 -->
+
+                <!-- Layout 덴탈 매거진 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/menu_magazine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+
+                    android:paddingStart="24dp"
+                    android:paddingTop="18dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="18dp"
+                    app:layout_constraintTop_toBottomOf="@id/menu_medicine_examine">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="덴탈 매거진"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/B3_M500_15_h22"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+
+                        android:background="@drawable/ic_right_arrow"
+                        android:backgroundTint="@color/gray4_CB"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 덴탈 매거진 레이아웃 -->
+
+                <!-- Layout 병원 찾기 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/menu_search_hospital"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+
+                    android:paddingStart="24dp"
+                    android:paddingTop="18dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="18dp"
+                    app:layout_constraintTop_toBottomOf="@id/menu_magazine">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="병원 찾기"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/B3_M500_15_h22"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+
+                        android:background="@drawable/ic_right_arrow"
+                        android:backgroundTint="@color/gray4_CB"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 병원 찾기 레이아웃 -->
+                <!-- Layout End 첫 번째 설정 레이아웃 -->
+
+                <!-- Layout 두 번째 설정 레이아웃 -->
+                <!-- Layout 알림 설정 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/menu_notify_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/white"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+
+                    android:paddingStart="24dp"
+                    android:paddingTop="18dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="18dp"
+                    app:layout_constraintTop_toBottomOf="@+id/menu_search_hospital">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="알림 설정"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/B3_M500_15_h22"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+
+                        android:background="@drawable/ic_right_arrow"
+                        android:backgroundTint="@color/gray4_CB"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 알림 설정 레이아웃 -->
+
+                <!-- Layout 공지사항 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/menu_notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+
+                    android:paddingStart="24dp"
+                    android:paddingTop="18dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="18dp"
+                    app:layout_constraintTop_toBottomOf="@id/menu_notify_setting">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="공지사항"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/B3_M500_15_h22"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+
+                        android:background="@drawable/ic_right_arrow"
+                        android:backgroundTint="@color/gray4_CB"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 공지사항 레이아웃 -->
+
+                <!-- Layout 이용 약관 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/menu_terms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+
+                    android:paddingStart="24dp"
+                    android:paddingTop="18dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="18dp"
+                    app:layout_constraintTop_toBottomOf="@id/menu_notice">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="이용약관"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/B3_M500_15_h22"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+
+                        android:background="@drawable/ic_right_arrow"
+                        android:backgroundTint="@color/gray4_CB"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 이용 약관 레이아웃 -->
+
+                <!-- Layout 고객센터 메뉴 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/menu_customer_service"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+
+                    android:paddingStart="24dp"
+                    android:paddingTop="18dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="18dp"
+                    app:layout_constraintTop_toBottomOf="@id/menu_terms">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="고객센터"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/B3_M500_15_h22"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+
+                        android:background="@drawable/ic_right_arrow"
+                        android:backgroundTint="@color/gray4_CB"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 고객센터 메뉴 레이아웃 -->
+
+                <!-- Layout 앱 버전 메뉴 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/menu_app_version"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+
+                    android:paddingStart="24dp"
+                    android:paddingTop="18dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="18dp"
+                    app:layout_constraintTop_toBottomOf="@id/menu_customer_service">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="앱 버전"
+                        android:textColor="@color/gray1_55"
+                        android:textSize="@dimen/B3_M500_15_h22"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="0.0.1"
+                        android:textSize="@dimen/B4_M500_13_h18"
+                        android:textColor="@color/gray3_8E"
+                        android:fontFamily="@font/pretendard_medium"
+
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Layout End 앱 버전 메뉴 레이아웃 -->
+                <!-- Layout End 첫 번째 설정 레이아웃 -->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Layout End 설정 메뉴 레이아웃 -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="68dp"
+                android:layout_marginBottom="44dp"
+                android:layout_marginStart="24dp"
+
+                android:text="@string/app_provider_Information"
+                android:textSize="@dimen/H4_R400_15_h22"
+                android:textColor="@color/gray3_8E"
+                android:fontFamily="@font/pretendard_regular"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="6sp"
+                app:layout_constraintTop_toBottomOf="@id/menu_layout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 전체 레이아웃 -->
+    </ScrollView>
+</layout>

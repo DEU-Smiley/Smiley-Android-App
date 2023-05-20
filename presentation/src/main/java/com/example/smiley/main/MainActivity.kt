@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.smiley.R
 import com.example.smiley.databinding.ActivityMainBinding
 import com.example.smiley.main.home.HomeFragment
+import com.example.smiley.main.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,9 +14,11 @@ class MainActivity : AppCompatActivity() {
     private val bind:ActivityMainBinding get() = _bind!!
 
     private var homeFragment: HomeFragment? = null
+    private var profileFragment: ProfileFragment? = null
 
     private var fragmentMap: HashMap<Int, Fragment?>? = hashMapOf(
         R.id.menu_home to homeFragment,
+        R.id.menu_profile to profileFragment
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,11 +33,12 @@ class MainActivity : AppCompatActivity() {
         bind.navbar.run {
             setOnNavigationItemSelectedListener {
                 when (it.itemId) {
-                    R.id.menu_home -> changetFragment(R.id.menu_home)
-                    R.id.menu_timetable -> changetFragment(R.id.menu_timetable)
-                    R.id.menu_lab -> changetFragment(R.id.menu_lab)
-                    R.id.menu_profile -> changetFragment(R.id.menu_profile)
-                    else -> changetFragment(R.id.menu_home)
+                    R.id.menu_home -> changeFragment(R.id.menu_home)
+                    R.id.menu_timetable -> changeFragment(R.id.menu_timetable)
+                    R.id.menu_lab -> changeFragment(R.id.menu_lab)
+                    R.id.menu_community -> changeFragment(R.id.menu_community)
+                    R.id.menu_profile -> changeFragment(R.id.menu_profile)
+                    else -> changeFragment(R.id.menu_home)
                 }
 
                 true
@@ -43,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun changetFragment(fragmentId: Int){
+    private fun changeFragment(fragmentId: Int){
         fragmentMap?.let {
             it.forEach{ (key, value) ->
                 if(key == fragmentId){
@@ -63,7 +67,8 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_home -> HomeFragment()
             R.id.menu_timetable -> HomeFragment()
             R.id.menu_lab -> HomeFragment()
-            R.id.menu_profile -> HomeFragment()
+            R.id.menu_community -> HomeFragment()
+            R.id.menu_profile -> ProfileFragment()
             else -> HomeFragment()
         }
     }
