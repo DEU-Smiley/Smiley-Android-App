@@ -1,9 +1,11 @@
 package com.example.smiley.main.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smiley.common.extension.gone
+import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.databinding.TimelineMagazineViewBinding
 import com.example.smiley.databinding.TimelineTextViewBinding
 
@@ -26,6 +28,7 @@ sealed class TimeLineViewHolder(
     class MagazineObjectViewHolder(
         private val bind: TimelineMagazineViewBinding
     ): TimeLineViewHolder(bind){
+        @SuppressLint("ClickableViewAccessibility")
         override fun bind(item: TimeLineItem, isLastView: Boolean) {
             val viewObject = item.viewObject as ViewObject.MagazineObject
             val magazine = viewObject.magazine
@@ -40,6 +43,8 @@ sealed class TimeLineViewHolder(
                 )
             }
 
+            // 터치 효과 적용
+            bind.magazineLayout.setOnTouchListener(TransparentTouchListener())
             if(isLastView) bind.marginLayout.gone()
         }
     }

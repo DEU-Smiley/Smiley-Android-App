@@ -1,7 +1,6 @@
 package com.example.smiley.main.home
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.magazine.model.Magazine
 import com.example.smiley.R
+import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.databinding.FragmentHomeBinding
 import com.example.smiley.main.adapter.TimeLineAdapter
 import com.example.smiley.main.adapter.TimeLineItem
@@ -54,6 +54,24 @@ class HomeFragment : Fragment() {
         initTimeLineView()
 
         return bind.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        applyTouchEffectToAllViews(view as ViewGroup)
+    }
+
+    private fun applyTouchEffectToAllViews(viewGroup: ViewGroup) {
+        for (i in 0 until viewGroup.childCount) {
+            val child = viewGroup.getChildAt(i)
+            if (child.isClickable) {
+                child.setOnTouchListener(TransparentTouchListener())
+            }
+
+            if (child is ViewGroup) {
+                applyTouchEffectToAllViews(child)
+            }
+        }
     }
 
     private fun initTimeLineView(){

@@ -306,6 +306,8 @@
                     android:layout_marginEnd="@dimen/side_margin"
                     android:background="@drawable/background_card_white_radius_10"
                     android:paddingStart="@dimen/side_margin"
+                    android:clickable="true"
+
                     app:layout_constraintTop_toBottomOf="@+id/mission_scroll_view">
 
                     <TextView
