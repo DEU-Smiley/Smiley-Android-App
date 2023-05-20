@@ -14,7 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/parent_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/background">
 
             <!-- Layout 프로필 레이아웃 -->
@@ -65,6 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:clickable="true"
 
                     android:background="@drawable/bg_rounded_corner_radius_10"
                     android:backgroundTint="@color/light_blue1"
@@ -121,6 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
                     android:layout_marginTop="34dp"
+                    android:clickable="true"
 
                     android:orientation="vertical"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -167,6 +169,7 @@
                     android:layout_marginTop="34dp"
                     android:layout_marginEnd="45dp"
                     android:orientation="vertical"
+                    android:clickable="true"
 
                     app:layout_constraintLeft_toRightOf="@+id/mission_btn"
                     app:layout_constraintRight_toLeftOf="@id/chat_bot_btn"
@@ -209,6 +212,7 @@
                     android:layout_marginTop="34dp"
                     android:layout_marginEnd="45dp"
                     android:orientation="vertical"
+                    android:clickable="true"
 
                     app:layout_constraintLeft_toRightOf="@+id/store_btn"
                     app:layout_constraintRight_toLeftOf="@id/faq_btn"
@@ -250,6 +254,7 @@
                     android:layout_marginTop="34dp"
                     android:layout_marginEnd="9dp"
                     android:orientation="vertical"
+                    android:clickable="true"
 
                     app:layout_constraintLeft_toRightOf="@+id/chat_bot_btn"
                     app:layout_constraintRight_toRightOf="@id/reserv_banner"
@@ -301,7 +306,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:foreground="?attr/selectableItemBackground"
                     android:clickable="true"
 
                     android:paddingStart="24dp"
@@ -342,7 +346,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:foreground="?attr/selectableItemBackground"
                     android:clickable="true"
 
                     android:paddingStart="24dp"
@@ -383,7 +386,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:foreground="?attr/selectableItemBackground"
                     android:clickable="true"
 
                     android:paddingStart="24dp"
@@ -424,7 +426,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:foreground="?attr/selectableItemBackground"
                     android:clickable="true"
 
                     android:paddingStart="24dp"
@@ -468,7 +469,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:background="@color/white"
-                    android:foreground="?attr/selectableItemBackground"
                     android:clickable="true"
 
                     android:paddingStart="24dp"
@@ -509,7 +509,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:foreground="?attr/selectableItemBackground"
                     android:clickable="true"
 
                     android:paddingStart="24dp"
@@ -550,7 +549,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:foreground="?attr/selectableItemBackground"
                     android:clickable="true"
 
                     android:paddingStart="24dp"
@@ -591,7 +589,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:foreground="?attr/selectableItemBackground"
                     android:clickable="true"
 
                     android:paddingStart="24dp"
@@ -632,7 +629,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:foreground="?attr/selectableItemBackground"
                     android:clickable="true"
 
                     android:paddingStart="24dp"

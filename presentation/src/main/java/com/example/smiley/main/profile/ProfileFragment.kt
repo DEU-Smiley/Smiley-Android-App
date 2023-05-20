@@ -1,13 +1,16 @@
 package com.example.smiley.main.profile
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.smiley.R
+import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.databinding.FragmentProfileBinding
+
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -34,6 +37,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +46,24 @@ class ProfileFragment : Fragment() {
         _bind = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
         return bind.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        applyTouchEffectToAllViews(view as ViewGroup)
+    }
+
+    private fun applyTouchEffectToAllViews(viewGroup: ViewGroup) {
+        for (i in 0 until viewGroup.childCount) {
+            val child = viewGroup.getChildAt(i)
+            if (child.isClickable) {
+                child.setOnTouchListener(TransparentTouchListener())
+            }
+
+            if (child is ViewGroup) {
+                applyTouchEffectToAllViews(child)
+            }
+        }
     }
 
     companion object {
