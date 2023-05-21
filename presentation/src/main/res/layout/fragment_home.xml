@@ -159,22 +159,29 @@
                             app:cardUseCompatPadding="true">
 
                             <LinearLayout
-                                android:layout_width="122dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
-                                android:paddingLeft="14dp"
+                                android:minWidth="122dp"
+                                android:clickable="true"
+
+                                android:paddingStart="14dp"
+                                android:paddingEnd="14dp"
                                 android:paddingTop="12dp">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:fontFamily="@font/pretendard_medium"
                                     android:text="일일 착용 시간"
                                     android:textColor="@color/white"
-                                    android:textSize="@dimen/B4_M500_13_h18" />
+                                    android:textSize="@dimen/B4_M500_13_h18"
+
+                                    android:maxLines="1"/>
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
 
@@ -184,11 +191,13 @@
                                     android:textSize="@dimen/H6_SB600_16_h22" />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8sp"
                                     android:fontFamily="@font/pretendard_regular"
                                     android:lineSpacingExtra="6sp"
+                                    android:maxLines="1"
+
                                     android:text="권장 16h 30m"
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/B7_R400_12_h18" />
@@ -207,22 +216,30 @@
                             app:cardUseCompatPadding="true">
 
                             <LinearLayout
-                                android:layout_width="122dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
-                                android:paddingLeft="14dp"
+                                android:minWidth="122dp"
+                                android:clickable="true"
+
+                                android:paddingStart="14dp"
+                                android:paddingEnd="14dp"
                                 android:paddingTop="12dp">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:fontFamily="@font/pretendard_medium"
                                     android:text="목표 시간 달성"
                                     android:textColor="@color/white"
-                                    android:textSize="@dimen/B4_M500_13_h18" />
+                                    android:textSize="@dimen/B4_M500_13_h18"
+
+                                    android:maxLines="1"
+                                    />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
 
@@ -235,11 +252,16 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8sp"
+
                                     android:fontFamily="@font/pretendard_regular"
-                                    android:lineSpacingExtra="6sp"
                                     android:text="남은 시간 16h 30m"
+                                    android:textSize="@dimen/B7_R400_12_h18"
                                     android:textColor="@color/white"
-                                    android:textSize="@dimen/B7_R400_12_h18" />
+
+                                    android:lineSpacingExtra="6sp"
+                                    android:maxLines="1"
+                                    />
+
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                         <!-- Layout End 목표 착용 시간 카드 레이아웃 -->
@@ -256,14 +278,18 @@
                             app:cardUseCompatPadding="true">
 
                             <LinearLayout
-                                android:layout_width="122dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:minWidth="122dp"
                                 android:orientation="vertical"
-                                android:paddingLeft="14dp"
+                                android:clickable="true"
+
+                                android:paddingStart="14dp"
+                                android:paddingEnd="14dp"
                                 android:paddingTop="12dp">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/pretendard_medium"
                                     android:text="매거진 읽기"
@@ -271,7 +297,7 @@
                                     android:textSize="@dimen/B4_M500_13_h18" />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
 
@@ -281,14 +307,18 @@
                                     android:textSize="@dimen/H6_SB600_16_h22" />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="8sp"
-                                    android:fontFamily="@font/pretendard_regular"
-                                    android:lineSpacingExtra="6sp"
+
                                     android:text="3개 읽기"
+                                    android:textSize="@dimen/B7_R400_12_h18"
                                     android:textColor="@color/white"
-                                    android:textSize="@dimen/B7_R400_12_h18" />
+                                    android:fontFamily="@font/pretendard_regular"
+
+                                    android:lineSpacingExtra="6sp"
+                                    android:maxLines="1"
+                                    />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                         <!-- Layout End 매거진 미션 시간 카드 레이아웃 -->
