@@ -11,7 +11,7 @@
     <string name="onboarding_content3">전문가와 교정 선배들의 꿀팁, 똑똑한 챗봇까지 모두 다 준비되어 있어요 !</string>
     <string name="google_login_text">구글 계정으로 시작</string>
     <string name="kakao_login_text">카카오 계정으로 시작</string>
-    <string name="permission_explain_text">스마일리 서비스 사용을 위해 다음 권한의 허용이 필요합니다. 접근 권한은 휴대폰 설정에서 언제든지 바꿀 수 있습니다.</string>
+    <string name="permission_explain_text">앱 이용을 위해 아래의 권한들이 필요합니다. 접근 권한은 휴대폰 설정에서 언제든지 바꿀 수 있습니다.</string>
     <string name="medical_question_1">1. 치과진료 외에 수술이나 입원 경력이 있나요?</string>
     <string name="medical_question_2">2. 알러지나 부작용을 유발하는 의약품이 있나요?</string>
     <string name="medical_sub_question_2">*의약품명을 입력해주세요</string>
