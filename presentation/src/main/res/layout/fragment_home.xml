@@ -165,9 +165,10 @@
                                 android:minWidth="122dp"
                                 android:clickable="true"
 
+                                android:paddingTop="12dp"
+                                android:paddingBottom="8dp"
                                 android:paddingStart="14dp"
-                                android:paddingEnd="14dp"
-                                android:paddingTop="12dp">
+                                android:paddingEnd="14dp">
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -193,7 +194,6 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8sp"
                                     android:fontFamily="@font/pretendard_regular"
                                     android:lineSpacingExtra="6sp"
                                     android:maxLines="1"
@@ -222,9 +222,10 @@
                                 android:minWidth="122dp"
                                 android:clickable="true"
 
+                                android:paddingTop="12dp"
+                                android:paddingBottom="8dp"
                                 android:paddingStart="14dp"
-                                android:paddingEnd="14dp"
-                                android:paddingTop="12dp">
+                                android:paddingEnd="14dp">
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -251,7 +252,6 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8sp"
 
                                     android:fontFamily="@font/pretendard_regular"
                                     android:text="남은 시간 16h 30m"
@@ -284,9 +284,10 @@
                                 android:orientation="vertical"
                                 android:clickable="true"
 
+                                android:paddingTop="12dp"
+                                android:paddingBottom="8dp"
                                 android:paddingStart="14dp"
-                                android:paddingEnd="14dp"
-                                android:paddingTop="12dp">
+                                android:paddingEnd="14dp">
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -309,7 +310,6 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8sp"
 
                                     android:text="3개 읽기"
                                     android:textSize="@dimen/B7_R400_12_h18"
