@@ -20,7 +20,7 @@ internal class UserRepositoryImpl @Inject constructor(
 ): UserRepository {
     override suspend fun login(
         name: String,
-        email: String,
+        userId: String,
         birthDate: String,
         deviceToken: String
     ): Flow<ResponseState<User>> {
@@ -29,7 +29,7 @@ internal class UserRepositoryImpl @Inject constructor(
                 userApi.login(
                     UserLoginRequest(
                         name = name,
-                        email = email,
+                        userId = userId,
                         birthDate = birthDate,
                         deviceToken = deviceToken
                     )
