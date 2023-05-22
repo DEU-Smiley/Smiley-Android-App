@@ -2,7 +2,6 @@ package com.example.smiley.common.extension
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
-import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.Period

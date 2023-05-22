@@ -1,7 +1,6 @@
 package com.example.domain.reservation.model
 
 import com.example.domain.common.base.BaseModel
-import com.example.domain.hospital.model.Hospital
 import kotlinx.android.parcel.Parcelize
 import java.time.LocalDateTime
 

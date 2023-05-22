@@ -1,13 +1,12 @@
 package com.example.smiley.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
 import com.example.smiley.databinding.ActivityMainBinding
 import com.example.smiley.main.home.HomeFragment
 import com.example.smiley.main.profile.ProfileFragment
-import com.example.smiley.main.reserv.ReservHistoryAdapter
 import com.example.smiley.main.reserv.ReservHistoryFragment
 
 class MainActivity : AppCompatActivity() {
