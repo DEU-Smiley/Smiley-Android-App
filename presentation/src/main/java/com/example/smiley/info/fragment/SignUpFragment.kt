@@ -194,7 +194,7 @@ class SignUpFragment : Fragment() {
             if(isAllInputCompleted()){
                 infoVm.sendUserInfoToServer(
                     name = "${bind.nameEditText.text}",
-                    email = "${bind.emailEditText.text}",
+                    userId = "${bind.emailEditText.text}",
                     birth = "${bind.birthEditText.text}".toDateOfyyMMdd()
                 )
             }

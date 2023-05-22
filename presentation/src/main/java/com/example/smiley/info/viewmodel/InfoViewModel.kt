@@ -42,11 +42,11 @@ class InfoViewModel @Inject constructor(
     /**
      * 입력받은 사용자 정보를 서버로 전송하는 메소드
      */
-    fun sendUserInfoToServer(name: String, email: String, birth: LocalDate) {
+    fun sendUserInfoToServer(name: String, userId: String, birth: LocalDate) {
         viewModelScope.launch(Dispatchers.IO) {
             userLoginUseCase(
                 name = name,
-                email = email,
+                userId = userId,
                 birthDate = birth.toString(),
                 deviceToken = App.getDeviceToken()
             )

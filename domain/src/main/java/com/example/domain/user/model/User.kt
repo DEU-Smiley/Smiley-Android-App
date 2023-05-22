@@ -6,8 +6,8 @@ import java.time.LocalDate
 
 @Parcelize
 class User (
-    val id: String,
-    val email: String,
+    val idx: String,
+    val userId: String,
     val name: String,
     val birthDate: String,
     val deviceToken: String

@@ -8,7 +8,7 @@ import java.util.*
 interface UserRepository {
     suspend fun login(
         name: String,
-        email:String,
+        userId:String,
         birthDate: String,
         deviceToken: String
     ): Flow<ResponseState<User>>

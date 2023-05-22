@@ -14,13 +14,13 @@ class UserLoginUseCase @Inject constructor(
 ){
     suspend operator fun invoke(
         name: String,
-        email: String,
+        userId: String,
         birthDate: String,
         deviceToken: String
     ): Flow<ResponseState<User>> {
         return userRepository.login(
             name = name,
-            email = email,
+            userId = userId,
             birthDate = birthDate,
             deviceToken = deviceToken
         )
