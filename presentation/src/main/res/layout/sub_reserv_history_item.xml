@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/reserv_history_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingTop="20dp"
+        android:paddingLeft="@dimen/side_margin"
+        android:paddingRight="@dimen/side_margin"
+
+        android:background="@color/white"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/reserv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+
+            android:background="@drawable/background_round_rectangle_2dp"
+            android:backgroundTint="@color/light_blue1"
+
+            android:text="D-08"
+            android:textColor="@color/primary_dark"
+            android:textSize="@dimen/B4_M500_13_h18"
+            android:fontFamily="@font/pretendard_medium"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/hospital_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+
+            android:text="병원 이름"
+            android:textSize="@dimen/H6_SB600_16_h22"
+            android:textColor="@color/black1_20"
+            android:fontFamily="@font/pretendard_semibold"
+
+            app:layout_constraintTop_toBottomOf="@id/reserv_status"
+            app:layout_constraintLeft_toLeftOf="@id/reserv_status"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/hospital_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+
+            android:text="부산시 부산진구 가야대로 | 치과"
+            android:textSize="@dimen/B7_R400_12_h18"
+            android:textColor="@color/gray2_6E"
+            android:fontFamily="@font/pretendard_regular"
+
+            app:layout_constraintTop_toBottomOf="@id/hospital_name"
+            app:layout_constraintLeft_toLeftOf="@id/hospital_name"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/reserv_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+
+            android:text="2023년 5월 23일 오후 4시 30분"
+            android:textSize="@dimen/B7_R400_12_h18"
+            android:textColor="@color/black1_20"
+            android:fontFamily="@font/pretendard_regular"
+
+            app:layout_constraintTop_toBottomOf="@id/hospital_address"
+            app:layout_constraintLeft_toLeftOf="@id/hospital_address"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+
+            android:background="@color/gray6_F2"
+
+            app:layout_constraintTop_toBottomOf="@id/reserv_date"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,12 +1,13 @@
 package com.example.smiley.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
 import com.example.smiley.databinding.ActivityMainBinding
 import com.example.smiley.main.home.HomeFragment
 import com.example.smiley.main.profile.ProfileFragment
+import com.example.smiley.main.reserv.ReservHistoryFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,9 +16,11 @@ class MainActivity : AppCompatActivity() {
 
     private var homeFragment: HomeFragment? = null
     private var profileFragment: ProfileFragment? = null
+    private var reservHistoryFragment: ReservHistoryFragment? = null
 
     private var fragmentMap: HashMap<Int, Fragment?>? = hashMapOf(
         R.id.menu_home to homeFragment,
+        R.id.menu_reserv to reservHistoryFragment,
         R.id.menu_profile to profileFragment
     )
 
@@ -34,8 +37,8 @@ class MainActivity : AppCompatActivity() {
             setOnNavigationItemSelectedListener {
                 when (it.itemId) {
                     R.id.menu_home -> changeFragment(R.id.menu_home)
-                    R.id.menu_timetable -> changeFragment(R.id.menu_timetable)
-                    R.id.menu_lab -> changeFragment(R.id.menu_lab)
+                    R.id.menu_reserv -> changeFragment(R.id.menu_reserv)
+                    R.id.menu_inspect -> changeFragment(R.id.menu_inspect)
                     R.id.menu_community -> changeFragment(R.id.menu_community)
                     R.id.menu_profile -> changeFragment(R.id.menu_profile)
                     else -> changeFragment(R.id.menu_home)
@@ -65,8 +68,8 @@ class MainActivity : AppCompatActivity() {
     private fun fragmentFactory(fragmentId: Int): Fragment {
         return when (fragmentId) {
             R.id.menu_home -> HomeFragment()
-            R.id.menu_timetable -> HomeFragment()
-            R.id.menu_lab -> HomeFragment()
+            R.id.menu_reserv -> ReservHistoryFragment()
+            R.id.menu_inspect -> HomeFragment()
             R.id.menu_community -> HomeFragment()
             R.id.menu_profile -> ProfileFragment()
             else -> HomeFragment()

@@ -8,14 +8,14 @@
         />
 
     <item
-        android:id="@+id/menu_timetable"
+        android:id="@+id/menu_reserv"
         android:enabled = "true"
         android:icon="@drawable/ic_call"
         android:title="예약"
         />
 
     <item
-        android:id="@+id/menu_lab"
+        android:id="@+id/menu_inspect"
         android:enabled = "true"
         android:icon="@drawable/ic_scan"
         android:title="검사"
