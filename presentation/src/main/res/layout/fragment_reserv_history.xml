@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".main.reserv.ReservHistoryFragment">
+
+    <!-- Layout 전체 레이아웃 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <!-- Layout 예약 내역 리사이클러뷰 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reserv_history_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <!-- Layout End 예약 내역 리사이클러뷰 -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Layout End 전체 레이아웃 -->
+</layout>
