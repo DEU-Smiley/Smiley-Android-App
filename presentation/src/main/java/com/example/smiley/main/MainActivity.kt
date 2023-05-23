@@ -8,7 +8,9 @@ import com.example.smiley.databinding.ActivityMainBinding
 import com.example.smiley.main.home.HomeFragment
 import com.example.smiley.main.profile.ProfileFragment
 import com.example.smiley.main.reserv.ReservHistoryFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var _bind:ActivityMainBinding? = null
@@ -82,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         fragment?.let {
             supportFragmentManager
                 .beginTransaction() // 프래그먼트 변경을 위한 트랜잭션을 시작
-                .add(R.id.frame_layout, it) // FrameLayout에 전달 받은 프래그먼트로 교체
+                .add(R.id.base_layout, it) // FrameLayout에 전달 받은 프래그먼트로 교체
                 .commit() // 변경 사항 적용
         }
     }

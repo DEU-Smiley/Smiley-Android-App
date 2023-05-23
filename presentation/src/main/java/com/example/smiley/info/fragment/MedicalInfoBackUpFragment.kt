@@ -81,7 +81,7 @@ class MedicalInfoBackUpFragment : Fragment(), ButtonClickable, DataSendable {
             medicineSearchFragment.dataSendable = this
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .add(R.id.parent_layout, medicineSearchFragment)
+                .add(R.id.base_layout, medicineSearchFragment)
                 .addToBackStack(null)
                 .commit()
         }

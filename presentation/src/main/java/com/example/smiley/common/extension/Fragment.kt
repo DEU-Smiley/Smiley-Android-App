@@ -14,7 +14,7 @@ fun Fragment.dismiss(){
 fun Fragment.addFragment(fragment:Fragment){
     requireActivity().supportFragmentManager
         .beginTransaction()
-        .add(R.id.parent_layout, fragment)
+        .add(R.id.base_layout, fragment)
         .addToBackStack(null)
         .commit()
 }

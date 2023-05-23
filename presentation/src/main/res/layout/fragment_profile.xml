@@ -12,7 +12,7 @@
 
         <!-- Layout 전체 레이아웃 -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/parent_layout"
+            android:id="@+id/base_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background">

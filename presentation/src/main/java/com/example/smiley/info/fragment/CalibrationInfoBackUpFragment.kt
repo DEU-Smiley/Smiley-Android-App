@@ -146,7 +146,7 @@ class CalibrationInfoBackUpFragment : Fragment(), ButtonClickable, DataSendable 
             hospitalSearchFragment.dataSendable = this
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .add(R.id.parent_layout, hospitalSearchFragment)
+                .add(R.id.base_layout, hospitalSearchFragment)
                 .addToBackStack(null)
                 .commit()
         }

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.annotation.RawRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.common.dialog.ConfirmDialog
 import com.example.smiley.common.dialog.GenericDialog
@@ -25,11 +26,18 @@ fun<T> Activity.changeActivity(activity:Class<T>) {
 fun AppCompatActivity.addFragment(fragment: Fragment){
     supportFragmentManager
         .beginTransaction()
-        .add(R.id.parent_layout, fragment)
+        .add(R.id.base_layout, fragment)
         .addToBackStack(null)
         .commit()
 }
 
+fun AppCompatActivity.addFragmentToFullScreen(fragment: Fragment){
+    supportFragmentManager
+        .beginTransaction()
+        .add(R.id.parent_layout, fragment)
+        .addToBackStack(null)
+        .commit()
+}
 /**
  * 기본 다이얼로그 출력 메소드
  * 확인 / 취소
