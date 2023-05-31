@@ -54,9 +54,9 @@
 |:---------:|:--------:|:------------:|
 | <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/home_screen.png" width="250"/>| <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/reserv_screen.png" width="250"/> |<img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/profile_screen.png" width="250"/> | 
 
-| 장치 검색 |
-|:---------:|
-| <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/gif/bluetooth.gif" width="250"/> |
+| 약품 검색 | 장치 검색 |
+|:---------:|:--------:|
+| <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/gif/medicine_search.gif" width="250"/> | <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/gif/bluetooth.gif" width="250"/> |
 ---
 
 ## 💫 팀 협업 방식
