@@ -256,7 +256,10 @@ class BluetoothSearchFragment : Fragment() {
     private val btItemClickListener = object : OnItemClickListener<BluetoothDevice>{
         @SuppressLint("MissingPermission")
         override fun onItemClicked(view:View, position: Int, data: BluetoothDevice) {
-            // 연결 메소드
+            // 스캔 중인 경우엔 연결 시도 불가
+            if(bluetoothVm.isScanning) return
+
+            // 장치 연결 & 클릭한 아이템의 로딩 애니메이션 바인딩
             connectLoadingView = view.findViewById<LottieAnimationView>(R.id.connect_loading_view)
             bluetoothVm.connectToDevice(data.address)
         }
