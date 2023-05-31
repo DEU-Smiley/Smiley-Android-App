@@ -43,6 +43,21 @@
     - 교정 중 궁금한 사항이 생겨도 병원 진료 날짜까지 기다리지 않아도 됩니다.
 
 ---
+## 🖥️ 동작 화면
+
+
+| 온보딩 | 회원 가입 | 병원 등록 |
+|:---------:|:--------:|:------------:|
+| <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/gif/on_boarding.gif" width="250"/>| <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/gif/sign_up.gif" width="250"/> | <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/gif/add_hospital.gif" width="250"/> | 
+
+| 홈화면 | 예약 목록 | 프로필 |
+|:---------:|:--------:|:------------:|
+| <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/home_screen.png" width="250"/>| <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/reserv_screen.png" width="250"/> |<img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/profile_screen.png" width="250"/> | 
+
+| 장치 검색 |
+|:---------:|
+| <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/gif/bluetooth.gif" width="250"/> |
+---
 
 ## 💫 팀 협업 방식
 
