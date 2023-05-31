@@ -203,8 +203,20 @@ StateFlow와 State 패턴을 사용하지 않았을 때, UI 상태 처리가 복
 - StateFlow가 중간값을 보장하지 않는다는 것이 원인이었음을 알게 되었습니다.
 - 이를 해결하기 위해 로딩과 같은 UI 적인 부분은 상태 클래스로 만들지 않고 View에서 처리하도록 하여 문제를 해결했습니다.
 
+
 ## 📘 ERD
 
 > 테이블 구조도
 
 ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2ee39848-40ce-4277-b5dc-c6816f970198/Untitled.png)
+
+
+## 👨‍ 👨‍👦팀 구성
+<div align="center">
+
+|김동현 ``` Android Dev ```| 김준 ```Backend Dev``` | 김성찬 ```Backend Dev``` | 정민수```Backend Dev``` |
+|:-:|:-:|:-:|:-:|
+|<img src="https://avatars.githubusercontent.com/u/63500239?v=4" width=130>| <img src="https://avatars.githubusercontent.com/u/30451538?v=4" width=130> | <img src="https://avatars.githubusercontent.com/u/115801420?v=4" width=130> | <img src="https://avatars.githubusercontent.com/u/93813747?v=4" width=130> |
+|[@donghyeon0915](https://github.com/Donghyeon0915)| [@rlawns0327](https://github.com/rlawns0327)| [@effort-type](https://github.com/tjdckscert)| [@effort-type](https://github.com/effort-type)|
+
+</div>
