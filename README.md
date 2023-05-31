@@ -128,9 +128,6 @@ Coroutine-Flow를 사용하여 네트워크 요청을 비동기적으로 처리�
 2. **개발 효율성 증가 :** Coroutine-Flow를 활용하여 네트워크 요청 처리를 비동기화하면서, 개발 효율성도 향상되었습니다.
 <br> <br>
 
-<br>
-<br>
-
 ### **4. Hilt**
 <br>
 
@@ -214,9 +211,9 @@ StateFlow와 State 패턴을 사용하지 않았을 때, UI 상태 처리가 복
 ## 👨‍ 👨‍👦팀 구성
 <div align="center">
 
-|김동현 ``` Android Dev ```| 김준 ```Backend Dev``` | 김성찬 ```Backend Dev``` | 정민수```Backend Dev``` |
+|김동현 ``` Android Dev ```| 김준 ```Backend Dev``` | 김성찬 ```Backend Dev``` | 정민수 ```Backend Dev``` |
 |:-:|:-:|:-:|:-:|
 |<img src="https://avatars.githubusercontent.com/u/63500239?v=4" width=130>| <img src="https://avatars.githubusercontent.com/u/30451538?v=4" width=130> | <img src="https://avatars.githubusercontent.com/u/115801420?v=4" width=130> | <img src="https://avatars.githubusercontent.com/u/93813747?v=4" width=130> |
-|[@donghyeon0915](https://github.com/Donghyeon0915)| [@rlawns0327](https://github.com/rlawns0327)| [@effort-type](https://github.com/tjdckscert)| [@effort-type](https://github.com/effort-type)|
+|[@donghyeon0915](https://github.com/Donghyeon0915)| [@rlawns0327](https://github.com/rlawns0327)| [@tjdckscert](https://github.com/tjdckscert)| [@effort-type](https://github.com/effort-type)|
 
 </div>
