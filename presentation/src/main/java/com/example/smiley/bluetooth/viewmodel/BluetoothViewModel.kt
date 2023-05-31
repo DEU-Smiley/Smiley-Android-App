@@ -14,9 +14,14 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.AndroidViewModel
 import com.example.smiley.bluetooth.util.BluetoothUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -37,6 +42,7 @@ class BluetoothViewModel @Inject constructor(
 
     private var isScanning = false
     private val deviceList = mutableSetOf<BluetoothDevice>() // 스캔된 장치 리스트
+    private var searchJob: Job? = null // 스캔 타이머 job
 
     private val _state = MutableStateFlow<BluetoothSearchFragmentState>(BluetoothSearchFragmentState.Init)
     val state: StateFlow<BluetoothSearchFragmentState>
@@ -88,10 +94,14 @@ class BluetoothViewModel @Inject constructor(
             return
         }
         
+        // 이전 타이머가 끝나기 전에 다시 스캔을 요청한 경우
+        // 이전 타이머를 취소하고 새로 코루틴을 생성
+        searchJob?.cancel(null)
         // SCAN_PERIOD 시간 이후엔 검색 종료
-        Handler().postDelayed({
-            stopScan()
-        }, SCAN_PERIOD)
+        searchJob = CoroutineScope(Dispatchers.IO).launch {
+            delay(SCAN_PERIOD)
+            if(isScanning) stopScan()
+        }
 
         isScanning = true
         deviceList.clear() // 스캔 시작하면 기존 리스트 초기화
