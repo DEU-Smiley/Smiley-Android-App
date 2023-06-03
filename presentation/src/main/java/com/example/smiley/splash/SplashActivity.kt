@@ -1,56 +1,63 @@
 package com.example.smiley.splash
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.common.extension.changeActivity
-import com.example.smiley.common.extension.showGenericAlertDialog
 import com.example.smiley.login.LoginActivity
-import com.example.smiley.main.MainActivity
 import com.example.smiley.onboarding.OnBoardingActivity
-import com.example.smiley.permission.PermissionActivity
-import com.kakao.sdk.auth.AuthApiClient
-import com.kakao.sdk.common.model.KakaoSdkError
-import com.kakao.sdk.user.UserApiClient
+import com.example.smiley.splash.viewmodel.SplashActivityState
+import com.example.smiley.splash.viewmodel.SplashViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @SuppressLint("CustomSplashScreen")
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
+    private val splashVm: SplashViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        splashLogo(3)
+        observe()
+        splashLogo(2)
     }
 
     private fun splashLogo(sec:Long){
         Handler().postDelayed(Runnable {
-            checkKakaoAccessToken()
+            splashVm.checkFirstAccess()
         }, 1000L * sec)
     }
 
-
-    /**
-     * 카카오 토큰이 있는지 검증하는 메소드
-     */
-    private fun checkKakaoAccessToken(){
-        // 토큰이 이미 있는 경우
-        if(AuthApiClient.instance.hasToken()) {
-            UserApiClient.instance.accessTokenInfo{ _, error ->
-                if(error == null) { // 토큰 유효성 체크 성공 (필요시 토큰 갱신)
-                    changeActivity(PermissionActivity::class.java)
-                    return@accessTokenInfo
-                } else if (error !is KakaoSdkError || !error.isInvalidTokenError()){
-                    this.showGenericAlertDialog("사용자 검증에 실패하였습니다. 로그인 화면으로 이동합니다.")
+    private fun observe(){
+        splashVm.state
+            .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+            .onEach { state ->
+                when (state) {
+                    is SplashActivityState.Init -> Unit
+                    is SplashActivityState.IsFirstAccess -> {
+                        handleIsFirstAccess(state.flag)
+                    }
                 }
-                changeActivity(OnBoardingActivity::class.java)
             }
-        } else { // 로그인 필요
-            changeActivity(OnBoardingActivity::class.java)
-        }
+            .launchIn(lifecycleScope)
     }
 
+    private fun handleIsFirstAccess(flag: Boolean){
+        changeActivity(
+            // 최초 접속인 경우
+            if(flag) OnBoardingActivity::class.java
+            else LoginActivity::class.java
+        )
+    }
 }

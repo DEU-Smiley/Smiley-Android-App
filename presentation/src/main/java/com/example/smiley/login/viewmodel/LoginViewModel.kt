@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.domain.user.usecase.GetAccessFlagUseCase
 import com.example.smiley.login.LoginActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
@@ -11,12 +13,16 @@ import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import com.kakao.sdk.user.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor() : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val getAccessFlagUseCase: GetAccessFlagUseCase
+) : ViewModel() {
     @SuppressLint("StaticFieldLeak")
     private val _state = MutableStateFlow<LoginActivityState>(LoginActivityState.Init)
     val state: StateFlow<LoginActivityState> get() = _state
@@ -30,8 +36,8 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    private fun setSuccessLogin(user:User){
-        _state.value = LoginActivityState.SuccessLogin(user)
+    private fun setSuccessLogin(user:User, accessFlag:Boolean){
+        _state.value = LoginActivityState.SuccessLogin(user, accessFlag)
     }
     private fun setErrorLogin(message: String) {
         _state.value = LoginActivityState.ErrorLogin(message = message)
@@ -39,20 +45,25 @@ class LoginViewModel @Inject constructor() : ViewModel() {
 
 
     private fun setSuccessLogin() {
-        // 사용자 정보 요청 (기본)
-        UserApiClient.instance.me { user, error ->
-            if (error != null) {
-                setErrorLogin(error.message?:"사용자 정보 요청 실패")
-            } else if (user != null) {
-                Log.i(
-                    "LoginViewModel", "사용자 정보 요청 성공" +
-                            "\n회원번호: ${user.id}" +
-                            "\n이메일: ${user.kakaoAccount?.email}" +
-                            "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-                            "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}" +
-                            "\n생일: ${user.kakaoAccount?.birthday}"
-                )
-                setSuccessLogin(user)
+        viewModelScope.launch(Dispatchers.IO) {
+            // 최초 접속인지 먼저 확인
+            getAccessFlagUseCase().collect{ accessFlag ->
+                // 사용자 정보 요청 (기본)
+                UserApiClient.instance.me { user, error ->
+                    if (error != null) {
+                        setErrorLogin(error.message?:"사용자 정보 요청 실패")
+                    } else if (user != null) {
+                        Log.i(
+                            "LoginViewModel", "사용자 정보 요청 성공" +
+                                    "\n회원번호: ${user.id}" +
+                                    "\n이메일: ${user.kakaoAccount?.email}" +
+                                    "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                                    "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}" +
+                                    "\n생일: ${user.kakaoAccount?.birthday}"
+                        )
+                        setSuccessLogin(user, !accessFlag)
+                    }
+                }
             }
         }
     }
@@ -90,6 +101,6 @@ class LoginViewModel @Inject constructor() : ViewModel() {
 
 sealed class LoginActivityState {
     object Init : LoginActivityState()
-    data class SuccessLogin(val user: User) : LoginActivityState()
+    data class SuccessLogin(val user: User, val isFirstAccess: Boolean) : LoginActivityState()
     data class ErrorLogin(val message: String) : LoginActivityState()
 }

@@ -1,6 +1,8 @@
 package com.example.data.user
 
+import com.example.data.common.utils.PrefsDataStore
 import com.example.data.hilt.module.NetworkModule
+import com.example.data.hilt.module.PrefsDataStoreModule
 import com.example.data.hilt.qualifier.BaseRetrofit
 import com.example.data.user.remote.api.UserApi
 import com.example.data.user.repository.UserRepositoryImpl
@@ -13,7 +15,7 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 
 
-@Module(includes = [NetworkModule::class])
+@Module(includes = [NetworkModule::class, PrefsDataStoreModule::class])
 @InstallIn(SingletonComponent::class)
 internal class UserModule {
 
@@ -29,7 +31,8 @@ internal class UserModule {
     @Provides
     fun provideUserRepository(
         userApi: UserApi,
+        dataStore: PrefsDataStore
     ): UserRepository {
-        return UserRepositoryImpl(userApi)
+        return UserRepositoryImpl(userApi, dataStore)
     }
 }
