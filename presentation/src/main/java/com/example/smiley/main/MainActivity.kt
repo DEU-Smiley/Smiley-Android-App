@@ -8,6 +8,7 @@ import com.example.smiley.R
 import com.example.smiley.databinding.ActivityMainBinding
 import com.example.smiley.main.home.HomeFragment
 import com.example.smiley.main.profile.ProfileFragment
+import com.example.smiley.main.reserv.ReservFragment
 import com.example.smiley.main.reserv.ReservHistoryFragment
 import com.example.smiley.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,11 +22,11 @@ class MainActivity : AppCompatActivity() {
 
     private var homeFragment: HomeFragment? = null
     private var profileFragment: ProfileFragment? = null
-    private var reservHistoryFragment: ReservHistoryFragment? = null
+    private var reservFragment: ReservFragment? = null
 
     private var fragmentMap: HashMap<Int, Fragment?>? = hashMapOf(
         R.id.menu_home to homeFragment,
-        R.id.menu_reserv to reservHistoryFragment,
+        R.id.menu_reserv to reservFragment,
         R.id.menu_profile to profileFragment
     )
 
@@ -82,7 +83,7 @@ class MainActivity : AppCompatActivity() {
     private fun fragmentFactory(fragmentId: Int): Fragment {
         return when (fragmentId) {
             R.id.menu_home -> HomeFragment()
-            R.id.menu_reserv -> ReservHistoryFragment()
+            R.id.menu_reserv -> ReservFragment()
             R.id.menu_inspect -> HomeFragment()
             R.id.menu_community -> HomeFragment()
             R.id.menu_profile -> ProfileFragment()

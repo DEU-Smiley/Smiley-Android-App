@@ -11,6 +11,7 @@ import com.example.domain.reservation.model.Reserv
 import com.example.domain.reservation.model.ReservList
 import com.example.smiley.R
 import com.example.smiley.databinding.FragmentReservHistoryBinding
+import com.example.smiley.main.reserv.adapter.ReservHistoryAdapter
 import java.time.LocalDateTime
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

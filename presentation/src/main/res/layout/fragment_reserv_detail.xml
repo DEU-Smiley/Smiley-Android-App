@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".main.reserv.ReservDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Layout 예약 없음 화면 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/reserv_info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background">
+
+            <ImageView
+                android:id="@+id/ic_none_data"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_none_data"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/no_reserv_title"
+                app:layout_constraintVertical_chainStyle="packed"
+                />
+
+            <TextView
+                android:id="@+id/no_reserv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+
+                android:text="현재 예약이 없어요"
+                android:textSize="@dimen/M500_16_h22"
+                android:textColor="@color/gray1_55"
+                android:fontFamily="@font/pretendard_medium"
+                android:lineSpacingExtra="6sp"
+
+                app:layout_constraintLeft_toLeftOf="@id/ic_none_data"
+                app:layout_constraintRight_toRightOf="@id/ic_none_data"
+                app:layout_constraintTop_toBottomOf="@id/ic_none_data"
+                app:layout_constraintBottom_toTopOf="@id/no_reserv_content"
+                />
+
+            <TextView
+                android:id="@+id/no_reserv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+                android:text="@string/no_reserv_data_msg"
+                android:textSize="@dimen/M500_14_h20"
+                android:textColor="@color/gray3_8E"
+                android:textAlignment="center"
+                android:fontFamily="@font/pretendard_medium"
+                android:lineSpacingExtra="6sp"
+
+                app:layout_constraintLeft_toLeftOf="@id/ic_none_data"
+                app:layout_constraintRight_toRightOf="@id/ic_none_data"
+                app:layout_constraintTop_toBottomOf="@id/no_reserv_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 예약 없음 화면 레이아웃 -->
+
+        <!-- Layout 예약 화면 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/reserv_empty_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 예약 화면 레이아웃 -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
