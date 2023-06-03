@@ -1,6 +1,7 @@
 package com.example.smiley.main
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
@@ -8,6 +9,7 @@ import com.example.smiley.databinding.ActivityMainBinding
 import com.example.smiley.main.home.HomeFragment
 import com.example.smiley.main.profile.ProfileFragment
 import com.example.smiley.main.reserv.ReservHistoryFragment
+import com.example.smiley.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private var _bind:ActivityMainBinding? = null
     private val bind:ActivityMainBinding get() = _bind!!
+    private val mainVm: MainViewModel by viewModels()
 
     private var homeFragment: HomeFragment? = null
     private var profileFragment: ProfileFragment? = null
@@ -31,7 +34,16 @@ class MainActivity : AppCompatActivity() {
         _bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
 
+        initAcitivty()
         initBottomNavibar()
+    }
+
+    /**
+     * 액티비티 초기화 메소드
+     */
+    private fun initAcitivty(){
+        // 접속 플래그 설정
+        mainVm.setAccessFlag(true)
     }
 
     private fun initBottomNavibar() {
