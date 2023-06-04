@@ -1,4 +1,4 @@
-package com.example.smiley.main.adapter
+package com.example.smiley.main.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
