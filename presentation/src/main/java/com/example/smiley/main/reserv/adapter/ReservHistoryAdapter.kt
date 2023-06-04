@@ -17,7 +17,7 @@ import com.example.smiley.databinding.SubReservHistoryItemBinding
 import java.time.LocalDateTime
 
 class ReservHistoryAdapter(
-    private val data: ReservList
+    private var data: ReservList
 ): RecyclerView.Adapter<ReservHistoryAdapter.ViewHolder>(){
     private val _context = App.ApplicationContext()
 
@@ -32,6 +32,12 @@ class ReservHistoryAdapter(
     }
 
     override fun getItemCount() = data.reservList.size
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateDataSet(reservs:ReservList){
+        this.data = reservs
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(
         private val bind: SubReservHistoryItemBinding
