@@ -13,13 +13,12 @@ import com.example.domain.magazine.model.Magazine
 import com.example.smiley.R
 import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.databinding.FragmentHomeBinding
-import com.example.smiley.main.adapter.TimeLineAdapter
-import com.example.smiley.main.adapter.TimeLineItem
-import com.example.smiley.main.adapter.ViewObject
-import com.example.smiley.main.adapter.ViewType
+import com.example.smiley.main.home.adapter.TimeLineAdapter
+import com.example.smiley.main.home.adapter.TimeLineItem
+import com.example.smiley.main.home.adapter.TimeLimeObject
+import com.example.smiley.main.home.adapter.ViewType
 import java.io.ByteArrayOutputStream
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -81,7 +80,7 @@ class HomeFragment : Fragment() {
             add(
                 TimeLineItem(
                     ViewType.MAGAZINE_OBJECT.name,
-                    ViewObject.MagazineObject(
+                    TimeLimeObject.MagazineObject(
                         "스마일리 매거진이 드리는 교정 정보입니다.",
                         Magazine(
                             id = 1,
@@ -105,7 +104,7 @@ class HomeFragment : Fragment() {
             add(
                 TimeLineItem(
                     ViewType.TEXT_OBJECT.name,
-                    ViewObject.TextObject(
+                    TimeLimeObject.TextObject(
                         "오후에 매거진을 2개 읽었습니다."
                     )
                 )
@@ -113,7 +112,7 @@ class HomeFragment : Fragment() {
             add(
                 TimeLineItem(
                     ViewType.MAGAZINE_OBJECT.name,
-                    ViewObject.MagazineObject(
+                    TimeLimeObject.MagazineObject(
                         "앉아서 5분, 예쁜 미소를 유지시켜주는 차이 관리 방법",
                         Magazine(
                             id = 1,

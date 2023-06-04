@@ -1,14 +1,14 @@
-package com.example.smiley.main.adapter
+package com.example.smiley.main.home.adapter
 
 import com.example.domain.magazine.model.Magazine
 
-sealed class ViewObject {
+sealed class TimeLimeObject {
     data class TextObject(
         val text:String
-    ) : ViewObject()
+    ) : TimeLimeObject()
 
     data class MagazineObject(
         val notice: String,
         val magazine: Magazine
-    ) : ViewObject()
+    ) : TimeLimeObject()
 }

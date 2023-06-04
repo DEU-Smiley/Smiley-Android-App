@@ -1,21 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".main.reserv.ReservHistoryFragment">
 
-    <!-- Layout 전체 레이아웃 -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
-        <!-- Layout 예약 내역 리사이클러뷰 -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reserv_history_view"
+        <!-- Layout 전체 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <!-- Layout End 예약 내역 리사이클러뷰 -->
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!-- Layout End 전체 레이아웃 -->
+            <!-- Layout 예약 내역 리사이클러뷰 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reserv_history_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="-152dp"
+                tools:layout_editor_absoluteY="-16dp" />
+            <!-- Layout End 예약 내역 리사이클러뷰 -->
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/loading_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="@color/white">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:lottie_rawRes="@raw/loading"
+                    app:lottie_loop="true"
+                    app:lottie_autoPlay="true"
+                    android:background="#00000000"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 전체 레이아웃 -->
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>
