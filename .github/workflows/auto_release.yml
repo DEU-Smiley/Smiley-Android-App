@@ -44,7 +44,10 @@ jobs:
       - name: Access KAKAO_SDK_APPKEY
         env:
           KAKAO_SDK_APPKEY: ${{ secrets.KAKAO_SDK_APPKEY }}
-        run: echo KAKAO_SDK_APPKEY=$KAKAO_SDK_APPKEY > ./local.properties
+          NAVER_MAP_CLIENT_ID: ${{ secrets.NAVER_MAP_CLIENT_ID }}
+        run: |
+          echo KAKAO_SDK_APPKEY=$KAKAO_SDK_APPKEY > ./local.properties
+          echo NAVER_MAP_CLIENT_ID=$NAVER_MAP_CLIENT_ID >> ./local.properties
 
       # Release 빌드
       - name: Build Release APK
