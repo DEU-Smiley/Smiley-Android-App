@@ -57,4 +57,29 @@
         <item name="android:fontFamily">@font/pretendard_medium</item>
         <item name="android:textSize">13sp</item>
     </style>
+
+    <!-- Seekbar (색상 primary normal) -->
+    <style name="custom_seekbar_primary_normal" parent="Widget.AppCompat.SeekBar">
+        <item name="android:thumb">@drawable/seekbar_circle_thumb_primary_normal</item>
+        <item name="android:progressDrawable">@drawable/seekbar_progress</item>
+        <item name="android:maxHeight">5dp</item>
+        <item name="android:minHeight">5dp</item>
+    </style>
+
+    <!-- Seekbar (색상 primary dark) -->
+    <style name="custom_seekbar_primary_dark" parent="Widget.AppCompat.SeekBar">
+        <item name="android:thumb">@drawable/seekbar_circle_thumb_primary_dark</item>
+        <item name="android:progressDrawable">@drawable/seekbar_progress</item>
+        <item name="android:maxHeight">5dp</item>
+        <item name="android:minHeight">5dp</item>
+    </style>
+
+    <!-- Seekbar (색상 primary purple) -->
+    <style name="custom_seekbar_purple" parent="Widget.AppCompat.SeekBar">
+        <item name="android:thumb">@drawable/seekbar_circle_thumb_purple</item>
+        <item name="android:progressDrawable">@drawable/seekbar_progress</item>
+        <item name="android:maxHeight">5dp</item>
+        <item name="android:minHeight">5dp</item>
+    </style>
+
 </resources>
