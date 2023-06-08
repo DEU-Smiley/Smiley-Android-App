@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
+import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
 import com.example.smiley.common.extension.addFragment
 import com.example.smiley.common.extension.addFragmentToFullScreen
 import com.example.smiley.common.listener.TransparentTouchListener
@@ -81,6 +82,11 @@ class ProfileFragment : Fragment() {
             menuMedicineExamine.setOnClickListener {
                 (requireActivity() as AppCompatActivity)
                     .addFragmentToFullScreen(MedicineSearchFragment())
+            }
+
+            menuDeviceSetting.setOnClickListener{
+                (requireActivity() as AppCompatActivity)
+                    .addFragmentToFullScreen(BluetoothSearchFragment())
             }
         }
     }
