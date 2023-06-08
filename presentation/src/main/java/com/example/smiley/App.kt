@@ -7,6 +7,7 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import com.example.domain.user.model.User
+import com.example.smiley.common.utils.NotifyManager
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.common.KakaoSdk
@@ -19,13 +20,13 @@ class App : Application() {
         context = applicationContext
         catchAllError()
 
-
         // Kakao Sdk 초기화
         KakaoSdk.init(this, BuildConfig.KAKAO_SDK_APPKEY)
 
         // Firebase 인스턴스 초기화
         FirebaseApp.initializeApp(this.applicationContext)
         getDeviceToken()
+        createNoficationChannel()
     }
 
     /**
@@ -46,6 +47,14 @@ class App : Application() {
                 Log.d("디바이스 토큰", deviceToken)
             }
         }
+    }
+
+    private fun createNoficationChannel(){
+        NotifyManager.createNotificationChannel(
+            applicationContext,
+            NotifyManager.WEARING_NOTIFY_ID,
+            "교정기 착용 알림"
+        )
     }
 
     companion object{
