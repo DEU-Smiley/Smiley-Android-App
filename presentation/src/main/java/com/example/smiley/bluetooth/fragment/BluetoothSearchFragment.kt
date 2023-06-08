@@ -43,7 +43,7 @@ class BluetoothSearchFragment : Fragment() {
     private var _bind: FragmentBluetoothSearchBinding?=null
     private val bind get() = _bind!!
 
-    private val bluetoothVm: BluetoothViewModel by viewModels()
+    private val bluetoothVm: BluetoothViewModel by viewModels({requireActivity()})
     private val bluetoothSearchAdapter: BluetoothSearchAdapter by lazy {
         BluetoothSearchAdapter(listOf())
     }
@@ -204,7 +204,10 @@ class BluetoothSearchFragment : Fragment() {
         requireActivity().showConfirmDialog(
             "장치 연결 성공",
             "장치 연결이 완료 되었습니다.",
-            "(설정>장치 관리에서 장치를 연결/해제 가능합니다.)"
+            "(설정>장치 관리에서 장치를 연결/해제 가능합니다.)",
+            confirmListener = {
+                this.dismiss()
+            }
         )
     }
 
