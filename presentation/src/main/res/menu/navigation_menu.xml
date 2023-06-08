@@ -22,10 +22,10 @@
         />
 
     <item
-        android:id="@+id/menu_community"
+        android:id="@+id/menu_stats"
         android:enabled = "true"
         android:icon="@drawable/ic_chart"
-        android:title="커뮤니티"
+        android:title="통계"
         />
 
     <item
