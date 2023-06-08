@@ -1,0 +1,64 @@
+package com.example.smiley.main.stats.adapter
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.example.smiley.R
+import com.example.smiley.main.stats.StatsFragment
+
+class CalendarAdapter(
+    private val dataSet: ArrayList<StatsFragment.CalendarDate>
+): RecyclerView.Adapter<CalendarAdapter.ViewHolder>(){
+
+    /** RecyclerView의 클릭 이벤트 처리를 위한 리스너 인터페이스 */
+    interface OnItemClickListener{
+        fun onClick(view:View, position:Int)
+    }
+
+    lateinit var onItemClickListener: OnItemClickListener
+    var drawable: Drawable? = null
+    var selectedPosition:Int = 0
+
+    /**
+     * ViewHolder 클래스를 InnerClass로 생성
+     * 해당 클래스에서 데이터를 연결해줌
+     * */
+    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
+        val dateTextView: TextView = view.findViewById(R.id.dateTextView)
+        val dayTextView: TextView = view.findViewById(R.id.dayTextView)
+        val calendarCell: LinearLayout = view.findViewById(R.id.calendarCell)
+    }
+
+    // ViewHolder를 생성하는 메소드
+    // ViewHolder는 위에서 Inner Class로 생성해줌
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.sub_calendar_cell, viewGroup, false)
+
+        drawable = ContextCompat.getDrawable(view.context, R.drawable.bg_calendar_select)
+
+        return ViewHolder(view)
+    }
+
+    // ViewHolder에 데이터를 바인딩해주는 메소드
+    @SuppressLint("ResourceAsColor")
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        with(holder){
+            dateTextView.text = dataSet[position].date.dayOfMonth.toString()
+            dayTextView.text = dataSet[position].day
+
+            // 클릭 이벤트 등록
+            calendarCell.setOnClickListener {
+                onItemClickListener.onClick(it, position) // 람다 형태로 OnClickListener 인터페이스를 구현
+            }
+        }
+    }
+
+    override fun getItemCount(): Int = dataSet.size
+}
