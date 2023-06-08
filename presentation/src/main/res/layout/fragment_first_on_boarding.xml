@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
-z
+
     <ImageView
         android:id="@+id/illust"
         android:layout_width="match_parent"
