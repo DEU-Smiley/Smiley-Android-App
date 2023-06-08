@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/calendarCell"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/bg_layout_border"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/dayTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="S"
+        android:textSize="@dimen/M500_16_h22"
+        android:textColor="@color/gray2_6E"
+        android:fontFamily="@font/pretendard_medium"
+        />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+
+        android:gravity="center"
+        android:text="14"
+        android:textSize="@dimen/H5_B700_18_h22"
+        android:textColor="@color/black1_20"
+        android:fontFamily="@font/pretendard_semibold"
+        />
+</LinearLayout>
