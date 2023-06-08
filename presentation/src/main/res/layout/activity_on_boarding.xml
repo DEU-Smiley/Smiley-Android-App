@@ -13,25 +13,34 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="100dp"
+            android:layout_height="match_parent"
             app:layout_constraintVertical_weight="1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/indicator"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
+
+        <View
+            android:id="@+id/bottom_view"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@color/white"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
             android:id="@+id/indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="76dp"
 
             app:layout_constraintVertical_weight="1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/bottom_view"
             app:layout_constraintBottom_toTopOf="@+id/startBtn"
 
             app:dotsColor="@color/gray5_E6"
@@ -42,33 +51,46 @@
             app:progressMode="false"
             app:selectedDotColor="@color/primary_normal" />
 
-        <!-- Layout 카카오 로그인 버튼 -->
-        <Button
+        <!-- Layout 시작하기 버튼 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/startBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/side_margin"
-            android:layout_marginEnd="@dimen/side_margin"
+            android:layout_marginBottom="@dimen/btn_bottom_margin"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:layout_marginBottom="@dimen/btn_bottom_margin"
-
-            style="?attr/borderlessButtonStyle"
-            android:background="@drawable/selector_btn_radius_5dp"
+            android:background="@drawable/stroke_layout"
             android:foreground="?attr/selectableItemBackground"
 
             android:clickable="true"
             android:orientation="horizontal"
-            android:gravity="center"
-
-            android:text="시작하기"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/pretendard_bold"
 
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:text="시작하기"
+                android:textSize="@dimen/H6_SB600_16_h22"
+                android:textColor="@color/black1_20"
+                android:fontFamily="@font/pretendard_medium"
+                android:lineSpacingExtra="6sp"
+                android:includeFontPadding="false"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 시작하기 버튼 -->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

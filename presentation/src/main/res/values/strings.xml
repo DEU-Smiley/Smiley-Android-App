@@ -6,9 +6,9 @@
     <string name="onboarding_content1">착용 시간 관리부터, 목표 달성까지. 더욱 똑똑해진 교정기로 차별화된 교정을 경험해 보세요.</string>
 
     <string name="onboarding_title2">하루하루 기록되는 나의 노력</string>
-    <string name="onboarding_content2">노력이 배신하지 못하도록 저희가 꽉 잡아둘게요 :) 착용 시간, 미션, 체크리스트 달성 여부 등 내 모든 노력을 한 눈에 볼 수 있어요.</string>
+    <string name="onboarding_content2">노력이 배신하지 못하도록 저희가 꽉 잡아둘게요:)\n교정에 대한 나의 노력 매일매일 기록됩니다 !</string>
     <string name="onboarding_title3">무엇이든 물어보세요</string>
-    <string name="onboarding_content3">전문가와 교정 선배들의 꿀팁, 똑똑한 챗봇까지 모두 다 준비되어 있어요 !</string>
+    <string name="onboarding_content3">전문가와 교정 선배들의 꿀팁,\n똑똑한 챗봇까지 모두 다 준비되어 있어요 !</string>
     <string name="google_login_text">구글 계정으로 시작</string>
     <string name="kakao_login_text">카카오 계정으로 시작</string>
     <string name="permission_explain_text">앱 이용을 위해 아래의 권한들이 필요합니다. 접근 권한은 휴대폰 설정에서 언제든지 바꿀 수 있습니다.</string>
