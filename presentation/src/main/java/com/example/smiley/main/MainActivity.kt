@@ -10,6 +10,7 @@ import com.example.smiley.main.home.HomeFragment
 import com.example.smiley.main.profile.ProfileFragment
 import com.example.smiley.main.reserv.ReservFragment
 import com.example.smiley.main.reserv.ReservHistoryFragment
+import com.example.smiley.main.stats.StatsFragment
 import com.example.smiley.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,11 +24,13 @@ class MainActivity : AppCompatActivity() {
     private var homeFragment: HomeFragment? = null
     private var profileFragment: ProfileFragment? = null
     private var reservFragment: ReservFragment? = null
+    private var statsFragment: StatsFragment? = null
 
     private var fragmentMap: HashMap<Int, Fragment?>? = hashMapOf(
         R.id.menu_home to homeFragment,
         R.id.menu_reserv to reservFragment,
-        R.id.menu_profile to profileFragment
+        R.id.menu_profile to profileFragment,
+        R.id.menu_stats to statsFragment,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.menu_home -> changeFragment(R.id.menu_home)
                     R.id.menu_reserv -> changeFragment(R.id.menu_reserv)
                     R.id.menu_inspect -> changeFragment(R.id.menu_inspect)
-                    R.id.menu_community -> changeFragment(R.id.menu_community)
+                    R.id.menu_stats -> changeFragment(R.id.menu_stats)
                     R.id.menu_profile -> changeFragment(R.id.menu_profile)
                     else -> changeFragment(R.id.menu_home)
                 }
@@ -85,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_home -> HomeFragment()
             R.id.menu_reserv -> ReservFragment()
             R.id.menu_inspect -> HomeFragment()
-            R.id.menu_community -> HomeFragment()
+            R.id.menu_stats -> StatsFragment()
             R.id.menu_profile -> ProfileFragment()
             else -> HomeFragment()
         }

@@ -16,6 +16,9 @@
     <color name="light_blue1">#E7F3FF</color>
     <color name="light_blue2">#F6FBFF</color>
 
+    <color name="purple1_5C">#5C60F5</color>
+    <color name="purple2_BE">#BE6BFF</color>
+
     <color name="gray1_55">#555555</color>
     <color name="gray2_6E">#6E6E6E</color>
     <color name="gray3_8E">#8E8E8E</color>
@@ -29,6 +32,7 @@
     <color name="detail_point">#26A99B</color>
     <color name="red">#F0636E</color>
     <color name="trasparent">#00FFFFFF</color>
+    <color name="mint">#81D8E7</color>
     <!-- 컬러 셋 -->
 
 </resources>
