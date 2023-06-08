@@ -30,7 +30,7 @@
     <!-- Splash 화면 테마 -->
     <style name="Theme.Smiley.Splash">
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/primary_normal</item>
+        <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
