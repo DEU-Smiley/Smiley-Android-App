@@ -2,7 +2,6 @@ package com.example.data.magazine.remote.response
 
 import com.example.data.common.mapper.DataMapper
 import com.example.data.common.network.BaseResponse
-import com.example.data.magazine.remote.response.ContentResponse.Companion.toDomainModel
 import com.example.domain.magazine.model.Magazine
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -18,7 +17,7 @@ class MagazineResponse(
     @SerializedName("likes") val likes: Int,
     @SerializedName("viewCount") val viewCount: Int,
     @Expose
-    @SerializedName("mainContent") val mainContent: ContentResponse?
+    @SerializedName("mainContent") val mainContent: String
 ): BaseResponse {
     companion object: DataMapper<MagazineResponse, Magazine> {
         override fun MagazineResponse.toDomainModel(): Magazine {
@@ -30,7 +29,7 @@ class MagazineResponse(
                 thumbnail = thumbnail,
                 likes = likes,
                 viewCount = viewCount,
-                mainContent = mainContent?.toDomainModel()
+                contentUrl = mainContent
             )
         }
 
