@@ -19,7 +19,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val BASE_URL = "http://113.198.236.100:8080"
+    private const val BASE_URL = "http://218.147.21.57:8080"
 
     @Singleton
     @Provides
@@ -42,9 +42,9 @@ object NetworkModule {
     @Provides
     fun provideOkHttp(requestInterceptor: RequestInterceptor): OkHttpClient {
         return OkHttpClient.Builder().apply {
-            connectTimeout(60, TimeUnit.SECONDS)
-            readTimeout(60, TimeUnit.SECONDS)
-            writeTimeout(60, TimeUnit.SECONDS)
+            connectTimeout(10, TimeUnit.SECONDS)
+            readTimeout(10, TimeUnit.SECONDS)
+            writeTimeout(10, TimeUnit.SECONDS)
             addInterceptor(requestInterceptor)
             addInterceptor( // Http 요청/응답 중 Body만 로깅
                 HttpLoggingInterceptor(ApiLogger())
