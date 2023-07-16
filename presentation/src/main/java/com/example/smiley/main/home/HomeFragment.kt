@@ -1,15 +1,13 @@
 package com.example.smiley.main.home
 
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +18,7 @@ import com.example.smiley.R
 import com.example.smiley.bluetooth.viewmodel.BluetoothDataState
 import com.example.smiley.bluetooth.viewmodel.BluetoothViewModel
 import com.example.smiley.common.extension.addFragmentToFullScreen
+import com.example.smiley.common.extension.showToast
 import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.common.utils.NotifyManager
@@ -27,11 +26,10 @@ import com.example.smiley.databinding.FragmentHomeBinding
 import com.example.smiley.magazine.MagazineDetailFragment
 import com.example.smiley.main.home.adapter.TimeLineAdapter
 import com.example.smiley.main.home.adapter.TimeLineItem
-import com.example.smiley.main.home.adapter.TimeLimeObject
-import com.example.smiley.main.home.adapter.ViewType
+import com.example.smiley.main.home.viewmodel.HomeViewModel
+import com.example.smiley.main.home.viewmodel.TimeLineState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.io.ByteArrayOutputStream
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -47,6 +45,9 @@ class HomeFragment : Fragment() {
     private var _bind: FragmentHomeBinding?=null
     private val bind:FragmentHomeBinding get() = _bind!!
     private val bluetoothVm: BluetoothViewModel by viewModels({requireActivity()})
+    private val homeVm: HomeViewModel by viewModels()
+
+    private var notifyFlag:Boolean = false
 
     private var param1: String? = null
     private var param2: String? = null
@@ -68,6 +69,7 @@ class HomeFragment : Fragment() {
 
         observe()
         initTimeLineView()
+        requestData()
 
         return bind.root
     }
@@ -93,100 +95,70 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private var notifyFlag:Boolean = false
+    private fun requestData(){
+        homeVm.getTimeLineData()
+    }
 
     private fun observe(){
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                bluetoothVm.dataState.collect { state ->
-                    when (state) {
-                        is BluetoothDataState.Init -> Unit
-                        is BluetoothDataState.ReceiveData -> {
-                            Log.d("플로우", "${state.wearFlag}")
-                            if (state.wearFlag && !notifyFlag) {
-                                NotifyManager.sendNotification(
-                                    requireContext(),
-                                    NotifyManager.WEARING_NOTIFY_ID,
-                                    "Smiley",
-                                    "교정기를 착용 중입니다."
-                                )
-                            }
+                observeBluetoothState()
+            }
+        }
 
-                            notifyFlag = state.wearFlag
-                        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                observeTimeLineState()
+            }
+        }
+    }
+
+    private suspend fun observeBluetoothState(){
+        bluetoothVm.dataState.collect { state ->
+            when (state) {
+                is BluetoothDataState.Init -> Unit
+                is BluetoothDataState.ReceiveData -> {
+                    Log.d("플로우", "${state.wearFlag}")
+                    if (state.wearFlag && !notifyFlag) {
+                        NotifyManager.sendNotification(
+                            requireContext(),
+                            NotifyManager.WEARING_NOTIFY_ID,
+                            "Smiley",
+                            "교정기를 착용 중입니다."
+                        )
                     }
+
+                    notifyFlag = state.wearFlag
                 }
             }
         }
     }
 
+    private suspend fun observeTimeLineState(){
+        homeVm.timeLineState.collect { state ->
+            when(state){
+                is TimeLineState.Init -> Unit
+                is TimeLineState.SuccessLoad -> {
+                    Log.d("매거진 조회 성공", "${state.timeLine}")
+                    val adapter = bind.timelineView.adapter as TimeLineAdapter
+                    adapter.changeDataSet(state.timeLine as ArrayList<TimeLineItem>)
+                }
+                is TimeLineState.Error -> {
+                    Log.e("HomeFragment", state.message)
+                }
+                is TimeLineState.ShowToast -> {
+                    requireContext().showToast(state.message)
+                }
+            }
+        }
+    }
 
     /**
      * 타임라인 초기화
      */
     private fun initTimeLineView(){
-        val items = arrayListOf<TimeLineItem>()
-
-        items.apply {
-            add(
-                TimeLineItem(
-                    ViewType.MAGAZINE_OBJECT.name,
-                    TimeLimeObject.MagazineObject(
-                        "스마일리 매거진이 드리는 교정 정보입니다.",
-                        Magazine(
-                            id = 1,
-                            author = "test",
-                            title = "국산 vs 수입산 임플란트,\n뭐가 더 좋아요?",
-                            subTitle = "치아 교정시 주의사항",
-                            thumbnail = ByteArrayOutputStream().run {
-                                val bitmap =
-                                    (resources.getDrawable(R.drawable.implant) as BitmapDrawable).bitmap
-                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, this)
-                                toByteArray()
-                            },
-                            likes = 923,
-                            viewCount = 1023,
-                            contentUrl = "https://deu-smiley.github.io/Smiley-Magazine/magazine_1"
-                        )
-                    )
-                )
-            )
-
-            add(
-                TimeLineItem(
-                    ViewType.TEXT_OBJECT.name,
-                    TimeLimeObject.TextObject(
-                        "오후에 매거진을 2개 읽었습니다."
-                    )
-                )
-            )
-            add(
-                TimeLineItem(
-                    ViewType.MAGAZINE_OBJECT.name,
-                    TimeLimeObject.MagazineObject(
-                        "꼭 알아야 할 임플란트 상식!",
-                        Magazine(
-                            id = 1,
-                            author = "test",
-                            title = "꼭 알아야 할\n임플란트 상식!",
-                            subTitle = "치아 관리 방법",
-                            thumbnail = ByteArrayOutputStream().run {
-                                val bitmap =
-                                    (resources.getDrawable(R.drawable.implant2) as BitmapDrawable).bitmap
-                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, this)
-                                toByteArray()
-                            },
-                            likes = 923,
-                            viewCount = 1023,
-                            contentUrl = "https://deu-smiley.github.io/Smiley-Magazine/magazine_2"
-                        )
-                    )
-                )
-            )
-        }
-
         bind.timelineView.apply {
-            adapter = TimeLineAdapter(items).apply {
+            adapter = TimeLineAdapter(arrayListOf()).apply {
                 setMagazineClickListener(magazineClickListener)
             }
 
