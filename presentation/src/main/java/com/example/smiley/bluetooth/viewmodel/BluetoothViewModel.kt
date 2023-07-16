@@ -138,7 +138,6 @@ class BluetoothViewModel @Inject constructor(
             /**
              * 블루투스 연결 권한 요청 코드 작성
              */
-            return
         }
 
         // SDK 버전에 따라 처리해줘야할 수도 있음

@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.magazine.model.Magazine
 import com.example.smiley.common.extension.gone
+import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.databinding.TimelineMagazineViewBinding
 import com.example.smiley.databinding.TimelineTextViewBinding
@@ -18,7 +20,7 @@ sealed class TimeLineViewHolder(
         private val bind: TimelineTextViewBinding
     ): TimeLineViewHolder(bind){
         override fun bind(item: TimeLineItem, isLastView: Boolean) {
-            val viewObject = item.viewObject as TimeLimeObject.TextObject
+            val viewObject = item.viewObject as TimeLineObject.TextObject
             bind.title.text = viewObject.text
 
             if(isLastView) bind.marginLayout.gone()
@@ -26,11 +28,12 @@ sealed class TimeLineViewHolder(
     }
 
     class MagazineObjectViewHolder(
-        private val bind: TimelineMagazineViewBinding
+        private val bind: TimelineMagazineViewBinding,
+        private val clickListener: OnItemClickListener<Magazine>?
     ): TimeLineViewHolder(bind){
         @SuppressLint("ClickableViewAccessibility")
         override fun bind(item: TimeLineItem, isLastView: Boolean) {
-            val viewObject = item.viewObject as TimeLimeObject.MagazineObject
+            val viewObject = item.viewObject as TimeLineObject.MagazineObject
             val magazine = viewObject.magazine
 
             with(bind){
@@ -44,7 +47,19 @@ sealed class TimeLineViewHolder(
             }
 
             // 터치 효과 적용
-            bind.magazineLayout.setOnTouchListener(TransparentTouchListener())
+            with(bind.magazineLayout){
+                setOnTouchListener(TransparentTouchListener())
+
+                if(clickListener != null) {
+                    setOnClickListener {
+                        clickListener.onItemClicked(
+                            view = it,
+                            data = magazine
+                        )
+                    }
+                }
+            }
+
             if(isLastView) bind.marginLayout.gone()
         }
     }

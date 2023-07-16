@@ -12,6 +12,6 @@ class Magazine(
     val thumbnail: ByteArray,
     val likes: Int,
     val viewCount: Int,
-    val mainContent: Content?
+    val contentUrl: String
 ): BaseModel
 

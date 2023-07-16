@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,17 +19,17 @@ import com.example.domain.magazine.model.Magazine
 import com.example.smiley.R
 import com.example.smiley.bluetooth.viewmodel.BluetoothDataState
 import com.example.smiley.bluetooth.viewmodel.BluetoothViewModel
+import com.example.smiley.common.extension.addFragmentToFullScreen
+import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.common.utils.NotifyManager
 import com.example.smiley.databinding.FragmentHomeBinding
+import com.example.smiley.magazine.MagazineDetailFragment
 import com.example.smiley.main.home.adapter.TimeLineAdapter
 import com.example.smiley.main.home.adapter.TimeLineItem
 import com.example.smiley.main.home.adapter.TimeLimeObject
 import com.example.smiley.main.home.adapter.ViewType
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 
@@ -136,17 +136,17 @@ class HomeFragment : Fragment() {
                         Magazine(
                             id = 1,
                             author = "test",
-                            title = "치아 교정 시,\n주의해야 할 사항은?",
+                            title = "국산 vs 수입산 임플란트,\n뭐가 더 좋아요?",
                             subTitle = "치아 교정시 주의사항",
                             thumbnail = ByteArrayOutputStream().run {
                                 val bitmap =
-                                    (resources.getDrawable(R.drawable.mock_magazine_thumb_1) as BitmapDrawable).bitmap
+                                    (resources.getDrawable(R.drawable.implant) as BitmapDrawable).bitmap
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, this)
                                 toByteArray()
                             },
                             likes = 923,
                             viewCount = 1023,
-                            mainContent = null
+                            contentUrl = "https://deu-smiley.github.io/Smiley-Magazine/magazine_1"
                         )
                     )
                 )
@@ -164,21 +164,21 @@ class HomeFragment : Fragment() {
                 TimeLineItem(
                     ViewType.MAGAZINE_OBJECT.name,
                     TimeLimeObject.MagazineObject(
-                        "앉아서 5분, 예쁜 미소를 유지시켜주는 차이 관리 방법",
+                        "꼭 알아야 할 임플란트 상식!",
                         Magazine(
                             id = 1,
                             author = "test",
-                            title = "예쁜 미소를 유지 시켜주는\n치아 관리 방법!",
+                            title = "꼭 알아야 할\n임플란트 상식!",
                             subTitle = "치아 관리 방법",
                             thumbnail = ByteArrayOutputStream().run {
                                 val bitmap =
-                                    (resources.getDrawable(R.drawable.mock_magazine_thumb_2) as BitmapDrawable).bitmap
+                                    (resources.getDrawable(R.drawable.implant2) as BitmapDrawable).bitmap
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, this)
                                 toByteArray()
                             },
                             likes = 923,
                             viewCount = 1023,
-                            mainContent = null
+                            contentUrl = "https://deu-smiley.github.io/Smiley-Magazine/magazine_2"
                         )
                     )
                 )
@@ -186,9 +186,20 @@ class HomeFragment : Fragment() {
         }
 
         bind.timelineView.apply {
-            adapter = TimeLineAdapter(items)
+            adapter = TimeLineAdapter(items).apply {
+                setMagazineClickListener(magazineClickListener)
+            }
+
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private val magazineClickListener = object : OnItemClickListener<Magazine> {
+        override fun onItemClicked(view: View, data: Magazine) {
+            val magazineFragment = MagazineDetailFragment.newInstance(data.contentUrl)
+            (requireActivity() as AppCompatActivity)
+                .addFragmentToFullScreen(magazineFragment)
         }
     }
 
@@ -201,7 +212,6 @@ class HomeFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment HomeFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             HomeFragment().apply {
