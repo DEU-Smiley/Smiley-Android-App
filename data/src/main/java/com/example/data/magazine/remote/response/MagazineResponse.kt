@@ -5,7 +5,7 @@ import com.example.data.common.network.BaseResponse
 import com.example.domain.magazine.model.Magazine
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class MagazineResponse(

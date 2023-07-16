@@ -5,7 +5,7 @@ import com.example.data.common.network.BaseResponse
 import com.example.data.hospital.remote.response.HospitalPositResponse.Companion.toDomainModel
 import com.example.domain.hospital.model.HospitalPositList
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 
 @Parcelize

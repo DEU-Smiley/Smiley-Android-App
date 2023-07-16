@@ -4,7 +4,7 @@ import com.example.data.common.mapper.DataMapper
 import com.example.data.common.network.BaseResponse
 import com.example.domain.hospital.model.HospitalPosit
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class HospitalPositResponse (

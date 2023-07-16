@@ -16,10 +16,10 @@ class MagazineEntity(
     @ColumnInfo(name = "thumbnail")     val thumbnail: ByteArray,
     @ColumnInfo(name = "likes")         val likes: Int,
     @ColumnInfo(name = "view_cnt")      val viewCount: Int,
-    @ColumnInfo(name ="content_url")    val contentUrl: String,
+    @ColumnInfo(name = "content_url")    val contentUrl: String,
 ) {
     companion object : EntityMapper<MagazineEntity, Magazine> {
-        override fun MagazineEntity.entityToDomainModel(): Magazine {
+        override fun MagazineEntity.toModel(): Magazine {
             return Magazine(
                 id = id,
                 author = author,
@@ -32,7 +32,7 @@ class MagazineEntity(
             )
         }
 
-        override fun Magazine.domainModelToEntity(): MagazineEntity {
+        override fun Magazine.toEntity(): MagazineEntity {
             return MagazineEntity(
                 id = id,
                 author = author,
