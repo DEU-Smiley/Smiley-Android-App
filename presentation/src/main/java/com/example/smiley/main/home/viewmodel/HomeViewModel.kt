@@ -3,7 +3,6 @@ package com.example.smiley.main.home.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.common.base.NetworkError
 import com.example.domain.common.base.ResponseState
 import com.example.domain.magazine.usecase.GetRecentMagazineUseCase
 import com.example.smiley.main.home.adapter.TimeLineItem
@@ -14,7 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject

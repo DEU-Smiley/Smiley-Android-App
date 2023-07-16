@@ -12,14 +12,11 @@ import com.example.data.magazine.local.dao.MagazineDao
 import com.example.data.magazine.local.entity.MagazineEntity
 import com.example.data.medicine.local.dao.MedicineDao
 import com.example.data.medicine.local.entity.MedicineEntity
-import com.example.domain.magazine.model.Magazine
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
-import java.util.Arrays
 
 /**
  * entities에 포함된 클래스들이 각각의 테이블이 됨
