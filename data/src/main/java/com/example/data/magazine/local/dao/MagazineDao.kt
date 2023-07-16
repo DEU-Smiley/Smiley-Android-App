@@ -9,6 +9,7 @@ import com.example.data.magazine.local.entity.MagazineEntity
 
 @Dao
 interface MagazineDao: BaseDao<MagazineEntity> {
+  
     @Query("SELECT * FROM magazine")
     suspend fun findAll(): List<MagazineEntity>
 
