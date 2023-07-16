@@ -1,5 +1,6 @@
 package com.example.smiley.main.home.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -10,7 +11,7 @@ import com.example.smiley.R
 import com.example.smiley.common.listener.OnItemClickListener
 
 class TimeLineAdapter(
-    private val items: ArrayList<TimeLineItem>
+    private var items: ArrayList<TimeLineItem>
 ): RecyclerView.Adapter<TimeLineViewHolder>() {
     private var magazineClickListener: OnItemClickListener<Magazine>? = null
 
@@ -64,4 +65,9 @@ class TimeLineAdapter(
         )
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun changeDataSet(items: ArrayList<TimeLineItem>){
+        this.items = items
+        notifyDataSetChanged()
+    }
 }

@@ -2,7 +2,6 @@ package com.example.smiley.main.home.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
-import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.magazine.model.Magazine
@@ -21,7 +20,7 @@ sealed class TimeLineViewHolder(
         private val bind: TimelineTextViewBinding
     ): TimeLineViewHolder(bind){
         override fun bind(item: TimeLineItem, isLastView: Boolean) {
-            val viewObject = item.viewObject as TimeLimeObject.TextObject
+            val viewObject = item.viewObject as TimeLineObject.TextObject
             bind.title.text = viewObject.text
 
             if(isLastView) bind.marginLayout.gone()
@@ -34,7 +33,7 @@ sealed class TimeLineViewHolder(
     ): TimeLineViewHolder(bind){
         @SuppressLint("ClickableViewAccessibility")
         override fun bind(item: TimeLineItem, isLastView: Boolean) {
-            val viewObject = item.viewObject as TimeLimeObject.MagazineObject
+            val viewObject = item.viewObject as TimeLineObject.MagazineObject
             val magazine = viewObject.magazine
 
             with(bind){
