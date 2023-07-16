@@ -17,7 +17,7 @@ class MagazineRepositoryImpl @Inject constructor(
     override suspend fun getRecentMagazine(cnt: Int): Flow<ResponseState<MagazineList>> {
         return flow {
             try {
-                val magazines = magazineDao.findAll().map { it.toModel() }
+                val magazines = magazineDao.findByLimits(cnt).map { it.toModel() }
                 emit(ResponseState.Success(MagazineList(magazines)))
             } catch (e: Exception) {
                 Log.e("MagazineRepositoryImpl", e.message.toString())

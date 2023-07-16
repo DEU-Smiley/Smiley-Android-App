@@ -11,4 +11,7 @@ import com.example.data.magazine.local.entity.MagazineEntity
 interface MagazineDao: BaseDao<MagazineEntity> {
     @Query("SELECT * FROM magazine")
     suspend fun findAll(): List<MagazineEntity>
+
+    @Query("SELECT * FROM magazine ORDER BY id DESC LIMIT :cnt")
+    suspend fun findByLimits(cnt: Int): List<MagazineEntity>
 }
