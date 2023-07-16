@@ -3,7 +3,7 @@ package com.example.data.reserv.remote.response
 import com.example.data.common.mapper.DataMapper
 import com.example.data.common.network.BaseResponse
 import com.example.domain.reservation.model.Reserv
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import java.time.LocalDateTime
 
 @Parcelize
