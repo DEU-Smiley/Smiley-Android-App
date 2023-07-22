@@ -4,6 +4,7 @@ import com.example.data.common.utils.ApiLogger
 import com.example.data.common.utils.RequestInterceptor
 import com.example.data.common.utils.SharedPrefs
 import com.example.data.hilt.qualifier.BaseRetrofit
+import com.example.data.hilt.qualifier.MockRetrofit
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -21,6 +22,7 @@ import javax.inject.Singleton
 object NetworkModule {
 
     private const val BASE_URL = "http://113.198.236.222:8080"
+    private const val MOCK_BASE_URL = "https://980e509b-75c9-4e14-96a9-2691dedc1237.mock.pstmn.io"
 
     @Singleton
     @Provides
@@ -36,6 +38,24 @@ object NetworkModule {
             )
             client(okHttp)
             baseUrl(BASE_URL)
+        }.build()
+    }
+
+    @Singleton
+    @Provides
+    @MockRetrofit
+    fun provideMockRetrofit(okHttp: OkHttpClient): Retrofit {
+        return Retrofit.Builder().apply {
+            addConverterFactory(
+                GsonConverterFactory.create(
+                    GsonBuilder()
+                        .setDateFormat("yyyy-MM-dd")
+                        .setLenient()
+                        .create()
+                )
+            )
+            client(okHttp)
+            baseUrl(MOCK_BASE_URL)
         }.build()
     }
 
