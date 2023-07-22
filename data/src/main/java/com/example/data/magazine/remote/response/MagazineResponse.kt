@@ -1,5 +1,6 @@
 package com.example.data.magazine.remote.response
 
+import android.util.Base64
 import com.example.data.common.mapper.DataMapper
 import com.example.data.common.network.BaseResponse
 import com.example.domain.magazine.model.Magazine
@@ -13,11 +14,10 @@ class MagazineResponse(
     @SerializedName("author") val author: String,
     @SerializedName("title") val title: String,
     @SerializedName("subTitle") val subTitle: String,
-    @SerializedName("thumbnail") val thumbnail: ByteArray,
+    @SerializedName("thumbnail") val thumbnail: String,
     @SerializedName("likes") val likes: Int,
     @SerializedName("viewCount") val viewCount: Int,
-    @Expose
-    @SerializedName("mainContent") val mainContent: String
+    @SerializedName("contentUrl") val mainContent: String
 ): BaseResponse {
     companion object: DataMapper<MagazineResponse, Magazine> {
         override fun MagazineResponse.toDomainModel(): Magazine {
@@ -26,7 +26,7 @@ class MagazineResponse(
                 author = author,
                 title = title,
                 subTitle = subTitle,
-                thumbnail = thumbnail,
+                thumbnail = Base64.decode(thumbnail, Base64.DEFAULT),
                 likes = likes,
                 viewCount = viewCount,
                 contentUrl = mainContent
