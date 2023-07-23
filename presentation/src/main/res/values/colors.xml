@@ -9,6 +9,10 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- 컬러 셋 -->
+    <color name="white_trans_70">#B3FFFFFF</color>
+    <color name="white_trans_50">#80FFFFFF</color>
+    <color name="white_trans_30">#4DFFFFFF</color>
+
     <color name="black1_20">#202020</color>
     <color name="primary_normal">#3E9EFF</color>
     <color name="primary_light">#7CBDFF</color>
