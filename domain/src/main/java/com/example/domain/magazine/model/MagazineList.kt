@@ -6,5 +6,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class MagazineList(
-    val magazines: List<Magazine>
+    val magazines: ArrayList<Magazine>
 ): BaseModel
