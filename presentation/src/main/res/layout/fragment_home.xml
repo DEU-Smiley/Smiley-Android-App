@@ -106,11 +106,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
-                    android:id="@+id/mission_detail_btn"
+                    android:id="@+id/llMissionDetailBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/side_margin"
                     android:orientation="horizontal"
+                    android:clickable="true"
 
                     app:layout_constraintBottom_toBottomOf="@id/today_mission_title"
                     app:layout_constraintRight_toRightOf="parent"
@@ -402,11 +403,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/chat_bot_banner"/>
 
                 <LinearLayout
-                    android:id="@+id/magzine_detail_btn"
+                    android:id="@+id/llMagazineDetailBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/side_margin"
                     android:orientation="horizontal"
+                    android:clickable="true"
 
                     app:layout_constraintBottom_toBottomOf="@id/magazine_title"
                     app:layout_constraintRight_toRightOf="parent"
@@ -429,17 +431,33 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/timeline_view"
+                    android:id="@+id/rvTimelineView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="40dp"
-                    android:paddingStart="@dimen/side_margin"
-                    android:paddingEnd="@dimen/side_margin"
+                    android:layout_marginVertical="40dp"
+                    android:paddingHorizontal="@dimen/side_margin"
                     android:overScrollMode="never"
 
                     app:layout_constraintTop_toBottomOf="@id/magazine_title"/>
 
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/sflShimmerLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/side_margin"
+                    app:layout_constraintStart_toStartOf="@id/rvTimelineView"
+                    app:layout_constraintEnd_toEndOf="@id/rvTimelineView"
+                    app:layout_constraintTop_toTopOf="@id/rvTimelineView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/shimmer_timeline_magazine_view"/>
+                        <include layout="@layout/shimmer_timeline_magazine_view"/>
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
                 <!-- Layout End 타임 라인 레이아웃 -->
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!-- Layout End 콘텐츠 레이아웃 -->

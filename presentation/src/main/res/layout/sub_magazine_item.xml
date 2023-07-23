@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="409dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clMagazineContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivMagazineThumb"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/mock_magazine_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvMagazineTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/side_margin"
+                android:layout_marginTop="30dp"
+
+                android:text="치아 교정 시,\n주의해야 할 사항은 ?"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:fontFamily="@font/pretendard_bold"
+                android:lineSpacingExtra="6sp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivLikeCnt"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/ic_heart"
+                android:backgroundTint="@color/white_trans_50"
+
+                app:layout_constraintStart_toStartOf="@id/viewLine"
+                app:layout_constraintBottom_toTopOf="@id/viewLine"/>
+
+            <TextView
+                android:id="@+id/tvLikeCnt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+
+                android:text="539"
+                android:textColor="@color/white_trans_50"
+                android:textSize="@dimen/B7_R400_12_h18"
+                android:fontFamily="@font/pretendard_regular"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+
+                app:layout_constraintStart_toEndOf="@id/ivLikeCnt"
+                app:layout_constraintTop_toTopOf="@id/ivLikeCnt"
+                app:layout_constraintBottom_toBottomOf="@id/ivLikeCnt"/>
+
+            <ImageView
+                android:id="@+id/ivViewCnt"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/ic_eyes"
+                android:backgroundTint="@color/white_trans_50"
+
+                app:layout_constraintStart_toEndOf="@id/tvLikeCnt"
+                app:layout_constraintBottom_toTopOf="@id/viewLine"/>
+
+            <TextView
+                android:id="@+id/tvViewCnt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+
+                android:text="10,432"
+                android:textColor="@color/white_trans_50"
+                android:textSize="@dimen/B7_R400_12_h18"
+                android:fontFamily="@font/pretendard_regular"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+
+                app:layout_constraintStart_toEndOf="@id/ivViewCnt"
+                app:layout_constraintTop_toTopOf="@id/ivViewCnt"
+                app:layout_constraintBottom_toBottomOf="@id/ivViewCnt"/>
+
+            <View
+                android:id="@+id/viewLine"
+                android:layout_width="0dp"
+                android:layout_height="1.5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/white_trans_50"
+                app:layout_constraintStart_toStartOf="@id/tvMagazineTitle"
+                app:layout_constraintEnd_toEndOf="@id/tvMagazineTitle"
+                app:layout_constraintBottom_toTopOf="@id/tvAuthor"/>
+
+            <TextView
+                android:id="@+id/tvAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+
+                android:text="nickname"
+                android:textColor="@color/white_trans_50"
+                android:textSize="@dimen/B7_R400_12_h18"
+                android:fontFamily="@font/pretendard_regular"
+
+                app:layout_constraintStart_toStartOf="@id/viewLine"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tvSubTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/side_margin"
+
+                android:text="치아 교정시 주의해야할 사항은?"
+                android:textColor="@color/white_trans_50"
+                android:textSize="@dimen/B7_R400_12_h18"
+                android:fontFamily="@font/pretendard_regular"
+                android:maxLines="1"
+
+                app:layout_constraintStart_toEndOf="@id/tvAuthor"
+                app:layout_constraintEnd_toEndOf="@id/viewLine"
+                app:layout_constraintTop_toTopOf="@id/tvAuthor"
+                app:layout_constraintBottom_toBottomOf="@id/tvAuthor"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

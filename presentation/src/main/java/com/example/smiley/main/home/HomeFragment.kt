@@ -14,16 +14,21 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.magazine.model.Magazine
+import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.bluetooth.viewmodel.BluetoothDataState
 import com.example.smiley.bluetooth.viewmodel.BluetoothViewModel
+import com.example.smiley.common.extension.addFragment
 import com.example.smiley.common.extension.addFragmentToFullScreen
+import com.example.smiley.common.extension.gone
 import com.example.smiley.common.extension.showToast
+import com.example.smiley.common.extension.visible
 import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.common.utils.NotifyManager
 import com.example.smiley.databinding.FragmentHomeBinding
 import com.example.smiley.magazine.MagazineDetailFragment
+import com.example.smiley.magazine.MagazineListFragment
 import com.example.smiley.main.home.adapter.TimeLineAdapter
 import com.example.smiley.main.home.adapter.TimeLineItem
 import com.example.smiley.main.home.viewmodel.HomeViewModel
@@ -68,6 +73,7 @@ class HomeFragment : Fragment() {
         _bind = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         observe()
+        initView()
         initTimeLineView()
         requestData()
 
@@ -92,6 +98,13 @@ class HomeFragment : Fragment() {
             if (child is ViewGroup) {
                 applyTouchEffectToAllViews(child)
             }
+        }
+    }
+
+    private fun initView(){
+        bind.llMagazineDetailBtn.setOnClickListener {
+            (requireActivity() as AppCompatActivity)
+                .addFragmentToFullScreen(MagazineListFragment.newInstance())
         }
     }
 
@@ -137,10 +150,19 @@ class HomeFragment : Fragment() {
     private suspend fun observeTimeLineState(){
         homeVm.timeLineState.collect { state ->
             when(state){
-                is TimeLineState.Init -> Unit
+                is TimeLineState.Init -> {
+                    with(bind.sflShimmerLayout){
+                        startShimmer()
+                        visible()
+                    }
+                }
                 is TimeLineState.SuccessLoad -> {
                     Log.d("매거진 조회 성공", "${state.timeLine}")
-                    val adapter = bind.timelineView.adapter as TimeLineAdapter
+                    with(bind.sflShimmerLayout){
+                        stopShimmer()
+                        gone()
+                    }
+                    val adapter = bind.rvTimelineView.adapter as TimeLineAdapter
                     adapter.changeDataSet(state.timeLine as ArrayList<TimeLineItem>)
                 }
                 is TimeLineState.Error -> {
@@ -157,7 +179,7 @@ class HomeFragment : Fragment() {
      * 타임라인 초기화
      */
     private fun initTimeLineView(){
-        bind.timelineView.apply {
+        bind.rvTimelineView.apply {
             adapter = TimeLineAdapter(arrayListOf()).apply {
                 setMagazineClickListener(magazineClickListener)
             }
