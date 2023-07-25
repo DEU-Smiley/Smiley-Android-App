@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,14 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.magazine.model.Magazine
 import com.example.domain.magazine.model.MagazineList
 import com.example.smiley.R
-import com.example.smiley.common.extension.addFragment
-import com.example.smiley.common.extension.addFragmentToFullScreen
 import com.example.smiley.common.extension.addFragmetFullScreen
-import com.example.smiley.common.extension.gone
 import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.common.extension.start
 import com.example.smiley.common.extension.stop
-import com.example.smiley.common.extension.visible
 import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.databinding.FragmentMagazineListBinding
 import com.example.smiley.magazine.adapter.MagazineListAdapter

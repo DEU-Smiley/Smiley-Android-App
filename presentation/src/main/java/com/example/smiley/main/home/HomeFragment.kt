@@ -14,11 +14,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.magazine.model.Magazine
-import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.bluetooth.viewmodel.BluetoothDataState
 import com.example.smiley.bluetooth.viewmodel.BluetoothViewModel
-import com.example.smiley.common.extension.addFragment
 import com.example.smiley.common.extension.addFragmentToFullScreen
 import com.example.smiley.common.extension.gone
 import com.example.smiley.common.extension.showToast

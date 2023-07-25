@@ -1,7 +1,6 @@
 package com.example.data.magazine.remote.api
 
 import com.example.data.magazine.remote.response.MagazineListResponse
-import com.example.domain.magazine.model.MagazineList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
