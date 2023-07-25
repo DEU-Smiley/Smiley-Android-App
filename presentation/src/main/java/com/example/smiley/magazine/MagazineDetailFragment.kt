@@ -1,5 +1,6 @@
 package com.example.smiley.magazine
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,6 +41,7 @@ class MagazineDetailFragment : Fragment() {
         return bind.root
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView(){
         with(bind.wvMagazineView.settings){
             javaScriptEnabled = true
