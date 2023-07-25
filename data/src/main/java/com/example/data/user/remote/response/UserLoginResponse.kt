@@ -10,11 +10,12 @@ import java.util.*
 
 @Parcelize
 class UserLoginResponse(
-    @SerializedName("id")           val idx          : String,
-    @SerializedName("userNumber")   val userId       : String,
-    @SerializedName("name")         val name        : String,
-    @SerializedName("birthDate")    val birthDate   : String,
-    @SerializedName("phoneToken")   val deviceToken : String
+    @SerializedName("id")               val idx         : String,
+    @SerializedName("userNumber")       val userId      : String,
+    @SerializedName("name")             val name        : String,
+    @SerializedName("birthDate")        val birthDate   : String,
+    @SerializedName("phoneToken")       val deviceToken : String,
+    @SerializedName("userMedicalInfos") val medicalInfo : UserMedicalInfoResponse
 ): BaseResponse {
     companion object: DataMapper<UserLoginResponse, User> {
         override fun UserLoginResponse.toDomainModel(): User {

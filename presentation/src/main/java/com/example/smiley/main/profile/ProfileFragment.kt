@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
 import com.example.smiley.common.extension.addFragment
@@ -52,6 +53,7 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         _bind = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
+        initView()
         addClickEventToMenus()
 
         return bind.root
@@ -75,6 +77,12 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun initView(){
+        App.user?.let {
+            bind.tvUserNicknameView.text = it.name
+            bind.tvUserBirthDayView.text = it.birthDate
+        }
+    }
     /**
      * 프로필 화면의 각 메뉴에 클릭 이벤트를 지정하는 메소드
      */

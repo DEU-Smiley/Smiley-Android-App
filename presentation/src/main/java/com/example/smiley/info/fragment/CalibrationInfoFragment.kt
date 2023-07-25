@@ -18,6 +18,7 @@ import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.databinding.FragmentCalibrationInfoBinding
 import com.example.smiley.hospital.HospitalMapFragment
 import com.example.smiley.hospital.HospitalSearchFragment
+import com.example.smiley.main.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.time.LocalDate
@@ -105,7 +106,7 @@ class CalibrationInfoFragment : Fragment(), DataSendable {
                     confirmText = "등록하기",
                     cancleText = "나중에 하기",
                     confirmListener = { this.addFragment(BluetoothSearchFragment()) },
-                    cancleListner = { this.addFragment(HospitalMapFragment()) }
+                    cancleListner = { requireActivity().changeActivity(MainActivity::class.java) }
                 )
             }
         }
