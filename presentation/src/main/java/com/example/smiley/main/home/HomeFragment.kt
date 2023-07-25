@@ -180,9 +180,10 @@ class HomeFragment : Fragment() {
      */
     private fun initTimeLineView(){
         bind.rvTimelineView.apply {
-            adapter = TimeLineAdapter(arrayListOf()).apply {
-                setMagazineClickListener(magazineClickListener)
-            }
+            adapter = TimeLineAdapter(
+                arrayListOf(),
+                magazineClickListener
+            )
 
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
