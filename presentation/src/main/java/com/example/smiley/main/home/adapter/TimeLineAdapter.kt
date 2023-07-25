@@ -11,13 +11,9 @@ import com.example.smiley.R
 import com.example.smiley.common.listener.OnItemClickListener
 
 class TimeLineAdapter(
-    private var items: ArrayList<TimeLineItem>
+    private var items: ArrayList<TimeLineItem>,
+    private val magazineClickListener: OnItemClickListener<Magazine>? = null
 ): RecyclerView.Adapter<TimeLineViewHolder>() {
-    private var magazineClickListener: OnItemClickListener<Magazine>? = null
-
-    fun setMagazineClickListener(listener: OnItemClickListener<Magazine>){
-        magazineClickListener = listener
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeLineViewHolder {
         return when(viewType){

@@ -14,6 +14,7 @@ import com.example.smiley.common.extension.addFragment
 import com.example.smiley.common.extension.addFragmentToFullScreen
 import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.databinding.FragmentProfileBinding
+import com.example.smiley.magazine.MagazineListFragment
 import com.example.smiley.medicine.MedicineSearchFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -87,6 +88,11 @@ class ProfileFragment : Fragment() {
             menuDeviceSetting.setOnClickListener{
                 (requireActivity() as AppCompatActivity)
                     .addFragmentToFullScreen(BluetoothSearchFragment())
+            }
+
+            menuMagazine.setOnClickListener {
+                (requireActivity() as AppCompatActivity)
+                    .addFragmentToFullScreen(MagazineListFragment.newInstance())
             }
         }
     }
