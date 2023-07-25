@@ -18,3 +18,11 @@ fun Fragment.addFragment(fragment:Fragment){
         .addToBackStack(null)
         .commit()
 }
+
+fun Fragment.addFragmetFullScreen(fragment: Fragment){
+    requireActivity().supportFragmentManager
+        .beginTransaction()
+        .add(R.id.parent_layout, fragment)
+        .addToBackStack(null)
+        .commit()
+}
