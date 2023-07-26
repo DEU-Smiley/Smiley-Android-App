@@ -48,7 +48,7 @@ jobs:
 
       # Release 빌드
       - name: Build Release APK
-        run: bash ./gradlew assembleRelease --stacktrace
+        run: bash ./gradlew assembleRelease --debug
 
       # Release APK 추출
       - name: Upload Release APK
