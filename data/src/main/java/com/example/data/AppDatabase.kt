@@ -27,7 +27,7 @@ import java.io.ByteArrayOutputStream
  */
 @Database(
     entities = [ MedicineEntity::class ],
-    version = 2,
+    version = 3,
 )
 abstract class AppDatabase: RoomDatabase() {
     abstract fun medicineDao(): MedicineDao
@@ -46,6 +46,7 @@ abstract class AppDatabase: RoomDatabase() {
         private fun buildDatabase(context: Context): AppDatabase {
             return Room
                 .databaseBuilder(context, AppDatabase::class.java, "smiley-database")
+                .fallbackToDestructiveMigration()
                 .build()
         }
     }
