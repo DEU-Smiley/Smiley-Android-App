@@ -26,15 +26,11 @@ import java.io.ByteArrayOutputStream
  * 만약, 만약 구조가 바뀌었는데 버전이 같다면 에러 발생
  */
 @Database(
-    entities = [
-        MedicineEntity::class,
-        MagazineEntity::class
-    ],
+    entities = [ MedicineEntity::class ],
     version = 2,
 )
 abstract class AppDatabase: RoomDatabase() {
     abstract fun medicineDao(): MedicineDao
-    abstract fun magazineDao(): MagazineDao
 
     companion object {
         /* Singleton */
