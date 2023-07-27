@@ -16,7 +16,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-          cache: gradle
+
 
       # Generate Keystore File
       - name: Generate Keystore File
