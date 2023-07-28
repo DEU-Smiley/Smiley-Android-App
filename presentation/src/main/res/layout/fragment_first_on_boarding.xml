@@ -8,7 +8,7 @@
     android:background="@color/white">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -24,7 +24,7 @@
         app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
-        android:id="@+id/content"
+        android:id="@+id/tvContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/side_margin_2x"
@@ -38,19 +38,19 @@
         android:lineSpacingExtra="6sp"
         android:includeFontPadding="false"
 
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
     <ImageView
-        android:id="@+id/illust"
-        android:layout_width="match_parent"
+        android:id="@+id/ivIllust"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="100dp"
         android:adjustViewBounds="true"
         android:background="@drawable/img_on_boarding_1"
 
-        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintTop_toBottomOf="@id/tvContent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
