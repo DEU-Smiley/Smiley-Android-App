@@ -16,7 +16,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-          cache: gradle
+          cache: 'gradle'
 
       # Generate Keystore File
       - name: Generate Keystore File
@@ -25,8 +25,7 @@ jobs:
         run : |
           echo $KEY_STORE > ./keystore.b64
           base64 -d -i ./keystore.b64 > ./Smiley.jks
-
-
+          
       # Generate keystore.properties
       - name: Generate keystore.properties
         env:
@@ -39,16 +38,23 @@ jobs:
           echo keyPassword=$KEY_PASSWORD >> ./keystore.properties
           echo keyAlias=$KEY_ALIAS >> ./keystore.properties
           echo storeFile=$STORE_FILE >> ./keystore.properties
-
-      # Kakao App Key
-      - name: Access KAKAO_SDK_APPKEY
+          
+      # Generate local.properties
+      - name: Generate local.properties
         env:
           KAKAO_SDK_APPKEY: ${{ secrets.KAKAO_SDK_APPKEY }}
-        run: echo KAKAO_SDK_APPKEY=$KAKAO_SDK_APPKEY > ./local.properties
-
+          NAVER_MAP_CLIENT_ID: ${{ secrets.NAVER_MAP_CLIENT_ID }}
+        run: |
+          echo KAKAO_SDK_APPKEY=$KAKAO_SDK_APPKEY > ./local.properties
+          echo NAVER_MAP_CLIENT_ID=$NAVER_MAP_CLIENT_ID >> ./local.properties
+        
+      # Grant gradlew
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      
       # Release 빌드
       - name: Build Release APK
-        run: bash ./gradlew assembleRelease --stacktrace
+        run: bash ./gradlew assembleRelease --debug
 
       # Release APK 추출
       - name: Upload Release APK
@@ -64,7 +70,6 @@ jobs:
       - name: print branch name
         run: |
           echo ${{ steps.branch-name.outputs.current_branch }}
-
       # merge commit에서 release 버전 정보 추출
       - name: 버전 정보 추출
         run: echo "##[set-output name=version;]$(echo '${{ steps.branch-name.outputs.current_branch }}' | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')"
@@ -84,8 +89,6 @@ jobs:
             - Apk 다운로드 -> [Apk Downloads](https://github.com/DEU-Smiley/Smiley-Android-App/releases/download/${{ steps.extract_version_name.outputs.version }}/app-release.apk) 
             - Apk는 위의 링크 또는 해당 게시글 하단에서 다운로드 받을 수 있습니다.
             - 만약 해당 게시글에 Apk 파일이 업로드 되어 있지 않다면 아래 절차를 통해 다운로드 받아주세요.
-
-
             ### Apk 다운로드
             1. [Apk Downloads](https://github.com/DEU-Smiley/Smiley-Android-App/actions/workflows/auto_release.yml?query=is%3Asuccess+) 로 이동하세요.
             2. 목록 중 가장 최근에 완료된 항목(초록색 체크 표시)을 클릭하세요.
