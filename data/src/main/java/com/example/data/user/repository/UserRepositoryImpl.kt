@@ -29,7 +29,7 @@ internal class UserRepositoryImpl @Inject constructor(
         return flow{
             // Handler가 Flow<ApiResponse<T>>를 리턴
             ApiResponseHandler().handle {
-                userApi.login(
+                userApi.signUp(
                     UserLoginRequest(
                         name = name,
                         userId = userId,
