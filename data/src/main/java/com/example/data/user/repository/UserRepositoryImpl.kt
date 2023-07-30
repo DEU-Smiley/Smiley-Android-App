@@ -1,5 +1,6 @@
 package com.example.data.user.repository
 
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import com.example.data.common.network.ApiResponse
 import com.example.data.common.network.ApiResponseHandler
 import com.example.data.common.network.ErrorResponse.Companion.toDomainModel
@@ -20,7 +21,11 @@ internal class UserRepositoryImpl @Inject constructor(
     private val userApi: UserApi,
     private val dataStore: PrefsDataStore
 ): UserRepository {
-    override suspend fun login(
+    companion object{
+        const val ACCESS_FLAG_KEY = "ACCESS_FLAG"
+    }
+
+    override suspend fun signUp(
         name: String,
         userId: String,
         birthDate: String,
@@ -55,13 +60,13 @@ internal class UserRepositoryImpl @Inject constructor(
      * 최초 접속 플래그를 가져오는 메소드
      */
     override suspend fun getAccessFlag(): Flow<Boolean> {
-        return dataStore.getAccessFlag()
+        return dataStore.get(ACCESS_FLAG_KEY, Boolean::class.java)
     }
 
     /**
      * 최초 접속 플래그를 세팅하는 메소드
      */
     override suspend fun setAccessFlag(flag: Boolean) {
-        dataStore.setAccessFlag(flag)
+        dataStore.put(ACCESS_FLAG_KEY, flag)
     }
 }

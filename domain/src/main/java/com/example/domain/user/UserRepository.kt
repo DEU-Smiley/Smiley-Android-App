@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import java.util.*
 
 interface UserRepository {
-    suspend fun login(
+    suspend fun signUp(
         name: String,
         userId:String,
         birthDate: String,

@@ -5,11 +5,10 @@ import com.example.domain.user.UserRepository
 import com.example.domain.user.model.User
 import dagger.Reusable
 import kotlinx.coroutines.flow.Flow
-import java.util.*
 import javax.inject.Inject
 
 @Reusable
-class UserLoginUseCase @Inject constructor(
+class UserSignUpUseCase @Inject constructor(
     private val userRepository: UserRepository
 ){
     suspend operator fun invoke(
@@ -18,7 +17,7 @@ class UserLoginUseCase @Inject constructor(
         birthDate: String,
         deviceToken: String
     ): Flow<ResponseState<User>> {
-        return userRepository.login(
+        return userRepository.signUp(
             name = name,
             userId = userId,
             birthDate = birthDate,
