@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.magazine.model.Magazine
+import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.bluetooth.viewmodel.BluetoothDataState
 import com.example.smiley.bluetooth.viewmodel.BluetoothViewModel
@@ -103,6 +104,10 @@ class HomeFragment : Fragment() {
         bind.llMagazineDetailBtn.setOnClickListener {
             (requireActivity() as AppCompatActivity)
                 .addFragmentToFullScreen(MagazineListFragment.newInstance())
+        }
+
+        App.user?.let {
+            bind.tvUserName.text = "${it.name}님"
         }
     }
 

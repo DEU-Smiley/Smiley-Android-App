@@ -356,9 +356,9 @@
                     android:gravity="center"
 
                     android:text="권한 허용하기"
-                    android:textSize="@dimen/H4_M500_18_auto"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/pretendard_bold"
+                    android:textSize="@dimen/M500_16_h22"
+                    android:fontFamily="@font/pretendard_medium"
                     android:lineSpacingExtra="0sp"
                     android:includeFontPadding="false"
                     />
