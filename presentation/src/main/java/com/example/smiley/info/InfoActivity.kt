@@ -15,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class InfoActivity : AppCompatActivity() {
 
     private lateinit var bind:ActivityInfoBinding
-    private var currentPage = 0 // ViewPager의 현재 페이지를 저장하는 변수
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +25,9 @@ class InfoActivity : AppCompatActivity() {
     }
 
     private fun initViewPager(){
-        this.addFragment(SignUpFragment())
+        val userId = intent.getStringExtra("userId") ?: ""
+        this.addFragment(
+            SignUpFragment.newInstance(userId)
+        )
     }
 }

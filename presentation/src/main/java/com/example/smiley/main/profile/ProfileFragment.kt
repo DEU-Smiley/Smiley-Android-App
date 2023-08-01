@@ -11,13 +11,12 @@ import androidx.fragment.app.Fragment
 import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
-import com.example.smiley.common.extension.addFragment
 import com.example.smiley.common.extension.addFragmentToFullScreen
 import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.databinding.FragmentProfileBinding
+import com.example.smiley.hospital.HospitalSearchFragment
 import com.example.smiley.magazine.MagazineListFragment
 import com.example.smiley.medicine.MedicineSearchFragment
-import dagger.hilt.android.AndroidEntryPoint
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,18 +88,19 @@ class ProfileFragment : Fragment() {
     private fun addClickEventToMenus(){
         with(bind){
             menuMedicineExamine.setOnClickListener {
-                (requireActivity() as AppCompatActivity)
-                    .addFragmentToFullScreen(MedicineSearchFragment())
+                this@ProfileFragment.addFragmentToFullScreen(MedicineSearchFragment())
             }
 
             menuDeviceSetting.setOnClickListener{
-                (requireActivity() as AppCompatActivity)
-                    .addFragmentToFullScreen(BluetoothSearchFragment())
+                this@ProfileFragment.addFragmentToFullScreen(BluetoothSearchFragment())
             }
 
             menuMagazine.setOnClickListener {
-                (requireActivity() as AppCompatActivity)
-                    .addFragmentToFullScreen(MagazineListFragment.newInstance())
+                this@ProfileFragment.addFragmentToFullScreen(MagazineListFragment.newInstance())
+            }
+
+            menuSearchHospital.setOnClickListener {
+                this@ProfileFragment.addFragmentToFullScreen(HospitalSearchFragment())
             }
         }
     }
