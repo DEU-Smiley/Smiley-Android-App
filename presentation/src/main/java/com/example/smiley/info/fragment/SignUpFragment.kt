@@ -18,7 +18,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.domain.user.model.User
+import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.common.dialog.LoadingDialog
 import com.example.smiley.common.extension.*
@@ -30,8 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_USER_ID = ""
 
 /**
  * A simple [Fragment] subclass.
@@ -46,14 +45,12 @@ class SignUpFragment : Fragment() {
     private val infoVm: InfoViewModel by viewModels()
     private val editTextList: ArrayList<EditText> = arrayListOf()
 
-    private var param1: String? = null
-    private var param2: String? = null
+    private var userId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            userId = it.getString(ARG_USER_ID)
         }
     }
 
@@ -82,7 +79,7 @@ class SignUpFragment : Fragment() {
                         is SignUpFragmentState.IsLoading -> handleLoading(true)
                         is SignUpFragmentState.ShowToast -> handleShowToast(state.message)
                         is SignUpFragmentState.Error -> handleError(state.message)
-                        is SignUpFragmentState.SuccessSendInfo -> handleSuccess(state.user)
+                        is SignUpFragmentState.SuccessSignUp -> handleSuccess()
                     }
                 }
             }
@@ -114,14 +111,14 @@ class SignUpFragment : Fragment() {
         )
     }
 
-    private fun handleSuccess(user:User){
+    private fun handleSuccess(){
         handleLoading(false)
         requireActivity().showLottieGenericDialog(
-            "회원가입 완료!",
-            "${user.name}님 환영합니다!",
-            "교정 치료를 받고 계신가요?\n병원을 등록하면 앱에서 예약할 수 있어요 !",
-            confirmText = "등록하러 가기",
-            cancleText = "나중에 하기",
+            title = getString(R.string.dialog_title_sign_up_complete),
+            "${App.user?.name}님 환영합니다!",
+            subContent = getString(R.string.dialog_message_add_hospital),
+            confirmText = getString(R.string.dialog_button_resist),
+            cancleText = getString(R.string.dialog_button_later),
             lottieView = R.raw.hospital,
             confirmListener = { this@SignUpFragment.addFragment(CalibrationInfoFragment()) },
             cancleListner = { requireActivity().changeActivity(MainActivity::class.java) }
@@ -181,7 +178,7 @@ class SignUpFragment : Fragment() {
                 confirmBtn.visibleWithAnimation()
                 birthLayout.visibleWithAnimation()
                 birthEditText.requestFocus()
-                signUpTextView.text = "생년월일을\n입력해 주세요."
+                signUpTextView.text = getString(R.string.title_input_brith_date)
             }
         }
     }
@@ -191,10 +188,10 @@ class SignUpFragment : Fragment() {
      */
     private fun setConfirmBtnClickEvent(){
         bind.confirmBtn.setOnClickListener {
-            if(isAllInputCompleted()){
-                infoVm.sendUserInfoToServer(
+            if (isAllInputCompleted()) {
+                infoVm.signUp(
                     name = "${bind.nameEditText.text}",
-                    userId = "${bind.emailEditText.text}",
+                    userId = userId ?: "",
                     birth = "${bind.birthEditText.text}".toDateOfyyMMdd()
                 )
             }
@@ -227,7 +224,7 @@ class SignUpFragment : Fragment() {
             val input = "$p0"
 
             bind.emailEditText.error =
-                if(!pattern.matcher(input).matches()) "올바르지 않은 이메일 형식입니다."
+                if(!pattern.matcher(input).matches()) getString(R.string.dialog_error_invalid_email)
                 else null
 
             if(input.length == 6 && bind.emailEditText.error == null){
@@ -258,7 +255,7 @@ class SignUpFragment : Fragment() {
                 with(bind){
                     phoneLayout.visibleWithAnimation()
                     phoneEditText.requestFocus()
-                    signUpTextView.text = "전화번호를\n입력해 주세요."
+                    signUpTextView.text = getString(R.string.title_input_phone_number)
                 }
             }
         }
@@ -274,7 +271,7 @@ class SignUpFragment : Fragment() {
                 with(bind){
                     emailLayout.visibleWithAnimation()
                     emailEditText.requestFocus()
-                    signUpTextView.text = "이메일을\n입력해 주세요."
+                    signUpTextView.text = getString(R.string.title_input_email)
                 }
             }
         }
@@ -285,30 +282,45 @@ class SignUpFragment : Fragment() {
 
         editTextList.forEach {
             if(it.text.isBlank()){
-                requireActivity().showConfirmDialog("입력 확인","빈 칸 없이 입력해 주세요.")
+                requireActivity().showConfirmDialog(
+                    getString(R.string.dialog_title_confirm_input),
+                    getString(R.string.dialog_error_no_empty_space)
+                )
                 return false
             }
         }
 
         if(!pattern.matcher(bind.emailEditText.text).matches()){
-            requireActivity().showConfirmDialog("입력 확인","이메일 형식을 확인해 주세요.")
+            requireActivity().showConfirmDialog(
+                getString(R.string.dialog_title_confirm_input),
+                getString(R.string.dialog_error_email_format)
+            )
             return false
         }
 
         if(bind.phoneEditText.text.length != 11){
-            requireActivity().showConfirmDialog("입력 확인","전화번호를 확인해 주세요.")
+            requireActivity().showConfirmDialog(
+                getString(R.string.dialog_title_confirm_input),
+                getString(R.string.dialog_error_phone_number_format)
+            )
             return false
         }
 
         if(bind.birthEditText.text.length != 6){
-            requireActivity().showConfirmDialog("입력 확인","생년월일을 확인해 주세요.")
+            requireActivity().showConfirmDialog(
+                getString(R.string.dialog_title_confirm_input),
+                getString(R.string.dialog_error_invalid_birth_date)
+            )
             return false
         }
 
         try {
             "${bind.birthEditText.text}".toDateOfyyMMdd()
         } catch (e: java.lang.Exception){
-            requireActivity().showConfirmDialog("입력 확인","생년월일을 확인해 주세요.")
+            requireActivity().showConfirmDialog(
+                getString(R.string.dialog_title_confirm_input),
+                getString(R.string.dialog_error_invalid_birth_date)
+            )
             return false
         }
 
@@ -330,16 +342,15 @@ class SignUpFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
+         * @param userId Parameter 1.
          * @param param2 Parameter 2.
          * @return A new instance of fragment SignUpFragment.
          */
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(userId: String) =
             SignUpFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_USER_ID, userId)
                 }
             }
     }

@@ -7,13 +7,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:background="@color/white">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintVertical_weight="1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -23,7 +22,7 @@
 
         <View
             android:id="@+id/bottom_view"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="120dp"
             android:background="@color/white"
 
@@ -76,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
 
-                android:text="시작하기"
+                android:text="@string/on_boarding_start"
                 android:textSize="@dimen/H6_SB600_16_h22"
                 android:textColor="@color/black1_20"
                 android:fontFamily="@font/pretendard_medium"

@@ -19,7 +19,7 @@ fun Fragment.addFragment(fragment:Fragment){
         .commit()
 }
 
-fun Fragment.addFragmetFullScreen(fragment: Fragment){
+fun Fragment.addFragmentToFullScreen(fragment: Fragment){
     requireActivity().supportFragmentManager
         .beginTransaction()
         .add(R.id.parent_layout, fragment)

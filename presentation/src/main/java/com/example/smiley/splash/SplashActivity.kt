@@ -8,10 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.common.extension.changeActivity
+import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.login.LoginActivity
+import com.example.smiley.main.MainActivity
 import com.example.smiley.onboarding.OnBoardingActivity
 import com.example.smiley.splash.viewmodel.SplashActivityState
 import com.example.smiley.splash.viewmodel.SplashViewModel
@@ -35,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun splashLogo(sec:Long){
         Handler().postDelayed(Runnable {
-            splashVm.checkFirstAccess()
+            splashVm.getUserInfo()
         }, 1000L * sec)
     }
 
@@ -45,19 +46,17 @@ class SplashActivity : AppCompatActivity() {
             .onEach { state ->
                 when (state) {
                     is SplashActivityState.Init -> Unit
-                    is SplashActivityState.IsFirstAccess -> {
-                        handleIsFirstAccess(state.flag)
+                    is SplashActivityState.FirstAccess -> {
+                        changeActivity(OnBoardingActivity::class.java)
+                    }
+                    is SplashActivityState.SuccessLoadUserId -> {
+                        changeActivity(MainActivity::class.java)
+                    }
+                    is SplashActivityState.Error -> {
+                        showConfirmDialog("로그인 에러", state.message)
                     }
                 }
             }
             .launchIn(lifecycleScope)
-    }
-
-    private fun handleIsFirstAccess(flag: Boolean){
-        changeActivity(
-            // 최초 접속인 경우
-            if(flag) OnBoardingActivity::class.java
-            else LoginActivity::class.java
-        )
     }
 }

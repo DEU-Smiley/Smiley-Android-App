@@ -30,8 +30,11 @@
     <dimen name="B7_R400_12_h18">12sp</dimen>
     <dimen name="B8_B700_12_auto">12sp</dimen>
     <dimen name="Detail1_M500_10_h14">10sp</dimen>
+
+    <dimen name="L300_20_auto">20sp</dimen>
     <dimen name="M500_14_h20">14sp</dimen>
     <dimen name="M500_16_h22">16sp</dimen>
+    <dimen name="SB600_20_auto">20sp</dimen>
     <dimen name="SB600_24_auto">24sp</dimen>
     <dimen name="B700_11_auto">11sp</dimen>
     <dimen name="B700_15_auto">15sp</dimen>

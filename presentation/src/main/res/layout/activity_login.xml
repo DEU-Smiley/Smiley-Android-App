@@ -7,103 +7,98 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:paddingLeft="@dimen/side_margin"
-        android:paddingRight="@dimen/side_margin">
+        android:background="@color/white">
 
-        <!-- Layout 로그인 타이틀 -->
-        <LinearLayout
-            android:id="@+id/title_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+        <TextureView
+            android:id="@+id/ttv_login_video"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
 
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#4D000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/login_logo"
-            android:gravity="center">
-
-            <View
-                android:layout_width="61dp"
-                android:layout_height="20dp"
-                android:background="@drawable/smiley_logo"
-                android:backgroundTint="@color/black1_20"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-
-                android:text="스마일리와 함께"
-                android:textSize="@dimen/SB600_24_auto"
-                android:textColor="@color/black1_20"
-                android:fontFamily="@font/pretendard_semibold"
-                android:lineSpacingExtra="6sp"
-                android:includeFontPadding="false"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-
-                android:text="기록하고 관리해 보세요!"
-                android:textSize="@dimen/SB600_24_auto"
-                android:textColor="@color/black1_20"
-                android:fontFamily="@font/pretendard_light"
-                android:lineSpacingExtra="6sp"
-                android:includeFontPadding="false"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-
-                android:text="바로 지금, 미소가 필요한 순간"
-                android:textSize="@dimen/M500_16_h22"
-                android:textColor="@color/gray2_6E"
-                android:fontFamily="@font/pretendard_medium"
-                android:lineSpacingExtra="6sp"
-                android:includeFontPadding="false"/>
-        </LinearLayout>
-        <!-- Layout End 로그인 타이틀 -->
-
-        <!-- Layout 로그인 로고 -->
-        <ImageView
-            android:id="@+id/login_logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="40dp"
-            android:src="@drawable/login_logo"
-            android:adjustViewBounds="true"
-
-            app:layout_constraintTop_toBottomOf="@+id/title_layout"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/google_login_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
-        <!-- Layout End 로그인 로고 -->
+        <TextView
+            android:id="@+id/tv_slogan_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="바로 지금,"
+            android:textColor="@color/white"
+            android:textSize="@dimen/SB600_20_auto"
+
+            app:layout_constraintBottom_toTopOf="@id/tv_slogan_2"
+            app:layout_constraintStart_toStartOf="@id/tv_slogan_2" />
+
+        <TextView
+            android:id="@+id/tv_slogan_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
+
+            android:fontFamily="@font/pretendard_light"
+            android:text="미소가 필요한 순간"
+            android:textColor="@color/white"
+            android:textSize="@dimen/L300_20_auto"
+
+            app:layout_constraintBottom_toTopOf="@+id/cl_google_login_btn"
+            app:layout_constraintEnd_toStartOf="@id/view_line"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@id/cl_google_login_btn" />
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@color/white_trans_70"
+
+            app:layout_constraintBottom_toBottomOf="@id/tv_slogan_2"
+            app:layout_constraintEnd_toStartOf="@id/iv_simple_logo"
+            app:layout_constraintStart_toEndOf="@id/tv_slogan_2"
+            app:layout_constraintTop_toTopOf="@id/tv_slogan_2" />
+
+        <ImageView
+            android:id="@+id/iv_simple_logo"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/smiley_logo_simple"
+
+            app:layout_constraintBottom_toBottomOf="@id/tv_slogan_2"
+            app:layout_constraintEnd_toEndOf="@id/cl_google_login_btn"
+            app:layout_constraintStart_toEndOf="@id/view_line"
+            app:layout_constraintTop_toTopOf="@id/tv_slogan_2" />
 
         <!-- Layout 구글 로그인 버튼 -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/google_login_btn"
-            android:layout_width="match_parent"
+            android:id="@+id/cl_google_login_btn"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/side_margin"
             android:layout_marginBottom="10dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:background="@drawable/stroke_layout"
-            android:foreground="?attr/selectableItemBackground"
+            android:background="@drawable/background_round_rectangle_5dp"
+            android:backgroundTint="@color/white"
 
             android:clickable="true"
-            android:orientation="horizontal"
+            android:foreground="?attr/selectableItemBackground"
 
+            android:orientation="horizontal"
+            android:paddingVertical="15dp"
+
+            app:layout_constraintBottom_toTopOf="@+id/cl_kakao_login_btn"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/kakao_login_btn">
+            app:layout_constraintRight_toRightOf="parent">
 
             <ImageView
                 android:layout_width="18dp"
@@ -111,22 +106,21 @@
                 android:layout_marginStart="26dp"
                 android:src="@drawable/ic_google"
 
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
 
-                android:text="@string/google_login_text"
-                android:textSize="@dimen/H6_SB600_16_h22"
-                android:textColor="@color/black1_20"
                 android:fontFamily="@font/pretendard_medium"
-                android:lineSpacingExtra="6sp"
                 android:includeFontPadding="false"
+                android:lineSpacingExtra="6sp"
+                android:text="@string/google_login_text"
+                android:textColor="@color/black1_20"
+                android:textSize="@dimen/H6_SB600_16_h22"
 
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -138,23 +132,24 @@
 
         <!-- Layout 카카오 로그인 버튼 -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/kakao_login_btn"
+            android:id="@+id/cl_kakao_login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+            android:layout_marginHorizontal="@dimen/side_margin"
             android:layout_marginBottom="@dimen/btn_bottom_margin"
-
-            android:background="@drawable/stroke_layout_yellow"
-            android:foreground="?attr/selectableItemBackground"
+            android:background="@drawable/background_round_rectangle_5dp"
+            android:backgroundTint="@color/kakao_yello"
 
             android:clickable="true"
-            android:orientation="horizontal"
-            android:gravity="center"
+            android:foreground="?attr/selectableItemBackground"
 
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingVertical="15dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintRight_toRightOf="parent">
 
             <ImageView
                 android:layout_width="18dp"
@@ -162,25 +157,23 @@
                 android:layout_marginStart="26dp"
                 android:src="@drawable/ic_kakao"
 
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/kakao_login_text"
-                android:textSize="@dimen/H6_SB600_16_h22"
-                android:textColor="@color/black1_20"
                 android:fontFamily="@font/pretendard_medium"
-                android:lineSpacingExtra="6sp"
                 android:includeFontPadding="false"
+                android:lineSpacingExtra="6sp"
+                android:text="@string/kakao_login_text"
+                android:textColor="@color/black1_20"
+                android:textSize="@dimen/H6_SB600_16_h22"
 
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- Layout End 카카오 로그인 버튼 -->
 

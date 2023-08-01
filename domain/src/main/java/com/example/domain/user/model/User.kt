@@ -6,9 +6,10 @@ import java.time.LocalDate
 
 @Parcelize
 class User (
-    val idx: String,
-    val userId: String,
-    val name: String,
-    val birthDate: String,
-    val deviceToken: String
+    val idx             : Int,
+    val userId          : String,
+    val name            : String,
+    val birthDate       : String,
+    val deviceToken     : String,
+    val profileImgUrl   : String
 ): BaseModel

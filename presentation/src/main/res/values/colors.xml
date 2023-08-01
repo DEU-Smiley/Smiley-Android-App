@@ -37,6 +37,8 @@
     <color name="red">#F0636E</color>
     <color name="trasparent">#00FFFFFF</color>
     <color name="mint">#81D8E7</color>
+
+    <color name="kakao_yello">#FEE500</color>
     <!-- 컬러 셋 -->
 
 </resources>

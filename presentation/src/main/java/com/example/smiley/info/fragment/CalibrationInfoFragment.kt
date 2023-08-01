@@ -18,6 +18,7 @@ import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.databinding.FragmentCalibrationInfoBinding
 import com.example.smiley.hospital.HospitalMapFragment
 import com.example.smiley.hospital.HospitalSearchFragment
+import com.example.smiley.main.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.time.LocalDate
@@ -96,16 +97,14 @@ class CalibrationInfoFragment : Fragment(), DataSendable {
         bind.confirmBtn.setOnClickListener {
             if (isAllInputCompleted()) {
                 requireActivity().showLottieGenericDialog(
-                    "정보 입력 완료",
-                    content = """모든 정보 입력이 완료 되었습니다 !
-                    |지금 바로 교정 장치를 등록해보세요 !
-                    """.trimMargin(),
-                    subContent = "(교정 장치 등록은 추후 앱 설정에서도 가능합니다.)",
+                    title = getString(R.string.dialog_title_info_complete),
+                    content = getString(R.string.dialog_message_add_device),
+                    subContent = getString(R.string.dialog_message_setting_device),
                     lottieView = R.raw.complete,
-                    confirmText = "등록하기",
-                    cancleText = "나중에 하기",
+                    confirmText = getString(R.string.dialog_button_resist),
+                    cancleText = getString(R.string.dialog_button_later),
                     confirmListener = { this.addFragment(BluetoothSearchFragment()) },
-                    cancleListner = { this.addFragment(HospitalMapFragment()) }
+                    cancleListner = { requireActivity().changeActivity(MainActivity::class.java) }
                 )
             }
         }
@@ -118,14 +117,19 @@ class CalibrationInfoFragment : Fragment(), DataSendable {
         val selectDate = bind.dateEditText.text.toString().toDate()
         val today = LocalDate.now()
 
-        if (bind.hospitalEditText.text.isBlank()
-            || bind.dateEditText.text.isBlank()) {
-            requireActivity().showConfirmDialog("입력 확인", "빈 칸 없이 입력해주세요.")
+        if (bind.hospitalEditText.text.isBlank() || bind.dateEditText.text.isBlank()) {
+            requireActivity().showConfirmDialog(
+                getString(R.string.dialog_title_confirm_input),
+                getString(R.string.dialog_error_no_empty_space)
+            )
             return false
         }
 
         if (today < selectDate) {
-            requireActivity().showConfirmDialog("입력 확인", "교정 시작일을 확인해주세요.")
+            requireActivity().showConfirmDialog(
+                getString(R.string.dialog_title_confirm_input),
+                getString(R.string.dialog_error_check_calibration_start_date)
+            )
             return false
         }
 

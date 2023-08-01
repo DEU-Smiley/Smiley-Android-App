@@ -32,5 +32,34 @@
     <string name="hospital_data_edit_request_message">잘못된 정보가 있다면\nSMILEY 팀에게 알려주세요.</string>
     <string name="app_provider_Information">Smi)ey\n\n사업자 등록번호: 000-00-00000\n동의대학교 컴퓨터소프트웨어공학과\n부산광역시 부산진구 엄광로 176(가야동) 정보공학관 915호\n대표전화 : 051-890-0000</string>
     <string name="no_reserv_data_msg">스마일리에서 접수한 이력이 없거나,\n진료자 정보가 정확하지 않을 수 있어요</string>
+    <string name="on_boarding_start">시작하기</string>
 
+
+    <!-- 레이아웃 Title -->
+    <string name="title_input_phone_number">전화번호\n입력해 주세요.</string>
+    <string name="title_input_email">이메일을\n입력해 주세요.</string>
+    <string name="title_input_brith_date">"생년월일을\n입력해 주세요."</string>
+
+    <!-- 다이얼로그 Title -->
+    <string name="dialog_title_confirm_input">입력 확인</string>
+    <string name="dialog_title_info_complete">정보 입력 완료</string>
+    <string name="dialog_title_sign_up_complete">회원가입 완료!</string>
+
+    <!-- 다이얼로그 Button -->
+    <string name="dialog_button_resist">등록하기</string>
+    <string name="dialog_button_later">나중에 하기</string>
+
+    <!-- 다이얼로그 Message -->
+    <string name="dialog_message_add_device">모든 정보 입력이 완료 되었습니다 !\n지금 바로 교정 장치를 등록해보세요!</string>
+    <string name="dialog_message_add_hospital">교정 치료를 받고 계신가요?\n병원을 등록하면 앱에서 예약할 수 있어요!</string>
+    <string name="dialog_message_setting_device">(교정 장치 등록은 추후 앱 설정에서도 가능합니다.)</string>
+
+    <!-- 다이얼로그 Error Message -->
+    <string name="dialog_error_no_empty_space">빈 칸 없이 입력해주세요.</string>
+    <string name="dialog_error_check_calibration_start_date">교정 시작 일을 확인 해주세요.</string>
+    <string name="dialog_error_login">사용자 검증에 실패 하였습니다. 로그인을 다시 진행해 주세요.</string>
+    <string name="dialog_error_invalid_email">올바르지 않은 이메일 형식입니다.</string>
+    <string name="dialog_error_email_format">이메일 형식을 확인해 주세요.</string>
+    <string name="dialog_error_phone_number_format">전화번호를 확인해 주세요.</string>
+    <string name="dialog_error_invalid_birth_date">생년월일을 확인해 주세요.</string>
 </resources>
