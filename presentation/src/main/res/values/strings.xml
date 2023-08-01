@@ -38,6 +38,7 @@
     <!-- 레이아웃 Title -->
     <string name="title_input_phone_number">전화번호\n입력해 주세요.</string>
     <string name="title_input_email">이메일을\n입력해 주세요.</string>
+    <string name="title_input_brith_date">"생년월일을\n입력해 주세요."</string>
 
     <!-- 다이얼로그 Title -->
     <string name="dialog_title_confirm_input">입력 확인</string>
