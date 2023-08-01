@@ -162,7 +162,7 @@ class SignUpFragment : Fragment() {
             if (hasFocus) { // 포커스 얻었을 때
                 textView.setTextColor(resources.getColor(R.color.primary_normal))
             } else { // 포커스 잃었을 때
-                textView.setTextColor(resources.getColor(R.color.gray2_6E))
+                textView.setTextColor(resources.getColor(R.color.gray2_5E))
             }
         }
     }

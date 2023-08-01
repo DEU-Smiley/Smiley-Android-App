@@ -37,7 +37,7 @@
             android:lineSpacingExtra="6sp"
             android:fontFamily="@font/pretendard_regular"
             android:text="다이얼로그 내용"
-            android:textColor="@color/gray1_55"
+            android:textColor="@color/gray1_42"
             android:textSize="@dimen/M500_14_h20" />
 
         <com.airbnb.lottie.LottieAnimationView
@@ -67,7 +67,7 @@
             android:lineSpacingExtra="6sp"
             android:fontFamily="@font/pretendard_regular"
             android:text="(부가 정보)"
-            android:textColor="@color/gray3_8E"
+            android:textColor="@color/gray3_82"
             android:textSize="@dimen/B4_M500_13_h18" />
 
         <View

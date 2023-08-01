@@ -48,7 +48,7 @@
             android:lineSpacingExtra="6sp"
             android:fontFamily="@font/pretendard_regular"
             android:text="(부가 정보)"
-            android:textColor="@color/gray3_8E"
+            android:textColor="@color/gray3_82"
             android:textSize="@dimen/B4_M500_13_h18" />
 
         <View

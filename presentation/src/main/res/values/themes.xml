@@ -22,7 +22,7 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
 
         <item name="colorControlActivated">@color/primary_normal</item>
-        <item name="colorControlNormal">@color/gray3_8E</item>
+        <item name="colorControlNormal">@color/gray3_82</item>
         <item name="android:textCursorDrawable">@color/black1_20</item>
         <item name="android:textColorHighlight">@color/light_blue1</item>
     </style>

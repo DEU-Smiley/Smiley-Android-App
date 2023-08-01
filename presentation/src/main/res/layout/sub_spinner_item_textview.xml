@@ -5,6 +5,6 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:textSize="14sp"
-    android:textColor="@color/gray3_8E"
+    android:textColor="@color/gray3_82"
     android:fontFamily="@font/pretendard_medium"
     />

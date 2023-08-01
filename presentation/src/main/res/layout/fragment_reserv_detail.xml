@@ -38,7 +38,7 @@
 
                 android:text="현재 예약이 없어요"
                 android:textSize="@dimen/M500_16_h22"
-                android:textColor="@color/gray1_55"
+                android:textColor="@color/gray1_42"
                 android:fontFamily="@font/pretendard_medium"
                 android:lineSpacingExtra="6sp"
 
@@ -56,7 +56,7 @@
 
                 android:text="@string/no_reserv_data_msg"
                 android:textSize="@dimen/M500_14_h20"
-                android:textColor="@color/gray3_8E"
+                android:textColor="@color/gray3_82"
                 android:textAlignment="center"
                 android:fontFamily="@font/pretendard_medium"
                 android:lineSpacingExtra="6sp"

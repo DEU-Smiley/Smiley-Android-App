@@ -56,7 +56,7 @@
         android:layout_marginStart="@dimen/side_margin"
         android:text="42:CB:6F:92:0E:F3"
         android:textSize="@dimen/B5_M500_12_auto"
-        android:textColor="@color/gray3_8E"
+        android:textColor="@color/gray3_82"
         android:fontFamily="@font/pretendard_light"
         android:maxLines="1"
 

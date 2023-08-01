@@ -49,7 +49,7 @@ fun View.goneWithAnimation(){
 }
 
 fun Button.setDisabled(){
-    this.setTextColor(resources.getColor(R.color.gray3_8E))
+    this.setTextColor(resources.getColor(R.color.gray3_82))
     this.isEnabled = false
 }
 

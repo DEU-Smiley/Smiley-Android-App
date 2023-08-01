@@ -64,7 +64,7 @@
 
                 android:background="@drawable/selector_primary_edittext"
                 android:drawableEnd="@drawable/ic_search"
-                android:drawableTint="@color/gray1_55"
+                android:drawableTint="@color/gray1_42"
 
                 android:hint="@string/hospital_search_hint"
                 android:textColorHint="@color/gray4_CB"

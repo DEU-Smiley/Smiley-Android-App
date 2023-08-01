@@ -23,10 +23,10 @@
     <color name="purple1_5C">#5C60F5</color>
     <color name="purple2_BE">#BE6BFF</color>
 
-    <color name="gray1_55">#555555</color>
-    <color name="gray2_6E">#6E6E6E</color>
-    <color name="gray3_8E">#8E8E8E</color>
-    <color name="gray4_CB">#CBCBCB</color>
+    <color name="gray1_42">#555555</color>
+    <color name="gray2_5E">#5E6472</color>
+    <color name="gray3_82">#828896</color>
+    <color name="gray4_CB">#CBCFD7</color>
     <color name="gray5_E6">#E6E6E6</color>
     <color name="gray6_F2">#F2F2F2</color>
     <color name="gray7_F7">#F7F7F7</color>

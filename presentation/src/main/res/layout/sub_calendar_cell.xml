@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="S"
         android:textSize="@dimen/M500_16_h22"
-        android:textColor="@color/gray2_6E"
+        android:textColor="@color/gray2_5E"
         android:fontFamily="@font/pretendard_medium"
         />
 

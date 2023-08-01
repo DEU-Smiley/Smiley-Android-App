@@ -100,7 +100,7 @@
 
                     android:fontFamily="@font/pretendard_semibold"
                     android:text="일일 미션"
-                    android:textColor="@color/gray1_55"
+                    android:textColor="@color/black1_20"
                     android:textSize="@dimen/H6_SB600_16_h22"
 
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -124,14 +124,14 @@
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/pretendard_semibold"
                         android:text="전체보기"
-                        android:textColor="@color/gray3_8E"
+                        android:textColor="@color/gray3_82"
                         android:textSize="@dimen/H4_SB600_14_h18" />
 
                     <View
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:background="@drawable/ic_right_arrow"
-                        android:backgroundTint="@color/gray3_8E" />
+                        android:backgroundTint="@color/gray3_82" />
                 </LinearLayout>
 
                 <!-- Layout 일일 미션 스크롤뷰 -->
@@ -157,7 +157,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/primary_normal"
                             app:cardCornerRadius="10dp"
-                            app:cardElevation="2dp"
+                            app:cardElevation="0dp"
                             app:cardUseCompatPadding="true">
 
                             <LinearLayout
@@ -214,7 +214,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/primary_dark"
                             app:cardCornerRadius="10dp"
-                            app:cardElevation="2dp"
+                            app:cardElevation="0dp"
                             app:cardUseCompatPadding="true">
 
                             <LinearLayout
@@ -276,7 +276,7 @@
                             android:layout_marginEnd="40dp"
                             android:backgroundTint="#5C60F5"
                             app:cardCornerRadius="10dp"
-                            app:cardElevation="2dp"
+                            app:cardElevation="0dp"
                             app:cardUseCompatPadding="true">
 
                             <LinearLayout
@@ -328,64 +328,21 @@
                 </HorizontalScrollView>
                 <!-- Layout End 일일 미션 스크롤뷰 -->
 
-                <!-- Layout 챗봇 상담 배너 -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/chat_bot_banner"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/iv_banner_chat_bot"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/side_margin"
-                    android:layout_marginTop="36dp"
-                    android:layout_marginEnd="@dimen/side_margin"
-                    android:background="@drawable/background_card_white_radius_10"
-                    android:paddingStart="@dimen/side_margin"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginHorizontal="@dimen/side_margin"
+                    android:src="@drawable/img_banner_chat_bot"
+                    android:adjustViewBounds="true"
                     android:clickable="true"
 
-                    app:layout_constraintTop_toBottomOf="@+id/mission_scroll_view">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mission_scroll_view"
+                    />
 
-                    <TextView
-                        android:id="@+id/chat_bot_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:fontFamily="@font/pretendard_semibold"
-                        android:text="챗봇 상담 OPEN!"
-                        android:textColor="@color/black1_20"
-                        android:textSize="@dimen/H6_SB600_16_h22"
-
-                        app:layout_constraintBottom_toTopOf="@id/chat_bot_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_chainStyle="packed" />
-
-                    <TextView
-                        android:id="@+id/chat_bot_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-
-                        android:fontFamily="@font/pretendard_medium"
-                        android:text="궁금한 건 바로 질문하세요 !"
-                        android:textColor="@color/gray3_8E"
-                        android:textSize="@dimen/B5_M500_12_auto"
-
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/chat_bot_title" />
-
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginBottom="15dp"
-                        android:src="@drawable/ic_chat_bot"
-
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <!-- Layout End 챗봇 상담 배너 -->
 
                 <!-- Layout 타임 라인 레이아웃 -->
                 <TextView
@@ -393,7 +350,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/side_margin"
-                    android:layout_marginTop="36dp"
+                    android:layout_marginTop="50dp"
 
                     android:fontFamily="@font/pretendard_bold"
                     android:text="오늘의 매거진"
@@ -401,7 +358,7 @@
                     android:textSize="@dimen/H3_B700_20_h30"
 
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/chat_bot_banner"/>
+                    app:layout_constraintTop_toBottomOf="@+id/iv_banner_chat_bot"/>
 
                 <LinearLayout
                     android:id="@+id/llMagazineDetailBtn"
@@ -421,14 +378,14 @@
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/pretendard_semibold"
                         android:text="전체보기"
-                        android:textColor="@color/gray3_8E"
+                        android:textColor="@color/gray3_82"
                         android:textSize="@dimen/H4_SB600_14_h18" />
 
                     <View
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:background="@drawable/ic_right_arrow"
-                        android:backgroundTint="@color/gray3_8E" />
+                        android:backgroundTint="@color/gray3_82" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView

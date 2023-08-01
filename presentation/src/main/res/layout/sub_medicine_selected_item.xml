@@ -17,7 +17,7 @@
         android:bufferType="spannable"
 
         android:textSize="@dimen/M500_14_h20"
-        android:textColor="@color/gray1_55"
+        android:textColor="@color/gray1_42"
         android:fontFamily="@font/pretendard_medium"
 
         android:lineSpacingExtra="6sp"

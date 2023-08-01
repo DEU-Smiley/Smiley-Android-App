@@ -80,7 +80,7 @@
 
                     android:fontFamily="@font/pretendard_medium"
                     android:text="2022-08-08"
-                    android:textColor="@color/gray3_8E"
+                    android:textColor="@color/gray3_82"
                     android:textSize="@dimen/M500_14_h20"
 
                     app:layout_constraintBottom_toBottomOf="@+id/mission_title"
@@ -150,7 +150,7 @@
 
                     android:fontFamily="@font/pretendard_regular"
                     android:text="최소 04H 30m"
-                    android:textColor="@color/gray3_8E"
+                    android:textColor="@color/gray3_82"
                     android:textSize="@dimen/B7_R400_12_h18"
 
                     app:layout_constraintBottom_toBottomOf="@id/tv_daily_time_text"
@@ -227,7 +227,7 @@
 
                     android:fontFamily="@font/pretendard_regular"
                     android:text="권장 16H 30m"
-                    android:textColor="@color/gray3_8E"
+                    android:textColor="@color/gray3_82"
                     android:textSize="@dimen/B7_R400_12_h18"
 
                     app:layout_constraintBottom_toBottomOf="@id/tv_target_time_text"
@@ -305,7 +305,7 @@
 
                     android:fontFamily="@font/pretendard_regular"
                     android:text="권장 3개"
-                    android:textColor="@color/gray3_8E"
+                    android:textColor="@color/gray3_82"
                     android:textSize="@dimen/B7_R400_12_h18"
 
                     app:layout_constraintBottom_toBottomOf="@id/tv_magazine_text"
@@ -372,7 +372,7 @@
 
                     android:fontFamily="@font/pretendard_medium"
                     android:text="2022-08-08"
-                    android:textColor="@color/gray3_8E"
+                    android:textColor="@color/gray3_82"
                     android:textSize="@dimen/M500_14_h20"
 
                     app:layout_constraintBottom_toBottomOf="@+id/tv_exp_title"

@@ -54,7 +54,7 @@
 
                     android:fontFamily="@font/pretendard_medium"
                     android:text="1999년 09월 15일"
-                    android:textColor="@color/gray3_8E"
+                    android:textColor="@color/gray3_82"
                     android:textSize="@dimen/M500_14_h20"
 
                     app:layout_constraintLeft_toLeftOf="@id/tv_user_nickname_view"
@@ -96,7 +96,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="예약 등록하러 가기"
-                        android:textColor="@color/gray3_8E"
+                        android:textColor="@color/gray3_82"
                         android:textSize="@dimen/M500_14_h20"
 
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -138,7 +138,7 @@
                         android:layout_gravity="center_horizontal"
 
                         android:background="@drawable/ic_document"
-                        android:backgroundTint="@color/gray1_55"
+                        android:backgroundTint="@color/gray1_42"
 
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -151,7 +151,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="일일 미션"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/M500_14_h20"
 
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -182,7 +182,7 @@
                         android:layout_gravity="center_horizontal"
 
                         android:background="@drawable/ic_coins"
-                        android:backgroundTint="@color/gray1_55"
+                        android:backgroundTint="@color/gray1_42"
 
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -195,7 +195,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="스토어"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/M500_14_h20"
 
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -225,7 +225,7 @@
                         android:layout_gravity="center_horizontal"
 
                         android:background="@drawable/ic_headphone"
-                        android:backgroundTint="@color/gray1_55"
+                        android:backgroundTint="@color/gray1_42"
 
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -238,7 +238,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="챗봇 상담"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/M500_14_h20"
 
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -267,7 +267,7 @@
                         android:layout_gravity="center_horizontal"
 
                         android:background="@drawable/ic_message"
-                        android:backgroundTint="@color/gray1_55"
+                        android:backgroundTint="@color/gray1_42"
 
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -280,7 +280,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="질문 답변"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/M500_14_h20"
 
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -320,7 +320,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="장치 연결"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/B3_M500_15_h22"
 
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -360,7 +360,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="약품 성분 검사"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/B3_M500_15_h22"
 
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -400,7 +400,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="덴탈 매거진"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/B3_M500_15_h22"
 
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -440,7 +440,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="병원 찾기"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/B3_M500_15_h22"
 
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -483,7 +483,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="알림 설정"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/B3_M500_15_h22"
 
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -523,7 +523,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="공지사항"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/B3_M500_15_h22"
 
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -563,7 +563,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="이용약관"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/B3_M500_15_h22"
 
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -603,7 +603,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="고객센터"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/B3_M500_15_h22"
 
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -643,7 +643,7 @@
 
                         android:fontFamily="@font/pretendard_medium"
                         android:text="앱 버전"
-                        android:textColor="@color/gray1_55"
+                        android:textColor="@color/gray1_42"
                         android:textSize="@dimen/B3_M500_15_h22"
 
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -656,7 +656,7 @@
 
                         android:text="0.0.1"
                         android:textSize="@dimen/B4_M500_13_h18"
-                        android:textColor="@color/gray3_8E"
+                        android:textColor="@color/gray3_82"
                         android:fontFamily="@font/pretendard_medium"
 
                         app:layout_constraintTop_toTopOf="parent"
@@ -679,7 +679,7 @@
 
                 android:text="@string/app_provider_Information"
                 android:textSize="@dimen/H4_R400_15_h22"
-                android:textColor="@color/gray3_8E"
+                android:textColor="@color/gray3_82"
                 android:fontFamily="@font/pretendard_regular"
                 android:includeFontPadding="false"
                 android:lineSpacingExtra="6sp"
