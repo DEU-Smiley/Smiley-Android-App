@@ -12,6 +12,6 @@ interface UserRepository {
         birthDate: String,
         deviceToken: String
     ): Flow<ResponseState<User>>
-    suspend fun getAccessFlag(): Flow<Boolean>
-    suspend fun setAccessFlag(flag: Boolean)
+    suspend fun login(userId: String): Flow<ResponseState<User>>
+    suspend fun getSavedUserInfo(): Flow<String?>
 }

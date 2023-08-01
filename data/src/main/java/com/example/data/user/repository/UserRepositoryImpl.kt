@@ -1,6 +1,5 @@
 package com.example.data.user.repository
 
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import com.example.data.common.network.ApiResponse
 import com.example.data.common.network.ApiResponseHandler
 import com.example.data.common.network.ErrorResponse.Companion.toDomainModel
@@ -23,6 +22,7 @@ internal class UserRepositoryImpl @Inject constructor(
 ): UserRepository {
     companion object{
         const val ACCESS_FLAG_KEY = "ACCESS_FLAG"
+        const val SAVED_USER_ID = "SAVED_USER_ID"
     }
 
     override suspend fun signUp(
@@ -32,7 +32,6 @@ internal class UserRepositoryImpl @Inject constructor(
         deviceToken: String
     ): Flow<ResponseState<User>> {
         return flow{
-            // Handler가 Flow<ApiResponse<T>>를 리턴
             ApiResponseHandler().handle {
                 userApi.signUp(
                     UserLoginRequest(
@@ -43,9 +42,9 @@ internal class UserRepositoryImpl @Inject constructor(
                     )
                 )
             }.onEach { result ->
-                // Handler가 방출한 값에 따라 ResponseState로 변환하여 방출
                 when(result){
                     is ApiResponse.Success -> {
+                        dataStore.put(SAVED_USER_ID, result.data.userId)
                         emit(ResponseState.Success(result.data.toDomainModel()))
                     }
                     is ApiResponse.Error -> {
@@ -56,17 +55,25 @@ internal class UserRepositoryImpl @Inject constructor(
         }
     }
 
-    /**
-     * 최초 접속 플래그를 가져오는 메소드
-     */
-    override suspend fun getAccessFlag(): Flow<Boolean> {
-        return dataStore.get(ACCESS_FLAG_KEY, Boolean::class.java)
+    override suspend fun login(userId: String): Flow<ResponseState<User>> {
+        return flow {
+            ApiResponseHandler().handle {
+                userApi.login(userId)
+            }.onEach { result ->
+                when(result) {
+                    is ApiResponse.Success -> {
+                        dataStore.put(SAVED_USER_ID, result.data.userId)
+                        emit(ResponseState.Success(result.data.toDomainModel()))
+                    }
+                    is ApiResponse.Error -> {
+                        emit(ResponseState.Error(result.error.toDomainModel()))
+                    }
+                }
+            }.collect()
+        }
     }
 
-    /**
-     * 최초 접속 플래그를 세팅하는 메소드
-     */
-    override suspend fun setAccessFlag(flag: Boolean) {
-        dataStore.put(ACCESS_FLAG_KEY, flag)
+    override suspend fun getSavedUserInfo(): Flow<String?> {
+        return dataStore.get(SAVED_USER_ID, String::class.java)
     }
 }
