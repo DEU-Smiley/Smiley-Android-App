@@ -6,12 +6,12 @@ import kotlinx.coroutines.flow.Flow
 import java.util.*
 
 interface UserRepository {
-    suspend fun login(
+    suspend fun signUp(
         name: String,
         userId:String,
         birthDate: String,
         deviceToken: String
     ): Flow<ResponseState<User>>
-    suspend fun getAccessFlag(): Flow<Boolean>
-    suspend fun setAccessFlag(flag: Boolean)
+    suspend fun login(userId: String): Flow<ResponseState<User>>
+    suspend fun getSavedUserInfo(): Flow<String?>
 }

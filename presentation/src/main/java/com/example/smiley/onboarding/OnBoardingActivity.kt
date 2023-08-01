@@ -1,15 +1,13 @@
 package com.example.smiley.onboarding
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.example.smiley.R
 import com.example.smiley.common.extension.changeActivity
 import com.example.smiley.databinding.ActivityOnBoardingBinding
 import com.example.smiley.login.LoginActivity
-import com.example.smiley.main.MainActivity
 import com.example.smiley.onboarding.adapter.OnBoardingAdapter
 
 class OnBoardingActivity : AppCompatActivity() {

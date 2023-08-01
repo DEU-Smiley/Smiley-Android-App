@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.magazine.model.Magazine
 import com.example.domain.magazine.model.MagazineList
 import com.example.smiley.R
-import com.example.smiley.common.extension.addFragmetFullScreen
+import com.example.smiley.common.extension.addFragmentToFullScreen
 import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.common.extension.start
 import com.example.smiley.common.extension.stop
@@ -113,7 +113,7 @@ class MagazineListFragment : Fragment() {
         override fun onItemClicked(view: View, data: Magazine) {
             val magazineFragment = MagazineDetailFragment.newInstance(data.contentUrl)
 
-            this@MagazineListFragment.addFragmetFullScreen(magazineFragment)
+            this@MagazineListFragment.addFragmentToFullScreen(magazineFragment)
         }
     }
 

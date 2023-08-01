@@ -13,11 +13,11 @@ class ApiLogger : HttpLoggingInterceptor.Logger {
             try{
                 val prettyPrintJson = GsonBuilder().setPrettyPrinting().create().toJson(JsonParser().parse(message))
 
-                Log.d(logName, prettyPrintJson)
+                Log.v(logName, prettyPrintJson)
             }catch (e: JsonSyntaxException){
-                Log.d(logName, message)
+                Log.v(logName, message)
             }
         }
-        else Log.d(logName, message)
+        else Log.v(logName, message)
     }
 }
