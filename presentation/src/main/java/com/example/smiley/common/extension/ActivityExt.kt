@@ -22,6 +22,24 @@ fun<T> Activity.changeActivity(activity:Class<T>) {
     finish() //현재 액티비티 종료
 }
 
+fun AppCompatActivity.setCustomColorStatusBarAndNavigationBar(statusBarColor: Int, navigationBarColor: Int){
+    // 상단바(Status Bar)와 하단바(Navigation Bar) 투명 처리
+    window.apply {
+        addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        this.statusBarColor = statusBarColor
+        this.navigationBarColor = navigationBarColor
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // 레이아웃이 상단바 영역까지 덮을 수 있게 됨
+            setDecorFitsSystemWindows(false)
+        } else {
+            @Suppress("DEPRECATION")
+            decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+        }
+    }
+}
+
 fun AppCompatActivity.setTransparentStatusBarAndNavigationBar(){
     // 상단바(Status Bar)와 하단바(Navigation Bar) 투명 처리
     window.apply {
@@ -36,6 +54,23 @@ fun AppCompatActivity.setTransparentStatusBarAndNavigationBar(){
             @Suppress("DEPRECATION")
             decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                     or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+        }
+    }
+}
+
+fun AppCompatActivity.resetStatusBarAndNavigationBar(){
+    window.apply {
+        // clearFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        statusBarColor = Color.WHITE
+        navigationBarColor = Color.WHITE
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // 레이아웃이 상단바 영역까지 덮을 수 있게 됨
+            setDecorFitsSystemWindows(true)
+        } else {
+            @Suppress("DEPRECATION")
+            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
         }
     }
 }

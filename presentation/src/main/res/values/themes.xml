@@ -49,8 +49,8 @@
     <style name="tab_item_text"
         parent="Widget.Design.TabLayout">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@drawable/selector_tab_layout_item_text</item>
-        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textColor">#cccccc</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
     </style>
 
     <style name="tab_small_text" parent="@android:style/TextAppearance.Widget.TabWidget">
