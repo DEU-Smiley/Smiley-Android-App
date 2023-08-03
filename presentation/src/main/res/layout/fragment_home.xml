@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/gray6_F2">
+            android:background="@color/gray7_F2">
 
             <!-- Layout 프로필 레이아웃 -->
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -28,9 +28,9 @@
     <color name="gray3_82">#828896</color>
     <color name="gray4_AC">#ACB2C0</color>
     <color name="gray5_CB">#CBCFD7</color>
-    <color name="gray6_E6">#E6E6E6</color>
-    <color name="gray6_F2">#F2F2F2</color>
-    <color name="gray7_F7">#F7F7F7</color>
+    <color name="gray6_F5">#F5F6FA</color>
+    <color name="gray7_F2">#F2F2F2</color>
+    <color name="gray8_F7">#F7F7F7</color>
 
     <color name="background">#F5F7F9</color>
     <color name="btn_gray">#E6E7EC</color>

@@ -67,7 +67,7 @@
                 android:drawableTint="@color/gray1_42"
 
                 android:hint="@string/meidcine_search_hint"
-                android:textColorHint="@color/gray4_CB"
+                android:textColorHint="@color/gray4_AC"
                 android:textSize="14sp"
                 android:textColor="@color/black1_20"
                 android:fontFamily="@font/pretendard_medium"

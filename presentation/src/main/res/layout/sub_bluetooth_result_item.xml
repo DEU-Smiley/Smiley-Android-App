@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="@dimen/side_margin_2x"
-        android:background="@color/gray6_F2"
+        android:background="@color/gray7_F2"
         app:layout_constraintTop_toTopOf="parent"
         />
 

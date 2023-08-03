@@ -85,7 +85,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
 
-            android:background="@color/gray6_F2"
+            android:background="@color/gray7_F2"
 
             app:layout_constraintTop_toBottomOf="@id/reserv_date"
             app:layout_constraintLeft_toLeftOf="parent"

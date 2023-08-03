@@ -332,7 +332,7 @@
                         android:layout_height="24dp"
 
                         android:background="@drawable/ic_right_arrow"
-                        android:backgroundTint="@color/gray4_CB"
+                        android:backgroundTint="@color/gray4_AC"
 
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -372,7 +372,7 @@
                         android:layout_height="24dp"
 
                         android:background="@drawable/ic_right_arrow"
-                        android:backgroundTint="@color/gray4_CB"
+                        android:backgroundTint="@color/gray4_AC"
 
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -412,7 +412,7 @@
                         android:layout_height="24dp"
 
                         android:background="@drawable/ic_right_arrow"
-                        android:backgroundTint="@color/gray4_CB"
+                        android:backgroundTint="@color/gray4_AC"
 
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -452,7 +452,7 @@
                         android:layout_height="24dp"
 
                         android:background="@drawable/ic_right_arrow"
-                        android:backgroundTint="@color/gray4_CB"
+                        android:backgroundTint="@color/gray4_AC"
 
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -495,7 +495,7 @@
                         android:layout_height="24dp"
 
                         android:background="@drawable/ic_right_arrow"
-                        android:backgroundTint="@color/gray4_CB"
+                        android:backgroundTint="@color/gray4_AC"
 
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -535,7 +535,7 @@
                         android:layout_height="24dp"
 
                         android:background="@drawable/ic_right_arrow"
-                        android:backgroundTint="@color/gray4_CB"
+                        android:backgroundTint="@color/gray4_AC"
 
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -575,7 +575,7 @@
                         android:layout_height="24dp"
 
                         android:background="@drawable/ic_right_arrow"
-                        android:backgroundTint="@color/gray4_CB"
+                        android:backgroundTint="@color/gray4_AC"
 
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -615,7 +615,7 @@
                         android:layout_height="24dp"
 
                         android:background="@drawable/ic_right_arrow"
-                        android:backgroundTint="@color/gray4_CB"
+                        android:backgroundTint="@color/gray4_AC"
 
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
