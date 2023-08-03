@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.common.base.ResponseState
+import com.example.domain.hospital.model.Hospital
 import com.example.domain.hospital.model.HospitalPositList
+import com.example.domain.hospital.usecase.GetHospitalByHpidUseCase
 import com.example.domain.hospital.usecase.GetNearByHospitalUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HospitalMapViewModel  @Inject constructor(
-    private val getNearByHospitalUseCase: GetNearByHospitalUseCase
+    private val getNearByHospitalUseCase: GetNearByHospitalUseCase,
+    private val getHospitalByHpidUseCase: GetHospitalByHpidUseCase
 ) : ViewModel() {
     private var _state = MutableStateFlow<HospitalMapFragmentState>(HospitalMapFragmentState.Init)
     val state : StateFlow<HospitalMapFragmentState> get() = _state
@@ -26,7 +29,7 @@ class HospitalMapViewModel  @Inject constructor(
         _state.value = HospitalMapFragmentState.IsLoading
     }
 
-    private fun showError(message: String){
+    private fun setError(message: String){
         _state.value = HospitalMapFragmentState.Error(message)
     }
 
@@ -55,11 +58,36 @@ class HospitalMapViewModel  @Inject constructor(
                 .collect { state ->
                     when (state) {
                         is ResponseState.Success -> {
+                            _state.value = HospitalMapFragmentState.SuccessLoadHospitalList(state.data)
+                        }
+                        is ResponseState.Error -> {
+                            setError(state.error.message)
+                            _state.value = HospitalMapFragmentState.Error(state.error.message)
+                        }
+                    }
+                }
+        }
+    }
+
+    /**
+     * hpid로 병원 정보를 요청하는 메소드
+     * @param hpid String
+     */
+    fun requestHospital(hpid:String){
+        viewModelScope.launch(Dispatchers.IO) {
+            getHospitalByHpidUseCase(hpid)
+                .onStart { setLoading() }
+                .catch { exception ->
+                    setError("병원 조회 중 오류가 발생 하였습니다.")
+                    Log.d("병원 조회 에러", exception.stackTraceToString())
+                }
+                .collect{ state ->
+                    when(state){
+                        is ResponseState.Success -> {
                             _state.value = HospitalMapFragmentState.SuccessLoadHospital(state.data)
                         }
                         is ResponseState.Error -> {
-                            showError(state.error.message)
-                            _state.value = HospitalMapFragmentState.Error(state.error.message)
+                            setError(state.error.message)
                         }
                     }
                 }
@@ -70,8 +98,11 @@ class HospitalMapViewModel  @Inject constructor(
 sealed class HospitalMapFragmentState {
     object Init : HospitalMapFragmentState()
     object IsLoading : HospitalMapFragmentState()
-    data class SuccessLoadHospital(
+    data class SuccessLoadHospitalList(
         val hospitalPositList: HospitalPositList
+    ) : HospitalMapFragmentState()
+    data class SuccessLoadHospital(
+        val hospital: Hospital
     ) : HospitalMapFragmentState()
     data class Error(val error: String) : HospitalMapFragmentState()
     data class ShowToast(val message: String) : HospitalMapFragmentState()

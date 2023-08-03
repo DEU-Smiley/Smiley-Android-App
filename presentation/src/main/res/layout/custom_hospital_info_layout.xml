@@ -59,7 +59,7 @@
                         android:layout_height="5dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/background_round_rectangle_15dp"
-                        android:backgroundTint="@color/gray5_E6"
+                        android:backgroundTint="@color/gray5_CB"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -189,8 +189,8 @@
                     android:clipToPadding="false"
                     android:paddingTop="30dp"
                     android:scrollIndicators="bottom"
-                    app:tabGravity="fill"
 
+                    app:tabGravity="fill"
                     app:tabIndicatorColor="@color/black1_20"
                     app:tabIndicatorFullWidth="true"
                     app:tabMaxWidth="0dp"
@@ -198,7 +198,8 @@
                     app:tabPaddingEnd="10dp"
                     app:tabPaddingStart="10dp"
                     app:tabRippleColor="@color/trasparent"
-                    app:tabSelectedTextColor="@color/black1_20" />
+                    app:tabSelectedTextColor="@color/black1_20"
+                    app:tabTextAppearance="@style/tab_item_text"/>
                 <!-- Layout End 탭 레이아웃 -->
 
                 <!-- Layout 스크롤뷰 베이스 리니어 레이아웃 -->

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Layout 병원 정보 제공 레이아웃 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/hospital_provide_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="100dp"
+        android:background="@color/white"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/hospital_provide_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+
+            android:fontFamily="@font/pretendard_medium"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/mock_provide_hospital_info"
+            android:textColor="@color/black1_20"
+            android:textSize="@dimen/R400_17_auto"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/hospital_provide_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="7sp"
+            android:text="@string/hospital_info_provide_notice"
+            android:textColor="@color/gray1_42"
+            android:textSize="@dimen/M500_14_h20"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hospital_provide_title" />
+
+        <View
+            android:id="@+id/hospital_provide_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="@dimen/side_margin"
+            android:layout_marginRight="@dimen/side_margin"
+            android:background="@color/gray5_CB"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hospital_provide_content"/>
+
+        <TextView
+            android:id="@+id/hospital_provide_wrong_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="7sp"
+            android:text="@string/hospital_data_edit_request_message"
+            android:textColor="@color/gray1_42"
+            android:textSize="@dimen/M500_14_h20"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hospital_provide_line" />
+
+        <TextView
+            android:id="@+id/hospital_provide_edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:layout_marginTop="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:background="@drawable/background_gray_round_button"
+            android:clickable="true"
+
+            android:text="@string/mock_request_info_edit"
+            android:textColor="@color/black1_20"
+            android:textSize="@dimen/B7_R400_12_h18"
+            android:fontFamily="@font/pretendard_regular"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="6sp"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hospital_provide_line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Layout End 병원 정보 제공 레이아웃 -->
+</merge>

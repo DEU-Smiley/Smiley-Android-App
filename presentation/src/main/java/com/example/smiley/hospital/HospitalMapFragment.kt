@@ -1,6 +1,7 @@
 package com.example.smiley.hospital
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -13,15 +14,22 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.domain.hospital.model.Hospital
 import com.example.domain.hospital.model.HospitalPositList
 import com.example.smiley.R
+import com.example.smiley.common.extension.gone
+import com.example.smiley.common.extension.resetStatusBarAndNavigationBar
+import com.example.smiley.common.extension.setCustomColorStatusBarAndNavigationBar
 import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.common.extension.showToast
+import com.example.smiley.common.extension.visible
+import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.databinding.FragmentHospitalMapBinding
 import com.example.smiley.hospital.viewmodel.HospitalMapFragmentState
 import com.example.smiley.hospital.viewmodel.HospitalMapViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -47,7 +55,6 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
 
     private var _bind:FragmentHospitalMapBinding? = null
     private val bind get() = _bind!!
-    
 
     private lateinit var naverMap:NaverMap // 지도 객체
     private lateinit var locationSource: FusedLocationSource
@@ -77,6 +84,7 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
         _bind = DataBindingUtil.inflate(inflater, R.layout.fragment_hospital_map, container, false)
 
         observe()
+        initView()
 
         /** 위치 권한 확인 후 요청 */
         return bind.root
@@ -84,24 +92,31 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        applyTouchEffectToAllViews(view as ViewGroup)
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
     }
 
-    override fun onMapReady(map: NaverMap) {
-        naverMap = map
-        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-        
-        // 현재 위치로 이동
-        setCurrentPostion()
+    /**
+     * 클릭 가능한 모든 뷰에 반투명 효과 적용
+     */
+    private fun applyTouchEffectToAllViews(viewGroup: ViewGroup) {
+        for (i in 0 until viewGroup.childCount) {
+            val child = viewGroup.getChildAt(i)
+            if (child.isClickable) {
+                child.setOnTouchListener(TransparentTouchListener())
+            }
 
-        // Ui Setting
-        settingMapUi()
+            if (child is ViewGroup) {
+                applyTouchEffectToAllViews(child)
+            }
+        }
+    }
 
-        // 위치 갱신 버튼 클릭시 FusedLocationSource를 통해 현재 위치로 이동
-        naverMap.locationSource = locationSource
-        naverMap.addOnCameraIdleListener(cameraIdleListener)
+    private fun initView(){
+        showBottomSheet(false)
+        bind.customHospitalInfoView.setBottomSheetBehavior(BottomSheetBehavior.from(bind.customHospitalInfoView))
     }
 
     private fun observe() {
@@ -111,8 +126,12 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
                     when(state){
                         is HospitalMapFragmentState.Init -> Unit
                         is HospitalMapFragmentState.IsLoading -> handleLoading(true)
-                        is HospitalMapFragmentState.SuccessLoadHospital -> {
+                        is HospitalMapFragmentState.SuccessLoadHospitalList -> {
                             handleSuccess(state.hospitalPositList)
+                        }
+                        is HospitalMapFragmentState.SuccessLoadHospital -> {
+                            handleLoading(false)
+                            handleLoadHospital(state.hospital)
                         }
                         is HospitalMapFragmentState.Error -> {
                             handleError(state.error)
@@ -126,8 +145,9 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun handleLoading(isLoading:Boolean){
 
+    private fun handleLoading(isLoading:Boolean){
+        bind.customHospitalInfoView.setLoading(isLoading)
     }
 
 
@@ -140,6 +160,11 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
                 it.hpid
             )
         }
+    }
+
+    private fun handleLoadHospital(hospital: Hospital){
+        handleLoading(false)
+        bind.customHospitalInfoView.updateHospitalInfo(hospital)
     }
 
     private fun handleError(message: String){
@@ -171,6 +196,21 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
             return
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    override fun onMapReady(map: NaverMap) {
+        naverMap = map
+        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+
+        setCurrentPostion() // 현재 위치로 이동
+        settingMapUi() // Ui Setting
+
+        // 위치 갱신 버튼 클릭시 FusedLocationSource를 통해 현재 위치로 이동
+        naverMap.locationSource = locationSource
+        naverMap.addOnCameraIdleListener(cameraIdleListener)
+        naverMap.setOnMapClickListener { pointF, latLng ->
+            showBottomSheet(false)
+        }
     }
 
     /**
@@ -206,7 +246,9 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
      *
      * @param lat Double
      * @param lng Double
+     * @param tag String
      */
+    private val markerList: ArrayList<Marker> = arrayListOf()
     private fun addMarker(lat:Double, lng:Double, tag: String){
         Marker().apply {
             // 여러 마커가 같은 이미지를 사용하는 경우 OverlayImage는 하나만 만들어놓고 쓰면 됨
@@ -218,39 +260,7 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
 
             map = naverMap
             onClickListener = markerClickListener
-        }
-    }
-
-    /**
-     * 카메라 움직임 종료 이벤트 리스너
-     */
-    private val cameraIdleListener =
-        NaverMap.OnCameraIdleListener {
-
-            with(naverMap.cameraPosition.target){
-                hospitalVm.getNearByHospitals(
-                    lat = latitude,
-                    lng = longitude,
-                    dis = 1.5
-                )
-                Log.i("NaverMap", "카메라 움직임 종료 중심 좌표(${latitude}, $longitude)")
-            }
-        }
-
-    /**
-     * 마커 클릭 이벤트 리스너
-     */
-    private val markerClickListener = Overlay.OnClickListener { overlay ->
-        val marker = overlay as Marker
-        val bundle = Bundle()
-        bundle.putString("hpid", "${marker.tag}")
-
-        HospitalInfoBottomSheetFragment().apply {
-            arguments = bundle
-        }.show(parentFragmentManager, HospitalInfoBottomSheetFragment.TAG)
-
-        Log.i("NaverMap", "${marker.tag} 클릭 됨")
-        true
+        }.also(markerList::add)
     }
 
     override fun onStart() {
@@ -261,11 +271,15 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+
+        this.setCustomColorStatusBarAndNavigationBar(Color.TRANSPARENT, Color.WHITE)
     }
 
     override fun onPause() {
         super.onPause()
         mapView.onPause()
+
+        this.resetStatusBarAndNavigationBar()
     }
 
     override fun onStop() {
@@ -286,6 +300,55 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
     override fun onDestroyView() {
         super.onDestroyView()
         mapView.onDestroy()
+    }
+
+
+    /**
+     * 카메라 움직임 종료 이벤트 리스너
+     */
+    private val cameraIdleListener =
+        NaverMap.OnCameraIdleListener {
+            markerList.forEach { it.map = null }
+
+            with(naverMap.cameraPosition.target){
+                hospitalVm.getNearByHospitals(
+                    lat = latitude,
+                    lng = longitude,
+                    dis = 1.5
+                )
+                Log.i("NaverMap", "카메라 움직임 종료 중심 좌표(${latitude}, $longitude)")
+            }
+        }
+
+    private fun showBottomSheet(isShow: Boolean){
+        bind.customHospitalInfoView.show(isShow)
+        if(isShow){
+            bind.clAddBtnLayout.visible()
+        } else {
+            bind.clAddBtnLayout.gone()
+        }
+    }
+
+    /**
+     * 마커 클릭 이벤트 리스너
+     */
+    private val markerClickListener = Overlay.OnClickListener { overlay ->
+        val marker = overlay as Marker
+        val hpid = marker.tag as String
+
+        hospitalVm.requestHospital(hpid)
+
+        showBottomSheet(true)
+
+        true
+//        val bundle = Bundle()
+//        bundle.putString("hpid", "${marker.tag}")
+//
+//        HospitalInfoBottomSheetFragment().apply {
+//            arguments = bundle
+//        }.show(parentFragmentManager, HospitalInfoBottomSheetFragment.TAG)
+//
+//        Log.i("NaverMap", "${marker.tag} 클릭 됨")
     }
 
     companion object {

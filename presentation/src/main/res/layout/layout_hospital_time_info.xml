@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_time_info_container"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingHorizontal="@dimen/side_margin"
+        android:paddingTop="20dp"
+        android:paddingBottom="60dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_time_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingVertical="20dp"
+            android:background="@drawable/bg_rounded_corner_radius_15"
+            android:backgroundTint="@color/gray6_F5"
+            app:layout_constraintStart_toStartOf="@id/cl_mon_tue_info"
+            app:layout_constraintEnd_toEndOf="@id/cl_mon_tue_info"
+            app:layout_constraintTop_toTopOf="@id/cl_mon_tue_info"
+            app:layout_constraintBottom_toBottomOf="@id/cl_lunch_time_layout">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Layout 병원 시간(오늘) 정보 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_today_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_round_rectangle_10dp"
+            android:paddingHorizontal="26dp"
+            android:paddingVertical="11dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/today_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/common_today"
+                android:textColor="@color/black1_20"
+                android:textSize="@dimen/H4_SB600_14_h18"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/lunch_info"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/lunch_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/common_lunch_time"
+                android:textColor="@color/gray1_42"
+                android:textSize="@dimen/M500_14_h20"
+
+                app:layout_constraintBottom_toBottomOf="@id/today_info"
+                app:layout_constraintLeft_toRightOf="@id/today_info"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/today_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/common_break"
+                android:textColor="@color/gray1_42"
+                android:textSize="@dimen/H4_R400_15_h22"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/today_info" />
+
+            <TextView
+                android:id="@+id/lunch_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/mock_time_range_13_30_14_30"
+                android:textColor="@color/gray1_42"
+                android:textSize="@dimen/H4_R400_15_h22"
+
+                app:layout_constraintBottom_toBottomOf="@id/today_time"
+                app:layout_constraintLeft_toLeftOf="@+id/lunch_info"
+                app:layout_constraintTop_toBottomOf="@+id/lunch_info" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 병원 시간(오늘) 정보 레이아웃 -->
+
+        <!-- Layout 병원 시간(월, 화) 정보 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_mon_tue_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:paddingHorizontal="26dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="11dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_today_info">
+
+            <TextView
+                android:id="@+id/monday_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/common_monday"
+                android:textColor="@color/black1_20"
+                android:textSize="@dimen/H4_SB600_14_h18"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tuesday_info"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tuesday_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/common_tuesday"
+                android:textColor="@color/gray1_42"
+                android:textSize="@dimen/H4_SB600_14_h18"
+
+                app:layout_constraintBottom_toBottomOf="@id/monday_info"
+                app:layout_constraintLeft_toRightOf="@id/monday_info"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/monday_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/mock_time_range_08_30_19_30"
+                android:textColor="@color/gray1_42"
+                android:textSize="@dimen/H4_R400_15_h22"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/monday_info" />
+
+            <TextView
+                android:id="@+id/tuesday_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/mock_time_range_08_30_19_30"
+                android:textColor="@color/gray1_42"
+                android:textSize="@dimen/H4_R400_15_h22"
+
+                app:layout_constraintBottom_toBottomOf="@id/monday_time"
+                app:layout_constraintLeft_toLeftOf="@+id/tuesday_info"
+                app:layout_constraintTop_toBottomOf="@+id/tuesday_info" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 병원 시간(월, 화) 정보 레이아웃 -->
+
+        <!-- Layout 병원 시간(수, 목) 정보 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_wed_thu_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:paddingHorizontal="26dp"
+            android:paddingVertical="11dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_mon_tue_info">
+
+            <TextView
+                android:id="@+id/wednesday_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/common_wednesday"
+                android:textColor="@color/black1_20"
+                android:textSize="@dimen/H4_SB600_14_h18"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/thursday_info"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/thursday_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/common_thursday"
+                android:textColor="@color/gray1_42"
+                android:textSize="@dimen/H4_SB600_14_h18"
+
+                app:layout_constraintBottom_toBottomOf="@id/wednesday_info"
+                app:layout_constraintLeft_toRightOf="@id/wednesday_info"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/wednesday_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/mock_time_range_08_30_19_30"
+                android:textColor="@color/gray1_42"
+                android:textSize="@dimen/H4_R400_15_h22"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wednesday_info" />
+
+            <TextView
+                android:id="@+id/thursday_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/mock_time_range_08_30_19_30"
+                android:textColor="@color/gray1_42"
+                android:textSize="@dimen/H4_R400_15_h22"
+
+                app:layout_constraintBottom_toBottomOf="@id/wednesday_time"
+                app:layout_constraintLeft_toLeftOf="@+id/thursday_info"
+                app:layout_constraintTop_toBottomOf="@+id/thursday_info" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 병원 시간(수, 목) 정보 레이아웃 -->
+
+        <!-- Layout 병원 시간(금, 토) 정보 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_fri_sat_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:paddingHorizontal="26dp"
+            android:paddingVertical="11dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_wed_thu_info">
+
+            <TextView
+                android:id="@+id/friday_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/common_friday"
+                android:textColor="@color/black1_20"
+                android:textSize="@dimen/H4_SB600_14_h18"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/saturday_info"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/saturday_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/common_saturday"
+                android:textColor="@color/primary_light"
+                android:textSize="@dimen/H4_SB600_14_h18"
+
+                app:layout_constraintBottom_toBottomOf="@id/friday_info"
+                app:layout_constraintLeft_toRightOf="@id/friday_info"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/friday_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/mock_time_range_08_30_19_30"
+                android:textColor="@color/gray1_42"
+                android:textSize="@dimen/H4_R400_15_h22"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/friday_info" />
+
+            <TextView
+                android:id="@+id/saturday_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/mock_time_range_08_30_19_30"
+                android:textColor="@color/primary_light"
+                android:textSize="@dimen/H4_R400_15_h22"
+
+                app:layout_constraintBottom_toBottomOf="@id/friday_time"
+                app:layout_constraintLeft_toLeftOf="@+id/saturday_info"
+                app:layout_constraintTop_toBottomOf="@+id/saturday_info" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 병원 시간(금, 토) 정보 레이아웃 -->
+
+
+        <!-- Layout 병원 시간(금, 토) 정보 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_sun_hol_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+
+            android:paddingHorizontal="26dp"
+            android:paddingVertical="11dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_fri_sat_layout">
+
+            <TextView
+                android:id="@+id/sunday_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/common_sunday"
+                android:textColor="@color/red"
+                android:textSize="@dimen/H4_SB600_14_h18"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/holiday_info"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/holiday_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@string/common_holiday"
+                android:textColor="@color/red"
+                android:textSize="@dimen/H4_SB600_14_h18"
+
+                app:layout_constraintBottom_toBottomOf="@id/sunday_info"
+                app:layout_constraintLeft_toRightOf="@id/sunday_info"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/sunday_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/common_break"
+                android:textColor="@color/red"
+                android:textSize="@dimen/H4_R400_15_h22"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sunday_info" />
+
+            <TextView
+                android:id="@+id/holiday_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@string/common_break"
+                android:textColor="@color/red"
+                android:textSize="@dimen/H4_R400_15_h22"
+
+                app:layout_constraintBottom_toBottomOf="@id/sunday_time"
+                app:layout_constraintLeft_toLeftOf="@+id/holiday_info"
+                app:layout_constraintTop_toBottomOf="@+id/holiday_info" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 병원 시간(금, 토) 정보 레이아웃 -->
+
+        <!-- Layout 병원 시간(금, 토) 정보 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_lunch_time_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:paddingHorizontal="26dp"
+            android:paddingTop="11dp"
+            android:paddingBottom="16dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_sun_hol_layout">
+
+            <TextView
+                android:id="@+id/tv_weekend_lunch_time_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/pretendard_bold"
+                android:text="주말 점심시간"
+                android:textColor="@color/black1_20"
+                android:textSize="@dimen/H4_SB600_14_h18"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tv_weekday_lunch_time_layout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_weekday_lunch_time_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+
+                android:fontFamily="@font/pretendard_bold"
+                android:text="평일 점심시간"
+                android:textColor="@color/black1_20"
+                android:textSize="@dimen/H4_SB600_14_h18"
+
+                app:layout_constraintBottom_toBottomOf="@id/tv_weekend_lunch_time_layout"
+                app:layout_constraintLeft_toRightOf="@id/tv_weekend_lunch_time_layout"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_weekend_lunch_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+
+                android:fontFamily="@font/pretendard_regular"
+                android:text="전화문의"
+                android:textColor="@color/black1_20"
+                android:textSize="@dimen/H4_R400_15_h22"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_weekend_lunch_time_layout" />
+
+            <TextView
+                android:id="@+id/tv_weekday_lunch_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+
+                android:fontFamily="@font/pretendard_regular"
+                android:text="전화문의"
+                android:textColor="@color/black1_20"
+                android:textSize="@dimen/H4_R400_15_h22"
+
+                app:layout_constraintBottom_toBottomOf="@id/tv_weekend_lunch_time"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_weekday_lunch_time_layout"
+                app:layout_constraintTop_toBottomOf="@+id/tv_weekday_lunch_time_layout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Layout End 병원 시간(금, 토) 정보 레이아웃 -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</merge>
