@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/loding_layout"
+            android:id="@+id/lottie_loding_layout"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:gravity="center_horizontal"
@@ -68,7 +68,7 @@
                             android:layout_height="5dp"
                             android:layout_marginTop="10dp"
                             android:background="@drawable/background_round_rectangle_15dp"
-                            android:backgroundTint="@color/gray5_E6"
+                            android:backgroundTint="@color/gray5_CB"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -163,12 +163,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="50dp"
+                            android:layout_marginBottom="10dp"
                             app:cardCornerRadius="8dp"
                             app:cardElevation="0dp"
 
                             app:layout_constraintRight_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/hospital_address">
+                            app:layout_constraintTop_toBottomOf="@id/hospital_address"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
 
                             <ImageView
                                 android:id="@+id/hospital_image"
@@ -255,7 +258,7 @@
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="오늘"
                                 android:textColor="@color/black1_20"
-                                android:textSize="@dimen/H5_B700_18_h22"
+                                android:textSize="@dimen/B700_16_auto"
 
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintRight_toLeftOf="@id/lunch_info"
@@ -324,7 +327,7 @@
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="월요일"
                                 android:textColor="@color/black1_20"
-                                android:textSize="@dimen/H5_B700_18_h22"
+                                android:textSize="@dimen/B700_16_auto"
 
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintRight_toLeftOf="@id/tuesday_info"
@@ -339,7 +342,7 @@
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="화요일"
                                 android:textColor="@color/gray1_42"
-                                android:textSize="@dimen/H5_B700_18_h22"
+                                android:textSize="@dimen/B700_16_auto"
 
                                 app:layout_constraintBottom_toBottomOf="@id/monday_info"
                                 app:layout_constraintLeft_toRightOf="@id/monday_info"
@@ -394,7 +397,7 @@
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="수요일"
                                 android:textColor="@color/black1_20"
-                                android:textSize="@dimen/H5_B700_18_h22"
+                                android:textSize="@dimen/B700_16_auto"
 
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintRight_toLeftOf="@id/thursday_info"
@@ -409,7 +412,7 @@
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="목요일"
                                 android:textColor="@color/gray1_42"
-                                android:textSize="@dimen/H5_B700_18_h22"
+                                android:textSize="@dimen/B700_16_auto"
 
                                 app:layout_constraintBottom_toBottomOf="@id/wednesday_info"
                                 app:layout_constraintLeft_toRightOf="@id/wednesday_info"
@@ -464,7 +467,7 @@
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="금요일"
                                 android:textColor="@color/black1_20"
-                                android:textSize="@dimen/H5_B700_18_h22"
+                                android:textSize="@dimen/B700_16_auto"
 
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintRight_toLeftOf="@id/saturday_info"
@@ -478,7 +481,7 @@
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="토요일"
                                 android:textColor="@color/primary_normal"
-                                android:textSize="@dimen/H5_B700_18_h22"
+                                android:textSize="@dimen/B700_16_auto"
 
                                 app:layout_constraintBottom_toBottomOf="@id/friday_info"
                                 app:layout_constraintLeft_toRightOf="@id/friday_info"
@@ -536,7 +539,7 @@
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="일요일"
                                 android:textColor="@color/red"
-                                android:textSize="@dimen/H5_B700_18_h22"
+                                android:textSize="@dimen/B700_16_auto"
 
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintRight_toLeftOf="@id/holiday_info"
@@ -551,7 +554,7 @@
                                 android:fontFamily="@font/pretendard_bold"
                                 android:text="공휴일"
                                 android:textColor="@color/red"
-                                android:textSize="@dimen/H5_B700_18_h22"
+                                android:textSize="@dimen/B700_16_auto"
 
                                 app:layout_constraintBottom_toBottomOf="@id/sunday_info"
                                 app:layout_constraintLeft_toRightOf="@id/sunday_info"
@@ -593,7 +596,7 @@
 
                     <!-- Layout 병원 위치 정보 레이아웃 -->
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/hospital_posit_info"
+                        android:id="@+id/cl_hospital_posit_info"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="12dp"
@@ -607,10 +610,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
-                            android:fontFamily="@font/pretendard_bold"
+                            android:fontFamily="@font/pretendard_medium"
                             android:text="위치"
                             android:textColor="@color/black1_20"
-                            android:textSize="@dimen/H5_B700_18_h22"
+                            android:textSize="@dimen/H4_M500_18_auto"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -622,7 +625,7 @@
                             android:fontFamily="@font/pretendard_regular"
                             android:text="서울특별시 은평구 신사동 12"
                             android:textColor="@color/gray1_42"
-                            android:textSize="@dimen/H4_R400_15_h22"
+                            android:textSize="@dimen/M500_14_h20"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/posit_text_view" />
 
@@ -662,12 +665,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/side_margin"
 
-                            android:fontFamily="@font/pretendard_bold"
+                            android:fontFamily="@font/pretendard_medium"
                             android:includeFontPadding="false"
                             android:lineSpacingExtra="4sp"
                             android:text="전화번호"
                             android:textColor="@color/black1_20"
-                            android:textSize="@dimen/H5_B700_18_h22"
+                            android:textSize="@dimen/H4_M500_18_auto"
 
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -683,7 +686,7 @@
                             android:lineSpacingExtra="7sp"
                             android:text="02-123-4567"
                             android:textColor="@color/gray1_42"
-                            android:textSize="@dimen/H4_R400_15_h22"
+                            android:textSize="@dimen/M500_14_h20"
 
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/hospital_phone_title" />
@@ -692,7 +695,7 @@
 
                     <!-- Layout 병원 리뷰 레이아웃 -->
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/hospital_review_info"
+                        android:id="@+id/cl_hospital_review_info"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -706,12 +709,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/side_margin"
 
-                            android:fontFamily="@font/pretendard_bold"
+                            android:fontFamily="@font/pretendard_medium"
                             android:includeFontPadding="false"
                             android:lineSpacingExtra="4sp"
                             android:text="리뷰"
                             android:textColor="@color/black1_20"
-                            android:textSize="@dimen/H5_B700_18_h22"
+                            android:textSize="@dimen/H4_M500_18_auto"
 
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -727,7 +730,7 @@
                             android:lineSpacingExtra="7sp"
                             android:text="리뷰 0개"
                             android:textColor="@color/gray1_42"
-                            android:textSize="@dimen/H4_R400_15_h22"
+                            android:textSize="@dimen/M500_14_h20"
 
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/hospital_review_title" />
@@ -811,7 +814,7 @@
                             android:layout_marginTop="20dp"
                             android:layout_marginLeft="@dimen/side_margin"
                             android:layout_marginRight="@dimen/side_margin"
-                            android:background="@color/gray5_E6"
+                            android:background="@color/gray5_CB"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/hospital_provide_content"/>
