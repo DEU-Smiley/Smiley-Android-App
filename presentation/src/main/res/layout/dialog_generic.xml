@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="1.5dp"
             android:layout_marginTop="30dp"
-            android:background="@color/gray5_E6" />
+            android:background="@color/gray5_CB" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                 android:id="@+id/btn_line"
                 android:layout_width="1.5dp"
                 android:layout_height="50dp"
-                android:background="@color/gray5_E6"
+                android:background="@color/gray5_CB"
                 app:layout_constraintBottom_toBottomOf="parent"
 
                 app:layout_constraintHorizontal_weight="1"

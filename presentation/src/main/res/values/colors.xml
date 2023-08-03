@@ -14,7 +14,7 @@
     <color name="white_trans_30">#4DFFFFFF</color>
 
     <color name="black1_20">#202020</color>
-    <color name="primary_normal">#3E9EFF</color>
+    <color name="primary_normal">#0073FA</color>
     <color name="primary_light">#7CBDFF</color>
     <color name="primary_dark">#4780EE</color>
     <color name="light_blue1">#E7F3FF</color>
@@ -23,11 +23,12 @@
     <color name="purple1_5C">#5C60F5</color>
     <color name="purple2_BE">#BE6BFF</color>
 
-    <color name="gray1_42">#555555</color>
+    <color name="gray1_42">#424958</color>
     <color name="gray2_5E">#5E6472</color>
     <color name="gray3_82">#828896</color>
-    <color name="gray4_CB">#CBCFD7</color>
-    <color name="gray5_E6">#E6E6E6</color>
+    <color name="gray4_AC">#ACB2C0</color>
+    <color name="gray5_CB">#CBCFD7</color>
+    <color name="gray6_E6">#E6E6E6</color>
     <color name="gray6_F2">#F2F2F2</color>
     <color name="gray7_F7">#F7F7F7</color>
 

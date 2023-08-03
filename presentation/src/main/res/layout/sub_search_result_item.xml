@@ -29,7 +29,7 @@
             android:includeFontPadding="false"
             android:lineSpacingExtra="6sp"
 
-            android:textColor="@color/gray4_CB"
+            android:textColor="@color/gray4_AC"
             android:textSize="@dimen/H6_SB600_16_h22"
             android:maxLines="1"
             />

@@ -57,7 +57,7 @@
             android:layout_height="1.5dp"
 
             android:layout_marginTop="30dp"
-            android:background="@color/gray5_E6" />
+            android:background="@color/gray5_CB" />
 
         <TextView
             android:id="@+id/dialog_confirm_btn"
