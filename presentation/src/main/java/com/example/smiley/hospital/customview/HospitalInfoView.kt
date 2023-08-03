@@ -46,8 +46,10 @@ class HospitalInfoView @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
+
         initTabLayout()
         initScrollView()
+        addBottomSheetClickEvent()
     }
 
     /**
@@ -80,11 +82,11 @@ class HospitalInfoView @JvmOverloads constructor(
         bind.ssvContentScrollView.setOnScrollChangeListener(scrollChangedListener)
     }
 
-    fun show(isShow: Boolean){
-        if(isShow){
-            bind.clBottomSheetLayout.visible()
-        } else {
-            bind.clBottomSheetLayout.gone()
+
+
+    private fun addBottomSheetClickEvent(){
+        bind.clHospitalInfoLayout.setOnClickListener {
+            behavior?.state = BottomSheetBehavior.STATE_EXPANDED
         }
     }
 
@@ -129,6 +131,20 @@ class HospitalInfoView @JvmOverloads constructor(
         }
     }
 
+    fun show(isShow: Boolean){
+        if(isShow){
+            bind.clBottomSheetLayout.visible()
+        } else {
+            bind.clBottomSheetLayout.gone()
+        }
+    }
+
+    fun setBottomSheetBehavior(behavior: BottomSheetBehavior<ConstraintLayout>){
+         this.behavior = behavior
+         this.behavior?.addBottomSheetCallback(bottomSheetCallback)
+
+    }
+
     /**
      * 요일별 진료 시간을 반환하는 메소드
      */
@@ -142,14 +158,14 @@ class HospitalInfoView @JvmOverloads constructor(
         return "$startTime ~ $endTime"
     }
 
-    fun setBottomSheetBehavior(behavior: BottomSheetBehavior<ConstraintLayout>){
-         this.behavior = behavior
-         this.behavior?.addBottomSheetCallback(bottomSheetCallback)
-
-    }
-
     private val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
-        override fun onStateChanged(bottomSheet: View, newState: Int) = Unit
+        override fun onStateChanged(bottomSheet: View, newState: Int){
+            if(newState == BottomSheetBehavior.STATE_EXPANDED){
+                bind.clHospitalInfoLayout.isClickable = false
+            } else if(newState == BottomSheetBehavior.STATE_COLLAPSED){
+                bind.clHospitalInfoLayout.isClickable = true
+            }
+        }
 
         override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
     }
