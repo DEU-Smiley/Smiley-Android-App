@@ -7,16 +7,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import com.example.domain.hospital.model.Hospital
 import com.example.smiley.R
 import com.example.smiley.common.extension.computeDistanceToView
+import com.example.smiley.common.extension.createValueAnimator
 import com.example.smiley.common.extension.getTodayOfWeek
 import com.example.smiley.common.extension.gone
+import com.example.smiley.common.extension.goneWithAnimation
 import com.example.smiley.common.extension.invisible
 import com.example.smiley.common.extension.smoothScrollToView
 import com.example.smiley.common.extension.visible
+import com.example.smiley.common.extension.visibleWithAnimation
 import com.example.smiley.databinding.CustomHospitalInfoLayoutBinding
 import com.example.smiley.databinding.LayoutHospitalCallInfoBinding
 import com.example.smiley.databinding.LayoutHospitalLocationInfoBinding
@@ -25,6 +29,7 @@ import com.example.smiley.databinding.LayoutHospitalTimeInfoBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import java.util.Calendar
+import kotlin.math.max
 
 class HospitalInfoView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -49,7 +54,7 @@ class HospitalInfoView @JvmOverloads constructor(
 
         initTabLayout()
         initScrollView()
-        addBottomSheetClickEvent()
+        initBottomSheet()
     }
 
     /**
@@ -82,12 +87,21 @@ class HospitalInfoView @JvmOverloads constructor(
         bind.ssvContentScrollView.setOnScrollChangeListener(scrollChangedListener)
     }
 
-
-
-    private fun addBottomSheetClickEvent(){
-        bind.clHospitalInfoLayout.setOnClickListener {
+    private fun initBottomSheet(){
+        bind.mlHospitalInfoLayout.setOnClickListener {
             behavior?.state = BottomSheetBehavior.STATE_EXPANDED
         }
+
+        bind.mlHospitalInfoLayout.addTransitionListener(object : MotionLayout.TransitionListener{
+            val animator = bind.hospitalTitle.createValueAnimator(18f, 24f)
+
+            override fun onTransitionStarted(motionLayout: MotionLayout?,startId: Int,endId: Int) = Unit
+            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) = Unit
+            override fun onTransitionTrigger(motionLayout: MotionLayout?,triggerId: Int,positive: Boolean,progress: Float) = Unit
+            override fun onTransitionChange(motionLayout: MotionLayout?,startId: Int,endId: Int,progress: Float) {
+                animator.currentPlayTime = (animator.duration * progress).toLong()
+            }
+        })
     }
 
     fun setLoading(isLoading: Boolean){
@@ -133,41 +147,38 @@ class HospitalInfoView @JvmOverloads constructor(
 
     fun show(isShow: Boolean){
         if(isShow){
-            bind.clBottomSheetLayout.visible()
+            bind.clBottomSheetLayout.visibleWithAnimation(200)
         } else {
-            bind.clBottomSheetLayout.gone()
+            bind.clBottomSheetLayout.goneWithAnimation(200)
         }
     }
 
     fun setBottomSheetBehavior(behavior: BottomSheetBehavior<ConstraintLayout>){
          this.behavior = behavior
          this.behavior?.addBottomSheetCallback(bottomSheetCallback)
-
-    }
-
-    /**
-     * 요일별 진료 시간을 반환하는 메소드
-     */
-    private fun Hospital.parseRunningTimeAt(dayOfWeek: Int): String {
-        val time = this.getRunnginTimeAt(dayOfWeek)
-        if(time.first.isEmpty() || time.second.isEmpty()) return "휴진"
-
-        val startTime = "${time.first.substring(0..1)}:${time.first.substring(2..3)}"
-        val endTime = "${time.second.substring(0..1)}:${time.second.substring(2..3)}"
-
-        return "$startTime ~ $endTime"
     }
 
     private val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onStateChanged(bottomSheet: View, newState: Int){
-            if(newState == BottomSheetBehavior.STATE_EXPANDED){
-                bind.clHospitalInfoLayout.isClickable = false
-            } else if(newState == BottomSheetBehavior.STATE_COLLAPSED){
-                bind.clHospitalInfoLayout.isClickable = true
+            when(newState){
+                BottomSheetBehavior.STATE_EXPANDED -> {
+                    bind.mlHospitalInfoLayout.isClickable = false
+                    bind.mlHospitalInfoLayout.transitionToEnd()
+                }
+                BottomSheetBehavior.STATE_COLLAPSED -> {
+                    bind.mlHospitalInfoLayout.isClickable = true
+                    bind.mlHospitalInfoLayout.transitionToStart()
+                }
+                BottomSheetBehavior.STATE_HALF_EXPANDED -> Unit
+                BottomSheetBehavior.STATE_HIDDEN -> Unit
+                BottomSheetBehavior.STATE_DRAGGING -> Unit
+                BottomSheetBehavior.STATE_SETTLING -> Unit
             }
         }
 
-        override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
+        override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            bind.mlHospitalInfoLayout.progress = max(0.0f, slideOffset)
+        }
     }
 
     /**
