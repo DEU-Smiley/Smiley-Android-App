@@ -50,7 +50,6 @@ class HospitalMapViewModel  @Inject constructor(
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             getNearByHospitalUseCase(lat, lng, dis)
-                .onStart { setLoading() }
                 .catch { exception ->
                     showToast(exception.message.toString())
                     Log.d("병원 조회 에러", exception.stackTraceToString())

@@ -17,12 +17,12 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.domain.hospital.model.Hospital
 import com.example.domain.hospital.model.HospitalPositList
 import com.example.smiley.R
-import com.example.smiley.common.extension.gone
+import com.example.smiley.common.extension.goneWithAnimation
 import com.example.smiley.common.extension.resetStatusBarAndNavigationBar
 import com.example.smiley.common.extension.setCustomColorStatusBarAndNavigationBar
 import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.common.extension.showToast
-import com.example.smiley.common.extension.visible
+import com.example.smiley.common.extension.visibleWithAnimation
 import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.databinding.FragmentHospitalMapBinding
 import com.example.smiley.hospital.viewmodel.HospitalMapFragmentState
@@ -309,6 +309,7 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
     private val cameraIdleListener =
         NaverMap.OnCameraIdleListener {
             markerList.forEach { it.map = null }
+            markerList.clear()
 
             with(naverMap.cameraPosition.target){
                 hospitalVm.getNearByHospitals(
@@ -323,9 +324,9 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
     private fun showBottomSheet(isShow: Boolean){
         bind.customHospitalInfoView.show(isShow)
         if(isShow){
-            bind.clAddBtnLayout.visible()
+            bind.clAddBtnLayout.visibleWithAnimation(200)
         } else {
-            bind.clAddBtnLayout.gone()
+            bind.clAddBtnLayout.goneWithAnimation(200)
         }
     }
 
@@ -341,14 +342,6 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
         showBottomSheet(true)
 
         true
-//        val bundle = Bundle()
-//        bundle.putString("hpid", "${marker.tag}")
-//
-//        HospitalInfoBottomSheetFragment().apply {
-//            arguments = bundle
-//        }.show(parentFragmentManager, HospitalInfoBottomSheetFragment.TAG)
-//
-//        Log.i("NaverMap", "${marker.tag} 클릭 됨")
     }
 
     companion object {
