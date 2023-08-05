@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/side_margin"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/background_round_rectangle_5dp"
+            android:background="@drawable/bg_rounded_corner_radius_5"
             android:backgroundTint="@color/white"
 
             android:clickable="true"
@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/side_margin"
             android:layout_marginBottom="@dimen/btn_bottom_margin"
-            android:background="@drawable/background_round_rectangle_5dp"
+            android:background="@drawable/bg_rounded_corner_radius_5"
             android:backgroundTint="@color/kakao_yello"
 
             android:clickable="true"

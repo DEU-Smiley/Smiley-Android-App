@@ -38,8 +38,9 @@
             android:layout_marginEnd="@dimen/side_margin"
 
             android:text="스마일리 매거진이 드리는 교정 정보입니다. "
-            android:textColor="@color/gray1_42"
-            android:textSize="@dimen/H4_R400_15_h22"
+            android:textColor="@color/gray2_5E"
+            android:textSize="@dimen/B3_M500_15_h22"
+            android:fontFamily="@font/pretendard_medium"
 
             app:layout_constraintLeft_toRightOf="@id/indicator"
 
