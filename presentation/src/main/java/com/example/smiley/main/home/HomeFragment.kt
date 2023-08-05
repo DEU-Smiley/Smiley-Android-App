@@ -26,6 +26,7 @@ import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.common.utils.NotifyManager
 import com.example.smiley.databinding.FragmentHomeBinding
+import com.example.smiley.databinding.FragmentHomeTestBinding
 import com.example.smiley.magazine.MagazineDetailFragment
 import com.example.smiley.magazine.MagazineListFragment
 import com.example.smiley.main.home.adapter.TimeLineAdapter
@@ -47,7 +48,7 @@ private const val ARG_PARAM2 = "param2"
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _bind: FragmentHomeBinding?=null
-    private val bind:FragmentHomeBinding get() = _bind!!
+    private val bind: FragmentHomeBinding get() = _bind!!
     private val bluetoothVm: BluetoothViewModel by viewModels({requireActivity()})
     private val homeVm: HomeViewModel by viewModels()
 
