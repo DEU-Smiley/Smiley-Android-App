@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="@dimen/side_margin_2x"
-        android:background="@color/gray6_F2"
+        android:background="@color/gray7_F2"
         app:layout_constraintTop_toTopOf="parent"
         />
 
@@ -56,7 +56,7 @@
         android:layout_marginStart="@dimen/side_margin"
         android:text="42:CB:6F:92:0E:F3"
         android:textSize="@dimen/B5_M500_12_auto"
-        android:textColor="@color/gray3_8E"
+        android:textColor="@color/gray3_82"
         android:fontFamily="@font/pretendard_light"
         android:maxLines="1"
 

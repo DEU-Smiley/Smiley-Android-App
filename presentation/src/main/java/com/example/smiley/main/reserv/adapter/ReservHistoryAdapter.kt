@@ -53,7 +53,7 @@ class ReservHistoryAdapter(
                         backgroundTintList = ColorStateList.valueOf(
                             _context.resources.getColor(R.color.background)
                         )
-                        setTextColor(_context.resources.getColor(R.color.gray3_8E))
+                        setTextColor(_context.resources.getColor(R.color.gray3_82))
                     } else {
                         backgroundTintList = ColorStateList.valueOf(
                             _context.resources.getColor(R.color.light_blue1)

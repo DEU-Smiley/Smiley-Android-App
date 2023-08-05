@@ -14,6 +14,7 @@ import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
 import com.example.smiley.common.extension.addFragmentToFullScreen
 import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.databinding.FragmentProfileBinding
+import com.example.smiley.hospital.HospitalMapFragment
 import com.example.smiley.hospital.HospitalSearchFragment
 import com.example.smiley.magazine.MagazineListFragment
 import com.example.smiley.medicine.MedicineSearchFragment
@@ -101,6 +102,10 @@ class ProfileFragment : Fragment() {
 
             menuSearchHospital.setOnClickListener {
                 this@ProfileFragment.addFragmentToFullScreen(HospitalSearchFragment())
+            }
+
+            menuNotifySetting.setOnClickListener {
+                this@ProfileFragment.addFragmentToFullScreen(HospitalMapFragment())
             }
         }
     }

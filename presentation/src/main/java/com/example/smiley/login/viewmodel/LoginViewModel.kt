@@ -66,7 +66,7 @@ class LoginViewModel @Inject constructor(
 
                         is ResponseState.Error -> {
                             Log.d("로그인 뷰모델", "에러로 옴 ${state.error}")
-                            if (state.error.code == "510") setRequiredSignUp(userId)
+                            if (state.error.code == "NEW_USER") setRequiredSignUp(userId)
                             else setError(state.error.message)
                         }
                     }

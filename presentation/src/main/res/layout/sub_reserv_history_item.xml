@@ -57,7 +57,7 @@
 
             android:text="부산시 부산진구 가야대로 | 치과"
             android:textSize="@dimen/B7_R400_12_h18"
-            android:textColor="@color/gray2_6E"
+            android:textColor="@color/gray2_5E"
             android:fontFamily="@font/pretendard_regular"
 
             app:layout_constraintTop_toBottomOf="@id/hospital_name"
@@ -85,7 +85,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
 
-            android:background="@color/gray6_F2"
+            android:background="@color/gray7_F2"
 
             app:layout_constraintTop_toBottomOf="@id/reserv_date"
             app:layout_constraintLeft_toLeftOf="parent"

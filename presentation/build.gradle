@@ -60,4 +60,7 @@ dependencies {
 
     /* Shimmer */
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    /* StickyScrollView */
+    implementation 'com.github.amarjain07:StickyScrollView:1.0.3'
 }

@@ -118,19 +118,6 @@ class HospitalSearchFragment : Fragment(), DataSendable{
     }
 
     /**
-     * 검색어 입력 체크 TextWatcher
-     */
-    private val filterTextWatcher = object : TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        override fun afterTextChanged(p0: Editable?) {}
-
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            if(!::hospitalFilterAdapter.isInitialized) return
-            hospitalFilterAdapter.filter.filter(p0)
-        }
-    }
-
-    /**
      * 리사이클러뷰 초기화
      */
     private fun initRecyclerView(simpleHospitalList: SimpleHospitalList) {
@@ -202,6 +189,19 @@ class HospitalSearchFragment : Fragment(), DataSendable{
         Log.d("검색페이지", "DataSendable : $data")
         dataSendable.sendData(data)
         this.dismiss()
+    }
+
+    /**
+     * 검색어 입력 체크 TextWatcher
+     */
+    private val filterTextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun afterTextChanged(p0: Editable?) {}
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            if(!::hospitalFilterAdapter.isInitialized) return
+            hospitalFilterAdapter.filter.filter(p0)
+        }
     }
 
     /**

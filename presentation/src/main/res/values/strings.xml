@@ -40,10 +40,16 @@
     <string name="title_input_email">이메일을\n입력해 주세요.</string>
     <string name="title_input_brith_date">"생년월일을\n입력해 주세요."</string>
 
+    <!-- 버튼 텍스트 -->
+    <string name="btn_ok">확인</string>
+    <string name="btn_select_ok">선택 완료</string>
+    <string name="btn_allow_permission">권한 허용하기</string>
+
     <!-- 다이얼로그 Title -->
     <string name="dialog_title_confirm_input">입력 확인</string>
     <string name="dialog_title_info_complete">정보 입력 완료</string>
     <string name="dialog_title_sign_up_complete">회원가입 완료!</string>
+    <string name="dialog_title_system_notice">시스템 알림</string>
 
     <!-- 다이얼로그 Button -->
     <string name="dialog_button_resist">등록하기</string>
@@ -62,4 +68,42 @@
     <string name="dialog_error_email_format">이메일 형식을 확인해 주세요.</string>
     <string name="dialog_error_phone_number_format">전화번호를 확인해 주세요.</string>
     <string name="dialog_error_invalid_birth_date">생년월일을 확인해 주세요.</string>
+
+    <!-- 레이아웃 Mock String -->
+    <string name="mock_address">서울특별시 은평구 신사동 12</string>
+    <string name="mock_phone_number">02-123-4567</string>
+    <string name="mock_provide_hospital_info">병원 정보 제공</string>
+    <string name="mock_request_info_edit">정보 수정 요청</string>
+    <string name="mock_review_count">리뷰 0개</string>
+    <string name="mock_review_no_exist">리뷰 내역이 없어요</string>
+    <string name="mock_time_range_08_30_19_30">08:30 ~ 19:30</string>
+    <string name="mock_time_range_13_30_14_30">13:30 ~ 14:30</string>
+    <string name="mock_sub_info">(부가 정보)</string>
+    <string name="mock_dialog_content">다이얼로그 내용</string>
+
+    <!-- 공용 단어 -->
+    <string name="common_location">위치</string>
+    <string name="common_phone_number">전화번호</string>
+    <string name="common_review">리뷰</string>
+    <string name="common_break">휴진</string>
+    <string name="common_lunch_time">점심 시간</string>
+    <string name="common_today">오늘</string>
+    <string name="common_monday">월요일</string>
+    <string name="common_tuesday">화요일</string>
+    <string name="common_wednesday">수요일</string>
+    <string name="common_thursday">목요일</string>
+    <string name="common_friday">금요일</string>
+    <string name="common_saturday">토요일</string>
+    <string name="common_sunday">일요일</string>
+    <string name="common_holiday">공휴일</string>
+    <string name="common_bluetooth">블루투스</string>
+    <string name="common_camera">카메라</string>
+    <string name="common_storage">저장 공간</string>
+    <string name="common_see">보기</string>
+
+    <!-- 기타 -->
+    <string name="slogan_part_1_right_now">바로 지금,</string>
+    <string name="slogan_part_2_need_smile">미소가 필요한 순간</string>
+    <string name="app_logo_smiley">Smi)ey</string>
+    <string name="btn_cancle">취소</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.domain.hospital.model
 
+import android.util.Log
 import com.example.domain.common.base.BaseModel
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
@@ -57,11 +58,35 @@ class Hospital (
         }
     }
 
+    /**
+     * 요일별 진료 시간을 반환하는 메소드
+     */
+    fun parseRunningTimeAt(dayOfWeek: Int): String {
+        val time = this.getRunnginTimeAt(dayOfWeek)
+        if(time.first.isEmpty() || time.second.isEmpty()) return "휴진"
+
+        val startTime = "${time.first.substring(0..1)}:${time.first.substring(2..3)}"
+        val endTime = "${time.second.substring(0..1)}:${time.second.substring(2..3)}"
+
+        return "$startTime ~ $endTime"
+    }
+
+    /**
+     * ex)
+     * startTime : 1000 -> 10:00
+     * closeTime : 1830 -> 18:30
+     */
     fun isRunningNow(): Boolean {
         val today = LocalDateTime.now()
-        val runningTime = getRunnginTimeAt(today.dayOfWeek.value)
-        val now = "${today.hour} + ${today.minute}"
+        val now = String.format("%d%d", today.hour, today.minute).toInt()
+        val runningTime = getRunnginTimeAt(today.dayOfWeek.value+1).also {
+            if(it.first.isEmpty() || it.second.isEmpty()) return false
+        }
 
-        return (runningTime.first <= now && now <= runningTime.second)
+        val (startTime, endTime) = runningTime.run {
+            this.first.toInt() to this.second.toInt()
+        }
+
+        return (now in startTime..endTime)
     }
 }

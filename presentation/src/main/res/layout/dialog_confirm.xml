@@ -20,7 +20,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="@dimen/side_margin"
             android:fontFamily="@font/pretendard_semibold"
-            android:text="시스템 알림"
+            android:text="@string/dialog_title_system_notice"
             android:textColor="@color/black1_20"
             android:textSize="18sp" />
 
@@ -33,7 +33,7 @@
             android:layout_marginEnd="@dimen/side_margin"
             android:lineSpacingExtra="6sp"
             android:fontFamily="@font/pretendard_regular"
-            android:text="다이얼로그 내용"
+            android:text="@string/mock_dialog_content"
             android:textColor="@color/black1_20"
             android:textSize="@dimen/M500_14_h20" />
 
@@ -47,8 +47,8 @@
 
             android:lineSpacingExtra="6sp"
             android:fontFamily="@font/pretendard_regular"
-            android:text="(부가 정보)"
-            android:textColor="@color/gray3_8E"
+            android:text="@string/mock_sub_info"
+            android:textColor="@color/gray3_82"
             android:textSize="@dimen/B4_M500_13_h18" />
 
         <View
@@ -57,7 +57,7 @@
             android:layout_height="1.5dp"
 
             android:layout_marginTop="30dp"
-            android:background="@color/gray5_E6" />
+            android:background="@color/gray5_CB" />
 
         <TextView
             android:id="@+id/dialog_confirm_btn"
@@ -67,10 +67,10 @@
 
             android:gravity="center"
             android:layout_gravity="bottom"
-            android:text="확인"
+            android:text="@string/btn_ok"
             android:textColor="@color/primary_normal"
             android:textSize="@dimen/M500_14_h20"
-            android:fontFamily="@font/pretendard_regular"
+            android:fontFamily="@font/pretendard_medium"
             tools:targetApi="s" />
     </LinearLayout>
 </layout>

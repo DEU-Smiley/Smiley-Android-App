@@ -166,9 +166,6 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
         }
     }
 
-    private fun addSelectBtnClickEvent(){
-
-    }
     /**
      * 바텀 시트가 펼쳐졌을 때, Height를 화면 전체로 지정하는 메소드
      */
@@ -250,8 +247,6 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
         }
     }
 
-
-
     /**
      * HospitalList 조회에 실패한 경우의 핸들러
      */
@@ -268,10 +263,10 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
      */
     private fun handleLoading(isLoding: Boolean){
         if(isLoding) {
-            bind.lodingLayout.visible()
+            bind.lottieLodingLayout.visible()
             bind.coordinatorLayout.gone()
         } else {
-            bind.lodingLayout.gone()
+            bind.lottieLodingLayout.gone()
             bind.coordinatorLayout.visible()
         }
     }
@@ -307,8 +302,8 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
             bind.appBarLayout.setExpanded(false, true)
             when (tab?.position) {
                 0 -> bind.nestedScrollView.smoothScrollToView(bind.hospitalTimeInfo)
-                1 -> bind.nestedScrollView.smoothScrollToView(bind.hospitalPositInfo)
-                2 -> bind.nestedScrollView.smoothScrollToView(bind.hospitalReviewInfo)
+                1 -> bind.nestedScrollView.smoothScrollToView(bind.clHospitalPositInfo)
+                2 -> bind.nestedScrollView.smoothScrollToView(bind.clHospitalReviewInfo)
             }
         }
     }
@@ -319,10 +314,10 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
     private val scrollChangedListener = View.OnScrollChangeListener { _, _, scrollY, _, _ ->
         bind.nestedScrollView.apply {
             when {
-                scrollY < (computeDistanceToView(bind.hospitalPositInfo) / 2)-> {
+                scrollY < (computeDistanceToView(bind.clHospitalPositInfo) / 2)-> {
                     bind.tabLayout.setScrollPosition(0, 0f, true)
                 }
-                scrollY < (computeDistanceToView(bind.hospitalReviewInfo) / 2) -> {
+                scrollY < (computeDistanceToView(bind.clHospitalReviewInfo) / 2) -> {
                     bind.tabLayout.setScrollPosition(1, 0f, true)
                 }
                 else ->{

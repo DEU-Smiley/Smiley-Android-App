@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Smi)ey"
+                android:text="@string/app_logo_smiley"
                 android:textSize="@dimen/H3_B700_20_h30"
                 android:textColor="@color/black1_20"
                 android:fontFamily="@font/pretendard_bold"

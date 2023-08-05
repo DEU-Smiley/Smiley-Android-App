@@ -1,6 +1,7 @@
 package com.example.smiley.common.extension
 
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.graphics.Rect
 import android.graphics.Typeface
 import android.text.Editable
@@ -27,29 +28,29 @@ fun View.visible(){ visibility = View.VISIBLE }
 
 fun View.invisible(){ visibility = View.INVISIBLE }
 
-fun View.visibleWithAnimation(){
+fun View.visibleWithAnimation(duration: Long = 250){
     val animation: Animation = AlphaAnimation(0f, 1f)
-    animation.duration = 250
+    animation.duration = duration
     this.visibility = View.VISIBLE
     this.animation = animation
 }
 
-fun View.invisibleWithAnimation(){
+fun View.invisibleWithAnimation(duration: Long = 250){
     val animation: Animation = AlphaAnimation(0f, 1f)
-    animation.duration = 250
+    animation.duration = duration
     this.visibility = View.INVISIBLE
     this.animation = animation
 }
 
-fun View.goneWithAnimation(){
-    val animation: Animation = AlphaAnimation(0f, 1f)
-    animation.duration = 250
-    this.visibility = View.GONE
+fun View.goneWithAnimation(duration: Long = 250){
+    val animation: Animation = AlphaAnimation(1f, 0f)
+    animation.duration = duration
     this.animation = animation
+    this.visibility = View.GONE
 }
 
 fun Button.setDisabled(){
-    this.setTextColor(resources.getColor(R.color.gray3_8E))
+    this.setTextColor(resources.getColor(R.color.gray3_82))
     this.isEnabled = false
 }
 
@@ -223,4 +224,19 @@ fun TextView.setBold(start:Int, end:Int){
     val span = SpannableStringBuilder(this.text)
     span.setSpan(StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
     this.text = span
+}
+
+/**
+ * TextView의 폰트 사이즈를 조절하는 ValueAnimator
+ *
+ * @param startPx Float
+ * @param endPx Float
+ */
+fun TextView.createValueAnimator(startPx:Float, endPx: Float): ValueAnimator {
+    return ValueAnimator.ofFloat(startPx, endPx).apply {
+        addUpdateListener { valueAnimator ->
+            val size = valueAnimator.animatedValue as Float
+            this@createValueAnimator.textSize = size
+        }
+    }
 }
