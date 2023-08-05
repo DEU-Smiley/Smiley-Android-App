@@ -80,7 +80,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!-- Layout End 프로필 레이아웃 -->
-
+            
             <!-- Layout 콘텐츠 레이아웃 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_mission_layout"
@@ -351,7 +351,6 @@
                     android:layout_marginVertical="@dimen/side_margin_2x"
                     android:src="@drawable/img_banner_chat_bot"
                     android:adjustViewBounds="true"
-                    android:clickable="true"
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -373,6 +372,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cl_chat_bot_banner_layout">
+
                 <TextView
                     android:id="@+id/tv_famous_dental_hospital"
                     android:layout_width="wrap_content"
