@@ -22,7 +22,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
 
-            android:background="@drawable/background_round_rectangle_2dp"
+            android:background="@drawable/bg_rounded_corner_radius_2"
             android:backgroundTint="@color/light_blue1"
 
             android:text="D-08"
