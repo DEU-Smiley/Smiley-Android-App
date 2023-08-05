@@ -45,7 +45,7 @@
                 android:layout_marginTop="30dp"
 
                 android:text="이메일"
-                android:textColor="@color/gray2_6E"
+                android:textColor="@color/gray2_5E"
                 android:textSize="@dimen/M500_16_h22"
                 android:fontFamily="@font/pretendard_medium"
 
@@ -85,7 +85,7 @@
                 android:layout_marginTop="30dp"
 
                 android:text="전화번호"
-                android:textColor="@color/gray2_6E"
+                android:textColor="@color/gray2_5E"
                 android:textSize="@dimen/M500_16_h22"
                 android:fontFamily="@font/pretendard_medium"
 
@@ -127,7 +127,7 @@
                 android:layout_marginTop="30dp"
 
                 android:text="생년월일"
-                android:textColor="@color/gray2_6E"
+                android:textColor="@color/gray2_5E"
                 android:textSize="@dimen/M500_16_h22"
                 android:fontFamily="@font/pretendard_medium"
 
@@ -248,7 +248,7 @@
                 android:layout_height="wrap_content"
 
                 android:text="이름"
-                android:textColor="@color/gray2_6E"
+                android:textColor="@color/gray2_5E"
                 android:textSize="@dimen/M500_16_h22"
                 android:fontFamily="@font/pretendard_medium"
 

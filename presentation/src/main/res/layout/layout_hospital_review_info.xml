@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Layout 병원 리뷰 레이아웃 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_hospital_review_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@color/white"
+        android:paddingTop="20dp"
+        android:paddingBottom="100dp">
+
+        <TextView
+            android:id="@+id/hospital_review_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+
+            android:fontFamily="@font/pretendard_medium"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/common_review"
+            android:textColor="@color/black1_20"
+            android:textSize="@dimen/R400_17_auto"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/hospital_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="7sp"
+            android:text="@string/mock_review_count"
+            android:textColor="@color/gray1_42"
+            android:textSize="@dimen/R400_14_auto"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hospital_review_title" />
+
+        <ImageView
+            android:id="@+id/ic_review"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_none_data"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hospital_review" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="@string/mock_review_no_exist"
+            android:textColor="@color/gray1_42"
+            android:textSize="@dimen/M500_14_h20"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ic_review" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Layout End 병원 리뷰 레이아웃 -->
+
+</merge>

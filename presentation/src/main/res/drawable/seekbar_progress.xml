@@ -2,7 +2,7 @@
     <item android:id="@android:id/background">
         <shape>
             <corners android:radius="20dp"/>
-            <solid android:color="@color/gray6_F2" />
+            <solid android:color="@color/gray7_F2" />
         </shape>
     </item>
 
@@ -10,9 +10,9 @@
         <scale
             android:scaleWidth="100%"
             android:startOffset="0"
-            android:drawable="@color/gray6_F2">
+            android:drawable="@color/gray7_F2">
             <shape>
-                <solid android:color="@color/gray6_F2"/>
+                <solid android:color="@color/gray7_F2"/>
                 <corners android:radius="20dp"/>
             </shape>
         </scale>

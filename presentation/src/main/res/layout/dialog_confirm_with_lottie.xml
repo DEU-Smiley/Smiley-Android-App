@@ -21,7 +21,7 @@
             android:layout_marginEnd="@dimen/side_margin"
             android:layout_gravity="center"
             android:fontFamily="@font/pretendard_medium"
-            android:text="시스템 알림"
+            android:text="@string/dialog_title_system_notice"
             android:textColor="@color/black1_20"
             android:textSize="@dimen/M500_16_h22" />
 
@@ -36,8 +36,8 @@
             android:textAlignment="center"
             android:lineSpacingExtra="6sp"
             android:fontFamily="@font/pretendard_regular"
-            android:text="다이얼로그 내용"
-            android:textColor="@color/gray1_55"
+            android:text="@string/mock_dialog_content"
+            android:textColor="@color/gray1_42"
             android:textSize="@dimen/M500_14_h20" />
 
         <com.airbnb.lottie.LottieAnimationView
@@ -66,15 +66,15 @@
             android:textAlignment="center"
             android:lineSpacingExtra="6sp"
             android:fontFamily="@font/pretendard_regular"
-            android:text="(부가 정보)"
-            android:textColor="@color/gray3_8E"
+            android:text="@string/mock_sub_info"
+            android:textColor="@color/gray3_82"
             android:textSize="@dimen/B4_M500_13_h18" />
 
         <View
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1.5dp"
-            android:background="@color/gray5_E6" />
+            android:background="@color/gray5_CB" />
 
         <TextView
             android:id="@+id/dialog_confirm_btn"
@@ -83,10 +83,10 @@
             android:background="?attr/selectableItemBackground"
 
             android:gravity="center"
-            android:text="확인"
+            android:text="@string/btn_ok"
             android:textColor="@color/primary_normal"
             android:textSize="@dimen/M500_14_h20"
-            android:fontFamily="@font/pretendard_regular"
+            android:fontFamily="@font/pretendard_medium"
             tools:targetApi="s" />
     </LinearLayout>
 </layout>

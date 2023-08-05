@@ -32,7 +32,7 @@
         android:layout_marginTop="13dp"
         android:gravity="center"
         android:text="@string/onboarding_content1"
-        android:textColor="@color/gray2_6E"
+        android:textColor="@color/gray2_5E"
         android:textSize="@dimen/H4_R400_15_h22"
         android:fontFamily="@font/pretendard_regular"
         android:lineSpacingExtra="6sp"

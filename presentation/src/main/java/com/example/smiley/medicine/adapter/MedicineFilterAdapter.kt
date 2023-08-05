@@ -1,8 +1,6 @@
 package com.example.smiley.medicine.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,7 +59,7 @@ class MedicineFilterAdapter(
                 }
                 else -> {
                     text = "[기타] " + medicine.itemName
-                    setForegroundColor(resources.getColor(R.color.gray4_CB), 0, 4)
+                    setForegroundColor(resources.getColor(R.color.gray4_AC), 0, 4)
                 }
             }
 

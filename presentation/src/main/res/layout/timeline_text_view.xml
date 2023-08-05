@@ -13,7 +13,7 @@
             android:layout_width="1dp"
             android:layout_height="0dp"
             android:layout_marginStart="24dp"
-            android:background="@color/gray5_E6"
+            android:background="@color/gray5_CB"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@id/title"
@@ -38,7 +38,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginBottom="40dp"
             android:text="스마일리 매거진이 드리는 교정 정보입니다. "
-            android:textColor="@color/gray1_55"
+            android:textColor="@color/gray1_42"
             android:textSize="@dimen/H4_R400_15_h22"
 
             app:layout_constraintLeft_toRightOf="@id/indicator"

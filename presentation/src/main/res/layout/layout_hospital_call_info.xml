@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Layout 병원 전화번호 레이아웃 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@color/white"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/hospital_phone_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+
+            android:fontFamily="@font/pretendard_medium"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/common_phone_number"
+            android:textColor="@color/black1_20"
+            android:textSize="@dimen/R400_17_auto"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/hospital_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="7sp"
+            android:text="@string/mock_phone_number"
+            android:textColor="@color/gray1_42"
+            android:textSize="@dimen/M500_14_h20"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hospital_phone_title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Layout End 병원 전화번호 레이아웃 -->
+</merge>

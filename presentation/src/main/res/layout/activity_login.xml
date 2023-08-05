@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
 
             android:fontFamily="@font/pretendard_semibold"
-            android:text="바로 지금,"
+            android:text="@string/slogan_part_1_right_now"
             android:textColor="@color/white"
             android:textSize="@dimen/SB600_20_auto"
 
@@ -47,7 +47,7 @@
             android:layout_marginBottom="35dp"
 
             android:fontFamily="@font/pretendard_light"
-            android:text="미소가 필요한 순간"
+            android:text="@string/slogan_part_2_need_smile"
             android:textColor="@color/white"
             android:textSize="@dimen/L300_20_auto"
 

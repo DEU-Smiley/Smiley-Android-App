@@ -86,7 +86,7 @@
 
             android:text="2023.07.23 (일)"
             android:textSize="@dimen/H4_R400_15_h22"
-            android:textColor="@color/gray2_6E"
+            android:textColor="@color/gray2_5E"
             android:fontFamily="@font/pretendard_regular"
 
             app:layout_constraintEnd_toEndOf="parent"
