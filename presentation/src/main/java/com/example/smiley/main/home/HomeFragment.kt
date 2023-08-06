@@ -19,12 +19,14 @@ import com.example.smiley.R
 import com.example.smiley.bluetooth.viewmodel.BluetoothDataState
 import com.example.smiley.bluetooth.viewmodel.BluetoothViewModel
 import com.example.smiley.common.extension.addFragmentToFullScreen
+import com.example.smiley.common.extension.applyTouchEffectToAllViews
 import com.example.smiley.common.extension.gone
 import com.example.smiley.common.extension.showToast
 import com.example.smiley.common.extension.visible
 import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.common.utils.NotifyManager
+import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentHomeBinding
 import com.example.smiley.databinding.FragmentHomeTestBinding
 import com.example.smiley.magazine.MagazineDetailFragment
@@ -46,7 +48,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
     private var _bind: FragmentHomeBinding?=null
     private val bind: FragmentHomeBinding get() = _bind!!
     private val bluetoothVm: BluetoothViewModel by viewModels({requireActivity()})
@@ -80,26 +82,6 @@ class HomeFragment : Fragment() {
         return bind.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        applyTouchEffectToAllViews(view as ViewGroup)
-    }
-
-    /**
-     * 클릭 가능한 모든 뷰에 반투명 효과 적용
-     */
-    private fun applyTouchEffectToAllViews(viewGroup: ViewGroup) {
-        for (i in 0 until viewGroup.childCount) {
-            val child = viewGroup.getChildAt(i)
-            if (child.isClickable) {
-                child.setOnTouchListener(TransparentTouchListener())
-            }
-
-            if (child is ViewGroup) {
-                applyTouchEffectToAllViews(child)
-            }
-        }
-    }
 
     private fun initView(){
         bind.llMagazineDetailBtn.setOnClickListener {
