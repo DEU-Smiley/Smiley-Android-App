@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.smiley.R
+import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentReservBinding
 import com.example.smiley.main.reserv.adapter.ReservViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -20,7 +21,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [ReservFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ReservFragment : Fragment() {
+class ReservFragment : BaseFragment() {
     private var _bind: FragmentReservBinding?=null
     private val bind get() = _bind!!
 
