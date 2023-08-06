@@ -1,8 +1,10 @@
 package com.example.smiley.common.extension
 
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
+import com.example.smiley.common.listener.TransparentTouchListener
 
 fun Fragment.dismiss(){
     requireActivity()
@@ -35,4 +37,17 @@ fun Fragment.setCustomColorStatusBarAndNavigationBar(statusBarColor: Int, naviga
 
 fun Fragment.resetStatusBarAndNavigationBar(){
     (requireActivity() as AppCompatActivity).resetStatusBarAndNavigationBar()
+}
+
+fun Fragment.applyTouchEffectToAllViews(viewGroup: ViewGroup) {
+    for (i in 0 until viewGroup.childCount) {
+        val child = viewGroup.getChildAt(i)
+        if (child.isClickable) {
+            child.setOnTouchListener(TransparentTouchListener())
+        }
+
+        if (child is ViewGroup) {
+            applyTouchEffectToAllViews(child)
+        }
+    }
 }
