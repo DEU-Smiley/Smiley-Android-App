@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:background="@color/white"
-
+            android:clickable="true"
             android:clipToPadding="false"
             android:paddingTop="5dp"
             android:scrollIndicators="bottom"
@@ -22,7 +22,7 @@
             app:tabGravity="fill"
             app:tabIndicatorColor="@color/black1_20"
             app:tabIndicatorFullWidth="true"
-            app:tabTextAppearance="@style/tab_small_text"
+            app:tabTextAppearance="@style/tab_item_text"
             app:tabMaxWidth="0dp"
             app:tabMode="fixed"
             app:tabPaddingEnd="10dp"
