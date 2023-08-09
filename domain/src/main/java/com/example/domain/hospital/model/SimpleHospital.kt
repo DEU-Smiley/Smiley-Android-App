@@ -8,4 +8,6 @@ class SimpleHospital(
     val hpid        : String,
     val dutyName    : String,
     val dutyAddress : String,
+    val lat         : Double,
+    val lng         : Double
 ) : BaseModel
