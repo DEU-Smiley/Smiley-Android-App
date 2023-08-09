@@ -1,4 +1,4 @@
-package com.example.smiley.main.home.adapter
+package com.example.smiley.main.home.adapter.timeline
 
 enum class ViewType(viewType: String) {
     TEXT_OBJECT("TEXT_OBJECT"),

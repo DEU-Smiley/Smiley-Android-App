@@ -1,4 +1,4 @@
-package com.example.smiley.main.home.adapter
+package com.example.smiley.main.home.adapter.timeline
 
 import com.example.domain.magazine.model.Magazine
 
