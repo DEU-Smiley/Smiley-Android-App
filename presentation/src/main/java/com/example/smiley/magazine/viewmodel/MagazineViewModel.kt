@@ -4,17 +4,13 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.common.base.ResponseState
-import com.example.domain.magazine.model.Magazine
 import com.example.domain.magazine.model.MagazineList
 import com.example.domain.magazine.usecase.GetAllMagazinesUseCase
-import com.example.smiley.main.home.adapter.TimeLineItem
-import com.example.smiley.main.home.viewmodel.TimeLineState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
