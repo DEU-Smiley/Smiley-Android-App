@@ -1,9 +1,9 @@
 package com.example.data.hospital.remote.api
 
 import com.example.data.hospital.remote.request.NearbyHospitalRequest
-import com.example.data.hospital.remote.response.HospitalPositListResponse
-import com.example.data.hospital.remote.response.HospitalResponse
-import com.example.data.hospital.remote.response.SimpleHospitalListResponse
+import com.example.data.hospital.remote.response.list.HospitalPositListResponse
+import com.example.data.hospital.remote.response.single.HospitalResponse
+import com.example.data.hospital.remote.response.list.SimpleHospitalListResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
