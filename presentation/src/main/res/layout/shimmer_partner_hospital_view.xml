@@ -1,85 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/base_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <View
+        android:id="@+id/view_top_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#ECEDEF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/line"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="24dp"
-            android:background="@color/gray5_CB"
+    <View
+        android:id="@+id/view_rank_oval"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginVertical="45dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/shape_oval"
+        android:backgroundTint="@color/gray6_F5"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/indicator" />
+        app:layout_constraintBottom_toBottomOf="@id/view_bottom_divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view_top_divider" />
 
-        <View
-            android:id="@+id/indicator"
-            android:layout_width="15sp"
-            android:layout_height="15sp"
-            android:background="@drawable/shape_oval_stroke_2dp"
+    <TextView
+        android:id="@+id/tv_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-            app:layout_constraintBottom_toBottomOf="@id/title"
-            app:layout_constraintLeft_toLeftOf="@id/line"
-            app:layout_constraintRight_toRightOf="@id/line"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:fontFamily="@font/pretendard_bold"
+        android:text=""
+        android:textColor="@color/gray1_42"
+        android:textSize="@dimen/R400_17_auto"
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="@dimen/side_margin"
+        app:layout_constraintBottom_toBottomOf="@id/view_rank_oval"
+        app:layout_constraintEnd_toEndOf="@id/view_rank_oval"
+        app:layout_constraintStart_toStartOf="@id/view_rank_oval"
+        app:layout_constraintTop_toTopOf="@id/view_rank_oval" />
 
-            android:text="매거진을 불러오는 중 입니다..."
-            android:textColor="@color/gray1_42"
-            android:textSize="@dimen/H4_R400_15_h22"
+    <TextView
+        android:id="@+id/tv_hospital_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/side_margin"
+        android:layout_marginTop="30dp"
 
-            app:layout_constraintLeft_toRightOf="@id/indicator"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:fontFamily="@font/pretendard_bold"
+        android:includeFontPadding="false"
+        android:text="병원 정보 로드 중..."
+        android:textColor="@color/gray1_42"
+        android:textSize="@dimen/B700_16_auto"
 
-        <!-- Layout 매거진 레이아웃 -->
-        <FrameLayout
-            android:id="@+id/magazine_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="@dimen/side_margin"
-            android:layout_marginBottom="40dp"
-            android:clickable="true"
+        app:layout_constraintStart_toEndOf="@+id/view_rank_oval"
+        app:layout_constraintTop_toTopOf="@id/view_top_divider" />
 
-            app:layout_constraintLeft_toLeftOf="@id/title"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title">
+    <TextView
+        android:id="@+id/tv_review_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
 
-            <!-- Layout 매거진 썸네일 레이아웃 -->
-            <ImageView
-                android:id="@+id/thumbnail"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/bg_rounded_corner_radius_10"
-                android:backgroundTint="@color/gray5_CB"/>
-            <!-- Layout End 매거진 썸네일 레이아웃 -->
-        </FrameLayout>
-        <!-- Layout End 매거진 레이아웃 -->
+        android:fontFamily="@font/pretendard_bold"
+        android:includeFontPadding="false"
+        android:text="★ 0.0"
+        android:textColor="@color/gray1_42"
+        android:textSize="14sp"
 
-        <!-- Layout 타임라인 콘텐트 사이 레이아웃 -->
-        <View
-            android:id="@+id/margin_layout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="40dp"
+        app:layout_constraintStart_toStartOf="@id/tv_hospital_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_hospital_name" />
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/line"
-            app:layout_constraintTop_toBottomOf="@id/magazine_layout" />
-        <!-- Layout End 타임라인 콘텐트 사이 레이아웃 -->
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+    <TextView
+        android:id="@+id/tv_review_cnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/pretendard_medium"
+        android:includeFontPadding="false"
+        android:text=" (0)"
+        android:textColor="@color/gray3_82"
+        android:textSize="@dimen/M500_14_h20"
+
+        app:layout_constraintBottom_toBottomOf="@id/tv_review_point"
+        app:layout_constraintStart_toEndOf="@id/tv_review_point"
+        app:layout_constraintTop_toTopOf="@id/tv_review_point" />
+
+    <TextView
+        android:id="@+id/tv_hospital_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+
+        android:fontFamily="@font/pretendard_medium"
+        android:includeFontPadding="false"
+        android:text="병원 정보 로드 중..."
+        android:textColor="@color/gray3_82"
+        android:textSize="@dimen/M500_14_h20"
+
+        app:layout_constraintBottom_toBottomOf="@id/view_bottom_divider"
+        app:layout_constraintStart_toStartOf="@id/tv_hospital_name" />
+
+    <View
+        android:id="@+id/view_bottom_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#ECEDEF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

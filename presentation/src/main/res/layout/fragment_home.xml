@@ -397,18 +397,36 @@
                     app:layout_constraintTop_toTopOf="@id/tv_famous_dental_hospital"
                     app:layout_constraintBottom_toBottomOf="@id/tv_famous_dental_hospital"/>
 
-                <LinearLayout
-                    android:id="@+id/rv_famous_hospital"
-                    android:layout_width="match_parent"
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/sfl_partner_shimmer"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_famous_dental_hospital">
 
-                    <include layout="@layout/sub_famous_hospital_item"/>
-                    <include layout="@layout/sub_famous_hospital_item"/>
-                    <include layout="@layout/sub_famous_hospital_item"/>
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/shimmer_partner_hospital_view"/>
+                        <include layout="@layout/shimmer_partner_hospital_view"/>
+                        <include layout="@layout/shimmer_partner_hospital_view"/>
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_famous_hospital"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+
+                    app:layout_constraintStart_toStartOf="@id/sfl_partner_shimmer"
+                    app:layout_constraintEnd_toEndOf="@id/sfl_partner_shimmer"
+                    app:layout_constraintTop_toTopOf="@id/sfl_partner_shimmer"
+                    app:layout_constraintBottom_toBottomOf="@id/sfl_partner_shimmer"/>
 
                 <TextView
                     android:id="@+id/tv_find_near_by_hosptial"
