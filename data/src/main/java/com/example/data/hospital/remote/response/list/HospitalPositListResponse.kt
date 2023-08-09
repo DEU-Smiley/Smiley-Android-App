@@ -1,8 +1,9 @@
-package com.example.data.hospital.remote.response
+package com.example.data.hospital.remote.response.list
 
 import com.example.data.common.mapper.DataMapper
 import com.example.data.common.network.BaseResponse
-import com.example.data.hospital.remote.response.HospitalPositResponse.Companion.toDomainModel
+import com.example.data.hospital.remote.response.single.HospitalPositResponse
+import com.example.data.hospital.remote.response.single.HospitalPositResponse.Companion.toDomainModel
 import com.example.domain.hospital.model.HospitalPositList
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize

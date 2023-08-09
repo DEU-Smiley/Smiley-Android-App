@@ -1,4 +1,4 @@
-package com.example.data.hospital.remote.response
+package com.example.data.hospital.remote.response.single
 
 import com.example.data.common.mapper.DataMapper
 import com.example.data.common.network.BaseResponse
