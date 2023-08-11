@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.hospital.model.SimpleHospital
 import com.example.domain.hospital.model.SimpleHospitalList
 import com.example.domain.magazine.model.Magazine
+import com.example.domain.youtube.model.YoutubeVideo
 import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.bluetooth.viewmodel.BluetoothDataState
@@ -33,6 +35,7 @@ import com.example.smiley.magazine.MagazineListFragment
 import com.example.smiley.main.home.adapter.partner.PartnerListAdapter
 import com.example.smiley.main.home.adapter.timeline.TimeLineAdapter
 import com.example.smiley.main.home.adapter.timeline.TimeLineItem
+import com.example.smiley.main.home.adapter.youtube.YoutubeListAdapter
 import com.example.smiley.main.home.viewmodel.HomeViewModel
 import com.example.smiley.main.home.viewmodel.HomeFragmentState
 import dagger.hilt.android.AndroidEntryPoint
@@ -77,6 +80,7 @@ class HomeFragment : BaseFragment() {
         initView()
         initTimeLineView()
         initPartnerListView()
+        initYoutubeListView()
         requestData()
 
         return bind.root
@@ -97,6 +101,7 @@ class HomeFragment : BaseFragment() {
     private fun requestData(){
         homeVm.getTimeLineData()
         homeVm.getNearByPartnerList(3)
+        homeVm.getRecommendVideoList()
     }
 
     private fun observe(){
@@ -133,15 +138,15 @@ class HomeFragment : BaseFragment() {
     private suspend fun observeHomeState(){
         homeVm.state.collect { state ->
             when(state){
-                is HomeFragmentState.Init -> {
-//                    bind.sflShimmerLayout.start()
-//                    bind.sflPartnerShimmer.start()
-                }
+                is HomeFragmentState.Init -> Unit
                 is HomeFragmentState.TimeLine -> {
                     handleTimeLine(state.timeLine)
                 }
                 is HomeFragmentState.PartnerHospital -> {
                     handlePartnerHospital(state.hospitals)
+                }
+                is HomeFragmentState.RecommendVideo -> {
+                    handleRecommendVideo(state.youtubeList)
                 }
                 is HomeFragmentState.Error -> {
                     Log.e("HomeFragment", state.message)
@@ -167,6 +172,13 @@ class HomeFragment : BaseFragment() {
         adapter.updateDataSet(hospitals = hospitals as ArrayList<SimpleHospital>)
     }
 
+    private fun handleRecommendVideo(youtubeList: ArrayList<YoutubeVideo>){
+        bind.sflRecommendVideo.stop()
+
+        val adapter = bind.rvRecommendVideo.adapter as YoutubeListAdapter
+        adapter.updateDataSet(youtubeList = youtubeList)
+    }
+
     /**
      * 타임라인 초기화
      */
@@ -190,6 +202,22 @@ class HomeFragment : BaseFragment() {
 
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireActivity())
+        }
+    }
+
+    private fun initYoutubeListView(){
+        bind.rvRecommendVideo.apply {
+            adapter = YoutubeListAdapter(
+                requireActivity(),
+                arrayListOf()
+            )
+
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(
+                requireActivity(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
         }
     }
 

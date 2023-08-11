@@ -7,6 +7,8 @@ import com.example.domain.hospital.model.SimpleHospital
 import com.example.domain.hospital.usecase.GetNearByHospitalUseCase
 import com.example.domain.hospital.usecase.GetNearByPartnerHospitalUseCase
 import com.example.domain.magazine.usecase.GetRecentMagazineUseCase
+import com.example.domain.youtube.model.YoutubeVideo
+import com.example.domain.youtube.usecase.GetRecommendVideoUseCase
 import com.example.smiley.common.base.BaseViewModel
 import com.example.smiley.main.home.adapter.timeline.TimeLineItem
 import com.example.smiley.main.home.adapter.timeline.TimeLineObject
@@ -17,12 +19,14 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getRecentMagazineUseCase: GetRecentMagazineUseCase,
-    private val getNearByPartnerHospitalUseCase: GetNearByPartnerHospitalUseCase
+    private val getNearByPartnerHospitalUseCase: GetNearByPartnerHospitalUseCase,
+    private val getRecommendVideoUseCase: GetRecommendVideoUseCase
 ): BaseViewModel<HomeFragmentState>() {
 
     fun getTimeLineData(){
@@ -84,12 +88,32 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun getRecommendVideoList(){
+        viewModelScope.launch(Dispatchers.IO){
+            getRecommendVideoUseCase()
+                .catch {
+                    setState(HomeFragmentState.ShowToast(message = it.message.toString()))
+                    Log.d("추천 영상 조회 에러", it.message.toString())
+                }
+                .collect { state ->
+                    when(state){
+                        is ResponseState.Success -> {
+                            setState(HomeFragmentState.RecommendVideo(state.data.youtubeList))
+                        }
+                        is ResponseState.Error -> {
+                            setState(HomeFragmentState.Error(state.error.message))
+                        }
+                    }
+                }
+        }
+    }
 }
 
 sealed class HomeFragmentState {
     object Init: HomeFragmentState()
     data class TimeLine(val timeLine: List<TimeLineItem>): HomeFragmentState()
     data class PartnerHospital(val hospitals: List<SimpleHospital>): HomeFragmentState()
+    data class RecommendVideo(val youtubeList: ArrayList<YoutubeVideo>): HomeFragmentState()
     data class Error(val message: String): HomeFragmentState()
     data class ShowToast(val message: String): HomeFragmentState()
 }
