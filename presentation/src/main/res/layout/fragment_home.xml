@@ -397,18 +397,36 @@
                     app:layout_constraintTop_toTopOf="@id/tv_famous_dental_hospital"
                     app:layout_constraintBottom_toBottomOf="@id/tv_famous_dental_hospital"/>
 
-                <LinearLayout
-                    android:id="@+id/rv_famous_hospital"
-                    android:layout_width="match_parent"
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/sfl_partner_shimmer"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_famous_dental_hospital">
 
-                    <include layout="@layout/sub_famous_hospital_item"/>
-                    <include layout="@layout/sub_famous_hospital_item"/>
-                    <include layout="@layout/sub_famous_hospital_item"/>
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/shimmer_partner_hospital_view"/>
+                        <include layout="@layout/shimmer_partner_hospital_view"/>
+                        <include layout="@layout/shimmer_partner_hospital_view"/>
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_famous_hospital"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+
+                    app:layout_constraintStart_toStartOf="@id/sfl_partner_shimmer"
+                    app:layout_constraintEnd_toEndOf="@id/sfl_partner_shimmer"
+                    app:layout_constraintTop_toTopOf="@id/sfl_partner_shimmer"
+                    app:layout_constraintBottom_toBottomOf="@id/sfl_partner_shimmer"/>
 
                 <TextView
                     android:id="@+id/tv_find_near_by_hosptial"
@@ -458,7 +476,6 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:paddingVertical="40dp"
-                android:paddingHorizontal="@dimen/side_margin"
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -468,6 +485,7 @@
                     android:id="@+id/tv_recommend_video"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/side_margin"
                     android:clickable="true"
 
                     android:text="추천 영상"
@@ -489,12 +507,12 @@
                     app:layout_constraintTop_toTopOf="@id/tv_recommend_video"
                     app:layout_constraintBottom_toBottomOf="@id/tv_recommend_video"/>
 
-                <HorizontalScrollView
-                    android:id="@+id/rv_recommend_video"
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/sfl_recommend_video"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-
+                    android:paddingStart="@dimen/side_margin"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_recommend_video">
@@ -503,12 +521,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
-
-                        <include layout="@layout/sub_recommend_video_item"/>
-                        <include layout="@layout/sub_recommend_video_item"/>
-                        <include layout="@layout/sub_recommend_video_item"/>
+                        <include layout="@layout/shimmer_youtube_video_item"/>
+                        <include layout="@layout/shimmer_youtube_video_item"/>
                     </LinearLayout>
-                </HorizontalScrollView>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_recommend_video"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:paddingStart="@dimen/side_margin"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+
+                    app:layout_constraintBottom_toBottomOf="@id/sfl_recommend_video"
+                    app:layout_constraintEnd_toEndOf="@id/sfl_recommend_video"
+                    app:layout_constraintStart_toStartOf="@id/sfl_recommend_video"
+                    app:layout_constraintTop_toTopOf="@id/sfl_recommend_video">
+
+                </androidx.recyclerview.widget.RecyclerView>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!-- Layout End 추천 영상 레이아웃 -->
 

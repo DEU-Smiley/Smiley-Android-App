@@ -46,7 +46,8 @@ class SplashActivity : AppCompatActivity() {
             .onEach { state ->
                 when (state) {
                     is SplashActivityState.Init -> Unit
-                    is SplashActivityState.FirstAccess -> {
+                    is SplashActivityState.FirstAccess,
+                    SplashActivityState.RequiredLogin -> {
                         changeActivity(OnBoardingActivity::class.java)
                     }
                     is SplashActivityState.SuccessLoadUserId -> {

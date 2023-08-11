@@ -5,15 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.hospital.model.SimpleHospital
+import com.example.domain.hospital.model.SimpleHospitalList
 import com.example.domain.magazine.model.Magazine
+import com.example.domain.youtube.model.YoutubeVideo
 import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.bluetooth.viewmodel.BluetoothDataState
@@ -21,22 +22,24 @@ import com.example.smiley.bluetooth.viewmodel.BluetoothViewModel
 import com.example.smiley.common.extension.addFragmentToFullScreen
 import com.example.smiley.common.extension.applyTouchEffectToAllViews
 import com.example.smiley.common.extension.gone
+import com.example.smiley.common.extension.repeatOnStarted
 import com.example.smiley.common.extension.showToast
+import com.example.smiley.common.extension.start
+import com.example.smiley.common.extension.stop
 import com.example.smiley.common.extension.visible
 import com.example.smiley.common.listener.OnItemClickListener
-import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.common.utils.NotifyManager
 import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentHomeBinding
-import com.example.smiley.databinding.FragmentHomeTestBinding
 import com.example.smiley.magazine.MagazineDetailFragment
 import com.example.smiley.magazine.MagazineListFragment
-import com.example.smiley.main.home.adapter.TimeLineAdapter
-import com.example.smiley.main.home.adapter.TimeLineItem
+import com.example.smiley.main.home.adapter.partner.PartnerListAdapter
+import com.example.smiley.main.home.adapter.timeline.TimeLineAdapter
+import com.example.smiley.main.home.adapter.timeline.TimeLineItem
+import com.example.smiley.main.home.adapter.youtube.YoutubeListAdapter
 import com.example.smiley.main.home.viewmodel.HomeViewModel
-import com.example.smiley.main.home.viewmodel.TimeLineState
+import com.example.smiley.main.home.viewmodel.HomeFragmentState
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -77,6 +80,8 @@ class HomeFragment : BaseFragment() {
         observe()
         initView()
         initTimeLineView()
+        initPartnerListView()
+        initYoutubeListView()
         requestData()
 
         return bind.root
@@ -96,19 +101,17 @@ class HomeFragment : BaseFragment() {
 
     private fun requestData(){
         homeVm.getTimeLineData()
+        homeVm.getNearByPartnerList(3)
+        homeVm.getRecommendVideoList()
     }
 
     private fun observe(){
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                observeBluetoothState()
-            }
+        repeatOnStarted {
+            observeBluetoothState()
         }
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                observeTimeLineState()
-            }
+        repeatOnStarted {
+            observeHomeState()
         }
     }
 
@@ -133,32 +136,48 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private suspend fun observeTimeLineState(){
-        homeVm.timeLineState.collect { state ->
+    private suspend fun observeHomeState(){
+        homeVm.state.collect { state ->
             when(state){
-                is TimeLineState.Init -> {
-                    with(bind.sflShimmerLayout){
-                        startShimmer()
-                        visible()
-                    }
+                is HomeFragmentState.Init -> Unit
+                is HomeFragmentState.TimeLine -> {
+                    handleTimeLine(state.timeLine)
                 }
-                is TimeLineState.SuccessLoad -> {
-                    Log.d("매거진 조회 성공", "${state.timeLine}")
-                    with(bind.sflShimmerLayout){
-                        stopShimmer()
-                        gone()
-                    }
-                    val adapter = bind.rvTimelineView.adapter as TimeLineAdapter
-                    adapter.changeDataSet(state.timeLine as ArrayList<TimeLineItem>)
+                is HomeFragmentState.PartnerHospital -> {
+                    handlePartnerHospital(state.hospitals)
                 }
-                is TimeLineState.Error -> {
+                is HomeFragmentState.RecommendVideo -> {
+                    handleRecommendVideo(state.youtubeList)
+                }
+                is HomeFragmentState.Error -> {
                     Log.e("HomeFragment", state.message)
                 }
-                is TimeLineState.ShowToast -> {
+                is HomeFragmentState.ShowToast -> {
                     requireContext().showToast(state.message)
                 }
             }
         }
+    }
+
+    private fun handleTimeLine(timelineItem: List<TimeLineItem>){
+        bind.sflShimmerLayout.stop()
+
+        val adapter = bind.rvTimelineView.adapter as TimeLineAdapter
+        adapter.changeDataSet(timelineItem as ArrayList<TimeLineItem>)
+    }
+
+    private fun handlePartnerHospital(hospitals: List<SimpleHospital>){
+        bind.sflPartnerShimmer.stop()
+
+        val adapter = bind.rvFamousHospital.adapter as PartnerListAdapter
+        adapter.updateDataSet(hospitals = hospitals as ArrayList<SimpleHospital>)
+    }
+
+    private fun handleRecommendVideo(youtubeList: ArrayList<YoutubeVideo>){
+        bind.sflRecommendVideo.stop()
+
+        val adapter = bind.rvRecommendVideo.adapter as YoutubeListAdapter
+        adapter.updateDataSet(youtubeList = youtubeList)
     }
 
     /**
@@ -172,7 +191,34 @@ class HomeFragment : BaseFragment() {
             )
 
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = LinearLayoutManager(requireActivity())
+        }
+    }
+
+    private fun initPartnerListView(){
+        bind.rvFamousHospital.apply {
+            adapter = PartnerListAdapter(
+                arrayListOf()
+            )
+
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireActivity())
+        }
+    }
+
+    private fun initYoutubeListView(){
+        bind.rvRecommendVideo.apply {
+            adapter = YoutubeListAdapter(
+                requireActivity(),
+                arrayListOf()
+            )
+
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(
+                requireActivity(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
         }
     }
 

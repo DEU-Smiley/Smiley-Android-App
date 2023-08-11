@@ -1,4 +1,4 @@
-package com.example.smiley.main.home.adapter
+package com.example.smiley.main.home.adapter.timeline
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

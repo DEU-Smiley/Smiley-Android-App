@@ -10,5 +10,5 @@ fun ShimmerFrameLayout.start(){
 
 fun ShimmerFrameLayout.stop(){
     this.stopShimmer()
-    this.gone()
+    this.invisible()
 }

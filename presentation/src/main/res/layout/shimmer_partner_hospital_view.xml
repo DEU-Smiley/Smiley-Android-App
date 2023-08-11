@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true">
@@ -12,7 +14,7 @@
         android:background="#ECEDEF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/view_rank_oval"
@@ -33,7 +35,7 @@
         android:layout_height="wrap_content"
 
         android:fontFamily="@font/pretendard_bold"
-        android:text="1"
+        android:text=""
         android:textColor="@color/gray1_42"
         android:textSize="@dimen/R400_17_auto"
 
@@ -51,7 +53,7 @@
 
         android:fontFamily="@font/pretendard_bold"
         android:includeFontPadding="false"
-        android:text="레아산부인과의원"
+        android:text="병원 정보 로드 중..."
         android:textColor="@color/gray1_42"
         android:textSize="@dimen/B700_16_auto"
 
@@ -96,7 +98,7 @@
 
         android:fontFamily="@font/pretendard_medium"
         android:includeFontPadding="false"
-        android:text="서울시 강남구 강남대로 | 치과"
+        android:text="병원 정보 로드 중..."
         android:textColor="@color/gray3_82"
         android:textSize="@dimen/M500_14_h20"
 

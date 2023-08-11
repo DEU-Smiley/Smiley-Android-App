@@ -6,6 +6,7 @@ import com.example.domain.common.base.ResponseState
 import com.example.domain.user.usecase.GetUserInfoUseCase
 import com.example.domain.user.usecase.UserLoginUseCase
 import com.example.smiley.App
+import com.example.smiley.common.base.BaseStateFlowViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,27 +20,17 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
     private val getUserInfoUserCase: GetUserInfoUseCase,
     private val userLoginUseCase: UserLoginUseCase
-): ViewModel() {
-    private val _state = MutableStateFlow<SplashActivityState>(SplashActivityState.Init)
-    val state: StateFlow<SplashActivityState> get() = _state
+): BaseStateFlowViewModel<SplashActivityState>() {
 
-    private fun setFirstAccess(){
-        _state.value = SplashActivityState.FirstAccess
-    }
-
-    private fun setSuccessLoadUserId(){
-        _state.value = SplashActivityState.SuccessLoadUserId
-    }
-
-    private fun setError(message: String){
-        _state.value = SplashActivityState.Error(message)
+    override fun initialState(): SplashActivityState {
+        return SplashActivityState.Init
     }
 
     fun getUserInfo(){
         viewModelScope.launch(Dispatchers.IO) {
             getUserInfoUserCase().collect {userId ->
                 if(userId == null) {
-                    setFirstAccess()
+                    setState(SplashActivityState.FirstAccess)
                 } else {
                     requestLogin(userId)
                 }
@@ -53,10 +44,11 @@ class SplashViewModel @Inject constructor(
                 when(state){
                     is ResponseState.Success -> {
                         App.user = state.data
-                        setSuccessLoadUserId()
+                        setState(SplashActivityState.SuccessLoadUserId)
                     }
                     is ResponseState.Error -> {
-                        setError(state.error.message)
+                        if(state.error.code == "NEW_USER") setState(SplashActivityState.RequiredLogin)
+                        else setState(SplashActivityState.Error(state.error.message))
                     }
                 }
             }
@@ -68,5 +60,6 @@ sealed class SplashActivityState {
     object Init : SplashActivityState()
     object FirstAccess : SplashActivityState()
     object SuccessLoadUserId : SplashActivityState()
+    object RequiredLogin : SplashActivityState()
     data class Error(val message: String): SplashActivityState()
 }

@@ -1,40 +1,33 @@
 package com.example.smiley.main.home.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.common.base.ResponseState
+import com.example.domain.hospital.model.SimpleHospital
+import com.example.domain.hospital.usecase.GetNearByHospitalUseCase
+import com.example.domain.hospital.usecase.GetNearByPartnerHospitalUseCase
 import com.example.domain.magazine.usecase.GetRecentMagazineUseCase
-import com.example.smiley.main.home.adapter.TimeLineItem
-import com.example.smiley.main.home.adapter.TimeLineObject
-import com.example.smiley.main.home.adapter.ViewType
+import com.example.domain.youtube.model.YoutubeVideo
+import com.example.domain.youtube.usecase.GetRecommendVideoUseCase
+import com.example.smiley.common.base.BaseViewModel
+import com.example.smiley.main.home.adapter.timeline.TimeLineItem
+import com.example.smiley.main.home.adapter.timeline.TimeLineObject
+import com.example.smiley.main.home.adapter.timeline.ViewType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getRecentMagazineUseCase: GetRecentMagazineUseCase
-): ViewModel() {
-    private val _timeLineState = MutableStateFlow<TimeLineState>(TimeLineState.Init)
-    val timeLineState: StateFlow<TimeLineState> = _timeLineState
-
-    private fun setSuccess(timeLines: List<TimeLineItem>){
-        _timeLineState.value = TimeLineState.SuccessLoad(timeLines)
-    }
-
-    private fun setError(message: String){
-        _timeLineState.value = TimeLineState.Error(message)
-    }
-
-    private fun showToast(message: String){
-        _timeLineState.value = TimeLineState.ShowToast(message)
-    }
+    private val getRecentMagazineUseCase: GetRecentMagazineUseCase,
+    private val getNearByPartnerHospitalUseCase: GetNearByPartnerHospitalUseCase,
+    private val getRecommendVideoUseCase: GetRecommendVideoUseCase
+): BaseViewModel<HomeFragmentState>() {
 
     fun getTimeLineData(){
         viewModelScope.launch(Dispatchers.IO){
@@ -44,7 +37,7 @@ class HomeViewModel @Inject constructor(
                     Log.d("매거진 조회 요청", "요청 보냄")
                 }
                 .catch {
-                    showToast(message = it.message.toString())
+                    setState(HomeFragmentState.ShowToast(message = it.message.toString()))
                     Log.e("타임라인 조회 에러", it.message.toString())
                 }
                 .collect { state ->
@@ -64,10 +57,51 @@ class HomeViewModel @Inject constructor(
                                 }
                             }
 
-                            setSuccess(timeLineItems)
+                            setState(HomeFragmentState.TimeLine(timeLineItems))
                         }
                         is ResponseState.Error -> {
-                            setError(state.error.message)
+                            setState(HomeFragmentState.Error(state.error.message))
+                        }
+                    }
+                }
+        }
+    }
+
+    fun getNearByPartnerList(cnt: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            getNearByPartnerHospitalUseCase(cnt)
+                .onStart {  }
+                .catch {
+                    setState(HomeFragmentState.ShowToast(message = it.message.toString()))
+                    Log.e("파트너 병원 조회 에러", it.message.toString())
+                }
+                .collect { state ->
+                    when(state){
+                        is ResponseState.Success -> {
+                            setState(HomeFragmentState.PartnerHospital(state.data.simpleHospitals))
+                        }
+                        is ResponseState.Error -> {
+                            setState(HomeFragmentState.Error(state.error.message))
+                        }
+                    }
+                }
+        }
+    }
+
+    fun getRecommendVideoList(){
+        viewModelScope.launch(Dispatchers.IO){
+            getRecommendVideoUseCase()
+                .catch {
+                    setState(HomeFragmentState.ShowToast(message = it.message.toString()))
+                    Log.d("추천 영상 조회 에러", it.message.toString())
+                }
+                .collect { state ->
+                    when(state){
+                        is ResponseState.Success -> {
+                            setState(HomeFragmentState.RecommendVideo(state.data.youtubeList))
+                        }
+                        is ResponseState.Error -> {
+                            setState(HomeFragmentState.Error(state.error.message))
                         }
                     }
                 }
@@ -75,9 +109,11 @@ class HomeViewModel @Inject constructor(
     }
 }
 
-sealed class TimeLineState {
-    object Init: TimeLineState()
-    data class SuccessLoad(val timeLine: List<TimeLineItem>): TimeLineState()
-    data class Error(val message: String): TimeLineState()
-    data class ShowToast(val message: String): TimeLineState()
+sealed class HomeFragmentState {
+    object Init: HomeFragmentState()
+    data class TimeLine(val timeLine: List<TimeLineItem>): HomeFragmentState()
+    data class PartnerHospital(val hospitals: List<SimpleHospital>): HomeFragmentState()
+    data class RecommendVideo(val youtubeList: ArrayList<YoutubeVideo>): HomeFragmentState()
+    data class Error(val message: String): HomeFragmentState()
+    data class ShowToast(val message: String): HomeFragmentState()
 }

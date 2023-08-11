@@ -1,4 +1,4 @@
-package com.example.smiley.main.home.adapter
+package com.example.smiley.main.home.adapter.timeline
 
 data class TimeLineItem(
     val viewType: String,
