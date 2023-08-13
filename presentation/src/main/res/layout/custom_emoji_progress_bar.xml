@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_emoji_indicator"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/emoji_smile_face"
+
+
+            app:layout_constraintBottom_toTopOf="@id/pb_progress_bar"
+            app:layout_constraintEnd_toEndOf="@id/pb_progress_bar"
+            app:layout_constraintStart_toStartOf="@id/pb_progress_bar" />
+
+        <ProgressBar
+            android:id="@+id/pb_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="40dp"
+            android:layout_height="100dp"
+            android:maxHeight="100dp"
+            android:max="100"
+            android:progress="100"
+            android:progressDrawable="@drawable/progress_bar_radius_5dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
