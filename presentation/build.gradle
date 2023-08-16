@@ -66,4 +66,7 @@ dependencies {
 
     /* Glide */
     implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    /* Calendar View */
+    implementation 'com.kizitonwose.calendar:view:2.3.0'
 }

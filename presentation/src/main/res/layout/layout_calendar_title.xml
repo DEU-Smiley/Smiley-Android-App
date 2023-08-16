@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="10dp"
+    android:background="@color/white"
+    android:weightSum="7"
+    android:orientation="horizontal">
+
+    <!-- 하나하나가 요일을 나타내는 텍스트 뷰이다. -->
+    <TextView
+        android:id="@+id/tv_sunday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+
+        android:text="일"
+        android:textSize="@dimen/M500_14_h20"
+        android:textColor="@color/black1_20"
+        android:fontFamily="@font/pretendard_medium"/>
+
+    <TextView
+        android:id="@+id/tv_monday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+
+        android:text="월"
+        android:textSize="@dimen/M500_14_h20"
+        android:textColor="@color/black1_20"
+        android:fontFamily="@font/pretendard_medium"/>
+
+    <TextView
+        android:id="@+id/tv_tuesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+
+        android:text="화"
+        android:textSize="@dimen/M500_14_h20"
+        android:textColor="@color/black1_20"
+        android:fontFamily="@font/pretendard_medium"/>
+
+    <TextView
+        android:id="@+id/tv_wednesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+
+        android:text="수"
+        android:textSize="@dimen/M500_14_h20"
+        android:textColor="@color/black1_20"
+        android:fontFamily="@font/pretendard_medium"/>
+
+    <TextView
+        android:id="@+id/tv_thursday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+
+        android:text="목"
+        android:textSize="@dimen/M500_14_h20"
+        android:textColor="@color/black1_20"
+        android:fontFamily="@font/pretendard_medium"/>
+
+    <TextView
+        android:id="@+id/tv_friday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+
+        android:text="금"
+        android:textSize="@dimen/M500_14_h20"
+        android:textColor="@color/black1_20"
+        android:fontFamily="@font/pretendard_medium"/>
+
+    <TextView
+        android:id="@+id/tv_saturday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+
+        android:text="토"
+        android:textSize="@dimen/M500_14_h20"
+        android:textColor="@color/black1_20"
+        android:fontFamily="@font/pretendard_medium"/>
+
+</LinearLayout>
