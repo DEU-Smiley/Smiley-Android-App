@@ -34,11 +34,20 @@
     <string name="no_reserv_data_msg">스마일리에서 접수한 이력이 없거나,\n진료자 정보가 정확하지 않을 수 있어요</string>
     <string name="on_boarding_start">시작하기</string>
 
+    <!-- 날짜 -->
+    <string name="date_year_month_kor">%d년 %d월</string>
 
     <!-- 레이아웃 Title -->
     <string name="title_input_phone_number">전화번호\n입력해 주세요.</string>
     <string name="title_input_email">이메일을\n입력해 주세요.</string>
     <string name="title_input_brith_date">"생년월일을\n입력해 주세요."</string>
+    <string name="title_stats_evaluation">교정 잘하고 있을까?</string>
+    <string name="title_mission_complete_ratio">미션 달성도</string>
+
+    <!-- 레이아웃 Content -->
+    <string name="content_mission_tips">Tip. 일일 미션은 교정에 도움이 되는 요소들로 구성했어요 :) 일일 미션을 잘 지킬 수 있도록 노력한다면 분명 좋은 결과가 있을거에요😊\n\n미션을 꾸준히 완수하면 보상이 주어지니 열심히 지켜주세요 !</string>
+    <string name="content_evaluation_tips">Tip. 오래 착용하는 것만큼 일정하게 착용하는 것도 중요합니다. 매일 같은 시간 대에 착용할 수 있도록 신경써보세요 :) \n\n교정은 무엇보다 본인의 노력이 가장 중요하다는 것을 잊지마세요</string>
+    <string name="content_stats_recommend_evaluation">하루 12시간 이상 착용이 권장됩니다 :)</string>
 
     <!-- 버튼 텍스트 -->
     <string name="btn_ok">확인</string>
@@ -100,6 +109,8 @@
     <string name="common_camera">카메라</string>
     <string name="common_storage">저장 공간</string>
     <string name="common_see">보기</string>
+    <string name="common_me">나</string>
+    <string name="common_avg">평균</string>
 
     <!-- 기타 -->
     <string name="slogan_part_1_right_now">바로 지금,</string>

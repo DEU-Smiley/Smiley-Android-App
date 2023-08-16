@@ -6,6 +6,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.Period
 import java.time.format.DateTimeFormatter
+import java.time.temporal.TemporalAdjusters
 import java.util.*
 
 /**
@@ -62,4 +63,21 @@ fun Calendar.getTodayOfWeek(): Int {
  */
 fun LocalDateTime.getDateDifference(target: LocalDateTime): Int {
     return Period.between(target.toLocalDate(), this.toLocalDate()).days
+}
+
+/**
+ * 특정 달에 몇 개의 주가 포함되어 있는지 반환하는 메소드
+ *
+ * @param year Int
+ * @param month Int
+ * @return Int
+ */
+fun getNumberOfWeeks(year: Int, month: Int): Int {
+    val firstDayOfMonth = LocalDate.of(year, month, 1)
+    val lastDayOfMonth = firstDayOfMonth.with(TemporalAdjusters.lastDayOfMonth())
+
+    val firstDayWeekValue = firstDayOfMonth.dayOfWeek.value
+    val totalDays = lastDayOfMonth.dayOfMonth
+
+    return ((firstDayWeekValue - 1 + totalDays) + 6) / 7
 }

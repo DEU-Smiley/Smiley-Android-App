@@ -2,10 +2,16 @@ package com.example.smiley.main.stats
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.view.children
+import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,14 +19,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.common.base.NetworkError
 import com.example.domain.stats.model.Exp
 import com.example.domain.stats.model.Stats
 import com.example.smiley.R
+import com.example.smiley.common.extension.getNumberOfWeeks
 import com.example.smiley.common.extension.showConfirmDialog
+import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentStatsBinding
-import com.example.smiley.main.stats.adapter.CalendarAdapter
+import com.example.smiley.databinding.LayoutStatsExpBinding
+import com.example.smiley.databinding.LayoutStatsMissionBinding
 import com.example.smiley.main.stats.adapter.ExpGridAdapter
 import com.example.smiley.main.stats.adapter.ExpListAdapter
 import com.example.smiley.main.stats.viewmodel.StatsFragmentState
@@ -28,15 +36,26 @@ import com.example.smiley.main.stats.viewmodel.StatsViewModel
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.kizitonwose.calendar.core.CalendarDay
+import com.kizitonwose.calendar.core.DayPosition
+import com.kizitonwose.calendar.core.Week
+import com.kizitonwose.calendar.core.WeekDay
+import com.kizitonwose.calendar.core.WeekDayPosition
+import com.kizitonwose.calendar.core.atStartOfMonth
+import com.kizitonwose.calendar.core.daysOfWeek
+import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
+import com.kizitonwose.calendar.view.MonthDayBinder
+import com.kizitonwose.calendar.view.ViewContainer
+import com.kizitonwose.calendar.view.WeekDayBinder
+import com.kizitonwose.calendar.view.WeekScrollListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
-import java.time.format.DateTimeFormatter
-import java.time.temporal.TemporalAdjusters
-import kotlin.math.abs
+import java.time.format.TextStyle
+import java.util.Locale
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,19 +68,13 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class StatsFragment : Fragment() {
-
-    /* 캘린더 관련 변수 (리팩토링 필요) */
-    class CalendarDate(var day: String, var date: LocalDate)
-
-    val itemList = arrayListOf<CalendarDate>()
-    private val calendarAdapter by lazy {
-        CalendarAdapter(itemList)
-    }
-    var selectorPosition:Int = itemList.size - 1
+class StatsFragment : BaseFragment() {
 
     private var _bind: FragmentStatsBinding? = null
     private val bind:FragmentStatsBinding get() = _bind!!
+    private val missionBind: LayoutStatsMissionBinding by lazy { LayoutStatsMissionBinding.bind(bind.root) }
+    private val expBind: LayoutStatsExpBinding by lazy { LayoutStatsExpBinding.bind(bind.root) }
+
     private val statsVm: StatsViewModel by viewModels()
     private val pieChartColors by lazy {
         arrayListOf(
@@ -72,6 +85,10 @@ class StatsFragment : Fragment() {
             resources.getColor(R.color.purple2_BE),
         )
     }
+
+    private var selectedDate:LocalDate? = LocalDate.now()
+    private var prevContainer: WeekDayViewContainer? = null
+    private val today = LocalDate.now()
 
     private var param1: String? = null
     private var param2: String? = null
@@ -92,11 +109,10 @@ class StatsFragment : Fragment() {
         _bind = DataBindingUtil.inflate(inflater, R.layout.fragment_stats, container, false)
 
         observe()
-        statsVm.requestTodayStats()
-        initSeekBar()
+        statsVm.requestStatToDate(today)
 
+        initSeekBar()
         initCalendarView()
-        calendarEventAdder()
 
         return bind.root
     }
@@ -122,7 +138,7 @@ class StatsFragment : Fragment() {
     }
 
     private fun handleSuccess(stats:Stats){
-        with(bind){
+        with(expBind){
             tvTotalExp.text = "+${DecimalFormat("#,###").format(stats.totalExp)} exp"
         }
 
@@ -141,7 +157,7 @@ class StatsFragment : Fragment() {
     }
 
     private fun initExpListView(exp:List<Exp>){
-        with(bind.expListView){
+        with(expBind.expListView){
             adapter = ExpListAdapter(exp)
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
@@ -149,7 +165,7 @@ class StatsFragment : Fragment() {
     }
 
     private fun initMission(stats: Stats){
-        with(bind){
+        with(missionBind){
             tvDailyTime.text = "${stats.wearTime / 60}H ${stats.wearTime % 60}m"
             dailyTimeSeekbar.setProgress(
                 stats.wearTime,
@@ -184,7 +200,7 @@ class StatsFragment : Fragment() {
 
         val pieData = PieData(dataSet)
 
-        with(bind.expPieChart){
+        with(expBind.expPieChart){
             data = pieData
             description.isEnabled = false
             legend.isEnabled = false
@@ -201,117 +217,182 @@ class StatsFragment : Fragment() {
             pieChartColors
         )
 
-        bind.expGridView.adapter = adapter
+        expBind.expGridView.adapter = adapter
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initSeekBar(){
-        with(bind){
+        with(missionBind){
             targetTimeSeekbar.setOnTouchListener { _, _ -> true }
             dailyTimeSeekbar.setOnTouchListener { _, _ -> true }
             magazineCountSeekbar.setOnTouchListener { _, _ -> true }
         }
     }
 
-
-    /**
-     * WeekCalendarView 초기화 메소드
-     */
     private fun initCalendarView(){
-        val layoutManager = LinearLayoutManager(requireContext())
-        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        val currentMonth = YearMonth.now()
+        val startMonth = currentMonth.minusMonths(240)
+        val endMonth = currentMonth.plusMonths(240)
+        val firstDayOfWeek = firstDayOfWeekFromLocale()
 
-        bind.calendarView.layoutManager = layoutManager
-
-        // 현재 달의 마지막 날짜
-        val lastDayOfMonth = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth())
-        lastDayOfMonth.format(DateTimeFormatter.ofPattern("dd"))
-
-        val today = LocalDate.now()
-
-        /* NEED FIX 교정 시작일 부터 현재까지로 바꿔야함 */
-        for (i in 1..today.monthValue) { // 1월부터 12월 까지
-            for (j in 1..YearMonth.of(today.year, i).lengthOfMonth()) { // 해당 년도, 해당 월의 마지막 달까지 반복
-                val localDate = LocalDate.of(today.year, i, j)
-                val dayOfWeek: DayOfWeek = localDate.dayOfWeek // MONDAY, TUESDAY 같은 요일의 이름을 가져옴
-
-                itemList.add(
-                    CalendarDate(
-                        dayOfWeek.toString().substring(0, 1), // 요일
-                        localDate // 날짜 YYYY-MM-DD
-                    )
-                )
-            }
-        }
-
-        // CalendarView Item 클릭 이벤트 리스너 등록
-        calendarAdapter.onItemClickListener = object : CalendarAdapter.OnItemClickListener{
-            override fun onClick(view: View, position: Int) {
-                val item:CalendarDate = itemList[position]
-
-                bind.selector.x = view.x + (view.paddingLeft / 2)
-
-                // selectorPosition은 완전히 보이는 아이템의 Position으로부터 셀렉터가 얼만큼 떨어져있는지를 저장해둠
-                selectorPosition = position - (bind.calendarView.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
-
-                bind.missionToday.text = "${item.date.year}-${item.date.monthValue}-${item.date.dayOfMonth}"
-
-                statsVm.requestTodayStats()
-            }
-        }
-
-        bind.calendarView.adapter = calendarAdapter
-        bind.calendarView.scrollToPosition(itemList.size - 1)
+        initCalendarTitle()
+        initWeekCalendar(startMonth, endMonth, currentMonth, daysOfWeek(firstDayOfWeek))
+        initMonthCalendar(startMonth,endMonth, currentMonth, daysOfWeek(firstDayOfWeek))
     }
 
+    private fun initCalendarTitle(){
+        bind.includeCalendarTitleLayout.root.children
+            .map { it as TextView }
+            .forEachIndexed { idx, textView ->
+                val dayOfWeek = daysOfWeek()[idx]
+                val title = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
+                textView.text = title
+            }
+    }
 
-    /**
-     * 캘린더 리사이클러뷰 이벤트 등록 메소드
-     * */
-    private fun calendarEventAdder(){
-        bind.calendarView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-            @SuppressLint("SetTextI18n")
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if(newState == RecyclerView.SCROLL_STATE_IDLE){
-                    bind.calendarView.post{ autoScroll() }
-
-                    // 완전히 보이는 아이템의 Position + SelectorPosition
-                    val item = itemList[
-                            (bind.calendarView.layoutManager as LinearLayoutManager)
-                                .findFirstCompletelyVisibleItemPosition() + selectorPosition
-                    ]
-                    bind.missionToday.text = "${item.date.year}-${item.date.monthValue}-${item.date.dayOfMonth}"
-                    statsVm.requestTodayStats()
+    private fun initWeekCalendar(startMonth: YearMonth, endMonth: YearMonth, currentMonth: YearMonth, daysOfWeek: List<DayOfWeek>){
+        with(bind.clWeekCalendar){
+            dayBinder = object : WeekDayBinder<WeekDayViewContainer> {
+                override fun create(view: View): WeekDayViewContainer = WeekDayViewContainer(view)
+                override fun bind(container: WeekDayViewContainer, data: WeekDay) {
+                    container.day = data
+                    bindDate(
+                        date = data.date,
+                        container = container,
+                        isSelectable = data.position == WeekDayPosition.RangeDate
+                    )
                 }
             }
-        })
+
+            weekScrollListener = mWeekScrollListener
+            setup(
+                startMonth.atStartOfMonth(),
+                endMonth.atEndOfMonth(),
+                daysOfWeek.first()
+            )
+            scrollToWeek(currentMonth.atDay(today.dayOfMonth))
+        }
     }
 
-    private fun autoScroll() {
-        lateinit var date: LinearLayout
-        val calendar = bind.calendarView
+    private fun initMonthCalendar(startMonth: YearMonth, endMonth: YearMonth, currentMonth: YearMonth, daysOfWeek: List<DayOfWeek>){
+        with(bind.cvMonthCalendar){
+            dayBinder = object : MonthDayBinder<DayViewContainer> {
+                // 새 컨테이너가 필요할 때만 호출
+                override fun create(view: View): DayViewContainer = DayViewContainer(view)
+                override fun bind(container: DayViewContainer, day: CalendarDay) {
+                    container.apply {
+                        this.day = day
+                        this.textView.text = "${day.date.dayOfMonth}"
+                        this.textView.alpha = if (this.day.position == DayPosition.MonthDate) 1.0f else 0.6f
+                        setEnabled(day.position == DayPosition.MonthDate)
+                    }
 
-        val xy = IntArray(2)
-        var gap: Int
-        var position: Int
-        var minimumGap = -1
+                    // 해당 달에 포함된 주 수에 따라 날짜 셀 height 조절
+                    val weeksInMonth = getNumberOfWeeks(day.date.year, day.date.monthValue)
+                    val cellHeight = bind.cvMonthCalendar.height / weeksInMonth
+                    val dayLayout = container.view.findViewById<ConstraintLayout>(R.id.cl_day_cell_layout)
+                    dayLayout.updateLayoutParams {
+                        LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            cellHeight
+                        )
+                    }
+                }
+            }
 
-        for (i in 0 until calendar.childCount) {
-            date = calendar.getChildAt(i) as LinearLayout // 리사이클러뷰 안의 날짜를 하나씩 가져옴
+            setup(startMonth, endMonth, daysOfWeek.first())
+            scrollToMonth(currentMonth)
+        }
+    }
 
-            date.getLocationInWindow(xy) // 해당 날짜의 절대 좌표 값
+    private fun bindDate(date: LocalDate, container: WeekDayViewContainer, isSelectable: Boolean){
+        with(container) {
+            val dayName = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
 
-            position = xy[0] + (date.width) / 4  // (프레임의 넓이 + 날짜 뷰의 넓이) / 2 -> 중간으로 설정 됨 + x 좌표
-            gap = position - calendar.width
+            tvDay.text = "${date.dayOfMonth}"
+            tvDayOfWeek.text = dayName
 
-            // 가장 가까운 그래프까지의 거리 차이를 저장
-            if (minimumGap == -1 || abs(gap) < abs(minimumGap)) {
-                minimumGap = gap
+            when {
+                !isSelectable -> setEnabled(false)
+                date == selectedDate -> {
+                    prevContainer?.setEnabled(false)
+                    prevContainer = this
+                    setEnabled(true)
+                }
+                date == today -> {
+                    prevContainer = this
+                    setEnabled(true)
+                }
+                else -> setEnabled(false)
+            }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun dateClicked(date: LocalDate) {
+        statsVm.requestStatToDate(date)
+        bind.tvYearMonth.text = String.format(
+            resources.getString(R.string.date_year_month_kor),
+            date.year,
+            date.monthValue
+        )
+
+        selectedDate = date
+
+        bind.cvMonthCalendar.notifyDateChanged(date)
+        bind.clWeekCalendar.notifyDateChanged(date)
+    }
+
+    private val mWeekScrollListener = object : WeekScrollListener {
+        override fun invoke(week: Week) {
+            val firstDay = week.days[0].date
+
+            bind.tvYearMonth.text = String.format(
+                resources.getString(R.string.date_year_month_kor),
+                firstDay.year,
+                firstDay.monthValue
+            )
+        }
+    }
+
+    inner class WeekDayViewContainer(view: View): ViewContainer(view){
+        lateinit var day: WeekDay
+        val tvDayOfWeek: TextView = view.findViewById(R.id.tv_day_of_week)
+        val tvDay: TextView = view.findViewById(R.id.tv_day)
+
+        init {
+            view.setOnClickListener {
+                if(day.position == WeekDayPosition.RangeDate){
+                    dateClicked(day.date)
+                }
             }
         }
 
-        calendar.smoothScrollBy(minimumGap, 0) // minimumGap 만큼 이동
+        fun setEnabled(isEnabled: Boolean){
+            if(isEnabled){
+                this.tvDayOfWeek.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black1_20))
+                this.tvDay.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black1_20))
+            } else {
+                this.tvDayOfWeek.setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray5_CB))
+                this.tvDay.setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray5_CB))
+            }
+        }
+    }
+
+    inner class DayViewContainer(view: View): ViewContainer(view){
+        lateinit var day: CalendarDay
+        val textView: TextView = view.findViewById(R.id.tv_day)
+
+        init {
+            view.setOnClickListener {
+                Log.d("StatsFragment", "$day")
+            }
+        }
+
+        fun setEnabled(isEnabled: Boolean){
+            if(isEnabled) textView.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black1_20))
+            else textView.setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray5_CB))
+        }
     }
 
     companion object {

@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,7 +40,7 @@ class StatsViewModel @Inject constructor(
         _state.value = StatsFragmentState.ShowToast(message)
     }
 
-    fun requestTodayStats(){
+    fun requestStatToDate(date: LocalDate){
         viewModelScope.launch(Dispatchers.IO) {
             getTodayStatsUseCase()
                 .onStart {
