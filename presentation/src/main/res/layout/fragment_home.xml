@@ -455,6 +455,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/tv_find_near_by_hosptial"/>
 
                 <ImageView
+                    android:id="@+id/iv_find_hospital_banner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"

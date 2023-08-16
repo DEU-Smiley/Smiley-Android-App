@@ -357,8 +357,7 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
 
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HospitalMapFragment().apply {
+        fun newInstance() = HospitalMapFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
