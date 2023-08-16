@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_rounded_corner_radius_15"
+    android:backgroundTint="@color/white"
+    android:padding="30dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/title_stats_evaluation"
+        android:textColor="@color/black1_20"
+        android:textSize="@dimen/H2_SB600_22_h30"
+        android:fontFamily="@font/pretendard_bold"
+        android:includeFontPadding="false"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+
+        android:fontFamily="@font/pretendard_medium"
+        android:lineSpacingExtra="6sp"
+        android:text="@string/content_stats_recommend_evaluation"
+        android:textAlignment="center"
+        android:textColor="@color/gray2_5E"
+        android:textSize="@dimen/M500_16_h22"
+
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <com.example.smiley.common.customview.CustomEmojiProgressBar
+        android:id="@+id/custom_emoji_progress_bar"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="50dp"
+        app:max="100"
+        app:progress="20"
+
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/pb_average_progress_bar"
+        app:layout_constraintTop_toBottomOf="@id/tv_sub_title"/>
+
+    <TextView
+        android:id="@+id/tv_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+
+        android:text="@string/common_me"
+        android:textSize="@dimen/M500_16_h22"
+        android:textColor="@color/gray1_42"
+        android:fontFamily="@font/pretendard_medium"
+        android:includeFontPadding="false"
+
+        app:layout_constraintStart_toStartOf="@id/custom_emoji_progress_bar"
+        app:layout_constraintEnd_toEndOf="@id/custom_emoji_progress_bar"
+        app:layout_constraintTop_toBottomOf="@id/custom_emoji_progress_bar"/>
+
+    <TextView
+        android:id="@+id/tv_my_wearing_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:text="14시간 30분"
+        android:textSize="@dimen/H6_SB600_16_h22"
+        android:textColor="@color/primary_normal"
+        android:fontFamily="@font/pretendard_semibold"
+        android:includeFontPadding="false"
+
+        app:layout_constraintStart_toStartOf="@id/custom_emoji_progress_bar"
+        app:layout_constraintEnd_toEndOf="@id/custom_emoji_progress_bar"
+        app:layout_constraintTop_toBottomOf="@id/tv_me"/>
+
+    <ProgressBar
+        android:id="@+id/pb_average_progress_bar"
+        android:layout_width="40dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="40dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/progress_bar_radius_5dp"
+        android:progressTint="@color/gray7_F2"
+        android:progress="100"
+        android:max="100"
+
+        app:layout_constraintStart_toEndOf="@id/custom_emoji_progress_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/custom_emoji_progress_bar"/>
+
+    <TextView
+        android:id="@+id/tv_avg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+
+        android:text="@string/common_avg"
+        android:textSize="@dimen/M500_16_h22"
+        android:textColor="@color/gray4_AC"
+        android:fontFamily="@font/pretendard_medium"
+        android:includeFontPadding="false"
+
+        app:layout_constraintStart_toStartOf="@id/pb_average_progress_bar"
+        app:layout_constraintEnd_toEndOf="@id/pb_average_progress_bar"
+        app:layout_constraintTop_toBottomOf="@id/pb_average_progress_bar"/>
+
+    <TextView
+        android:id="@+id/tv_avg_wearing_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:text="14시간 30분"
+        android:textSize="@dimen/H6_SB600_16_h22"
+        android:textColor="@color/gray4_AC"
+        android:fontFamily="@font/pretendard_semibold"
+        android:includeFontPadding="false"
+
+        app:layout_constraintStart_toStartOf="@id/pb_average_progress_bar"
+        app:layout_constraintEnd_toEndOf="@id/pb_average_progress_bar"
+        app:layout_constraintTop_toBottomOf="@id/tv_avg"/>
+
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/gray6_F5"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_wearing_time"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/content_evaluation_tips"
+        android:textSize="@dimen/M500_14_h20"
+        android:textColor="@color/gray3_82"
+        android:fontFamily="@font/pretendard_medium"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="3sp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_divider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -68,19 +68,13 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class StatsFragment : Fragment() {
-
-    /* 캘린더 관련 변수 (리팩토링 필요) */
-    class CalendarDate(var day: String, var date: LocalDate)
-
-    val itemList = arrayListOf<CalendarDate>()
-    private val calendarAdapter by lazy {
-        CalendarAdapter(itemList)
-    }
-    var selectorPosition:Int = itemList.size - 1
+class StatsFragment : BaseFragment() {
 
     private var _bind: FragmentStatsBinding? = null
     private val bind:FragmentStatsBinding get() = _bind!!
+    private val missionBind: LayoutStatsMissionBinding by lazy { LayoutStatsMissionBinding.bind(bind.root) }
+    private val expBind: LayoutStatsExpBinding by lazy { LayoutStatsExpBinding.bind(bind.root) }
+
     private val statsVm: StatsViewModel by viewModels()
     private val pieChartColors by lazy {
         arrayListOf(
@@ -144,7 +138,7 @@ class StatsFragment : Fragment() {
     }
 
     private fun handleSuccess(stats:Stats){
-        with(bind){
+        with(expBind){
             tvTotalExp.text = "+${DecimalFormat("#,###").format(stats.totalExp)} exp"
         }
 
@@ -163,7 +157,7 @@ class StatsFragment : Fragment() {
     }
 
     private fun initExpListView(exp:List<Exp>){
-        with(bind.expListView){
+        with(expBind.expListView){
             adapter = ExpListAdapter(exp)
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
@@ -171,7 +165,7 @@ class StatsFragment : Fragment() {
     }
 
     private fun initMission(stats: Stats){
-        with(bind){
+        with(missionBind){
             tvDailyTime.text = "${stats.wearTime / 60}H ${stats.wearTime % 60}m"
             dailyTimeSeekbar.setProgress(
                 stats.wearTime,
@@ -206,7 +200,7 @@ class StatsFragment : Fragment() {
 
         val pieData = PieData(dataSet)
 
-        with(bind.expPieChart){
+        with(expBind.expPieChart){
             data = pieData
             description.isEnabled = false
             legend.isEnabled = false

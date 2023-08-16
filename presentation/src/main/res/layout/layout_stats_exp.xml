@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/exp_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/bg_rounded_corner_radius_15"
+    android:backgroundTint="@color/white"
+    android:paddingHorizontal="30dp"
+
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/include_stats_mission">
+
+    <TextView
+        android:id="@+id/tv_exp_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+
+        android:fontFamily="@font/pretendard_bold"
+        android:includeFontPadding="false"
+        android:text="총 획득 경험치"
+        android:textColor="@color/black1_20"
+        android:textSize="@dimen/H2_SB600_22_h30"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_total_exp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/pretendard_medium"
+        android:text="2022-08-08"
+        android:textColor="@color/gray3_82"
+        android:textSize="@dimen/M500_14_h20"
+
+        app:layout_constraintBottom_toBottomOf="@+id/tv_exp_title"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_exp_title" />
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/exp_pie_chart"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/exp_grid_view" />
+
+    <GridView
+        android:id="@+id/exp_grid_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
+
+        android:numColumns="2"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="20dp"
+
+        app:layout_constraintBottom_toTopOf="@id/exp_list_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/exp_pie_chart"
+        app:layout_constraintTop_toBottomOf="@id/tv_exp_title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exp_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/exp_pie_chart" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

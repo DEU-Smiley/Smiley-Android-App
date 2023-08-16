@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mission_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/bg_rounded_corner_radius_15"
+    android:backgroundTint="@color/white"
+
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/include_stats_compare">
+
+    <TextView
+        android:id="@+id/tv_mission_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+
+        android:fontFamily="@font/pretendard_bold"
+        android:includeFontPadding="false"
+        android:text="@string/title_mission_complete_ratio"
+        android:textColor="@color/black1_20"
+        android:textSize="@dimen/H2_SB600_22_h30"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+
+        android:fontFamily="@font/pretendard_medium"
+        android:text="일일 미션을 잘 지켰는지를 보여줍니다 :)"
+        android:textColor="@color/gray2_5E"
+        android:textSize="@dimen/M500_16_h22"
+
+        app:layout_constraintStart_toStartOf="@id/tv_mission_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_mission_title" />
+
+
+    <!-- Layout 일일 착용시간 레이아웃 -->
+    <TextView
+        android:id="@+id/tv_daily_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="50dp"
+
+        android:fontFamily="@font/pretendard_medium"
+        android:text="일일 착용시간"
+        android:textColor="@color/primary_light"
+        android:textSize="@dimen/B4_M500_13_h18"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_sub_title" />
+
+    <View
+        android:id="@+id/daily_divide_line"
+        android:layout_width="1dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="10dp"
+        android:background="@color/gray5_CB"
+
+        app:layout_constraintBottom_toBottomOf="@id/tv_daily_time_text"
+        app:layout_constraintLeft_toRightOf="@id/tv_daily_time_text"
+        app:layout_constraintTop_toTopOf="@id/tv_daily_time_text" />
+
+    <TextView
+        android:id="@+id/tv_daily_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+
+        android:fontFamily="@font/pretendard_regular"
+        android:text="13H 30m"
+        android:textColor="@color/black1_20"
+        android:textSize="@dimen/B7_R400_12_h18"
+
+        app:layout_constraintBottom_toBottomOf="@id/tv_daily_time_text"
+        app:layout_constraintLeft_toRightOf="@id/daily_divide_line"
+        app:layout_constraintTop_toTopOf="@id/tv_daily_time_text" />
+
+    <TextView
+        android:id="@+id/tv_min_daily_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+
+        android:fontFamily="@font/pretendard_regular"
+        android:text="최소 04H 30m"
+        android:textColor="@color/gray3_82"
+        android:textSize="@dimen/B7_R400_12_h18"
+
+        app:layout_constraintBottom_toBottomOf="@id/tv_daily_time_text"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_daily_time_text" />
+
+    <SeekBar
+        android:id="@+id/daily_time_seekbar"
+        style="@style/custom_seekbar_primary_normal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+
+        android:max="1440"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:progress="0"
+        android:progressTint="@color/primary_light"
+        android:splitTrack="false"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_daily_time_text" />
+    <!-- Layout End 일일 착용시간 레이아웃 -->
+
+    <!-- Layout 목표시간 달성 레이아웃 -->
+    <TextView
+        android:id="@+id/tv_target_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="30dp"
+
+        android:fontFamily="@font/pretendard_medium"
+        android:text="목표시간 달성"
+        android:textColor="@color/primary_dark"
+        android:textSize="@dimen/B4_M500_13_h18"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/daily_time_seekbar" />
+
+    <View
+        android:id="@+id/target_divide_line"
+        android:layout_width="1dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="10dp"
+        android:background="@color/gray5_CB"
+
+        app:layout_constraintBottom_toBottomOf="@id/tv_target_time_text"
+        app:layout_constraintLeft_toRightOf="@id/tv_target_time_text"
+        app:layout_constraintTop_toTopOf="@id/tv_target_time_text" />
+
+    <TextView
+        android:id="@+id/tv_target_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+
+        android:fontFamily="@font/pretendard_regular"
+        android:text="13H 30m"
+        android:textColor="@color/black1_20"
+        android:textSize="@dimen/B7_R400_12_h18"
+
+        app:layout_constraintBottom_toBottomOf="@id/tv_target_time_text"
+        app:layout_constraintLeft_toRightOf="@id/daily_divide_line"
+        app:layout_constraintTop_toTopOf="@id/tv_target_time_text" />
+
+    <TextView
+        android:id="@+id/tv_min_target_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+
+        android:fontFamily="@font/pretendard_regular"
+        android:text="권장 16H 30m"
+        android:textColor="@color/gray3_82"
+        android:textSize="@dimen/B7_R400_12_h18"
+
+        app:layout_constraintBottom_toBottomOf="@id/tv_target_time_text"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_target_time_text" />
+
+    <SeekBar
+        android:id="@+id/target_time_seekbar"
+        style="@style/custom_seekbar_primary_dark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+
+        android:max="960"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:progress="960"
+        android:progressTint="@color/primary_dark"
+        android:splitTrack="false"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_target_time_text" />
+    <!-- Layout End 목표시간 달성 레이아웃 -->
+
+
+    <!-- Layout 매거진 읽기 레이아웃 -->
+    <TextView
+        android:id="@+id/tv_magazine_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="30dp"
+
+        android:fontFamily="@font/pretendard_medium"
+        android:text="매거진 읽기"
+        android:textColor="@color/purple1_5C"
+        android:textSize="@dimen/B4_M500_13_h18"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/target_time_seekbar" />
+
+    <View
+        android:id="@+id/magazine_divide_line"
+        android:layout_width="1dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="10dp"
+        android:background="@color/gray5_CB"
+
+        app:layout_constraintBottom_toBottomOf="@id/tv_magazine_text"
+        app:layout_constraintLeft_toRightOf="@id/tv_magazine_text"
+        app:layout_constraintTop_toTopOf="@id/tv_magazine_text" />
+
+    <TextView
+        android:id="@+id/tv_magazine_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+
+        android:fontFamily="@font/pretendard_regular"
+        android:text="1개 읽음"
+        android:textColor="@color/black1_20"
+        android:textSize="@dimen/B7_R400_12_h18"
+
+        app:layout_constraintBottom_toBottomOf="@id/tv_magazine_text"
+        app:layout_constraintLeft_toRightOf="@id/magazine_divide_line"
+        app:layout_constraintTop_toTopOf="@id/tv_magazine_text" />
+
+    <TextView
+        android:id="@+id/tv_min_magazine_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+
+        android:fontFamily="@font/pretendard_regular"
+        android:text="권장 3개"
+        android:textColor="@color/gray3_82"
+        android:textSize="@dimen/B7_R400_12_h18"
+
+        app:layout_constraintBottom_toBottomOf="@id/tv_magazine_text"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_magazine_text" />
+
+    <SeekBar
+        android:id="@+id/magazine_count_seekbar"
+        style="@style/custom_seekbar_purple"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp"
+        android:max="3"
+        android:paddingStart="40dp"
+
+        android:paddingEnd="40dp"
+        android:progress="0"
+        android:progressTint="@color/purple1_5C"
+        android:splitTrack="false"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_magazine_text" />
+    <!-- Layout End 매거진 읽기 레이아웃 -->
+
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/gray6_F5"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/magazine_count_seekbar" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+
+        android:fontFamily="@font/pretendard_medium"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="3sp"
+        android:text="@string/content_mission_tips"
+        android:textColor="@color/gray3_82"
+        android:textSize="@dimen/M500_14_h20"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_divider" />
+</androidx.constraintlayout.widget.ConstraintLayout>
