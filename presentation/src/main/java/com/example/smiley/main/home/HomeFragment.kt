@@ -31,6 +31,7 @@ import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.utils.NotifyManager
 import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentHomeBinding
+import com.example.smiley.hospital.HospitalMapFragment
 import com.example.smiley.magazine.MagazineDetailFragment
 import com.example.smiley.magazine.MagazineListFragment
 import com.example.smiley.main.home.adapter.partner.PartnerListAdapter
@@ -79,6 +80,7 @@ class HomeFragment : BaseFragment() {
 
         observe()
         initView()
+        addClickEvent()
         initTimeLineView()
         initPartnerListView()
         initYoutubeListView()
@@ -96,6 +98,20 @@ class HomeFragment : BaseFragment() {
 
         App.user?.let {
             bind.tvUserName.text = "${it.name}님"
+        }
+    }
+
+    private fun addClickEvent(){
+        bind.tvFamousDentalHospital.setOnClickListener {
+            this.addFragmentToFullScreen(HospitalMapFragment.newInstance())
+        }
+
+        bind.tvFindNearByHosptial.setOnClickListener {
+            this.addFragmentToFullScreen(HospitalMapFragment.newInstance())
+        }
+
+        bind.ivFindHospitalBanner.setOnClickListener {
+            this.addFragmentToFullScreen(HospitalMapFragment.newInstance())
         }
     }
 
