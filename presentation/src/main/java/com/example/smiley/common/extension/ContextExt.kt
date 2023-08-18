@@ -3,7 +3,6 @@ package com.example.smiley.common.extension
 import android.content.Context
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.smiley.R
 import kotlin.math.roundToInt
 
 fun Context.showToast(message: String){

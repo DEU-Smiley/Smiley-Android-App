@@ -5,14 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.common.base.ResponseState
 import com.example.domain.hospital.model.Hospital
-import com.example.domain.hospital.model.SimpleHospitalList
 import com.example.domain.hospital.usecase.GetHospitalByHpidUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.exp
 
 @HiltViewModel
 class HospitalDialogViewModel @Inject constructor(

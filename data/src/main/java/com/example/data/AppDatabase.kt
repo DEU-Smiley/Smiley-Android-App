@@ -1,22 +1,13 @@
 package com.example.data
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import androidx.core.content.ContextCompat
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.data.magazine.local.dao.MagazineDao
 import com.example.data.magazine.local.entity.MagazineEntity
 import com.example.data.medicine.local.dao.MedicineDao
 import com.example.data.medicine.local.entity.MedicineEntity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.ByteArrayOutputStream
 
 /**
  * entities에 포함된 클래스들이 각각의 테이블이 됨

@@ -15,15 +15,13 @@ import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.common.base.NetworkError
 import com.example.domain.stats.model.Exp
 import com.example.domain.stats.model.Stats
 import com.example.smiley.R
 import com.example.smiley.common.extension.getNumberOfWeeks
+import com.example.smiley.common.extension.repeatOnStarted
 import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentStatsBinding
@@ -49,7 +47,6 @@ import com.kizitonwose.calendar.view.ViewContainer
 import com.kizitonwose.calendar.view.WeekDayBinder
 import com.kizitonwose.calendar.view.WeekScrollListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -118,20 +115,18 @@ class StatsFragment : BaseFragment() {
     }
 
     private fun observe(){
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                statsVm.state.collect{ state ->
-                    when(state){
-                        is StatsFragmentState.Init -> Unit
-                        is StatsFragmentState.IsLoading -> Unit
-                        is StatsFragmentState.SuccessStats -> {
-                            handleSuccess(state.stats)
-                        }
-                        is StatsFragmentState.Error -> {
-                            handleError(state.error)
-                        }
-                        is StatsFragmentState.ShowToast -> Unit
+        repeatOnStarted {
+            statsVm.state.collect{ state ->
+                when(state){
+                    is StatsFragmentState.Init -> Unit
+                    is StatsFragmentState.IsLoading -> Unit
+                    is StatsFragmentState.SuccessStats -> {
+                        handleSuccess(state.stats)
                     }
+                    is StatsFragmentState.Error -> {
+                        handleError(state.error)
+                    }
+                    is StatsFragmentState.ShowToast -> Unit
                 }
             }
         }

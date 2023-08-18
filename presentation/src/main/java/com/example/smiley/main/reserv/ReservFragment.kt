@@ -41,7 +41,6 @@ class ReservFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        // Inflate the layout for this fragment
         _bind = DataBindingUtil.inflate(inflater, R.layout.fragment_reserv, container, false)
 
         initViewPager()

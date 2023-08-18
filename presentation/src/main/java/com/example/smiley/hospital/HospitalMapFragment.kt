@@ -11,13 +11,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.example.domain.hospital.model.Hospital
 import com.example.domain.hospital.model.HospitalPositList
 import com.example.smiley.R
 import com.example.smiley.common.extension.goneWithAnimation
+import com.example.smiley.common.extension.repeatOnStarted
 import com.example.smiley.common.extension.resetStatusBarAndNavigationBar
 import com.example.smiley.common.extension.setCustomColorStatusBarAndNavigationBar
 import com.example.smiley.common.extension.showConfirmDialog
@@ -37,7 +35,6 @@ import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -120,25 +117,23 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun observe() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                hospitalVm.state.collect{ state ->
-                    when(state){
-                        is HospitalMapFragmentState.Init -> Unit
-                        is HospitalMapFragmentState.IsLoading -> handleLoading(true)
-                        is HospitalMapFragmentState.SuccessLoadHospitalList -> {
-                            handleSuccess(state.hospitalPositList)
-                        }
-                        is HospitalMapFragmentState.SuccessLoadHospital -> {
-                            handleLoading(false)
-                            handleLoadHospital(state.hospital)
-                        }
-                        is HospitalMapFragmentState.Error -> {
-                            handleError(state.error)
-                        }
-                        is HospitalMapFragmentState.ShowToast -> {
-                            handleShowToast(state.message)
-                        }
+        repeatOnStarted {
+            hospitalVm.state.collect{ state ->
+                when(state){
+                    is HospitalMapFragmentState.Init -> Unit
+                    is HospitalMapFragmentState.IsLoading -> handleLoading(true)
+                    is HospitalMapFragmentState.SuccessLoadHospitalList -> {
+                        handleSuccess(state.hospitalPositList)
+                    }
+                    is HospitalMapFragmentState.SuccessLoadHospital -> {
+                        handleLoading(false)
+                        handleLoadHospital(state.hospital)
+                    }
+                    is HospitalMapFragmentState.Error -> {
+                        handleError(state.error)
+                    }
+                    is HospitalMapFragmentState.ShowToast -> {
+                        handleShowToast(state.message)
                     }
                 }
             }

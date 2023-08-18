@@ -5,14 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.hospital.model.SimpleHospital
-import com.example.domain.hospital.model.SimpleHospitalList
 import com.example.domain.magazine.model.Magazine
 import com.example.domain.youtube.model.YoutubeVideo
 import com.example.smiley.App
@@ -20,13 +18,9 @@ import com.example.smiley.R
 import com.example.smiley.bluetooth.viewmodel.BluetoothDataState
 import com.example.smiley.bluetooth.viewmodel.BluetoothViewModel
 import com.example.smiley.common.extension.addFragmentToFullScreen
-import com.example.smiley.common.extension.applyTouchEffectToAllViews
-import com.example.smiley.common.extension.gone
 import com.example.smiley.common.extension.repeatOnStarted
 import com.example.smiley.common.extension.showToast
-import com.example.smiley.common.extension.start
 import com.example.smiley.common.extension.stop
-import com.example.smiley.common.extension.visible
 import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.utils.NotifyManager
 import com.example.smiley.common.view.BaseFragment
@@ -38,8 +32,8 @@ import com.example.smiley.main.home.adapter.partner.PartnerListAdapter
 import com.example.smiley.main.home.adapter.timeline.TimeLineAdapter
 import com.example.smiley.main.home.adapter.timeline.TimeLineItem
 import com.example.smiley.main.home.adapter.youtube.YoutubeListAdapter
-import com.example.smiley.main.home.viewmodel.HomeViewModel
 import com.example.smiley.main.home.viewmodel.HomeFragmentState
+import com.example.smiley.main.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

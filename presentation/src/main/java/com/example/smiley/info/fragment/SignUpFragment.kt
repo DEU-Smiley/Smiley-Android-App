@@ -15,9 +15,6 @@ import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.common.dialog.LoadingDialog
@@ -27,7 +24,6 @@ import com.example.smiley.info.viewmodel.InfoViewModel
 import com.example.smiley.info.viewmodel.SignUpFragmentState
 import com.example.smiley.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_USER_ID = ""
@@ -71,16 +67,14 @@ class SignUpFragment : Fragment() {
     }
 
     private fun observe(){
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                infoVm.state.collect { state ->
-                    when(state){
-                        is SignUpFragmentState.Init -> Unit
-                        is SignUpFragmentState.IsLoading -> handleLoading(true)
-                        is SignUpFragmentState.ShowToast -> handleShowToast(state.message)
-                        is SignUpFragmentState.Error -> handleError(state.message)
-                        is SignUpFragmentState.SuccessSignUp -> handleSuccess()
-                    }
+        repeatOnStarted {
+            infoVm.state.collect { state ->
+                when(state){
+                    is SignUpFragmentState.Init -> Unit
+                    is SignUpFragmentState.IsLoading -> handleLoading(true)
+                    is SignUpFragmentState.ShowToast -> handleShowToast(state.message)
+                    is SignUpFragmentState.Error -> handleError(state.message)
+                    is SignUpFragmentState.SuccessSignUp -> handleSuccess()
                 }
             }
         }

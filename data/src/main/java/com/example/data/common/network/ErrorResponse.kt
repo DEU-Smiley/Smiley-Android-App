@@ -2,7 +2,6 @@ package com.example.data.common.network
 
 import com.example.data.common.mapper.DataMapper
 import com.example.domain.common.base.NetworkError
-import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

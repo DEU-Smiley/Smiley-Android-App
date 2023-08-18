@@ -10,15 +10,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.example.domain.medicine.model.MedicineList
 import com.example.smiley.R
 import com.example.smiley.common.dialog.LoadingDialog
-import com.example.smiley.common.extension.*
+import com.example.smiley.common.extension.dismiss
+import com.example.smiley.common.extension.gone
+import com.example.smiley.common.extension.repeatOnStarted
+import com.example.smiley.common.extension.showConfirmDialog
+import com.example.smiley.common.extension.visible
 import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.utils.DataSendable
 import com.example.smiley.databinding.FragmentMedicineSearchBinding
@@ -27,7 +28,6 @@ import com.example.smiley.medicine.adapter.MedicineSelectAdapter
 import com.example.smiley.medicine.viewmodel.MedicineFragmentState
 import com.example.smiley.medicine.viewmodel.MedicineViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -90,18 +90,16 @@ class MedicineSearchFragment : Fragment() {
     }
 
     private fun observe() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                medicineVm.state.collect{ state ->
-                    when(state){
-                        is MedicineFragmentState.Init -> Unit
-                        is MedicineFragmentState.IsLoading -> handleLoading(true)
-                        is MedicineFragmentState.SuccessMedicine ->{
-                            handleSuccessMedicine(state.medicineList)
-                        }
-                        is MedicineFragmentState.ErrorMedicine -> handleErrorMedicine(state.error)
-                        is MedicineFragmentState.ShowDialog -> handleShowDialog(state.message)
+        repeatOnStarted {
+            medicineVm.state.collect{ state ->
+                when(state){
+                    is MedicineFragmentState.Init -> Unit
+                    is MedicineFragmentState.IsLoading -> handleLoading(true)
+                    is MedicineFragmentState.SuccessMedicine ->{
+                        handleSuccessMedicine(state.medicineList)
                     }
+                    is MedicineFragmentState.ErrorMedicine -> handleErrorMedicine(state.error)
+                    is MedicineFragmentState.ShowDialog -> handleShowDialog(state.message)
                 }
             }
         }

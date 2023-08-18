@@ -1,7 +1,6 @@
 package com.example.data.hilt.module
 
 import android.content.Context
-import androidx.room.Room
 import com.example.data.AppDatabase
 import dagger.Module
 import dagger.Provides

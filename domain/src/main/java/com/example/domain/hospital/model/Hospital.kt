@@ -1,9 +1,7 @@
 package com.example.domain.hospital.model
 
-import android.util.Log
 import com.example.domain.common.base.BaseModel
 import kotlinx.parcelize.Parcelize
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.Calendar
 

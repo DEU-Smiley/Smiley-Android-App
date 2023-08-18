@@ -4,10 +4,8 @@ import com.example.data.reserv.remote.api.ReservApi
 import com.example.data.reserv.remote.response.ReservListResponse
 import com.example.data.reserv.remote.response.ReservListResponse.Companion.toDomainModel
 import com.example.data.reserv.remote.response.ReservResponse
-import com.example.domain.common.base.NetworkError
 import com.example.domain.common.base.ResponseState
 import com.example.domain.reservation.ReservRepository
-import com.example.domain.reservation.model.Reserv
 import com.example.domain.reservation.model.ReservList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

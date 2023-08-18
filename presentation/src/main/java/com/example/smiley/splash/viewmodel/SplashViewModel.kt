@@ -1,6 +1,5 @@
 package com.example.smiley.splash.viewmodel
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.common.base.ResponseState
 import com.example.domain.user.usecase.GetUserInfoUseCase
@@ -9,10 +8,6 @@ import com.example.smiley.App
 import com.example.smiley.common.base.BaseStateFlowViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

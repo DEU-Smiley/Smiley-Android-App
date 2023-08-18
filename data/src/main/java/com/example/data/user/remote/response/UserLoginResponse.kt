@@ -5,7 +5,6 @@ import com.example.data.common.network.BaseResponse
 import com.example.domain.user.model.User
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import java.time.LocalDate
 import java.util.*
 
 @Parcelize

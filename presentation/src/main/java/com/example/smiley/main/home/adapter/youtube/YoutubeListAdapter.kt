@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.domain.youtube.model.YoutubeVideo
 import com.example.smiley.R
 import com.example.smiley.common.listener.TransparentTouchListener
