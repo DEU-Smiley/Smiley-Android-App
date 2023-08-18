@@ -90,18 +90,16 @@ class MedicineSearchFragment : Fragment() {
     }
 
     private fun observe() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                medicineVm.state.collect{ state ->
-                    when(state){
-                        is MedicineFragmentState.Init -> Unit
-                        is MedicineFragmentState.IsLoading -> handleLoading(true)
-                        is MedicineFragmentState.SuccessMedicine ->{
-                            handleSuccessMedicine(state.medicineList)
-                        }
-                        is MedicineFragmentState.ErrorMedicine -> handleErrorMedicine(state.error)
-                        is MedicineFragmentState.ShowDialog -> handleShowDialog(state.message)
+        repeatOnStarted {
+            medicineVm.state.collect{ state ->
+                when(state){
+                    is MedicineFragmentState.Init -> Unit
+                    is MedicineFragmentState.IsLoading -> handleLoading(true)
+                    is MedicineFragmentState.SuccessMedicine ->{
+                        handleSuccessMedicine(state.medicineList)
                     }
+                    is MedicineFragmentState.ErrorMedicine -> handleErrorMedicine(state.error)
+                    is MedicineFragmentState.ShowDialog -> handleShowDialog(state.message)
                 }
             }
         }

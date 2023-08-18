@@ -24,6 +24,7 @@ import com.example.domain.stats.model.Exp
 import com.example.domain.stats.model.Stats
 import com.example.smiley.R
 import com.example.smiley.common.extension.getNumberOfWeeks
+import com.example.smiley.common.extension.repeatOnStarted
 import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentStatsBinding
@@ -118,20 +119,18 @@ class StatsFragment : BaseFragment() {
     }
 
     private fun observe(){
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                statsVm.state.collect{ state ->
-                    when(state){
-                        is StatsFragmentState.Init -> Unit
-                        is StatsFragmentState.IsLoading -> Unit
-                        is StatsFragmentState.SuccessStats -> {
-                            handleSuccess(state.stats)
-                        }
-                        is StatsFragmentState.Error -> {
-                            handleError(state.error)
-                        }
-                        is StatsFragmentState.ShowToast -> Unit
+        repeatOnStarted {
+            statsVm.state.collect{ state ->
+                when(state){
+                    is StatsFragmentState.Init -> Unit
+                    is StatsFragmentState.IsLoading -> Unit
+                    is StatsFragmentState.SuccessStats -> {
+                        handleSuccess(state.stats)
                     }
+                    is StatsFragmentState.Error -> {
+                        handleError(state.error)
+                    }
+                    is StatsFragmentState.ShowToast -> Unit
                 }
             }
         }

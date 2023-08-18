@@ -10,6 +10,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.smiley.R
 import com.example.smiley.common.extension.changeActivity
+import com.example.smiley.common.extension.repeatOnStarted
 import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.login.LoginActivity
 import com.example.smiley.main.MainActivity
@@ -18,6 +19,7 @@ import com.example.smiley.splash.viewmodel.SplashActivityState
 import com.example.smiley.splash.viewmodel.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -41,9 +43,8 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun observe(){
-        splashVm.state
-            .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-            .onEach { state ->
+        repeatOnStarted {
+            splashVm.state.collect { state ->
                 when (state) {
                     is SplashActivityState.Init -> Unit
                     is SplashActivityState.FirstAccess,
@@ -58,6 +59,6 @@ class SplashActivity : AppCompatActivity() {
                     }
                 }
             }
-            .launchIn(lifecycleScope)
+        }
     }
 }

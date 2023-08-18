@@ -31,6 +31,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.Tab
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.util.*
@@ -96,20 +97,19 @@ class HospitalInfoBottomSheetFragment() : BottomSheetDialogFragment() {
     }
 
     private fun observe(){
-        hospitalVm.state.flowWithLifecycle(
-            viewLifecycleOwner.lifecycle,
-            Lifecycle.State.STARTED
-        ).onEach { state ->
-            when(state){
-                is HospitalDialogState.Init -> Unit
-                is HospitalDialogState.IsLoading -> handleLoading(true)
-                is HospitalDialogState.SuccessLoadHospital ->{
-                    handleSucccessHospital(state.hospital)
+        repeatOnStarted {
+            hospitalVm.state.collect { state ->
+                when(state){
+                    is HospitalDialogState.Init -> Unit
+                    is HospitalDialogState.IsLoading -> handleLoading(true)
+                    is HospitalDialogState.SuccessLoadHospital ->{
+                        handleSucccessHospital(state.hospital)
+                    }
+                    is HospitalDialogState.ErrorLoadHospital -> handleErrorHospital(state.error)
+                    is HospitalDialogState.ShowToast -> handleShowToast(state.message)
                 }
-                is HospitalDialogState.ErrorLoadHospital -> handleErrorHospital(state.error)
-                is HospitalDialogState.ShowToast -> handleShowToast(state.message)
             }
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+        }
     }
 
     /**

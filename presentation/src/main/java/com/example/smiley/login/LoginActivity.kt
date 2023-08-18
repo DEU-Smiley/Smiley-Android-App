@@ -10,11 +10,9 @@ import android.view.TextureView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.example.smiley.R
 import com.example.smiley.common.extension.changeActivity
+import com.example.smiley.common.extension.repeatOnStarted
 import com.example.smiley.common.extension.setTransparentStatusBarAndNavigationBar
 import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.databinding.ActivityLoginBinding
@@ -23,8 +21,6 @@ import com.example.smiley.login.viewmodel.LoginActivityState
 import com.example.smiley.login.viewmodel.LoginViewModel
 import com.example.smiley.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -58,9 +54,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observeLoginState() {
-        viewModel.state
-            .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-            .onEach { state ->
+        repeatOnStarted {
+            viewModel.state.collect { state ->
                 when (state) {
                     is LoginActivityState.Init -> Unit
                     is LoginActivityState.SuccessLogin -> handleSuccessLogin()
@@ -68,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                     is LoginActivityState.Error -> handleErrorLogin(state.message)
                 }
             }
-            .launchIn(lifecycleScope)
+        }
     }
 
     private fun handleSuccessLogin() {

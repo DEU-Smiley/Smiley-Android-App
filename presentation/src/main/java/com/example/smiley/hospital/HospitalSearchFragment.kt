@@ -22,11 +22,13 @@ import com.example.smiley.common.dialog.LoadingDialog
 import com.example.smiley.common.extension.*
 import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.utils.DataSendable
+import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentHospitalSearchBinding
 import com.example.smiley.hospital.adapter.HospitalFilterAdapter
 import com.example.smiley.hospital.viewmodel.HospitalSearchFragmentState
 import com.example.smiley.hospital.viewmodel.HospitalViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -40,7 +42,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class HospitalSearchFragment : Fragment(), DataSendable{
+class HospitalSearchFragment : BaseFragment(), DataSendable{
     private var param1: String? = null
     private var param2: String? = null
 
@@ -78,20 +80,19 @@ class HospitalSearchFragment : Fragment(), DataSendable{
     }
 
     private fun observe(){
-        hospitalVm.state.flowWithLifecycle(
-            viewLifecycleOwner.lifecycle,
-            Lifecycle.State.STARTED
-        ).onEach { state ->
-            when(state){
-                is HospitalSearchFragmentState.Init -> Unit
-                is HospitalSearchFragmentState.IsLoading -> handleLoading(true)
-                is HospitalSearchFragmentState.SuccessLoadHospital ->{
-                    handleSucccessHospital(state.simpleHospitalList)
+        repeatOnStarted {
+            hospitalVm.state.collect { state ->
+                when(state){
+                    is HospitalSearchFragmentState.Init -> Unit
+                    is HospitalSearchFragmentState.IsLoading -> handleLoading(true)
+                    is HospitalSearchFragmentState.SuccessLoadHospital ->{
+                        handleSucccessHospital(state.simpleHospitalList)
+                    }
+                    is HospitalSearchFragmentState.ErrorLoadHospital -> handleErrorHospital(state.error)
+                    is HospitalSearchFragmentState.ShowToast -> handleShowToast(state.message)
                 }
-                is HospitalSearchFragmentState.ErrorLoadHospital -> handleErrorHospital(state.error)
-                is HospitalSearchFragmentState.ShowToast -> handleShowToast(state.message)
             }
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+        }
     }
 
     /**
