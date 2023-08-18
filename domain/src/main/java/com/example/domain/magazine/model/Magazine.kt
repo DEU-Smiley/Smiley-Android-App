@@ -1,7 +1,7 @@
 package com.example.domain.magazine.model
 
 import com.example.domain.common.base.BaseModel
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class Magazine(
