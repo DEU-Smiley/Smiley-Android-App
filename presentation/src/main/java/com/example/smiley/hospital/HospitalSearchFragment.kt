@@ -12,9 +12,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.hospital.model.SimpleHospitalList
 import com.example.smiley.R
@@ -28,9 +25,6 @@ import com.example.smiley.hospital.adapter.HospitalFilterAdapter
 import com.example.smiley.hospital.viewmodel.HospitalSearchFragmentState
 import com.example.smiley.hospital.viewmodel.HospitalViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"

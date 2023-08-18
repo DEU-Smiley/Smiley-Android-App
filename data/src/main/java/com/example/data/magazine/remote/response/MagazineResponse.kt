@@ -4,7 +4,6 @@ import android.util.Base64
 import com.example.data.common.mapper.DataMapper
 import com.example.data.common.network.BaseResponse
 import com.example.domain.magazine.model.Magazine
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 

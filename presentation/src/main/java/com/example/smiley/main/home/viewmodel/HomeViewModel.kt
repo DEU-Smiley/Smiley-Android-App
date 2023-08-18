@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.domain.common.base.ResponseState
 import com.example.domain.hospital.model.SimpleHospital
-import com.example.domain.hospital.usecase.GetNearByHospitalUseCase
 import com.example.domain.hospital.usecase.GetNearByPartnerHospitalUseCase
 import com.example.domain.magazine.usecase.GetRecentMagazineUseCase
 import com.example.domain.youtube.model.YoutubeVideo
@@ -16,10 +15,8 @@ import com.example.smiley.main.home.adapter.timeline.ViewType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel

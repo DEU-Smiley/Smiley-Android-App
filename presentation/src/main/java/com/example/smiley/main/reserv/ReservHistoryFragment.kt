@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.common.base.NetworkError
-import com.example.domain.reservation.model.Reserv
 import com.example.domain.reservation.model.ReservList
 import com.example.smiley.R
 import com.example.smiley.common.extension.gone
@@ -24,9 +23,7 @@ import com.example.smiley.main.reserv.adapter.ReservHistoryAdapter
 import com.example.smiley.main.reserv.viewmodel.ReservHistoryFragmentState
 import com.example.smiley.main.reserv.viewmodel.ReservHistoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"

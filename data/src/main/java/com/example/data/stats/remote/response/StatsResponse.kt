@@ -6,7 +6,6 @@ import com.example.domain.stats.model.Exp
 import com.example.domain.stats.model.Stats
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kotlin.math.exp
 
 @Parcelize
 class StatsResponse(

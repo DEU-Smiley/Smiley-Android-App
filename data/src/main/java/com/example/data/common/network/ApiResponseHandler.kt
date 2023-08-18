@@ -4,10 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import okhttp3.ResponseBody
-import retrofit2.Converter
 import retrofit2.Response
-import retrofit2.Retrofit
 
 /**
  * SafeApiCall 클래스
