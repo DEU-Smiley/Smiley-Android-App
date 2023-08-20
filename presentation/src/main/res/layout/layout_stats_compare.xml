@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
 
         android:text="@string/title_stats_evaluation"
-        android:textColor="@color/black1_20"
+        android:textColor="@color/gray1_42"
         android:textSize="@dimen/H2_SB600_22_h30"
         android:fontFamily="@font/pretendard_bold"
         android:includeFontPadding="false"
@@ -44,7 +44,8 @@
         android:layout_marginEnd="40dp"
         android:layout_marginTop="50dp"
         app:max="100"
-        app:progress="20"
+        app:progress="10"
+        app:progressTint="@color/primary_dark"
 
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +60,7 @@
 
         android:text="@string/common_me"
         android:textSize="@dimen/M500_16_h22"
-        android:textColor="@color/gray1_42"
+        android:textColor="@color/primary_dark"
         android:fontFamily="@font/pretendard_medium"
         android:includeFontPadding="false"
 
@@ -75,7 +76,7 @@
 
         android:text="14시간 30분"
         android:textSize="@dimen/H6_SB600_16_h22"
-        android:textColor="@color/primary_normal"
+        android:textColor="@color/primary_dark"
         android:fontFamily="@font/pretendard_semibold"
         android:includeFontPadding="false"
 
@@ -147,11 +148,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/content_evaluation_tips"
-        android:textSize="@dimen/M500_14_h20"
+        android:textSize="@dimen/R400_16_auto"
         android:textColor="@color/gray3_82"
-        android:fontFamily="@font/pretendard_medium"
+        android:fontFamily="@font/pretendard_regular"
         android:includeFontPadding="false"
-        android:lineSpacingExtra="3sp"
+        android:lineSpacingExtra="6sp"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -22,7 +22,7 @@
         android:fontFamily="@font/pretendard_bold"
         android:includeFontPadding="false"
         android:text="@string/title_mission_complete_ratio"
-        android:textColor="@color/black1_20"
+        android:textColor="@color/gray1_42"
         android:textSize="@dimen/H2_SB600_22_h30"
 
         app:layout_constraintLeft_toLeftOf="parent"
@@ -292,12 +292,12 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
 
-        android:fontFamily="@font/pretendard_medium"
-        android:includeFontPadding="false"
-        android:lineSpacingExtra="3sp"
         android:text="@string/content_mission_tips"
+        android:textSize="@dimen/R400_16_auto"
         android:textColor="@color/gray3_82"
-        android:textSize="@dimen/M500_14_h20"
+        android:fontFamily="@font/pretendard_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

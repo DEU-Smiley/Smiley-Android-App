@@ -14,15 +14,16 @@
             android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:paddingLeft="@dimen/side_margin"
-            android:paddingRight="@dimen/side_margin"
+            android:visibility="gone"
+            android:paddingHorizontal="@dimen/side_margin"
             android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/tv_title_bar_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_logo_smiley"
+                android:text="@string/common_smiley"
                 android:textSize="@dimen/H3_B700_20_h30"
                 android:textColor="@color/black1_20"
                 android:fontFamily="@font/pretendard_bold"

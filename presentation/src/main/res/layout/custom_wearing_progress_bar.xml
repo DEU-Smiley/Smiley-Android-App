@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/pb_wear_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:layout_marginHorizontal="3dp"
+            android:max="100"
+            android:progress="50"
+            android:progressDrawable="@drawable/bg_progress_bar_half_rounded_6dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/iv_circle_star"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_percent_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="20%"
+            android:textSize="@dimen/M500_12_auto"
+            android:textColor="@color/gray2_5E"
+            android:fontFamily="@font/pretendard_medium"
+
+            app:layout_constraintStart_toStartOf="@id/view_1"
+            app:layout_constraintTop_toBottomOf="@id/iv_circle_star"
+            app:layout_constraintEnd_toEndOf="@id/view_1"/>
+
+        <TextView
+            android:id="@+id/tv_percent_40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="40%"
+            android:textSize="@dimen/M500_12_auto"
+            android:textColor="@color/gray2_5E"
+            android:fontFamily="@font/pretendard_medium"
+
+            app:layout_constraintStart_toStartOf="@id/view_3"
+            app:layout_constraintTop_toBottomOf="@id/iv_circle_star"
+            app:layout_constraintEnd_toEndOf="@id/view_3"/>
+
+        <TextView
+            android:id="@+id/tv_percent_70"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="70%"
+            android:textSize="@dimen/M500_12_auto"
+            android:textColor="@color/gray2_5E"
+            android:fontFamily="@font/pretendard_medium"
+
+            app:layout_constraintStart_toStartOf="@id/view_5"
+            app:layout_constraintTop_toBottomOf="@id/iv_circle_star"
+            app:layout_constraintEnd_toEndOf="@id/view_5"/>
+
+        <TextView
+            android:id="@+id/tv_percent_100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="100%"
+            android:textSize="@dimen/M500_12_auto"
+            android:textColor="@color/gray2_5E"
+            android:fontFamily="@font/pretendard_medium"
+
+            app:layout_constraintTop_toBottomOf="@id/iv_circle_star"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/iv_circle_star"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_circle_star"
+
+
+            app:layout_constraintTop_toTopOf="@id/pb_wear_progress_bar"
+            app:layout_constraintStart_toStartOf="@id/tv_percent_100"
+            app:layout_constraintEnd_toEndOf="@id/tv_percent_100"
+            app:layout_constraintBottom_toBottomOf="@id/pb_wear_progress_bar"/>
+
+        <View
+            android:id="@+id/view_1"
+            android:layout_width="1.5dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+
+            app:layout_constraintTop_toTopOf="@id/pb_wear_progress_bar"
+            app:layout_constraintBottom_toBottomOf="@id/pb_wear_progress_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/view_2"/>
+
+        <View
+            android:id="@+id/view_2"
+            android:layout_width="1.5dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+
+            app:layout_constraintTop_toTopOf="@id/pb_wear_progress_bar"
+            app:layout_constraintBottom_toBottomOf="@id/pb_wear_progress_bar"
+            app:layout_constraintStart_toEndOf="@id/view_1"
+            app:layout_constraintEnd_toStartOf="@id/view_3"/>
+
+        <View
+            android:id="@+id/view_3"
+            android:layout_width="1.5dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+
+            app:layout_constraintTop_toTopOf="@id/pb_wear_progress_bar"
+            app:layout_constraintBottom_toBottomOf="@id/pb_wear_progress_bar"
+            app:layout_constraintStart_toEndOf="@id/view_2"
+            app:layout_constraintEnd_toStartOf="@id/view_4"/>
+
+        <View
+            android:id="@+id/view_4"
+            android:layout_width="1.5dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+
+            app:layout_constraintTop_toTopOf="@id/pb_wear_progress_bar"
+            app:layout_constraintBottom_toBottomOf="@id/pb_wear_progress_bar"
+            app:layout_constraintStart_toEndOf="@id/view_3"
+            app:layout_constraintEnd_toStartOf="@id/view_5"/>
+
+        <View
+            android:id="@+id/view_5"
+            android:layout_width="1.5dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+
+            app:layout_constraintTop_toTopOf="@id/pb_wear_progress_bar"
+            app:layout_constraintBottom_toBottomOf="@id/pb_wear_progress_bar"
+            app:layout_constraintStart_toEndOf="@id/view_4"
+            app:layout_constraintEnd_toStartOf="@id/view_6"/>
+
+        <View
+            android:id="@+id/view_6"
+            android:layout_width="1.5dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+
+            app:layout_constraintTop_toTopOf="@id/pb_wear_progress_bar"
+            app:layout_constraintBottom_toBottomOf="@id/pb_wear_progress_bar"
+            app:layout_constraintStart_toEndOf="@id/view_5"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

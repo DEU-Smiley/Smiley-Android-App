@@ -1,9 +1,12 @@
 package com.example.smiley.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
+import com.example.smiley.common.extension.setCustomColorStatusBarAndNavigationBar
+import com.example.smiley.common.listener.FragmentVisibilityListener
 import com.example.smiley.databinding.ActivityMainBinding
 import com.example.smiley.main.home.HomeFragment
 import com.example.smiley.main.profile.ProfileFragment
@@ -35,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(bind.root)
 
         initBottomNavibar()
+        this.setCustomColorStatusBarAndNavigationBar(R.color.white, R.color.white)
     }
 
     private fun initBottomNavibar() {
@@ -82,6 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Fragment 변경
+    @SuppressLint("CommitTransaction")
     private fun<T: Fragment> addFragment(fragment: T?) {
         // 이전 버전까지 호환 가능하도록 getSupportFragmentManager() 사용
         fragment?.let {
@@ -92,21 +97,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("CommitTransaction")
     private fun<T: Fragment> showFragment(fragment: T?){
         fragment?.let {
             supportFragmentManager
                 .beginTransaction()
                 .show(it)
                 .commit()
+
+            if(it is FragmentVisibilityListener){
+                it.onShowFragment()
+            }
         }
     }
 
+    @SuppressLint("CommitTransaction")
     private fun<T: Fragment> hideFragment(fragment: T?){
         fragment?.let {
             supportFragmentManager
                 .beginTransaction()
                 .hide(it)
                 .commit()
+
+            if(it is FragmentVisibilityListener){
+                it.onHideFragment()
+            }
         }
     }
 }

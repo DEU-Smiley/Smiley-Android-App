@@ -8,69 +8,72 @@
         android:id="@+id/ml_calendar_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/white"
 
-        <TextView
-            android:id="@+id/tv_year_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="@dimen/side_margin"
-            android:text="2023년 8월"
-            android:textSize="@dimen/H5_B700_18_h22"
-            android:textColor="@color/black1_20"
-            android:fontFamily="@font/pretendard_bold"
-            android:includeFontPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/include_calendar_title_layout"
-            />
+        <include
+            android:id="@+id/layout_common_app_bar"
+            layout="@layout/layout_common_app_bar"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <include
             android:id="@+id/include_calendar_title_layout"
             layout="@layout/layout_calendar_title"
-            android:visibility="gone"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:visibility="visible"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_year_month" />
+            app:layout_constraintTop_toBottomOf="@id/layout_common_app_bar" />
+
 
         <com.kizitonwose.calendar.view.WeekCalendarView
             android:id="@+id/cl_week_calendar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:padding="10dp"
+            android:alpha="1.0"
             android:background="@drawable/bg_rounded_bottom_corner_radius_10"
             android:backgroundTint="@color/white"
-            android:alpha="1.0"
+            android:paddingHorizontal="15dp"
+            android:paddingBottom="5dp"
 
             app:cv_dayViewResource="@layout/layout_calendar_day_cell"
             app:layout_constraintBottom_toTopOf="@id/scv_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/include_calendar_title_layout"/>
+            app:layout_constraintTop_toBottomOf="@id/include_calendar_title_layout" />
 
         <com.kizitonwose.calendar.view.CalendarView
             android:id="@+id/cv_month_calendar"
             android:layout_width="0dp"
             android:layout_height="250dp"
             android:layout_marginTop="5dp"
-            android:padding="10dp"
-            android:background="@color/white"
-            android:visibility="gone"
             android:alpha="0.0"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:visibility="gone"
 
-            app:cv_dayViewResource="@layout/layout_calendar_day_cell"
             app:cv_daySize="rectangle"
+            app:cv_dayViewResource="@layout/layout_calendar_day_cell"
 
             app:layout_constraintBottom_toTopOf="@id/scv_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/include_calendar_title_layout" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/gray6_F5"
+
+            app:layout_constraintBottom_toBottomOf="@id/cl_week_calendar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ScrollView
             android:id="@+id/scv_content"
@@ -88,6 +91,7 @@
                 android:id="@+id/parent_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="15dp"
                 android:background="@color/background">
 
                 <include
@@ -97,11 +101,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
 
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/include_stats_compare"
-                    />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <include
                     android:id="@+id/include_stats_compare"
@@ -110,21 +113,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
 
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/include_stats_mission"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/include_stats_evaluation"
-                    app:layout_constraintBottom_toTopOf="@id/include_stats_mission"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/include_stats_evaluation" />
 
                 <!-- Layout 미션 레이아웃 -->
                 <include
                     android:id="@+id/include_stats_mission"
                     layout="@layout/layout_stats_mission"
 
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/include_stats_compare"
                     app:layout_constraintBottom_toTopOf="@id/include_stats_exp"
-                    />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/include_stats_compare" />
 
                 <!-- Layout End 미션 레이아웃 -->
 
@@ -133,11 +135,10 @@
                     android:id="@+id/include_stats_exp"
                     layout="@layout/layout_stats_exp"
 
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/include_stats_compare"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/include_stats_compare" />
                 <!-- Layout End 경험치 레이아웃 -->
 
             </androidx.constraintlayout.widget.ConstraintLayout>

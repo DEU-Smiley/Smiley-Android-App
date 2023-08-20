@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.smiley.R
+import com.example.smiley.common.extension.setBasicMode
+import com.example.smiley.common.listener.FragmentVisibilityListener
 import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentReservBinding
+import com.example.smiley.databinding.LayoutCommonAppBarBinding
 import com.example.smiley.main.reserv.adapter.ReservViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -21,9 +24,10 @@ private const val ARG_PARAM2 = "param2"
  * Use the [ReservFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ReservFragment : BaseFragment() {
+class ReservFragment : BaseFragment(), FragmentVisibilityListener {
     private var _bind: FragmentReservBinding?=null
     private val bind get() = _bind!!
+    private val appBarBinding: LayoutCommonAppBarBinding by lazy { LayoutCommonAppBarBinding.bind(bind.root) }
 
     private var param1: String? = null
     private var param2: String? = null
@@ -47,6 +51,11 @@ class ReservFragment : BaseFragment() {
         initTabLayout()
 
         return bind.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        onShowFragment()
     }
 
     /**
@@ -77,6 +86,10 @@ class ReservFragment : BaseFragment() {
 
         }
 
+    }
+
+    override fun onShowFragment() {
+        appBarBinding.setBasicMode()
     }
 
     companion object {

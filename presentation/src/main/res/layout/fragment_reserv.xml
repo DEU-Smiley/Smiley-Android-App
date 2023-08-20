@@ -8,6 +8,12 @@
         android:layout_height="match_parent"
         tools:context=".main.reserv.ReservFragment">
 
+        <include
+            android:id="@+id/layout_common_app_bar"
+            layout="@layout/layout_common_app_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent "/>
+
         <!-- Layout 탭 레이아웃 -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
@@ -27,14 +33,14 @@
             app:tabMode="fixed"
             app:tabPaddingEnd="10dp"
             app:tabPaddingStart="10dp"
-            app:tabRippleColor="@color/trasparent"
+            app:tabRippleColor="@color/transparent"
             app:tabSelectedTextColor="@color/black1_20"
 
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toBottomOf="@id/layout_common_app_bar"/>
         <!-- Layout End 탭 레이아웃 -->
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
@@ -43,8 +49,7 @@
         app:layout_constraintTop_toBottomOf="@id/tab_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintRight_toRightOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

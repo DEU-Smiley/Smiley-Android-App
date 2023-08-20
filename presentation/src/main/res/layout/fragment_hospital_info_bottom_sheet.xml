@@ -201,7 +201,7 @@
                     app:tabMode="fixed"
                     app:tabGravity="fill"
                     app:tabMaxWidth="0dp"
-                    app:tabRippleColor="@color/trasparent"
+                    app:tabRippleColor="@color/transparent"
                     app:tabSelectedTextColor="@color/black1_20"
                     app:tabPaddingStart="10dp"
                     app:tabPaddingEnd="10dp"

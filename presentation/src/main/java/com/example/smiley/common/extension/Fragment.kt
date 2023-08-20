@@ -30,9 +30,9 @@ fun Fragment.addFragmentToFullScreen(fragment: Fragment){
         .commit()
 }
 
-fun Fragment.setCustomColorStatusBarAndNavigationBar(statusBarColor: Int, navigationBarColor: Int){
+fun Fragment.setCustomColorStatusBarAndNavigationBar(statusBarColor: Int, navigationBarColor: Int, isFullScreen: Boolean){
     (requireActivity() as AppCompatActivity)
-        .setCustomColorStatusBarAndNavigationBar(statusBarColor, navigationBarColor)
+        .setCustomColorStatusBarAndNavigationBar(statusBarColor, navigationBarColor, isFullScreen)
 }
 
 fun Fragment.resetStatusBarAndNavigationBar(){
