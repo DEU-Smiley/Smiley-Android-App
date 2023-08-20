@@ -1,14 +1,18 @@
 package com.example.smiley.common.customview
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.smiley.R
 import com.example.smiley.common.extension.dpToPx
 import com.example.smiley.databinding.CustomEmojiProgressBarBinding
 
+@SuppressLint("CustomViewStyleable")
 class CustomEmojiProgressBar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
@@ -29,14 +33,16 @@ class CustomEmojiProgressBar @JvmOverloads constructor(
     init {
         progressBar.progress = progress
 
-        val attributes = context.obtainStyledAttributes(attrs, R.styleable.CustomEmojiProgressBar)
-        val progressFromXml = attributes.getInt(R.styleable.CustomEmojiProgressBar_progress, 0)
-        val maxFromXml = attributes.getInt(R.styleable.CustomEmojiProgressBar_max, 100)
+        val attributes = context.obtainStyledAttributes(attrs, R.styleable.CustomProgressBar)
+        val progressFromXml = attributes.getInt(R.styleable.CustomProgressBar_progress, 0)
+        val progressTintXml = attributes.getColor(R.styleable.CustomProgressBar_progressTint, ContextCompat.getColor(context, R.color.primary_dark))
+        val maxFromXml = attributes.getInt(R.styleable.CustomProgressBar_max, 100)
 
         post{
             updateProgress(progressFromXml)
         }
         setMax(maxFromXml)
+        updateProgressTint(progressTintXml)
 
         attributes.recycle()
     }
@@ -60,6 +66,9 @@ class CustomEmojiProgressBar @JvmOverloads constructor(
         adjustEmojiPositionByProgress()
     }
 
+    private fun updateProgressTint(color: Int){
+        progressBar.progressTintList = ColorStateList.valueOf(color)
+    }
     private fun setMax(max: Int){
         progressBar.max = max
     }
