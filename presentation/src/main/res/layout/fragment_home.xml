@@ -4,17 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".main.home.HomeFragment">
 
-    <androidx.core.widget.NestedScrollView
+    <com.amar.library.ui.StickyScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        app:stickyHeader="@id/layout_common_app_bar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/gray7_F2">
+            android:background="@color/background">
+
+            <include
+                android:id="@+id/layout_common_app_bar"
+                layout="@layout/layout_common_app_bar"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <!-- Layout 프로필 레이아웃 -->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,8 +30,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:paddingTop="36dp"
+                android:paddingTop="92dp"
                 android:paddingBottom="36dp"
+                android:translationZ="-1dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
@@ -721,5 +730,5 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!-- Layout End 콘텐츠 레이아웃 -->
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+    </com.amar.library.ui.StickyScrollView>
 </layout>

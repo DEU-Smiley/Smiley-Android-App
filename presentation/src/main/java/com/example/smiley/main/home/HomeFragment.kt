@@ -19,12 +19,15 @@ import com.example.smiley.bluetooth.viewmodel.BluetoothDataState
 import com.example.smiley.bluetooth.viewmodel.BluetoothViewModel
 import com.example.smiley.common.extension.addFragmentToFullScreen
 import com.example.smiley.common.extension.repeatOnStarted
+import com.example.smiley.common.extension.setBasicMode
 import com.example.smiley.common.extension.showToast
 import com.example.smiley.common.extension.stop
+import com.example.smiley.common.listener.FragmentVisibilityListener
 import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.utils.NotifyManager
 import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentHomeBinding
+import com.example.smiley.databinding.LayoutCommonAppBarBinding
 import com.example.smiley.hospital.HospitalMapFragment
 import com.example.smiley.magazine.MagazineDetailFragment
 import com.example.smiley.magazine.MagazineListFragment
@@ -36,34 +39,21 @@ import com.example.smiley.main.home.viewmodel.HomeFragmentState
 import com.example.smiley.main.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
  * A simple [Fragment] subclass.
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(), FragmentVisibilityListener {
     private var _bind: FragmentHomeBinding?=null
     private val bind: FragmentHomeBinding get() = _bind!!
+    private val appBarBinding: LayoutCommonAppBarBinding by lazy { LayoutCommonAppBarBinding.bind(bind.clContainer) }
+
     private val bluetoothVm: BluetoothViewModel by viewModels({requireActivity()})
     private val homeVm: HomeViewModel by viewModels()
 
     private var notifyFlag:Boolean = false
-
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,6 +73,10 @@ class HomeFragment : BaseFragment() {
         return bind.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        onShowFragment()
+    }
 
     private fun initView(){
         bind.llMagazineDetailBtn.setOnClickListener {
@@ -232,6 +226,11 @@ class HomeFragment : BaseFragment() {
         }
     }
 
+    override fun onShowFragment() {
+        super.onShowFragment()
+        appBarBinding.setBasicMode()
+    }
+
     private val magazineClickListener = object : OnItemClickListener<Magazine> {
         override fun onItemClicked(view: View, data: Magazine) {
             val magazineFragment = MagazineDetailFragment.newInstance(data.contentUrl)
@@ -250,12 +249,6 @@ class HomeFragment : BaseFragment() {
          * @return A new instance of fragment HomeFragment.
          */
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = HomeFragment()
     }
 }

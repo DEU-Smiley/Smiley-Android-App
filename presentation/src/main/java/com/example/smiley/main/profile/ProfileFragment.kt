@@ -11,8 +11,12 @@ import com.example.smiley.App
 import com.example.smiley.R
 import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
 import com.example.smiley.common.extension.addFragmentToFullScreen
+import com.example.smiley.common.extension.setBasicMode
+import com.example.smiley.common.listener.FragmentVisibilityListener
 import com.example.smiley.common.listener.TransparentTouchListener
+import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentProfileBinding
+import com.example.smiley.databinding.LayoutCommonAppBarBinding
 import com.example.smiley.hospital.HospitalMapFragment
 import com.example.smiley.hospital.HospitalSearchFragment
 import com.example.smiley.magazine.MagazineListFragment
@@ -28,10 +32,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [ProfileFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment(), FragmentVisibilityListener {
 
     private var _bind:FragmentProfileBinding?=null
     private val bind:FragmentProfileBinding get() = _bind!!
+    private val appBarBinding: LayoutCommonAppBarBinding by lazy { LayoutCommonAppBarBinding.bind(bind.clBaseLayout) }
 
     private var param1: String? = null
     private var param2: String? = null
@@ -58,22 +63,9 @@ class ProfileFragment : Fragment() {
         return bind.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        applyTouchEffectToAllViews(view as ViewGroup)
-    }
-
-    private fun applyTouchEffectToAllViews(viewGroup: ViewGroup) {
-        for (i in 0 until viewGroup.childCount) {
-            val child = viewGroup.getChildAt(i)
-            if (child.isClickable) {
-                child.setOnTouchListener(TransparentTouchListener())
-            }
-
-            if (child is ViewGroup) {
-                applyTouchEffectToAllViews(child)
-            }
-        }
+    override fun onStart() {
+        super.onStart()
+        onShowFragment()
     }
 
     private fun initView(){
@@ -108,7 +100,11 @@ class ProfileFragment : Fragment() {
             }
         }
     }
-    
+
+    override fun onShowFragment() {
+        appBarBinding.setBasicMode()
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

@@ -22,9 +22,14 @@ import com.example.domain.stats.model.Stats
 import com.example.smiley.R
 import com.example.smiley.common.extension.getNumberOfWeeks
 import com.example.smiley.common.extension.repeatOnStarted
+import com.example.smiley.common.extension.setCalendarMode
+import com.example.smiley.common.extension.setDateText
+import com.example.smiley.common.extension.setTitle
 import com.example.smiley.common.extension.showConfirmDialog
+import com.example.smiley.common.listener.FragmentVisibilityListener
 import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentStatsBinding
+import com.example.smiley.databinding.LayoutCommonAppBarBinding
 import com.example.smiley.databinding.LayoutStatsExpBinding
 import com.example.smiley.databinding.LayoutStatsMissionBinding
 import com.example.smiley.main.stats.adapter.ExpGridAdapter
@@ -65,10 +70,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class StatsFragment : BaseFragment() {
+class StatsFragment : BaseFragment(), FragmentVisibilityListener {
 
     private var _bind: FragmentStatsBinding? = null
     private val bind:FragmentStatsBinding get() = _bind!!
+    private val appBarBinding: LayoutCommonAppBarBinding by lazy { LayoutCommonAppBarBinding.bind(bind.root) }
     private val missionBind: LayoutStatsMissionBinding by lazy { LayoutStatsMissionBinding.bind(bind.root) }
     private val expBind: LayoutStatsExpBinding by lazy { LayoutStatsExpBinding.bind(bind.root) }
 
@@ -112,6 +118,11 @@ class StatsFragment : BaseFragment() {
         initCalendarView()
 
         return bind.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        onShowFragment()
     }
 
     private fun observe(){
@@ -302,10 +313,7 @@ class StatsFragment : BaseFragment() {
 
     private fun bindDate(date: LocalDate, container: WeekDayViewContainer, isSelectable: Boolean){
         with(container) {
-            val dayName = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
-
             tvDay.text = "${date.dayOfMonth}"
-            tvDayOfWeek.text = dayName
 
             when {
                 !isSelectable -> setEnabled(false)
@@ -326,10 +334,9 @@ class StatsFragment : BaseFragment() {
     @SuppressLint("SetTextI18n")
     private fun dateClicked(date: LocalDate) {
         statsVm.requestStatToDate(date)
-        bind.tvYearMonth.text = String.format(
-            resources.getString(R.string.date_year_month_kor),
-            date.year,
-            date.monthValue
+
+        appBarBinding.setDateText(
+            String.format(resources.getString(R.string.date_year_month_kor), date.year, date.monthValue)
         )
 
         selectedDate = date
@@ -341,18 +348,14 @@ class StatsFragment : BaseFragment() {
     private val mWeekScrollListener = object : WeekScrollListener {
         override fun invoke(week: Week) {
             val firstDay = week.days[0].date
-
-            bind.tvYearMonth.text = String.format(
-                resources.getString(R.string.date_year_month_kor),
-                firstDay.year,
-                firstDay.monthValue
+            appBarBinding.setDateText(
+                String.format(resources.getString(R.string.date_year_month_kor),firstDay.year,firstDay.monthValue)
             )
         }
     }
 
     inner class WeekDayViewContainer(view: View): ViewContainer(view){
         lateinit var day: WeekDay
-        val tvDayOfWeek: TextView = view.findViewById(R.id.tv_day_of_week)
         val tvDay: TextView = view.findViewById(R.id.tv_day)
 
         init {
@@ -365,10 +368,8 @@ class StatsFragment : BaseFragment() {
 
         fun setEnabled(isEnabled: Boolean){
             if(isEnabled){
-                this.tvDayOfWeek.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black1_20))
                 this.tvDay.setTextColor(ContextCompat.getColor(requireActivity(), R.color.black1_20))
             } else {
-                this.tvDayOfWeek.setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray5_CB))
                 this.tvDay.setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray5_CB))
             }
         }
@@ -407,5 +408,12 @@ class StatsFragment : BaseFragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onShowFragment() {
+        appBarBinding.setCalendarMode()
+        appBarBinding.setDateText(
+            String.format(resources.getString(R.string.date_year_month_kor),today.year, today.monthValue)
+        )
     }
 }
