@@ -1,7 +1,6 @@
 package com.example.smiley.hospital
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -267,7 +266,7 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
         super.onResume()
         mapView.onResume()
 
-        this.setCustomColorStatusBarAndNavigationBar(Color.TRANSPARENT, Color.WHITE)
+        this.setCustomColorStatusBarAndNavigationBar(R.color.transparent, R.color.white, true)
     }
 
     override fun onPause() {

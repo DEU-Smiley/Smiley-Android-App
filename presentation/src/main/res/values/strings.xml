@@ -45,9 +45,9 @@
     <string name="title_mission_complete_ratio">미션 달성도</string>
 
     <!-- 레이아웃 Content -->
-    <string name="content_mission_tips">Tip. 일일 미션은 교정에 도움이 되는 요소들로 구성했어요 :) 일일 미션을 잘 지킬 수 있도록 노력한다면 분명 좋은 결과가 있을거에요😊\n\n미션을 꾸준히 완수하면 보상이 주어지니 열심히 지켜주세요 !</string>
-    <string name="content_evaluation_tips">Tip. 오래 착용하는 것만큼 일정하게 착용하는 것도 중요합니다. 매일 같은 시간 대에 착용할 수 있도록 신경써보세요 :) \n\n교정은 무엇보다 본인의 노력이 가장 중요하다는 것을 잊지마세요</string>
-    <string name="content_stats_recommend_evaluation">하루 12시간 이상 착용이 권장됩니다 :)</string>
+    <string name="content_mission_tips">일일 미션은 교정에 도움이 되는 요소들로 구성했어요. 일일 미션을 잘 지킬 수 있도록 노력한다면 분명 좋은 결과가 있을 거예요😊</string>
+    <string name="content_evaluation_tips">오래 착용하는 것만큼 일정하게 착용하는 것도 중요합니다. 매일 같은 시간대에 착용할 수 있도록 신경 써보세요\n\n교정은 무엇보다 본인의 노력이 가장 중요하다는 것을 잊지 마세요</string>
+    <string name="content_stats_recommend_evaluation">하루 12시간 이상 착용이 권장됩니다</string>
 
     <!-- 버튼 텍스트 -->
     <string name="btn_ok">확인</string>
@@ -111,10 +111,10 @@
     <string name="common_see">보기</string>
     <string name="common_me">나</string>
     <string name="common_avg">평균</string>
+    <string name="common_smiley">Smi)ey</string>
 
     <!-- 기타 -->
     <string name="slogan_part_1_right_now">바로 지금,</string>
     <string name="slogan_part_2_need_smile">미소가 필요한 순간</string>
-    <string name="app_logo_smiley">Smi)ey</string>
     <string name="btn_cancle">취소</string>
 </resources>
