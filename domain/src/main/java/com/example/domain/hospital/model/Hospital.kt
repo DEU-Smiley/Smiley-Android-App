@@ -12,6 +12,7 @@ class Hospital (
     val name: String,           /* 기관명 (병원 이름) */
     val address: String,        /* 병원 주소 */
     val detailAddress: String,  /* 병원 상세 주소 (간이 약도) */
+    val hospitalImgUrl: String, /* 병원 이미지 URL */
     val etc: String,            /* 비고 (ex: 주말 점심시간 안내 등) */
     val tel: String,            /* 대표 전화번호 */
     val emergencyTel: String,   /* 응급실 전화번호 */

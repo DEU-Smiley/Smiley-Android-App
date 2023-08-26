@@ -22,7 +22,9 @@ import javax.inject.Singleton
 object NetworkModule {
 
     private const val BASE_URL = "http://113.198.236.222:8080"
-    private const val MOCK_BASE_URL = "https://40f7f957-47a1-488e-ac1e-c8a882e2119d.mock.pstmn.io" //""https://980e509b-75c9-4e14-96a9-2691dedc1237.mock.pstmn.io"
+    private const val MOCK_BASE_URL = "https://21398c26-cbfe-4b79-8276-abe5ff68e880.mock.pstmn.io"
+    // "https://40f7f957-47a1-488e-ac1e-c8a882e2119d.mock.pstmn.io"
+    // "https://980e509b-75c9-4e14-96a9-2691dedc1237.mock.pstmn.io"
 
     @Singleton
     @Provides

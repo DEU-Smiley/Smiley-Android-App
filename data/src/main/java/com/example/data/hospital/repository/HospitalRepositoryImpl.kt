@@ -1,5 +1,7 @@
 package com.example.data.hospital.repository
 
+import android.app.Application
+import androidx.core.content.ContextCompat
 import com.example.data.common.network.ApiResponse
 import com.example.data.common.network.ApiResponseHandler
 import com.example.data.common.network.ErrorResponse.Companion.toDomainModel
@@ -18,6 +20,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onEach
+import org.jetbrains.annotations.TestOnly
 import javax.inject.Inject
 
 
@@ -25,6 +28,10 @@ internal class HospitalRepositoryImpl @Inject constructor(
     private val hospitalApi: HospitalApi,
     private val mockApi: HospitalMockApi
 ): HospitalRepository{
+    companion object {
+        const val IMG_STORAGE_URL = "https://raw.githubusercontent.com/DEU-Smiley/Smiley_Image_Storage/main/"
+    }
+
     /**
      * 전체 병원 리스트를 조회하는 메소드
      * @return Flow<ResponseState<HospitalList>>
@@ -58,6 +65,7 @@ internal class HospitalRepositoryImpl @Inject constructor(
             }.onEach { result ->
                 when(result) {
                     is ApiResponse.Success -> {
+                        result.data.hospitalImgUrl = getMockImgUrl()
                         emit(ResponseState.Success(result.data.toDomainModel()))
                     }
                     is ApiResponse.Error -> {
@@ -122,5 +130,10 @@ internal class HospitalRepositoryImpl @Inject constructor(
                 }
             }.collect()
         }
+    }
+
+    private fun getMockImgUrl(): String {
+        val imgUrl = "mock/hospital/mock_img_hospital_%02d.png"
+        return IMG_STORAGE_URL + String.format(imgUrl, (Math.random() * 23).toInt() + 1)
     }
 }
