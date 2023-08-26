@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.example.domain.hospital.model.Hospital
 import com.example.smiley.R
 import com.example.smiley.common.extension.computeDistanceToView
@@ -115,6 +116,15 @@ class HospitalInfoView @JvmOverloads constructor(
 
     @SuppressLint("SetTextI18n")
     fun updateHospitalInfo(hospital: Hospital){
+        Glide.with(this)
+            .load(hospital.hospitalImgUrl)
+            .thumbnail(0.1f)
+            .placeholder(R.drawable.base_image_hospital)
+            .error(R.drawable.base_image_hospital)
+            .fallback(R.drawable.base_image_hospital)
+            .centerCrop()
+            .into(bind.hospitalImage)
+
         with(bind) {
             partnerTag.text = if (hospital.isPartner) "제휴" else "일반"
             hospitalTitle.text = hospital.name

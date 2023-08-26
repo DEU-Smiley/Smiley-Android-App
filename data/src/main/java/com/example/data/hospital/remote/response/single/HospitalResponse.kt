@@ -1,5 +1,6 @@
 package com.example.data.hospital.remote.response.single
 
+import android.util.Base64
 import com.example.data.common.mapper.DataMapper
 import com.example.data.common.network.BaseResponse
 import com.example.domain.hospital.model.Hospital
@@ -25,7 +26,8 @@ class HospitalResponse(
     val dutyTel1: String, /* 대표 전화번호 */
     @SerializedName("dutyTel3")
     val dutyTel3: String, /* 응급실 전화번호 */
-
+    @SerializedName("imgUrl")
+    var hospitalImgUrl: String, /* 병원 이미지 */
     @SerializedName("wgs84Lat")
     val wgs84Lat: String, /* 병원 위도 */
     @SerializedName("wgs84Lon")
@@ -102,6 +104,7 @@ class HospitalResponse(
                 emergencyTel    = this.dutyTel3,
                 wgs84Lat        = this.wgs84Lat,
                 wgs84Lon        = this.wgs84Lon,
+                hospitalImgUrl  = this.hospitalImgUrl,
                 monStartTime = this.dutyTime1S,
                 monCloseTime = this.dutyTime1C,
                 tueStartTime = this.dutyTime2S,
