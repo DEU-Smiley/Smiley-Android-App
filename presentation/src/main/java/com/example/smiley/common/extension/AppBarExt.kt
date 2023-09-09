@@ -35,6 +35,9 @@ fun LayoutCommonAppBarBinding.setSubtitle(str: String, clickListener: OnClickLis
     }
 }
 
+/**
+ * 기본 모드 앱바
+ */
 fun LayoutCommonAppBarBinding.setBasicMode(){
     this.ivLogo.visible()
     this.menu.visible()
@@ -45,6 +48,9 @@ fun LayoutCommonAppBarBinding.setBasicMode(){
     this.tvTitleBarSubText.gone()
 }
 
+/**
+ * 캘린더 모드 앱바
+ */
 fun LayoutCommonAppBarBinding.setCalendarMode(){
     this.tvDateText.visible()
     this.tvTitleBarSubText.visible()

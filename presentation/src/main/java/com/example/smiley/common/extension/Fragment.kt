@@ -1,6 +1,7 @@
 package com.example.smiley.common.extension
 
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.smiley.R
@@ -30,7 +31,7 @@ fun Fragment.addFragmentToFullScreen(fragment: Fragment){
         .commit()
 }
 
-fun Fragment.setCustomColorStatusBarAndNavigationBar(statusBarColor: Int, navigationBarColor: Int, isFullScreen: Boolean){
+fun Fragment.setCustomColorStatusBarAndNavigationBar(@ColorRes statusBarColor: Int, @ColorRes navigationBarColor: Int, isFullScreen: Boolean){
     (requireActivity() as AppCompatActivity)
         .setCustomColorStatusBarAndNavigationBar(statusBarColor, navigationBarColor, isFullScreen)
 }
