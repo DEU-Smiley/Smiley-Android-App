@@ -9,11 +9,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.smiley.App
 import com.example.smiley.R
+import com.example.smiley.selfassessment.SelfAssessmentFragment
 import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
 import com.example.smiley.common.extension.addFragmentToFullScreen
 import com.example.smiley.common.extension.setBasicMode
 import com.example.smiley.common.listener.FragmentVisibilityListener
-import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentProfileBinding
 import com.example.smiley.databinding.LayoutCommonAppBarBinding
@@ -89,6 +89,10 @@ class ProfileFragment : BaseFragment(), FragmentVisibilityListener {
 
             menuMagazine.setOnClickListener {
                 this@ProfileFragment.addFragmentToFullScreen(MagazineListFragment.newInstance())
+            }
+
+            menuSelfAssessment.setOnClickListener {
+                this@ProfileFragment.addFragmentToFullScreen(SelfAssessmentFragment.newInstance())
             }
 
             menuSearchHospital.setOnClickListener {
