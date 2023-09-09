@@ -9,35 +9,31 @@ import android.util.Log
 import com.example.domain.user.model.User
 import com.example.smiley.common.utils.NotifyManager
 import com.google.firebase.FirebaseApp
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class App : Application() {
+
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
-        catchAllError()
 
         // Kakao Sdk 초기화
         KakaoSdk.init(this, BuildConfig.KAKAO_SDK_APPKEY)
 
         // Firebase 인스턴스 초기화
         FirebaseApp.initializeApp(this.applicationContext)
+        firebaseAnalytics = Firebase.analytics
+
         getDeviceToken()
         createNoficationChannel()
-    }
-
-    /**
-     * 앱이 강제종료 되어도 에러 로그를 출력할 수 있도록 함
-     */
-    private fun catchAllError(){
-        try {
-            Thread.setDefaultUncaughtExceptionHandler { _, ex -> ex.printStackTrace() }
-        } catch (e: SecurityException) {
-            e.printStackTrace()
-        }
     }
 
     private fun getDeviceToken() {
