@@ -34,6 +34,23 @@
     <string name="no_reserv_data_msg">스마일리에서 접수한 이력이 없거나,\n진료자 정보가 정확하지 않을 수 있어요</string>
     <string name="on_boarding_start">시작하기</string>
 
+    <!-- AI 자가진단 -->
+    <string name="assessment_facial_type">안면 비대칭 검사</string>
+    <string name="assessment_jaw_type">돌출입 &amp; 주걱턱 검사</string>
+    <string name="assessment_tooth_brush_type">칫솔 교체 주기 검사</string>
+
+    <string name="assessment_facial_tile_title">난 웃을 때 어떨까?\n안면 비대칭 진단하기</string>
+    <string name="assessment_jaw_tile_title">예쁜 옆모습을 원한다면?\n돌출입 &amp; 주걱턱 진단하기</string>
+    <string name="assessment_tooth_brush_tile_title">칫솔은 언제 바꿔야하지?\n교체주기 알아보러가기</string>
+
+    <string name="assessment_facial_title">인공지능 기술로\n내 상태를 알아보세요</string>
+    <string name="assessment_facial_sub_title">변화하는 나의 모습을 확인할 수 있어요</string>
+
+    <string name="assessment_guide_one_title">원하는 검사를 선택해주세요</string>
+    <string name="assessment_guide_one_sub_explain">안면 비대칭, 돌출입, 칫솔모 교체 검사 등 다양한 검사를 해볼 수 있어요</string>
+    <string name="assessment_guide_two_title">가이드에 맞게 얼굴을 촬영해주세요</string>
+    <string name="assessment_guide_two_explain">해당 기능은 촬영 가이드를 제공합니다. 정확한 결과를 위해 가이드를 최대한 지켜주세요</string>
+
     <!-- 날짜 -->
     <string name="date_year_month_kor">%d년 %d월</string>
 

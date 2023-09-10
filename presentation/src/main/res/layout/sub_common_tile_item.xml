@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvParent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/transparent"
+        android:clickable="true"
+        android:clipChildren="true"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="15dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContainer"
+            android:layout_width="208dp"
+            android:layout_height="305dp"
+            android:backgroundTint="@color/transparent">
+
+            <ImageView
+                android:id="@+id/iv_thumbnail"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:clipToOutline="true"
+                android:src="@drawable/img_recommend_video"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <eightbitlab.com.blurview.BlurView
+                android:id="@+id/blurViewDimd"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+
+                app:blurOverlayColor="@color/black_trans_70"
+                app:layout_constraintBottom_toBottomOf="@id/iv_thumbnail"
+                app:layout_constraintEnd_toEndOf="@id/iv_thumbnail"
+                app:layout_constraintStart_toStartOf="@id/iv_thumbnail" />
+
+            <TextView
+                android:id="@+id/tvType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/side_margin"
+
+                android:fontFamily="@font/pretendard_bold"
+                android:text="검사 타입"
+                android:textColor="@color/gray5_CB"
+                android:textSize="@dimen/M500_12_auto"
+
+                app:layout_constraintBottom_toTopOf="@id/tvTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/blurViewDimd"
+                app:layout_constraintTop_toTopOf="@id/blurViewDimd" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginEnd="10dp"
+
+                android:fontFamily="@font/pretendard_bold"
+                android:lineSpacingExtra="6sp"
+                android:text="검사 설명"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="@dimen/M500_16_h22"
+
+                app:layout_constraintBottom_toBottomOf="@id/blurViewDimd"
+                app:layout_constraintEnd_toEndOf="@id/iv_thumbnail"
+                app:layout_constraintStart_toStartOf="@id/iv_thumbnail"
+                app:layout_constraintTop_toBottomOf="@id/tvType" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -72,4 +72,7 @@ dependencies {
 
     /* Calendar View */
     implementation 'com.kizitonwose.calendar:view:2.3.0'
+
+    /* BlueView */
+    implementation 'com.github.Dimezis:BlurView:version-2.0.3'
 }

@@ -5,6 +5,6 @@
         android:width="0dp"
         android:color="@color/transparent" />
     <corners
-        android:bottomLeftRadius="5dp"
-        android:bottomRightRadius="5dp"/>
+        android:bottomLeftRadius="15dp"
+        android:bottomRightRadius="15dp"/>
 </shape>

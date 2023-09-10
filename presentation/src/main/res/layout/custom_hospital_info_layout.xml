@@ -51,7 +51,6 @@
                     android:backgroundTint="@color/white"
                     android:clickable="true"
                     android:paddingHorizontal="@dimen/side_margin"
-                    android:paddingBottom="20dp"
                     app:layoutDescription="@xml/custom_hospital_info_layout_xml_cl_bottom_sheet_layout_scene">
 
                     <View
@@ -189,7 +188,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="20dp"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="0dp"
 
@@ -201,7 +200,7 @@
                         <ImageView
                             android:id="@+id/hospital_image"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="200dp"
 
                             android:adjustViewBounds="true"
                             android:src="@drawable/base_image_hospital" />
