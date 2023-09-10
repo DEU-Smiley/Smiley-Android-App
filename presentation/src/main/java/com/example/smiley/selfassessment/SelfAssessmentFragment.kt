@@ -90,7 +90,7 @@ class SelfAssessmentFragment : BaseFragment<FragmentSelfAssessmentBinding>(R.lay
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initBlurBackground(){
-        if(context == null) return
+        context ?: return
 
         val decorView = activity?.window?.decorView
         val rootView = decorView?.findViewById<ViewGroup>(R.id.clParent)!!
