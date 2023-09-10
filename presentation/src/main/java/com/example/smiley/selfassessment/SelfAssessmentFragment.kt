@@ -62,12 +62,17 @@ class SelfAssessmentFragment : BaseFragment<FragmentSelfAssessmentBinding>(R.lay
     }
 
     override fun initView() {
+        initAppBar()
         initNoticeText()
         initBlurBackground()
         initBtnClickEvent()
         initScrollEnabled()
         initBackPressed()
         initAssessmentList()
+    }
+
+    private fun initAppBar(){
+        appBar.tvAppBarTitle.text = "AI 자가진단"
     }
 
     private fun initNoticeText(){
