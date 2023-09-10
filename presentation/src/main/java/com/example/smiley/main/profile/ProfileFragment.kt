@@ -20,6 +20,7 @@ import com.example.smiley.databinding.LayoutCommonAppBarBinding
 import com.example.smiley.hospital.HospitalMapFragment
 import com.example.smiley.hospital.HospitalSearchFragment
 import com.example.smiley.magazine.MagazineListFragment
+import com.example.smiley.medicine.MedicineCheckFragment
 import com.example.smiley.medicine.MedicineSearchFragment
 
 
@@ -80,7 +81,7 @@ class ProfileFragment : BaseFragment(), FragmentVisibilityListener {
     private fun addClickEventToMenus(){
         with(bind){
             menuMedicineExamine.setOnClickListener {
-                this@ProfileFragment.addFragmentToFullScreen(MedicineSearchFragment())
+                this@ProfileFragment.addFragmentToFullScreen(MedicineCheckFragment.newInstance())
             }
 
             menuDeviceSetting.setOnClickListener{
