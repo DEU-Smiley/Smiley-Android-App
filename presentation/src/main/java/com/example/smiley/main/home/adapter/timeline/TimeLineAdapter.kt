@@ -62,7 +62,7 @@ class TimeLineAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun changeDataSet(items: ArrayList<TimeLineItem>){
+    fun updateDataSet(items: ArrayList<TimeLineItem>){
         this.items = items
         notifyDataSetChanged()
     }

@@ -8,11 +8,14 @@ import com.example.smiley.common.extension.dpToPx
 
 /**
  * RecyclerView 아이템 사이의 간격을 설정하는 클래스
+ * @param context Context
  * @param dp Int
+ * @param isEdgeSpacingEnabled Boolean - 양 끝의 아이템에도 여백을 적용할 지 여부
  */
 class SpaceItemDecoration(
     private val context: Context,
-    private val dp: Int
+    private val dp: Int,
+    private val isEdgeSpacingEnabled: Boolean = false
 ) : RecyclerView.ItemDecoration() {
     private val pixel = dp.dpToPx(context)
 
@@ -22,7 +25,11 @@ class SpaceItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        outRect.left = pixel
+        val position = parent.getChildAdapterPosition(view)
+
+        if (isEdgeSpacingEnabled || position != 0) {
+            outRect.left = pixel
+        }
         outRect.right = pixel
     }
 }
