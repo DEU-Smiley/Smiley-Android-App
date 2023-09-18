@@ -8,6 +8,7 @@ import com.example.smiley.R
 import com.example.smiley.common.extension.setCustomColorStatusBarAndNavigationBar
 import com.example.smiley.common.listener.FragmentVisibilityListener
 import com.example.smiley.databinding.ActivityMainBinding
+import com.example.smiley.hospital.HospitalMapFragment
 import com.example.smiley.main.home.HomeFragment
 import com.example.smiley.main.profile.ProfileFragment
 import com.example.smiley.main.reserv.ReservFragment
@@ -24,12 +25,14 @@ class MainActivity : AppCompatActivity() {
     private var profileFragment: ProfileFragment? = null
     private var reservFragment: ReservFragment? = null
     private var statsFragment: StatsFragment? = null
+    private var hospitalMapFragment: HospitalMapFragment? = null
 
     private var fragmentMap: HashMap<Int, Fragment?>? = hashMapOf(
         R.id.menu_home to homeFragment,
         R.id.menu_reserv to reservFragment,
-        R.id.menu_profile to profileFragment,
+        R.id.menu_map to hospitalMapFragment,
         R.id.menu_stats to statsFragment,
+        R.id.menu_profile to profileFragment,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 when (it.itemId) {
                     R.id.menu_home -> changeFragment(R.id.menu_home)
                     R.id.menu_reserv -> changeFragment(R.id.menu_reserv)
-                    R.id.menu_inspect -> changeFragment(R.id.menu_inspect)
+                    R.id.menu_map -> changeFragment(R.id.menu_map)
                     R.id.menu_stats -> changeFragment(R.id.menu_stats)
                     R.id.menu_profile -> changeFragment(R.id.menu_profile)
                     else -> changeFragment(R.id.menu_home)
@@ -78,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         return when (fragmentId) {
             R.id.menu_home -> HomeFragment()
             R.id.menu_reserv -> ReservFragment()
-            R.id.menu_inspect -> HomeFragment()
+            R.id.menu_map -> HospitalMapFragment.newInstance()
             R.id.menu_stats -> StatsFragment()
             R.id.menu_profile -> ProfileFragment()
             else -> HomeFragment()
