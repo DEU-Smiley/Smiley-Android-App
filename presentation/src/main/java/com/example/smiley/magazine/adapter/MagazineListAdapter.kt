@@ -10,20 +10,20 @@ import com.example.domain.magazine.model.MagazineList
 import com.example.smiley.R
 import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.listener.TransparentTouchListener
-import com.example.smiley.databinding.SubMagazineItemBinding
+import com.example.smiley.databinding.SubFullSizeMagazineItemBinding
 
 class MagazineListAdapter(
     private var magazineList: MagazineList,
     private val listener: OnItemClickListener<Magazine>? = null
 ): RecyclerView.Adapter<MagazineListAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val bind: SubMagazineItemBinding): RecyclerView.ViewHolder(bind.root)
+    inner class ViewHolder(val bind: SubFullSizeMagazineItemBinding): RecyclerView.ViewHolder(bind.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.sub_magazine_item, parent, false)
+            .inflate(R.layout.sub_full_size_magazine_item, parent, false)
 
-        return ViewHolder(SubMagazineItemBinding.bind(view))
+        return ViewHolder(SubFullSizeMagazineItemBinding.bind(view))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
