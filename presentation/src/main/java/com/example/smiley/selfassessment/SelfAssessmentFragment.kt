@@ -10,16 +10,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.smiley.R
 import com.example.smiley.common.base.BaseFragment
+import com.example.smiley.common.extension.addFragmentToFullScreen
 import com.example.smiley.common.extension.gone
 import com.example.smiley.common.extension.resetStatusBarAndNavigationBar
 import com.example.smiley.common.extension.setCustomColorStatusBarAndNavigationBar
 import com.example.smiley.common.extension.visibleWithAnimation
+import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.utils.decorutils.SpaceItemDecoration
 import com.example.smiley.common.utils.textutils.IndentLeadingMarginSpan
 import com.example.smiley.databinding.FragmentSelfAssessmentBinding
 import com.example.smiley.databinding.LayoutSubAppBarBinding
 import com.example.smiley.selfassessment.adapter.AssessmentAdapter
 import com.example.smiley.selfassessment.adapter.AssessmentItem
+import com.example.smiley.selfassessment.assessmentresult.AssessmentResultFragment
 import eightbitlab.com.blurview.RenderScriptBlur
 
 /**
@@ -57,7 +60,7 @@ class SelfAssessmentFragment : BaseFragment<FragmentSelfAssessmentBinding>(R.lay
 
     private val assessmentAdapter by lazy {
         context?.let {
-            AssessmentAdapter(it, assessmentList)
+            AssessmentAdapter(it, assessmentList, onAssessmentItemClickListener)
         }
     }
 
@@ -98,12 +101,12 @@ class SelfAssessmentFragment : BaseFragment<FragmentSelfAssessmentBinding>(R.lay
         context ?: return
 
         val decorView = activity?.window?.decorView
-        val rootView = decorView?.findViewById<ViewGroup>(R.id.clParent)!!
+        val rootView = decorView?.findViewById<ViewGroup>(R.id.clBlurBasedLayout)!!
         val windowBackground = decorView.background
 
         with(bind.blurViewBackground){
             setOnTouchListener { v, event -> true }
-            setupWith(rootView, RenderScriptBlur(requireContext()))
+            setupWith(rootView, RenderScriptBlur(context))
                 .setFrameClearDrawable(windowBackground)
                 .setBlurRadius(5f)
         }
@@ -139,7 +142,7 @@ class SelfAssessmentFragment : BaseFragment<FragmentSelfAssessmentBinding>(R.lay
         with(bind.rvAssessment){
             adapter = assessmentAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            addItemDecoration(SpaceItemDecoration(context, 20))
+            addItemDecoration(SpaceItemDecoration(context, 20, true))
             PagerSnapHelper().attachToRecyclerView(this)
         }
     }
@@ -162,6 +165,22 @@ class SelfAssessmentFragment : BaseFragment<FragmentSelfAssessmentBinding>(R.lay
         with(bind){
             lavFaceScan.resumeAnimation()
             clSelectAssessment.gone()
+        }
+    }
+
+    private val onAssessmentItemClickListener = object : OnItemClickListener<AssessmentItem> {
+        override fun onItemClicked(position: Int, data: AssessmentItem) {
+            when(position){
+                0 -> {
+                    this@SelfAssessmentFragment.addFragmentToFullScreen(AssessmentResultFragment.newInstance())
+                }
+                1 -> {
+                    this@SelfAssessmentFragment.addFragmentToFullScreen(AssessmentResultFragment.newInstance())
+                }
+                else -> {
+                    this@SelfAssessmentFragment.addFragmentToFullScreen(AssessmentResultFragment.newInstance())
+                }
+            }
         }
     }
 

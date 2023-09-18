@@ -5,6 +5,7 @@
     tools:context=".selfassessment.SelfAssessmentFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -31,7 +32,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clParent"
+                android:id="@+id/clBlurBasedLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
