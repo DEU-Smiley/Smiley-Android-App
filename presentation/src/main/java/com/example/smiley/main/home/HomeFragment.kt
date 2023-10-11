@@ -8,10 +8,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,14 +28,16 @@ import com.example.smiley.R
 import com.example.smiley.bluetooth.viewmodel.BluetoothDataState
 import com.example.smiley.bluetooth.viewmodel.BluetoothViewModel
 import com.example.smiley.common.extension.addFragmentToFullScreen
+import com.example.smiley.common.extension.invisible
 import com.example.smiley.common.extension.repeatOnStarted
-import com.example.smiley.common.extension.setBasicMode
+import com.example.smiley.common.extension.setWearTimeMode
 import com.example.smiley.common.extension.showToast
 import com.example.smiley.common.extension.stop
+import com.example.smiley.common.extension.visible
 import com.example.smiley.common.listener.FragmentVisibilityListener
 import com.example.smiley.common.listener.OnItemClickListener
 import com.example.smiley.common.utils.NotifyManager
-import com.example.smiley.common.utils.decorutils.SpaceItemDecoration
+import com.example.smiley.common.utils.decorutils.SideSpaceDecoration
 import com.example.smiley.common.view.BaseFragment
 import com.example.smiley.databinding.FragmentHomeBinding
 import com.example.smiley.databinding.LayoutCommonAppBarBinding
@@ -63,6 +67,7 @@ import com.kizitonwose.calendar.view.WeekDayBinder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.jetbrains.annotations.TestOnly
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
@@ -167,10 +172,14 @@ class HomeFragment : BaseFragment(), FragmentVisibilityListener {
         }
     }
 
+    /**
+     * @param cnt Int 날짜 셀의 착용 단계를 표현 (추후 시간 데이터로 바꿔야함)
+     */
     private fun bindDate(date: LocalDate, container: WeekDayViewContainer, isSelectable: Boolean){
         with(container) {
             tvDayOfWeek.text = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
             tvDay.text = "${date.dayOfMonth}"
+            setDot()
         }
     }
 
@@ -178,6 +187,7 @@ class HomeFragment : BaseFragment(), FragmentVisibilityListener {
         lateinit var day: WeekDay
         val tvDayOfWeek: TextView = view.findViewById(R.id.tvDayOfWeek)
         val tvDay: TextView = view.findViewById(R.id.tvDay)
+        val dotLayout: LinearLayout = view.findViewById(R.id.ll_dot_layout)
 
         fun setEnabled(isEnabled: Boolean){
             if(isEnabled){
@@ -186,11 +196,26 @@ class HomeFragment : BaseFragment(), FragmentVisibilityListener {
                 this.tvDay.setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray5_CB))
             }
         }
+
+        @TestOnly
+        fun setDot(){
+            val dotCnt = 1..4
+            val dots = dotLayout.children.toList()
+            val cnt = dotCnt.random()
+
+            for (i in dots.indices){
+                if(i < cnt){
+                    dots[i].visible()
+                } else {
+                    dots[i].invisible()
+                }
+            }
+        }
     }
     /**--------------------------------------------------------------------------------------------*/
 
     private fun initStatusChart(labelList: ArrayList<String> = arrayListOf(
-        "10일", "11일", "12일", "13일", "14일", "15일", "오늘"
+        "14일", "15일", "16일", "17일", "18일", "19일", "오늘"
     )){
         context ?: return
 
@@ -318,7 +343,22 @@ class HomeFragment : BaseFragment(), FragmentVisibilityListener {
     private suspend fun observeBluetoothState(){
         bluetoothVm.dataState.collect { state ->
             when (state) {
-                is BluetoothDataState.Init -> Unit
+                is BluetoothDataState.Init -> {
+                    lifecycleScope.launch {
+                        delay(3000)
+                        if (!notifyFlag) {
+                            NotifyManager.sendNotification(
+                                requireContext(),
+                                NotifyManager.WEARING_NOTIFY_ID,
+                                "Smiley",
+                                "교정기를 착용 중입니다."
+                            )
+                        }
+                        notifyFlag = true
+                        appBarBinding.setWearTimeMode(true)
+                    }
+                }
+
                 is BluetoothDataState.ReceiveData -> {
                     Log.d("플로우", "${state.wearFlag}")
                     if (state.wearFlag && !notifyFlag) {
@@ -411,7 +451,7 @@ class HomeFragment : BaseFragment(), FragmentVisibilityListener {
             )
 
             setHasFixedSize(true)
-            addItemDecoration(SpaceItemDecoration(context, 10))
+            addItemDecoration(SideSpaceDecoration(context, 10))
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         }
     }
@@ -445,7 +485,7 @@ class HomeFragment : BaseFragment(), FragmentVisibilityListener {
 
     override fun onShowFragment() {
         super.onShowFragment()
-        appBarBinding.setBasicMode()
+        appBarBinding.setWearTimeMode()
     }
 
     private val magazineClickListener = object : OnItemClickListener<Magazine> {
@@ -456,14 +496,6 @@ class HomeFragment : BaseFragment(), FragmentVisibilityListener {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
         @JvmStatic
         fun newInstance() = HomeFragment()
     }

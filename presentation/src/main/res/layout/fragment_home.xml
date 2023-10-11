@@ -36,7 +36,9 @@
                     android:layout_height="56dp"
                     android:layout_marginStart="@dimen/side_margin"
                     android:layout_marginTop="30dp"
-                    android:background="@drawable/ic_profile_img"
+                    android:src="@drawable/ic_profile_img"
+                    android:background="@drawable/bg_rounded_corner_radius_20"
+                    android:clipToOutline="true"
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -199,13 +201,14 @@
                     <com.kizitonwose.calendar.view.WeekCalendarView
                         android:id="@+id/wcvWeekWearStatus"
                         android:layout_width="0dp"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/side_margin"
                         android:layout_marginTop="15dp"
                         android:clickable="false"
                         android:focusable="false"
                         app:cv_dayViewResource="@layout/layout_calendar_day_of_week_cell"
-
+                        android:nestedScrollingEnabled="false"
+                        app:cv_daySize="seventhWidth"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvWeekWearStatus" />
@@ -562,7 +565,7 @@
                             android:clickable="true"
 
                             android:fontFamily="@font/pretendard_bold"
-                            android:text="스마일리 사업자정보"
+                            android:text="스마일리"
                             android:textColor="@color/gray1_42"
                             android:textSize="@dimen/M500_14_h20"
 
@@ -590,7 +593,7 @@
 
                             android:fontFamily="@font/pretendard_regular"
                             android:lineSpacingExtra="3sp"
-                            android:text="사업자등록번호: 000-00-00000\n동의대학교 컴퓨터소프트웨어공학과\n부산광역시 부산진구 엄광로 176 정보공학관 915호 (가야동)\n대표전화 : 051-890-0000"
+                            android:text="한이음 공모전\n동의대학교 컴퓨터소프트웨어공학과\n부산광역시 부산진구 엄광로 176 정보공학관 915호 (가야동)\n대표전화 : 051-890-0000"
                             android:textColor="@color/gray3_82"
                             android:textSize="@dimen/B4_M500_13_h18"
 
