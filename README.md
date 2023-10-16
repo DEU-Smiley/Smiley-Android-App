@@ -1,5 +1,7 @@
 # Smiley-Android-App
 
+
+
 <hr>
 
 <div align="center">
@@ -20,6 +22,11 @@
 **착용 시간 관리, 일일 미션, 예약 관리, 챗봇 상담** 등 **교정에 관한 모든 편의기능을 앱에서 제공**합니다.
 
 ---
+
+## 🖥️ 시연 영상
+
+[![Video Label](http://img.youtube.com/vi/VlU84cp0GD8/0.jpg)](https://youtu.be/VlU84cp0GD8)
+
 
 ## ✨ 주요 기능
 
@@ -42,6 +49,7 @@
     - 앱 내에서 교정에 관한 대부분의 정보를 얻을 수 있습니다.
     - 교정 중 궁금한 사항이 생겨도 병원 진료 날짜까지 기다리지 않아도 됩니다.
 
+<!--
 ---
 ## 🖥️ 동작 화면
 
@@ -58,11 +66,16 @@
 |:---------:|:--------:|
 | <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/gif/medicine_search.gif" width="250"/> | <img src="https://raw.githubusercontent.com/Donghyeon0915/DataRepository/master/Smiley/screenshot/gif/bluetooth.gif" width="250"/> |
 ---
+-->
+
+<br>
 
 ## 💫 팀 협업 방식
 
 - **Github Issue & Pull-Request** 관리를 통해 팀원 간의 업무 파악 및 진행 사항을 기록하고, 디자인, 프론트, 백엔드 파트들 간의 협업을 위해 **Figma, Swagger** 등의 툴을 사용하였습니다.
 - **Github CI/CD**를 통해 통합 및 배포 환경을 자동화하였으며, 코딩 컨벤션을 맞추는 등의 방식으로 더 나은 코드를 작성할 수 있도록 노력하였습니다.
+
+<br>
 
 ---
 
@@ -211,9 +224,9 @@ StateFlow와 State 패턴을 사용하지 않았을 때, UI 상태 처리가 복
 ## 👨‍ 👨‍👦팀 구성
 <div align="center">
 
-|김동현 ``` Android Dev ```| 김준 ```Backend Dev``` | 김성찬 ```Backend Dev``` | 정민수 ```Backend Dev``` |
-|:-:|:-:|:-:|:-:|
-|<img src="https://avatars.githubusercontent.com/u/63500239?v=4" width=130>| <img src="https://avatars.githubusercontent.com/u/30451538?v=4" width=130> | <img src="https://avatars.githubusercontent.com/u/115801420?v=4" width=130> | <img src="https://avatars.githubusercontent.com/u/93813747?v=4" width=130> |
-|[@donghyeon0915](https://github.com/Donghyeon0915)| [@rlawns0327](https://github.com/rlawns0327)| [@tjdckscert](https://github.com/tjdckscert)| [@effort-type](https://github.com/effort-type)|
+|김동현 ``` Android Dev ```| 김준 ```Backend Dev``` | 김성찬 ```Backend Dev``` |
+|:-:|:-:|:-:|
+|<img src="https://avatars.githubusercontent.com/u/63500239?v=4" width=130>| <img src="https://avatars.githubusercontent.com/u/30451538?v=4" width=130> | <img src="https://avatars.githubusercontent.com/u/115801420?v=4" width=130> |
+|[@donghyeon0915](https://github.com/Donghyeon0915)| [@rlawns0327](https://github.com/rlawns0327)| [@tjdckscert](https://github.com/tjdckscert)|
 
 </div>
