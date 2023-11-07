@@ -230,7 +230,7 @@ StateFlow와 State 패턴을 사용하지 않았을 때, UI 상태 처리가 복
 ![Smiley Erd - Night](https://github.com/DEU-Smiley/Smiley-Android-App/assets/63500239/61cf1960-4310-4f45-b8cb-e040f8257e67)
 
 
-## 👨‍ 👨‍👦팀 구성
+## 👨‍👦팀 구성
 <div align="center">
 
 |김동현 ``` Android Dev ```| 김준 ```Backend Dev``` | 김성찬 ```Backend Dev``` |
