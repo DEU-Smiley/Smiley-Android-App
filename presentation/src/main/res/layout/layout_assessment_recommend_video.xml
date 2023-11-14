@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingVertical="@dimen/side_margin">
+
+        <TextView
+            android:id="@+id/tvRecommendVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_margin"
+
+            android:text="도움이 되는 영상"
+            android:textSize="@dimen/H2_SB600_22_h30"
+            android:textColor="@color/black1_20"
+            android:fontFamily="@font/pretendard_bold"
+            android:includeFontPadding="false"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/rvRecommendVideo"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="20dp"
+           android:paddingStart="@dimen/side_margin"
+           android:clipChildren="false"
+           android:clipToPadding="false"
+           app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+           android:orientation="horizontal"
+           tools:listitem="@layout/sub_recommend_video_item"
+
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/tvRecommendVideo"
+           app:layout_constraintEnd_toEndOf="parent"/>
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

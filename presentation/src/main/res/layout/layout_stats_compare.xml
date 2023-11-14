@@ -44,7 +44,7 @@
         android:layout_marginEnd="40dp"
         android:layout_marginTop="50dp"
         app:max="100"
-        app:progress="10"
+        app:progress="60"
         app:progressTint="@color/primary_dark"
 
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
 
-        android:text="14시간 30분"
+        android:text="11시간 17분"
         android:textSize="@dimen/H6_SB600_16_h22"
         android:textColor="@color/primary_dark"
         android:fontFamily="@font/pretendard_semibold"

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/side_margin">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+
+            android:text="측정 결과"
+            android:textSize="@dimen/H2_SB600_22_h30"
+            android:textColor="@color/black1_20"
+            android:fontFamily="@font/pretendard_bold"
+            android:includeFontPadding="false"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!-- Layout 안면 비대칭 프로그레스 -->
+        <TextView
+            android:id="@+id/tvFacialAsymmetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+
+            android:text="안면 비대칭"
+            android:textSize="@dimen/H4_SB600_14_h18"
+            android:textColor="@color/gray1_42"
+            android:fontFamily="@font/pretendard_semibold"
+            android:includeFontPadding="false"
+            
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
+
+        <TextView
+            android:id="@+id/tvFacailPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="50% / 100%"
+            android:textSize="@dimen/M500_12_auto"
+            android:textColor="@color/gray4_AC"
+            android:fontFamily="@font/pretendard_medium"
+            
+            app:layout_constraintEnd_toEndOf="@id/pbFacialAsymmetry"
+            app:layout_constraintBottom_toBottomOf="@id/tvFacialAsymmetry"/>
+
+        <ProgressBar
+            android:id="@+id/pbFacialAsymmetry"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="10dp"
+            android:progress="30"
+            android:progressDrawable="@drawable/background_progress_bar"
+            android:progressTint="#5498FF"
+            
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFacialAsymmetry"/>
+        <!-- Layout End 안면 비대칭 프로그레스 -->
+
+        <!-- Layout 눈 기울기 프로그레스 -->
+        <TextView
+            android:id="@+id/tvEyeDegree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+
+            android:text="눈 기울기"
+            android:textSize="@dimen/H4_SB600_14_h18"
+            android:textColor="@color/gray1_42"
+            android:fontFamily="@font/pretendard_semibold"
+            android:includeFontPadding="false"
+
+            app:layout_constraintStart_toStartOf="@id/pbFacialAsymmetry"
+            app:layout_constraintTop_toBottomOf="@id/pbFacialAsymmetry"/>
+
+        <TextView
+            android:id="@+id/tvEyeDegreePercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="50% / 100%"
+            android:textSize="@dimen/M500_12_auto"
+            android:textColor="@color/gray4_AC"
+            android:fontFamily="@font/pretendard_medium"
+
+            app:layout_constraintEnd_toEndOf="@id/pbEyeDegree"
+            app:layout_constraintBottom_toBottomOf="@id/tvEyeDegree"/>
+
+        <ProgressBar
+            android:id="@+id/pbEyeDegree"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="10dp"
+            android:progress="30"
+            android:progressDrawable="@drawable/background_progress_bar"
+            android:progressTint="#FC7EB9"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvEyeDegree"/>
+        <!-- Layout End 눈 기울기 프로그레스 -->
+
+        <!-- Layout 입술 기울기 프로그레스 -->
+        <TextView
+            android:id="@+id/tvLipDegree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+
+            android:text="입술 기울기"
+            android:textSize="@dimen/H4_SB600_14_h18"
+            android:textColor="@color/gray1_42"
+            android:fontFamily="@font/pretendard_semibold"
+            android:includeFontPadding="false"
+
+            app:layout_constraintStart_toStartOf="@id/pbEyeDegree"
+            app:layout_constraintTop_toBottomOf="@id/pbEyeDegree"/>
+
+        <TextView
+            android:id="@+id/tvLipDegreePercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="50% / 100%"
+            android:textSize="@dimen/M500_12_auto"
+            android:textColor="@color/gray4_AC"
+            android:fontFamily="@font/pretendard_medium"
+
+            app:layout_constraintEnd_toEndOf="@id/pbLipDegree"
+            app:layout_constraintBottom_toBottomOf="@id/tvLipDegree"/>
+
+        <ProgressBar
+            android:id="@+id/pbLipDegree"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="10dp"
+            android:progress="30"
+            android:progressDrawable="@drawable/background_progress_bar"
+            android:progressTint="#FCC64C"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLipDegree"/>
+        <!-- Layout End 입술 기울기 프로그레스 -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -2,23 +2,16 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
-            <corners android:radius="6dp"/>
-            <solid android:color="@color/gray7_F2"/>
+            <corners android:radius="2dp"/>
+            <solid android:color="@color/gray6_F5"/>
         </shape>
     </item>
 
     <item android:id="@android:id/progress">
         <scale android:scaleWidth="100%">
             <shape android:shape="rectangle">
-                <corners android:radius="6dp"/>
-                <gradient
-                    android:angle="45"
-                    android:type="linear"
-                    android:startColor="@color/primary_light"
-                    android:centerColor="@color/primary_dark"
-                    android:endColor="@color/primary_normal"
-                    />
-                <!--                <solid android:color="#287CF6"/>-->
+                <corners android:radius="2dp"/>
+                <solid android:color="@color/primary_normal"/>
             </shape>
         </scale>
     </item>
