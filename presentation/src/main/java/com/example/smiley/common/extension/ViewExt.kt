@@ -8,6 +8,7 @@ import android.text.Editable
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextWatcher
+import android.text.style.AbsoluteSizeSpan
 import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
@@ -17,6 +18,9 @@ import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.*
+import androidx.annotation.ColorRes
+import androidx.annotation.FontRes
+import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.widget.NestedScrollView
 import com.example.smiley.R
@@ -180,17 +184,27 @@ fun TextView.showViewThenTextChanged(nextView: View, scrollView: ScrollView?, in
     })
 }
 
+fun TextView.setAbsoluteSizeFromDimenRes(sizeResId: Int, start: Int, end: Int) {
+    val sizeInPx = resources.getDimension(sizeResId)
+    val sizeInSp = sizeInPx / resources.displayMetrics.scaledDensity
+    val span = SpannableStringBuilder(this.text)
+    span.setSpan(AbsoluteSizeSpan(sizeInSp.toInt(), true), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+    this.text = span
+}
+
 /**
  * start~end까지의 텍스트의 전경색 변경
  * @param color :Int
  * @param start :Int
  * @param end   :Int
  */
-fun TextView.setForegroundColor(color:Int, start:Int, end:Int){
+fun TextView.setForegroundColor(@ColorRes colorResId:Int, start:Int, end:Int){
+    val color = ContextCompat.getColor(context, colorResId)  // 실제 색상 값으로 변환
     val span = SpannableStringBuilder(this.text)
     span.setSpan(ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
     this.text = span
 }
+
 
 /**
  * start~end까지의 텍스트의 배경색 변경
