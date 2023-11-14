@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.common.base.NetworkError
@@ -24,7 +23,6 @@ import com.example.smiley.common.extension.getNumberOfWeeks
 import com.example.smiley.common.extension.repeatOnStarted
 import com.example.smiley.common.extension.setCalendarMode
 import com.example.smiley.common.extension.setDateText
-import com.example.smiley.common.extension.setTitle
 import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.common.listener.FragmentVisibilityListener
 import com.example.smiley.common.view.BaseFragment
@@ -40,6 +38,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.kizitonwose.calendar.core.CalendarDay
+import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition
 import com.kizitonwose.calendar.core.Week
 import com.kizitonwose.calendar.core.WeekDay
@@ -48,6 +47,7 @@ import com.kizitonwose.calendar.core.atStartOfMonth
 import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
 import com.kizitonwose.calendar.view.MonthDayBinder
+import com.kizitonwose.calendar.view.MonthScrollListener
 import com.kizitonwose.calendar.view.ViewContainer
 import com.kizitonwose.calendar.view.WeekDayBinder
 import com.kizitonwose.calendar.view.WeekScrollListener
@@ -59,16 +59,6 @@ import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Locale
 
-
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [StatsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 @AndroidEntryPoint
 class StatsFragment : BaseFragment(), FragmentVisibilityListener {
 
@@ -92,17 +82,6 @@ class StatsFragment : BaseFragment(), FragmentVisibilityListener {
     private var selectedDate:LocalDate? = LocalDate.now()
     private var prevContainer: WeekDayViewContainer? = null
     private val today = LocalDate.now()
-
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -237,8 +216,8 @@ class StatsFragment : BaseFragment(), FragmentVisibilityListener {
 
     private fun initCalendarView(){
         val currentMonth = YearMonth.now()
-        val startMonth = currentMonth.minusMonths(240)
-        val endMonth = currentMonth.plusMonths(240)
+        val startMonth = currentMonth.minusMonths(3)
+        val endMonth = currentMonth.plusMonths(3)
         val firstDayOfWeek = firstDayOfWeekFromLocale()
 
         initCalendarTitle()
@@ -391,29 +370,15 @@ class StatsFragment : BaseFragment(), FragmentVisibilityListener {
         }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment StatsFragment.
-         */
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            StatsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-
     override fun onShowFragment() {
         appBarBinding.setCalendarMode()
         appBarBinding.setDateText(
             String.format(resources.getString(R.string.date_year_month_kor),today.year, today.monthValue)
         )
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() =  StatsFragment()
     }
 }
