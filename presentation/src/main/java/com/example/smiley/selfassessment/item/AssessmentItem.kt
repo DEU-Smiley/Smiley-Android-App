@@ -1,4 +1,4 @@
-package com.example.smiley.selfassessment.adapter
+package com.example.smiley.selfassessment.item
 
 import androidx.annotation.DrawableRes
 
