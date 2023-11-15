@@ -2,6 +2,8 @@ package com.example.smiley.main.home.adapter.youtube
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -47,7 +49,10 @@ class YoutubeListAdapter(
                     .load(item.thumbnail)
                     .into(ivThumbnail)
             }
-
+            bind.clContainer.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.youtubeUrl))
+                context.startActivity(intent)
+            }
             bind.clContainer.setOnTouchListener(TransparentTouchListener())
         }
     }

@@ -220,7 +220,7 @@
 
             android:fontFamily="@font/pretendard_medium"
             android:includeFontPadding="false"
-            android:text="07-28"
+            android:text="09-23"
             android:textColor="@color/gray1_42"
             android:textSize="@dimen/M500_16_h22"
 
@@ -320,7 +320,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
 
-            android:fontFamily="@font/pretendard_regular"
+            android:fontFamily="@font/pretendard_medium"
             android:includeFontPadding="false"
             android:text="예약 2일전 부터는 취소 및\n변경시 수수료가 발생합니다."
             android:textColor="@color/gray1_42"
@@ -347,7 +347,7 @@
             android:id="@+id/cl_empty_layout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/iv_ticket_bottom"
             app:layout_constraintEnd_toEndOf="@id/iv_ticket_top"
             app:layout_constraintStart_toStartOf="@id/iv_ticket_top"

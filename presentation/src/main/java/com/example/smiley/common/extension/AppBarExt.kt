@@ -1,6 +1,7 @@
 package com.example.smiley.common.extension
 
 import android.view.View.OnClickListener
+import com.example.smiley.R
 import com.example.smiley.databinding.LayoutCommonAppBarBinding
 
 fun LayoutCommonAppBarBinding.setTitle(str: String){
@@ -17,6 +18,7 @@ fun LayoutCommonAppBarBinding.setDateText(date: String){
     this.ivLogo.gone()
     this.tvTitleBarText.gone()
     this.tvDateText.visible()
+    this.clWearTimeLayout.gone()
 
     with(this.tvDateText){
         text = date
@@ -46,6 +48,30 @@ fun LayoutCommonAppBarBinding.setBasicMode(){
     this.tvDateText.gone()
     this.tvTitleBarText.gone()
     this.tvTitleBarSubText.gone()
+    this.clWearTimeLayout.gone()
+}
+
+/**
+ * 착용 시간 앱바
+ */
+fun LayoutCommonAppBarBinding.setWearTimeMode(isWearing: Boolean = false){
+    this.ivLogo.visible()
+    this.clWearTimeLayout.visible()
+
+    this.tvWearTime.apply {
+        val timeColor = if(isWearing) R.color.primary_normal else R.color.gray2_5E
+
+        setAbsoluteSizeFromDimenRes(R.dimen.H4_M500_18_auto, 0, 2)
+        setAbsoluteSizeFromDimenRes(R.dimen.H4_M500_18_auto, 5, 7)
+        setForegroundColor(timeColor,0,2)
+        setForegroundColor(timeColor,5,7)
+    }
+
+    this.menu.gone()
+    this.nofify.gone()
+    this.tvDateText.gone()
+    this.tvTitleBarText.gone()
+    this.tvTitleBarSubText.gone()
 }
 
 /**
@@ -60,4 +86,5 @@ fun LayoutCommonAppBarBinding.setCalendarMode(){
     this.menu.gone()
     this.tvTitleBarText.gone()
     this.tvTitleBarSubText.gone()
+    this.clWearTimeLayout.gone()
 }

@@ -15,23 +15,23 @@
         />
 
     <item
-        android:id="@+id/menu_inspect"
+        android:id="@+id/menu_map"
         android:enabled = "true"
-        android:icon="@drawable/ic_scan"
-        android:title="검사"
+        android:icon="@drawable/ic_map"
+        android:title="지도"
         />
 
     <item
         android:id="@+id/menu_stats"
         android:enabled = "true"
-        android:icon="@drawable/ic_chart"
+        android:icon="@drawable/ic_stats"
         android:title="통계"
         />
 
     <item
         android:id="@+id/menu_profile"
         android:enabled = "true"
-        android:icon="@drawable/ic_profile"
-        android:title="프로필"
+        android:icon="@drawable/ic_grid"
+        android:title="더보기"
         />
 </menu>
