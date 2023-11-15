@@ -343,22 +343,7 @@ class HomeFragment : BaseFragment(), FragmentVisibilityListener {
     private suspend fun observeBluetoothState(){
         bluetoothVm.dataState.collect { state ->
             when (state) {
-                is BluetoothDataState.Init -> {
-                    lifecycleScope.launch {
-                        delay(3000)
-                        if (!notifyFlag) {
-                            NotifyManager.sendNotification(
-                                requireContext(),
-                                NotifyManager.WEARING_NOTIFY_ID,
-                                "Smiley",
-                                "교정기를 착용 중입니다."
-                            )
-                        }
-                        notifyFlag = true
-                        appBarBinding.setWearTimeMode(true)
-                    }
-                }
-
+                is BluetoothDataState.Init -> Unit
                 is BluetoothDataState.ReceiveData -> {
                     Log.d("플로우", "${state.wearFlag}")
                     if (state.wearFlag && !notifyFlag) {
@@ -371,6 +356,7 @@ class HomeFragment : BaseFragment(), FragmentVisibilityListener {
                     }
 
                     notifyFlag = state.wearFlag
+                    appBarBinding.setWearTimeMode(state.wearFlag)
                 }
             }
         }
