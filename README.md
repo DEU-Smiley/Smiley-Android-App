@@ -1,4 +1,3 @@
-# 
 # Smiley - Android <a href="https://wepli.site"><img src="https://avatars.githubusercontent.com/u/128583580?s=400&u=b45381b520339b0d5ee6e1e9d3a221e110cfa6cb&v=4" align="left" width="100"></a>
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/DEU-Smiley/Smiley-Android-App&count_bg=%2328DBE6&title_bg=%232D3540&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
