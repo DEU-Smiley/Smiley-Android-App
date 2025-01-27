@@ -20,6 +20,7 @@ import com.example.smiley.common.extension.setCustomColorStatusBarAndNavigationB
 import com.example.smiley.common.extension.showConfirmDialog
 import com.example.smiley.common.extension.showToast
 import com.example.smiley.common.extension.visibleWithAnimation
+import com.example.smiley.common.listener.FragmentVisibilityListener
 import com.example.smiley.common.listener.TransparentTouchListener
 import com.example.smiley.databinding.FragmentHospitalMapBinding
 import com.example.smiley.hospital.viewmodel.HospitalMapFragmentState
@@ -47,7 +48,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class HospitalMapFragment : Fragment(), OnMapReadyCallback {
+class HospitalMapFragment : Fragment(), FragmentVisibilityListener, OnMapReadyCallback {
 
     private var _bind:FragmentHospitalMapBinding? = null
     private val bind get() = _bind!!
@@ -252,7 +253,9 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
             // 지도에 추가하는 부분은 별도로 해야할 수도
             this.tag = tag
 
-            map = naverMap
+            if(::naverMap.isInitialized){
+                map = naverMap
+            }
             onClickListener = markerClickListener
         }.also(markerList::add)
     }
@@ -265,15 +268,11 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
-
-        this.setCustomColorStatusBarAndNavigationBar(R.color.transparent, R.color.white, true)
     }
 
     override fun onPause() {
         super.onPause()
         mapView.onPause()
-
-        this.resetStatusBarAndNavigationBar()
     }
 
     override fun onStop() {
@@ -324,6 +323,9 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    override fun onShowFragment() = Unit
+    override fun onHideFragment() = Unit
+
     /**
      * 마커 클릭 이벤트 리스너
      */
@@ -358,6 +360,4 @@ class HospitalMapFragment : Fragment(), OnMapReadyCallback {
                 }
             }
     }
-
-
 }

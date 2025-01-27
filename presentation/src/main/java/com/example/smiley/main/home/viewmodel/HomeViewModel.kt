@@ -5,13 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.common.base.ResponseState
 import com.example.domain.hospital.model.SimpleHospital
 import com.example.domain.hospital.usecase.GetNearByPartnerHospitalUseCase
+import com.example.domain.magazine.model.Magazine
 import com.example.domain.magazine.usecase.GetRecentMagazineUseCase
 import com.example.domain.youtube.model.YoutubeVideo
 import com.example.domain.youtube.usecase.GetRecommendVideoUseCase
 import com.example.smiley.common.base.BaseViewModel
-import com.example.smiley.main.home.adapter.timeline.TimeLineItem
-import com.example.smiley.main.home.adapter.timeline.TimeLineObject
-import com.example.smiley.main.home.adapter.timeline.ViewType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -26,35 +24,15 @@ class HomeViewModel @Inject constructor(
     private val getRecommendVideoUseCase: GetRecommendVideoUseCase
 ): BaseViewModel<HomeFragmentState>() {
 
-    fun getTimeLineData(){
-        viewModelScope.launch(Dispatchers.IO){
-            getRecentMagazineUseCase(2)
-                .onStart {
-                    // Skeleton
-                    Log.d("매거진 조회 요청", "요청 보냄")
-                }
-                .catch {
-                    setState(HomeFragmentState.ShowToast(message = it.message.toString()))
-                    Log.e("타임라인 조회 에러", it.message.toString())
-                }
+    fun getMagazineList(cnt: Int){
+        viewModelScope.launch {
+            getRecentMagazineUseCase(cnt)
+                .onStart {  }
+                .catch { setState(HomeFragmentState.ShowToast(message = it.message.toString())) }
                 .collect { state ->
                     when(state){
                         is ResponseState.Success -> {
-                            val timeLineItems = arrayListOf<TimeLineItem>().apply {
-                                state.data.magazines.forEach {
-                                    add(
-                                        TimeLineItem(
-                                            viewType = ViewType.MAGAZINE_OBJECT.name,
-                                            viewObject = TimeLineObject.MagazineObject(
-                                                notice = it.title.replace("\n", " "),
-                                                magazine = it
-                                            )
-                                        )
-                                    )
-                                }
-                            }
-
-                            setState(HomeFragmentState.TimeLine(timeLineItems))
+                            setState(HomeFragmentState.RecentMagazine(state.data.magazines))
                         }
                         is ResponseState.Error -> {
                             setState(HomeFragmentState.Error(state.error.message))
@@ -108,7 +86,7 @@ class HomeViewModel @Inject constructor(
 
 sealed class HomeFragmentState {
     object Init: HomeFragmentState()
-    data class TimeLine(val timeLine: List<TimeLineItem>): HomeFragmentState()
+    data class RecentMagazine(val magazine: ArrayList<Magazine>): HomeFragmentState()
     data class PartnerHospital(val hospitals: List<SimpleHospital>): HomeFragmentState()
     data class RecommendVideo(val youtubeList: ArrayList<YoutubeVideo>): HomeFragmentState()
     data class Error(val message: String): HomeFragmentState()

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:paddingBottom="20dp"
+        android:paddingHorizontal="@dimen/side_margin">
+
+        <TextView
+            android:id="@+id/tvResultTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="위험"
+            android:textSize="@dimen/H4_SB600_14_h18"
+            android:textColor="@color/red"
+            android:fontFamily="@font/pretendard_semibold"
+            android:includeFontPadding="false"
+            
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+
+            android:text="김동동님의 검사 결과"
+            android:textSize="@dimen/H2_SB600_22_h30"
+            android:textColor="@color/black1_20"
+            android:fontFamily="@font/pretendard_bold"
+            android:includeFontPadding="false"
+            
+            app:layout_constraintStart_toStartOf="@id/tvResultTag"
+            app:layout_constraintTop_toBottomOf="@id/tvResultTag"/>
+
+        <TextView
+            android:id="@+id/tvResultExplain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+
+            android:text="안면 비대칭률이 꽤 높게 측정 되었어요. 다리를 꼬거나 한 쪽으로 턱을 괴는 자세 등 나도 모르게 안면 비대칭을 유발하는 습관이 있는지 확인이 필요해요."
+            android:textSize="@dimen/M500_16_h22"
+            android:textColor="@color/gray2_5E"
+            android:fontFamily="@font/pretendard_medium"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="4sp"
+            
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

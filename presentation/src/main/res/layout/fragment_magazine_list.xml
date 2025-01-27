@@ -118,10 +118,10 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <include layout="@layout/shimmer_magazine_item"/>
-                <include layout="@layout/shimmer_magazine_item"/>
-                <include layout="@layout/shimmer_magazine_item"/>
-                <include layout="@layout/shimmer_magazine_item"/>
+                <include layout="@layout/shimmer_full_size_magazine_item"/>
+                <include layout="@layout/shimmer_full_size_magazine_item"/>
+                <include layout="@layout/shimmer_full_size_magazine_item"/>
+                <include layout="@layout/shimmer_full_size_magazine_item"/>
 
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>

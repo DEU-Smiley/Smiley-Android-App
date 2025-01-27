@@ -16,9 +16,10 @@
     <color name="black_trans_70">#B3000000</color>
     <color name="black_trans_50">#80000000</color>
     <color name="black_trans_30">#4D000000</color>
-
     <color name="black1_20">#202020</color>
+
     <color name="primary_normal">#0073FA</color>
+    <color name="primary_normal_light">#1B9AFF</color>
     <color name="primary_light">#7CBDFF</color>
     <color name="primary_dark">#4780EE</color>
     <color name="light_blue1">#E7F3FF</color>

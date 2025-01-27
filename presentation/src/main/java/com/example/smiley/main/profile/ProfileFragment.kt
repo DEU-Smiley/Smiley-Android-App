@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.smiley.App
 import com.example.smiley.R
-import com.example.smiley.selfassessment.SelfAssessmentFragment
+import com.example.smiley.selfassessment.fragment.SelfAssessmentFragment
 import com.example.smiley.bluetooth.fragment.BluetoothSearchFragment
 import com.example.smiley.common.extension.addFragmentToFullScreen
 import com.example.smiley.common.extension.setBasicMode
@@ -21,7 +21,6 @@ import com.example.smiley.hospital.HospitalMapFragment
 import com.example.smiley.hospital.HospitalSearchFragment
 import com.example.smiley.magazine.MagazineListFragment
 import com.example.smiley.medicine.MedicineCheckFragment
-import com.example.smiley.medicine.MedicineSearchFragment
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/tools">
+    <!-- Define start and end states -->
+    <Transition
+        app:constraintSetStart="@id/start"
+        app:constraintSetEnd="@id/end"
+        app:duration="2000">
+
+        <!-- Define what you want to animate, in this case, the drag of view_divider -->
+<!--        <OnSwipe-->
+<!--            app:dragDirection="dragUp"-->
+<!--            app:touchAnchorId="@id/clHandler"-->
+<!--            app:touchAnchorSide="top" />-->
+    </Transition>
+
+    <!-- Define your start state constraints -->
+    <ConstraintSet android:id="@+id/start"/>
+
+    <!-- Define your end state constraints -->
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@id/cl_week_calendar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:alpha="0.0"
+
+            app:layout_constraintTop_toBottomOf="@id/include_calendar_title_layout"
+            app:layout_constraintBottom_toTopOf="@id/scv_content"/>
+
+        <Constraint
+            android:id="@id/cv_month_calendar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:alpha="1.0"
+            app:layout_constraintTop_toBottomOf="@id/include_calendar_title_layout"
+            app:layout_constraintBottom_toTopOf="@id/scv_content"/>
+    </ConstraintSet>
+</MotionScene>

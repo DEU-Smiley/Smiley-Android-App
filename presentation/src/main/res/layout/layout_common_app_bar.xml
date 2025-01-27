@@ -22,6 +22,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:tint="@color/gray1_42" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clWearTimeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tvWearTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:bufferType="spannable"
+            android:text="08시간 16분"
+            android:textSize="@dimen/M500_16_h22"
+            android:textColor="@color/gray2_5E"
+            android:fontFamily="@font/pretendard_medium"
+            
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
         android:id="@+id/tv_title_bar_text"
         android:layout_width="wrap_content"

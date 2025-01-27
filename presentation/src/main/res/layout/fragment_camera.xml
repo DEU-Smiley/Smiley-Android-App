@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cameraXFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/previewLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <androidx.camera.view.PreviewView
+                android:id="@+id/previewView_finder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.example.smiley.test_ai_assessment.camera.GraphicOverlay
+                android:id="@+id/graphicOverlay_finder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/ivBackBtn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/side_margin"
+            android:clickable="true"
+            android:background="@drawable/ic_left_arrow"
+            android:backgroundTint="@color/white"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_guide_square"
+
+            app:layout_constraintDimensionRatio="w, 250:360"
+            app:layout_constraintTop_toBottomOf="@id/ivBackBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/viewBottomBackground"
+            app:tint="@color/primary_normal" />
+
+        <View
+            android:id="@+id/viewBottomBackground"
+            android:layout_width="0dp"
+            android:layout_height="170dp"
+            android:background="@color/black_trans_50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/ibCameraBtn"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:background="@drawable/img_camera_btn"
+            android:text="사진찍기"
+            app:layout_constraintTop_toTopOf="@id/viewBottomBackground"
+            app:layout_constraintBottom_toBottomOf="@id/viewBottomBackground"
+            app:layout_constraintStart_toStartOf="@id/viewBottomBackground"
+            app:layout_constraintEnd_toEndOf="@id/viewBottomBackground"
+            />
+
+        <View
+            android:id="@+id/cameraChangeBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right|center"
+            android:clickable="true"
+            android:src="@drawable/ic_grid"
+            android:background="@drawable/ic_refresh"
+            android:backgroundTint="@color/white"
+            
+            app:layout_constraintStart_toEndOf="@id/ibCameraBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ibCameraBtn"
+            app:layout_constraintBottom_toBottomOf="@id/ibCameraBtn"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
